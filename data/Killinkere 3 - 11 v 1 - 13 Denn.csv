@@ -1,0 +1,266 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:02,1,Killinkere,Other,Throw Up Won,Fintan O’Connell
+2,00:00:10,1,Denn,Free conceded,Middle third,Player 8
+3,00:00:13,1,Denn,Free conceded,Middle third,Player 8
+4,00:00:40,1,Killinkere,Attacks,Kick lost,Ben Philingham
+5,00:00:41,1,Denn,Ball Won,In Contact,Player 3
+6,00:01:00,1,Denn,Shot from play,2 Points,Player 10
+7,00:01:05,1,Denn,Score source,Turnover,Player 3
+8,00:01:25,1,Killinkere,Kickout,Break won,Conall Mooney
+9,00:01:26,1,Killinkere,Kickout,Break won,
+10,00:01:42,1,Killinkere,Attacks,Carry lost,Ben Philingham
+11,00:01:47,1,Killinkere,Possession lost,In Contact,Ben Philingham
+12,00:02:02,1,Denn,Possession lost,Kick pass,Player 11
+13,00:02:03,1,Denn,Attacks,Kick lost,Player 11
+14,00:02:25,1,Killinkere,Kickout,Lost clean,Player 8
+15,00:02:38,1,Denn,Shot from play,Wide,Player 8
+16,00:02:38,1,Denn,Attacks,Kick lost,Player 8
+17,00:02:59,1,Killinkere,Kickout,Break lost,Player 12
+18,00:03:08,1,Killinkere,Ball Won,In Contact,Conall Mooney
+19,00:03:20,1,Killinkere,Possession lost,Hand pass,Conall Mooney
+20,00:03:23,1,Killinkere,Free conceded,Attacking third,Fintan O’Connell
+21,00:03:23,1,Killinkere,Free conceded,Attacking third,Fintan O’Connell
+22,00:04:10,1,Denn,Shot from play,Wide,Player 11
+23,00:04:29,1,Killinkere,Kickout,Break won,Philip Corrigan
+24,00:04:37,1,Killinkere,Possession lost,Sideline,Philip Corrigan
+25,00:05:06,1,Killinkere,Free conceded,Defensive third,Shane Ryan
+26,00:05:29,1,Denn,Scoreable free,Point,Player 13
+27,00:05:41,1,Killinkere,Kickout,Won clean,Jason McMahon
+28,00:05:57,1,Denn,Free conceded,Middle third,Player 8
+29,00:06:13,1,Killinkere,Shot from play,Point,Ryan Smith
+30,00:06:26,1,Denn,Kickout,Short won,Player 10
+31,00:06:33,1,Denn,Possession lost,Kick pass,Player 10
+32,00:06:33,1,Killinkere,Ball Won,Interception,Shane Ryan
+33,00:06:42,1,Killinkere,Ball Won,In Contact,Jason McMahon
+34,00:06:53,1,Killinkere,Attacks,Kick lost,Ryan Smith
+35,00:06:59,1,Killinkere,Ball Won,Interception,Neill McCabe
+36,00:07:05,1,Killinkere,Shot from play,Point,Neill McCabe
+37,00:07:25,1,Denn,Kickout,Break won,Player 10
+38,00:07:36,1,Denn,Attacks,Kick lost,Player 14
+39,00:07:39,1,Killinkere,Ball Won,Interception,Nathan McQuade
+40,00:08:04,1,Killinkere,Shot from play,Short,Ben Philingham
+41,00:08:08,1,Denn,Ball Won,Interception,Player 9
+42,00:08:14,1,Killinkere,Free conceded,Attacking third,Cian McGovern
+43,00:08:31,1,Denn,Shot from play,Point,Player 11
+44,00:08:52,1,Killinkere,Kickout,Won clean,Jason McMahon
+45,00:08:55,1,Denn,Free conceded,Attacking third,Player 14
+46,00:09:02,1,Denn,Free conceded,Middle third,Player 8
+47,00:09:37,1,Killinkere,Shot from play,Point,Kevin McCabe
+48,00:09:40,1,Killinkere,Score source,Kickout,Jason McMahon
+49,00:10:04,1,Denn,Kickout,Break won,Player 6
+50,00:10:11,1,Killinkere,Free conceded,Middle third,Jason McMahon
+51,00:10:21,1,Killinkere,Free conceded,Penalty,Lee Philingham
+52,00:11:03,1,Denn,Scoreable free,Wide,Player 14
+53,00:11:29,1,Killinkere,Kickout,Break won,Jason McMahon
+54,00:11:50,1,Denn,Free conceded,Defensive third,Player 6
+55,00:12:14,1,Killinkere,Scoreable free,Short,Cian McGovern
+56,00:13:11,1,Denn,Shot from play,Wide,Player 10
+57,00:13:28,1,Killinkere,Kickout,Won clean,Kevin McCabe
+58,00:13:47,1,Killinkere,Possession lost,Kick pass,Ben Philingham
+59,00:13:48,1,Denn,Ball Won,Interception,Player 9
+60,00:15:04,1,Denn,Shot from play,Wide,Player 6
+61,00:15:23,1,Killinkere,Kickout,Break won,Philip Corrigan
+62,00:15:34,1,Denn,Free conceded,Middle third,Player 6
+63,00:15:48,1,Killinkere,Shot from play,Goal,Conall Mooney
+64,00:15:51,1,Killinkere,Score source,Free from play,Cian McGovern
+65,00:16:12,1,Denn,Kickout,Break lost,James Farrelly
+66,00:16:20,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+67,00:16:46,1,Killinkere,Bookings,Yellow,Philip Corrigan
+68,00:17:20,1,Denn,Shot from play,2 Points,Player 11
+69,00:17:23,1,Denn,Score source,Free from play,Player 8
+70,00:17:40,1,Killinkere,Kickout,Break won,Kevin McCabe
+71,00:18:02,1,Denn,Free conceded,Middle third,Player 14
+72,00:18:24,1,Killinkere,Shot from play,Woodwork,Conall Mooney
+73,00:18:40,1,Denn,Kickout,Sideline ball,Jason McMahon
+74,00:19:05,1,Killinkere,Shot from play,Short,Jason McMahon
+75,00:19:09,1,Killinkere,Free conceded,Attacking third,Fintan O’Connell
+76,00:19:24,1,Killinkere,Tackle,Missed,James Farrelly
+77,00:19:27,1,Killinkere,Tackle,Missed,Conall Mooney
+78,00:19:30,1,Killinkere,Tackle,Missed,Luke Crossan
+79,00:19:32,1,Denn,Shot from play,Wide,Player 15
+80,00:20:01,1,Killinkere,Kickout,Break lost,Player 10
+81,00:20:40,1,Denn,Possession lost,Foul,Player 7
+82,00:20:40,1,Denn,Free conceded,Attacking third,Player 7
+83,00:20:53,1,Denn,Free conceded,Attacking third,Player 6
+84,00:21:13,1,Killinkere,Shot from play,Goal,Neill McCabe
+85,00:21:15,1,Killinkere,Score Assist,Score Goal,Jason McMahon
+86,00:21:16,1,Killinkere,Score source,Free from play,Cian McGovern
+87,00:21:41,1,Denn,Kickout,Won clean,Player 8
+88,00:21:58,1,Denn,Shot from play,Wide,Player 10
+89,00:22:17,1,Killinkere,Kickout,Sideline ball,Player 14
+90,00:22:36,1,Denn,Shot from play,Point,Player 14
+91,00:22:39,1,Denn,Score source,Opp Kickout,Player 14
+92,00:22:55,1,Killinkere,Kickout,Break lost,Player 14
+93,00:23:08,1,Denn,Shot from play,Goal,Player 11
+94,00:23:10,1,Denn,Score source,Opp Kickout,Player 14
+95,00:23:33,1,Killinkere,Kickout,Break lost,Player 4
+96,00:23:51,1,Denn,Shot from play,Point,Player 4
+97,00:23:54,1,Denn,Score source,Opp Kickout,Player 4
+98,00:24:18,1,Killinkere,Kickout,Break won,Nathan McQuade
+99,00:24:26,1,Denn,Free conceded,Middle third,Player 14
+100,00:24:34,1,Denn,Free conceded,Middle third,Player 6
+101,00:25:15,1,Killinkere,Scoreable free,Point,Cian McGovern
+102,00:25:22,1,Denn,Kickout,Short won,Player 9
+103,00:25:47,1,Killinkere,Ball Won,In Contact,Conall Mooney
+104,00:26:00,1,Killinkere,Shot from play,Point,Ben Philingham
+105,00:26:01,1,Killinkere,Score source,Turnover,Cian McGovern
+106,00:26:21,1,Denn,Kickout,Break lost,Philip Corrigan
+107,00:26:53,1,Killinkere,Shot from play,Wide,Phelim Cusack
+108,00:27:03,1,Denn,Kickout,Break lost,Neill McCabe
+109,00:27:12,1,Killinkere,Possession lost,In Contact,Neill McCabe
+110,00:27:16,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+111,00:27:34,1,Denn,Shot from play,2 Points,Player 14
+112,00:27:36,1,Denn,Score source,Turnover,Player 4
+113,00:28:00,1,Killinkere,Kickout,Break won,Nathan McQuade
+114,00:28:29,1,Killinkere,Shot from play,Goal,Fintan O’Connell
+115,00:28:31,1,Killinkere,Score source,Kickout,Nathan McQuade
+116,00:28:51,1,Denn,Kickout,Break won,Player 8
+117,00:29:05,1,Killinkere,Free conceded,Attacking third,James Farrelly
+118,00:29:34,1,Denn,Scoreable free,Point,Player 13
+119,00:30:03,2,Killinkere,Other,Throw Up Won,Fintan O’Connell
+120,00:30:04,2,Killinkere,Substitution,Substitution,Ryan Smith
+121,00:30:29,2,Killinkere,Possession lost,Handling,Jason McMahon
+122,00:30:34,2,Killinkere,Tackle,Missed,Cian McGovern
+123,00:30:38,2,Killinkere,Tackle,Missed,Ben Philingham
+124,00:31:10,2,Killinkere,Tackle,Contact,Conall Mooney
+125,00:31:23,2,Killinkere,Tackle,Contact,Jason McMahon
+126,00:31:45,2,Killinkere,Ball Won,In Contact,Jason McMahon
+127,00:31:46,2,Killinkere,Tackle,Contact,Conall Mooney
+128,00:31:50,2,Killinkere,Ball Won,In Contact,Jason McMahon
+129,00:31:56,2,Denn,Free conceded,Middle third,Player 17
+130,00:32:03,2,Killinkere,Shot from play,Woodwork,Fintan O’Connell
+131,00:32:15,2,Killinkere,Shot from play,Wide,Ben Philingham
+132,00:33:12,2,Denn,Kickout,Break lost,Cian McGovern
+133,00:33:22,2,Killinkere,Possession lost,Hand pass,Fintan O’Connell
+134,00:33:26,2,Denn,Ball Won,Interception,Player 6
+135,00:33:41,2,Killinkere,Tackle,Contact,Phelim Cusack
+136,00:33:50,2,Killinkere,Tackle,Contact,Kevin McCabe
+137,00:33:58,2,Killinkere,Tackle,Contact,Kevin McCabe
+138,00:34:06,2,Denn,Shot from play,Wide,Player 14
+139,00:34:18,2,Killinkere,Kickout,Break won,Ben Philingham
+140,00:34:31,2,Killinkere,Possession lost,In Contact,Ben Philingham
+141,00:34:40,2,Killinkere,Free conceded,Attacking third,Nathan McQuade
+142,00:35:11,2,Denn,Scoreable free,Point,Player 14
+143,00:35:29,2,Killinkere,Kickout,Break won,Phelim Cusack
+144,00:35:47,2,Denn,Free conceded,Attacking third,Player 3
+145,00:36:06,2,Killinkere,Scoreable free,Point,Cian McGovern
+146,00:36:31,2,Denn,Kickout,Break lost,Cian McGovern
+147,00:36:42,2,Denn,Kickout,Break lost,Cian McGovern
+148,00:36:46,2,Killinkere,Free conceded,Middle third,Cian McGovern
+149,00:37:02,2,Denn,Score source,Free from play,
+150,00:37:04,2,Denn,Shot from play,Point,Player 5
+151,00:37:16,2,Killinkere,Kickout,Won clean,Fintan O’Connell
+152,00:37:45,2,Killinkere,Possession lost,In Contact,Kevin McCabe
+153,00:38:02,2,Killinkere,Tackle,Contact,Jason McMahon
+154,00:38:08,2,Denn,Shot from play,Save,Player 15
+155,00:38:15,2,Denn,Free conceded,Attacking third,Player 17
+156,00:38:55,2,Denn,Free conceded,Attacking third,Player 22
+157,00:39:24,2,Killinkere,Scoreable free,Point,Fiachra Mooney
+158,00:39:32,2,Killinkere,Score source,Free from play,Lee Philingham
+159,00:39:49,2,Denn,Kickout,Lost clean,Jason McMahon
+160,00:40:06,2,Killinkere,Shot from play,Short,Cian McGovern
+161,00:40:19,2,Killinkere,Ball Won,In Contact,Fiachra Mooney
+162,00:40:27,2,Denn,Ball Won,In Contact,Player 3
+163,00:40:38,2,Killinkere,Free conceded,Middle third,Fintan O’Connell
+164,00:40:54,2,Killinkere,Free conceded,Defensive third,Fintan O’Connell
+165,00:41:47,2,Denn,Scoreable free,Wide,Player 1
+166,00:42:10,2,Killinkere,Kickout,Lost clean,Player 15
+167,00:42:18,2,Killinkere,Ball Won,In Contact,Nathan McQuade
+168,00:42:37,2,Killinkere,Possession lost,Hand pass,Neill McCabe
+169,00:42:51,2,Killinkere,Tackle,Contact,Fiachra Mooney
+170,00:43:19,2,Killinkere,Tackle,Contact,Luke Crossan
+171,00:43:21,2,Killinkere,Ball Won,In Contact,Nathan McQuade
+172,00:44:04,2,Killinkere,Shot from play,Wide,Conall Mooney
+173,00:44:34,2,Killinkere,Substitution,Substitution,Neill McCabe
+174,00:44:43,2,Denn,Kickout,Break won,Player 28
+175,00:45:08,2,Killinkere,Tackle,Contact,Luke Crossan
+176,00:45:17,2,Killinkere,Ball Won,In Contact,Shane Ryan
+177,00:45:57,2,Killinkere,Possession lost,Shot Short,Fiachra Mooney
+178,00:45:59,2,Killinkere,Attacks,Kick lost,Fiachra Mooney
+179,00:46:13,2,Killinkere,Tackle,Contact,Kevin McCabe
+180,00:46:29,2,Killinkere,Tackle,Contact,James Farrelly
+181,00:46:38,2,Denn,Free conceded,Attacking third,Player 28
+182,00:46:59,2,Killinkere,Possession lost,Handling,Ben Philingham
+183,00:47:00,2,Killinkere,Attacks,Kick lost,Cian McGovern
+184,00:47:13,2,Killinkere,Tackle,Contact,Conall Mooney
+185,00:47:20,2,Killinkere,Tackle,Contact,Fiachra Mooney
+186,00:47:21,2,Killinkere,Tackle,Contact,Luke Crossan
+187,00:47:25,2,Denn,Shot from play,Wide,Player 10
+188,00:47:38,2,Killinkere,Kickout,Won clean,Kevin McCabe
+189,00:48:04,2,Killinkere,Shot from play,Wide,Cian McGovern
+190,00:48:24,2,Denn,Kickout,Break lost,Ruairi O Connell
+191,00:48:48,2,Denn,Free conceded,Attacking third,Player 6
+192,00:49:11,2,Killinkere,Scoreable free,2 Points,Cian McGovern
+193,00:49:22,2,Killinkere,Score source,Free from play,Ben Philingham
+194,00:49:45,2,Denn,Kickout,Break won,Player 5
+195,00:49:53,2,Denn,Possession lost,Kick pass,Player 14
+196,00:49:55,2,Killinkere,Ball Won,In Contact,Shane Ryan
+197,00:50:09,2,Killinkere,Shot from play,Wide,James Farrelly
+198,00:50:45,2,Denn,Kickout,Break lost,Ruairi O Connell
+199,00:51:00,2,Denn,Kickout,Break lost,Fintan O’Connell
+200,00:51:03,2,Denn,Free conceded,Attacking third,Player 3
+201,00:51:43,2,Killinkere,Substitution,Substitution,Philip Corrigan
+202,00:51:51,2,Killinkere,Substitution,Substitution,Ben Philingham
+203,00:52:11,2,Killinkere,Scoreable free,Point,Cian McGovern
+204,00:52:13,2,Killinkere,Score source,Opp Kickout,Fintan O’Connell
+205,00:52:27,2,Denn,Kickout,Break lost,Ruairi O Connell
+206,00:53:04,2,Denn,Free conceded,Attacking third,Player 4
+207,00:53:27,2,Killinkere,Scoreable free,Wide,Conall Mooney
+208,00:53:51,2,Denn,Kickout,Lost clean,Emmett Fitzsimons
+209,00:54:17,2,Killinkere,Possession lost,Handling,Ruairi O Connell
+210,00:54:23,2,Killinkere,Possession lost,In Contact,Neill McCabe
+211,00:54:24,2,Killinkere,Free conceded,Attacking third,Kevin McCabe
+212,00:54:34,2,Killinkere,Tackle,Contact,James Farrelly
+213,00:54:39,2,Killinkere,Free conceded,Middle third,James Farrelly
+214,00:54:45,2,Killinkere,Tackle,Contact,Luke Crossan
+215,00:54:50,2,Denn,Shot from play,Short,Player 14
+216,00:54:56,2,Killinkere,Ball Won,Interception,Jason McMahon
+217,00:55:16,2,Killinkere,Shot from play,Short,Phelim Cusack
+218,00:55:20,2,Killinkere,Ball Won,Interception,Phelim Cusack
+219,00:55:31,2,Killinkere,Shot from play,Point,Fintan O’Connell
+220,00:55:45,2,Killinkere,Score source,Turnover,Jason McMahon
+221,00:55:58,2,Denn,Kickout,Break won,Player 17
+222,00:56:10,2,Killinkere,Tackle,Contact,James Farrelly
+223,00:56:15,2,Killinkere,Ball Won,In Contact,Darren Smith
+224,00:56:36,2,Killinkere,Free conceded,Attacking third,Fintan O’Connell
+225,00:56:44,2,Killinkere,Free conceded,Attacking third,Fintan O’Connell
+226,00:56:51,2,Killinkere,Free conceded,Middle third,Nathan McQuade
+227,00:57:20,2,Denn,Shot from play,Woodwork,Player 17
+228,00:57:26,2,Killinkere,Ball Won,Interception,Jason McMahon
+229,00:57:49,2,Killinkere,Shot from play,Wide,Darren Smith
+230,00:57:59,2,Denn,Kickout,Short won,Player 28
+231,00:58:06,2,Killinkere,Ball Won,Interception,Emmett Fitzsimons
+232,00:58:24,2,Killinkere,Possession lost,Handling,Fintan O’Connell
+233,00:59:07,2,Denn,Kickout,Break won,Player 6
+234,00:59:20,2,Killinkere,Tackle,Contact,Cian McGovern
+235,00:59:33,2,Killinkere,Tackle,Contact,Shane Ryan
+236,00:59:37,2,Killinkere,Tackle,Contact,Fintan O’Connell
+237,00:59:39,2,Denn,Shot from play,Wide,Player 10
+238,01:00:04,2,Killinkere,Kickout,Break won,Jason McMahon
+239,01:00:29,2,Killinkere,Shot from play,Wide,Conall Mooney
+240,01:00:45,2,Denn,Kickout,Break won,Player 9
+241,01:01:12,2,Killinkere,Tackle,Contact,Luke Crossan
+242,01:01:13,2,Denn,Shot from play,Wide,Player 8
+243,01:01:41,2,Killinkere,Kickout,Break won,Fintan O’Connell
+244,01:01:52,2,Denn,Free conceded,Middle third,Player 9
+245,01:02:00,2,Killinkere,Shot from play,Wide,Jason McMahon
+
+
+==========================================================
+Denn
+==========================================================
+1. Mark Fegan
+2. Stephen Callaghan
+3. Leon Cobey
+4. Oran Smith
+5. Finnian Smith
+6. Bernard Gaffney
+7. Caolain Donohue
+8. Caolain McCabe
+9. Oran Callaghan
+10. Sean Donohue
+11. Oisin O'Reilly
+12. Cian Courtney
+13. Gary Conaty
+14. Ben Conaty
+15. Mark Reilly

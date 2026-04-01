@@ -1,0 +1,178 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:22,1,Killinkere,Turnover,Interception,Mark Farrelly (S)
+2,00:00:41,1,Killinkere,Shot from play,Point,Ben Philingham
+3,00:00:47,1,Killinkere,Attacks,Shot taken,Ben Philingham
+4,00:01:04,1,Arva,Kickout,Won clean,Player 9
+5,00:01:32,1,Killinkere,Turnover,Interception,Keiran Smith
+6,00:01:57,1,Killinkere,Shot from play,Point,Philip Corrigan
+7,00:02:06,1,Killinkere,Attacks,Shot taken,Philip Corrigan
+8,00:02:09,1,Arva,Kickout,Short won,Player 6
+9,00:02:40,1,Arva,Shot from play,Wide,Player 11
+10,00:02:50,1,Arva,Attacks,Shot taken,Player 11
+11,00:02:56,1,Killinkere,Kickout,Short won,Keiran Smith
+12,00:03:33,1,Killinkere,Attacks,Kick lost,Ben Philingham
+13,00:03:42,1,Killinkere,Possession lost,Foul,Ben Philingham
+14,00:04:15,1,Arva,Shot from play,Point,Player 11
+15,00:04:19,1,Arva,Attacks,Shot taken,Player 11
+16,00:04:32,1,Killinkere,Kickout,Won clean,Harry Banville
+17,00:04:46,1,Arva,Free conceded,Middle third,Player 8
+18,00:04:58,1,Killinkere,Possession lost,Handling,Ben Philingham
+19,00:05:08,1,Killinkere,Turnover,Interception,Keiran Smith
+20,00:05:26,1,Killinkere,Free conceded,Middle third,Ruairi O Connell
+21,00:05:54,1,Arva,Shot from play,Point,Player 7
+22,00:06:01,1,Arva,Attacks,Shot taken,Player 7
+23,00:06:12,1,Killinkere,Kickout,Short won,David Ryan
+24,00:06:54,1,Killinkere,Free conceded,Attacking third,Ben Philingham
+25,00:07:01,1,Killinkere,Turnover,Interception,Cian Fitzsimons
+26,00:07:40,1,Killinkere,Possession lost,In Contact,Shaun Clarke
+27,00:08:51,1,Arva,Shot from play,Wide,Player 2
+28,00:08:56,1,Arva,Attacks,Shot taken,Player 2
+29,00:09:01,1,Killinkere,Kickout,Short won,Mark Farrelly (S)
+30,00:09:40,1,Killinkere,Shot from play,Wide,Neill McCabe
+31,00:09:45,1,Killinkere,Attacks,Shot taken,Neill McCabe
+32,00:09:53,1,Arva,Kickout,Break lost,Keiran Smith
+33,00:10:18,1,Killinkere,Possession lost,In Contact,David Ryan
+34,00:10:51,1,Arva,Shot from play,Short,
+35,00:10:55,1,Arva,Attacks,Shot taken,Player 12
+36,00:11:31,1,Killinkere,Shot from play,2 Points,Philip Corrigan
+37,00:11:37,1,Killinkere,Attacks,Shot taken,Philip Corrigan
+38,00:11:55,1,Arva,Kickout,Break lost,David Ryan
+39,00:12:21,1,Killinkere,Shot from play,Wide,David Ryan
+40,00:12:26,1,Killinkere,Attacks,Shot taken,David Ryan
+41,00:12:39,1,Arva,Kickout,Short won,Player 2
+42,00:12:59,1,Killinkere,Turnover,In Contact,Darrell Dolan
+43,00:13:35,1,Killinkere,Possession lost,In Contact,Cian Fitzsimons
+44,00:13:41,1,Killinkere,Turnover,Interception,Harry Banville
+45,00:13:56,1,Killinkere,Shot from play,Point,Ben Philingham
+46,00:14:00,1,Killinkere,Attacks,Shot taken,Ben Philingham
+47,00:15:10,1,Arva,Kickout,Won clean,Player 7
+48,00:15:33,1,Killinkere,Turnover,In Contact,Shaun Clarke
+49,00:16:18,1,Arva,Free conceded,Defensive third,Player 6
+50,00:16:41,1,Killinkere,Scoreable free,Point,Neill McCabe
+51,00:16:50,1,Killinkere,Attacks,Mark taken,Harry Banville
+52,00:17:06,1,Arva,Kickout,Won clean,Player 6
+53,00:17:50,1,Arva,Shot from play,Short,Player 2
+54,00:17:57,1,Arva,Attacks,Shot taken,
+55,00:18:29,1,Killinkere,Free conceded,Middle third,Keiran Smith
+56,00:19:23,1,Arva,Scoreable free,Short,Player 1
+57,00:19:38,1,Killinkere,Possession lost,Hand pass,Keiran Smith
+58,00:20:12,1,Arva,Scoreable free,Point,Player 15
+59,00:20:25,1,Arva,Attacks,Mark taken,
+60,00:20:31,1,Killinkere,Kickout,Won clean,Cian Fitzsimons
+61,00:21:36,1,Killinkere,Shot from play,Wide,Shaun Clarke
+62,00:21:41,1,Killinkere,Attacks,Shot taken,Shaun Clarke
+63,00:21:53,1,Arva,Kickout,Short won,Player 6
+64,00:22:13,1,Killinkere,Turnover,In Contact,Darrell Dolan
+65,00:22:19,1,Arva,Attacks,Kick lost,
+66,00:22:26,1,Killinkere,Possession lost,Handling,Harry Banville
+67,00:23:56,1,Arva,Free conceded,Defensive third,
+68,00:24:30,1,Killinkere,Scoreable free,Short,Neill McCabe
+69,00:25:05,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+70,00:25:30,1,Killinkere,Turnover,In Contact,Cian Fitzsimons
+71,00:26:37,1,Arva,Free conceded,Attacking third,
+72,00:27:46,1,Killinkere,Shot from play,Short,Neill McCabe
+73,00:27:50,1,Killinkere,Attacks,Shot taken,Neill McCabe
+74,00:28:34,1,Arva,Shot from play,Short,Player 6
+75,00:28:43,1,Arva,Attacks,Shot taken,Player 6
+76,00:29:41,1,Killinkere,Shot from play,Point,Shaun Clarke
+77,00:29:47,1,Killinkere,Attacks,Shot taken,Shaun Clarke
+78,00:30:05,1,Arva,Kickout,Lost clean,Neill McCabe
+79,00:30:29,1,Killinkere,Shot from play,Save,Shaun Clarke
+80,00:31:05,1,Arva,Shot from play,Save,Player 6
+81,00:31:39,1,Arva,Scoreable free,Point,Player 11
+82,00:30:08,2,Killinkere,Free conceded,Middle third,Ruairi O Connell
+83,00:30:19,2,Killinkere,Turnover,In Contact,Sean Brady
+84,00:30:43,2,Killinkere,Free conceded,Middle third,Ben Philingham
+85,00:30:54,2,Arva,Free conceded,Middle third,
+86,00:32:07,2,Killinkere,Shot from play,Point,Cian Fitzsimons
+87,00:32:11,2,Killinkere,Attacks,Shot taken,Cian Fitzsimons
+88,00:32:25,2,Arva,Kickout,Short won,Player 4
+89,00:33:11,2,Killinkere,Free conceded,Defensive third,Shaun Clarke
+90,00:34:01,2,Arva,Scoreable free,2 Points,Player 1
+91,00:34:19,2,Killinkere,Kickout,Lost clean,Player 9
+92,00:34:31,2,Arva,Shot from play,Point,
+93,00:34:36,2,Arva,Attacks,Shot taken,Player 9
+94,00:34:49,2,Killinkere,Kickout,Break lost,Player 9
+95,00:35:16,2,Arva,Shot from play,Wide,
+96,00:35:22,2,Arva,Attacks,Shot taken,
+97,00:35:35,2,Killinkere,Kickout,Short won,Shaun Clarke
+98,00:36:35,2,Killinkere,Shot from play,Point,Ben Philingham
+99,00:36:38,2,Killinkere,Attacks,Shot taken,Ben Philingham
+100,00:36:50,2,Arva,Kickout,Lost clean,Mark Farrelly (S)
+101,00:37:25,2,Killinkere,Shot from play,Point,Ben Philingham
+102,00:37:29,2,Killinkere,Attacks,Shot taken,Ben Philingham
+103,00:37:48,2,Arva,Kickout,Break lost,Harry Banville
+104,00:39:00,2,Killinkere,Possession lost,Kick pass,Neill McCabe
+105,00:39:05,2,Killinkere,Attacks,Kick lost,Neill McCabe
+106,00:39:25,2,Killinkere,Turnover,Interception,Mark Farrelly (S)
+107,00:39:58,2,Killinkere,Turnover,In Contact,Ben Philingham
+108,00:40:01,2,Arva,Free conceded,Middle third,Player 6
+109,00:40:46,2,Killinkere,Scoreable free,Wide,Neill McCabe
+110,00:40:58,2,Arva,Kickout,Won clean,Player 7
+111,00:41:21,2,Arva,Shot from play,Wide,Player 11
+112,00:41:27,2,Killinkere,Free conceded,Defensive third,Darrell Dolan
+113,00:41:34,2,Arva,Attacks,Mark taken,
+114,00:41:47,2,Arva,Scoreable free,Point,Player 11
+115,00:42:07,2,Killinkere,Kickout,Break won,Shaun Clarke
+116,00:42:31,2,Killinkere,Shot from play,Wide,Philip Corrigan
+117,00:42:37,2,Killinkere,Attacks,Shot taken,Philip Corrigan
+118,00:42:46,2,Arva,Kickout,Break won,Player 9
+119,00:43:30,2,Arva,Shot from play,Point,
+120,00:43:40,2,Arva,Attacks,Shot taken,
+121,00:43:49,2,Killinkere,Kickout,Short won,Mark Farrelly (S)
+122,00:44:20,2,Killinkere,Shot from play,Short,Neill McCabe
+123,00:44:26,2,Killinkere,Attacks,Shot taken,Neill McCabe
+124,00:44:49,2,Arva,Shot from play,Point,
+125,00:44:56,2,Arva,Attacks,Shot taken,
+126,00:45:14,2,Killinkere,Kickout,Break lost,Player 12
+127,00:45:22,2,Arva,Shot from play,Wide,
+128,00:45:30,2,Arva,Attacks,Shot taken,
+129,00:45:33,2,Killinkere,Kickout,Won clean,Philip Corrigan
+130,00:46:14,2,Arva,Free conceded,Attacking third,
+131,00:46:55,2,Killinkere,Possession lost,Kick pass,Neill McCabe
+132,00:47:15,2,Killinkere,Turnover,In Contact,Darrell Dolan
+133,00:47:22,2,Killinkere,Possession lost,Handling,Cian Fitzsimons
+134,00:47:40,2,Arva,Shot from play,Short,Player 6
+135,00:47:57,2,Killinkere,Free conceded,Middle third,Harry Banville
+136,00:48:02,2,Arva,Free conceded,Middle third,Player 6
+137,00:48:49,2,Arva,Free conceded,Attacking third,
+138,00:48:58,2,Killinkere,Possession lost,Kick pass,Neill McCabe
+139,00:49:05,2,Arva,Shot from play,Short,
+140,00:49:08,2,Arva,Attacks,Shot taken,
+141,00:50:30,2,Killinkere,Shot from play,Short,Mark Farrelly (S)
+142,00:50:36,2,Killinkere,Attacks,Kick lost,Mark Farrelly (S)
+143,00:50:48,2,Killinkere,Turnover,In Contact,Harry Banville
+144,00:51:00,2,Killinkere,Free conceded,Defensive third,Harry Banville
+145,00:51:28,2,Arva,Scoreable free,Point,
+146,00:51:32,2,Arva,Attacks,Shot taken,Player 11
+147,00:51:42,2,Killinkere,Kickout,Won clean,Philip Corrigan
+148,00:51:58,2,Killinkere,Shot from play,Goal,Neill McCabe
+149,00:52:02,2,Killinkere,Attacks,Shot taken,Neill McCabe
+150,00:52:21,2,Killinkere,Substitution,Substitution,Cian Fitzsimons
+151,00:52:31,2,Arva,Kickout,Won clean,Player 7
+152,00:52:51,2,Arva,Shot from play,Point,Player 12
+153,00:52:57,2,Arva,Attacks,Shot taken,Player 12
+154,00:54:18,2,Killinkere,Kickout,Break won,Mark Farrelly (S)
+155,00:54:43,2,Killinkere,Shot from play,Point,Keiran Smith
+156,00:54:48,2,Killinkere,Attacks,Shot taken,Keiran Smith
+157,00:55:06,2,Arva,Kickout,Short won,
+158,00:55:27,2,Arva,Shot from play,Wide,
+159,00:55:44,2,Killinkere,Kickout,Break won,
+160,00:56:27,2,Arva,Free conceded,Middle third,
+161,00:57:22,2,Killinkere,Shot from play,Point,Ruairi O Connell
+162,00:57:25,2,Killinkere,Attacks,Shot taken,Ruairi O Connell
+163,00:57:41,2,Arva,Kickout,Won clean,Player 10
+164,00:57:52,2,Killinkere,Turnover,In Contact,David Ryan
+165,00:58:50,2,Killinkere,Possession lost,In Contact,Neill McCabe
+166,00:59:03,2,Arva,Free conceded,Attacking third,
+167,00:59:44,2,Arva,Shot from play,Short,Player 7
+168,01:00:15,2,Killinkere,Free conceded,Penalty,Shaun Clarke
+169,01:01:03,2,Arva,Scoreable free,Goal,
+170,01:01:24,2,Killinkere,Kickout,Won clean,Keiran Smith
+171,01:01:49,2,Killinkere,Free conceded,Defensive third,Keiran Smith
+172,01:02:17,2,Killinkere,Bookings,Red,Keiran Smith
+173,01:02:47,2,Arva,Scoreable free,Point,Player 11
+174,01:02:59,2,Killinkere,Kickout,Won clean,Ruairi O Connell
+175,01:03:17,2,Arva,Free conceded,Attacking third,Player 12
+176,01:03:44,2,Killinkere,Scoreable free,Point,Neill McCabe
+177,01:04:33,2,Killinkere,Shot from play,Short,Philip Corrigan

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opposition Analysis — Denn</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a0e1a; color:#e0e6f0; }
+
+  .page { max-width:1100px; margin:0 auto; padding:30px 20px; }
+
+  /* HEADER */
+  .header { text-align:center; padding:30px 20px; margin-bottom:30px;
+    background:linear-gradient(135deg,#1a1f35 0%,#0d1225 100%);
+    border-radius:16px; border:1px solid #2a3050; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,#e74c3c,#f39c12,#e74c3c); }
+  .header h1 { font-size:2.4em; font-weight:900; letter-spacing:-1px;
+    background:linear-gradient(135deg,#fff,#a0b0d0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .header .sub { color:#8090b0; font-size:1em; margin-top:6px; }
+  .header .match-ref { display:inline-block; margin-top:12px; padding:6px 18px;
+    background:#1e2540; border-radius:20px; font-size:0.85em; color:#6080c0; border:1px solid #2a3560; }
+
+  /* SECTION TITLES */
+  .section-title { font-size:1.15em; font-weight:700; margin:28px 0 14px;
+    padding-left:14px; border-left:4px solid #e74c3c; color:#f0f4ff; }
+  .section-title.green { border-left-color:#2ecc71; }
+  .section-title.amber { border-left-color:#f39c12; }
+  .section-title.blue  { border-left-color:#3498db; }
+
+  /* GRID */
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+  @media(max-width:700px){ .grid2,.grid3{ grid-template-columns:1fr; } }
+
+  /* CARDS */
+  .card { background:#131829; border:1px solid #1e2540; border-radius:12px; padding:20px; }
+  .card.red    { border-left:4px solid #e74c3c; }
+  .card.green  { border-left:4px solid #2ecc71; }
+  .card.amber  { border-left:4px solid #f39c12; }
+  .card.blue   { border-left:4px solid #3498db; }
+  .card h3 { font-size:0.85em; text-transform:uppercase; letter-spacing:1px; color:#6080a0; margin-bottom:10px; }
+  .big-num { font-size:2.6em; font-weight:900; line-height:1; }
+  .big-num.red   { color:#e74c3c; }
+  .big-num.green { color:#2ecc71; }
+  .big-num.amber { color:#f39c12; }
+  .big-num.blue  { color:#3498db; }
+  .card .detail { font-size:0.85em; color:#7890b0; margin-top:6px; }
+
+  /* BAR CHARTS */
+  .bar-row { display:flex; align-items:center; margin:6px 0; }
+  .bar-label { width:110px; font-size:0.82em; color:#8090b0; flex-shrink:0; }
+  .bar-track { flex:1; height:22px; background:#1a2040; border-radius:4px; overflow:hidden; position:relative; }
+  .bar-fill { height:100%; border-radius:4px; display:flex; align-items:center; padding-left:8px;
+    font-size:0.75em; font-weight:700; color:#fff; min-width:28px; transition:width .6s; }
+  .bar-fill.red   { background:linear-gradient(90deg,#c0392b,#e74c3c); }
+  .bar-fill.green { background:linear-gradient(90deg,#27ae60,#2ecc71); }
+  .bar-fill.amber { background:linear-gradient(90deg,#d68910,#f39c12); }
+  .bar-fill.blue  { background:linear-gradient(90deg,#2471a3,#3498db); }
+
+  /* STRENGTH / WEAKNESS PILLS */
+  .sw-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .pill { padding:8px 16px; border-radius:8px; font-size:0.82em; font-weight:600; }
+  .pill.strength { background:#1a3328; color:#2ecc71; border:1px solid #2ecc7140; }
+  .pill.weakness { background:#331a1a; color:#e74c3c; border:1px solid #e74c3c40; }
+
+  /* PLAYER TABLE */
+  .player-table { width:100%; border-collapse:collapse; margin-top:8px; }
+  .player-table th { text-align:left; font-size:0.75em; text-transform:uppercase; letter-spacing:1px;
+    color:#5070a0; padding:8px 10px; border-bottom:1px solid #1e2540; }
+  .player-table td { padding:8px 10px; font-size:0.85em; border-bottom:1px solid #141a30; color:#c0d0e0; }
+  .player-table tr:hover td { background:#1a2040; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75em; font-weight:600; }
+  .tag.scorer { background:#1a3328; color:#2ecc71; }
+  .tag.ko     { background:#1a2540; color:#3498db; }
+  .tag.foul   { background:#331a1a; color:#e74c3c; }
+
+  /* HALF-BY-HALF */
+  .half-compare { display:flex; gap:0; margin-top:8px; }
+  .half-box { flex:1; text-align:center; padding:16px; }
+  .half-box:first-child { border-right:1px solid #1e2540; }
+  .half-box .label { font-size:0.75em; text-transform:uppercase; letter-spacing:1px; color:#5070a0; }
+  .half-box .val { font-size:2em; font-weight:900; margin-top:4px; }
+
+  /* SUMMARY BOX */
+  .summary { background:linear-gradient(135deg,#1a1f35,#0d1225); border:1px solid #2a3050;
+    border-radius:12px; padding:24px; margin-top:28px; }
+  .summary h3 { font-size:1em; font-weight:700; margin-bottom:12px; color:#f0f4ff; }
+  .summary ul { list-style:none; padding:0; }
+  .summary li { padding:6px 0; font-size:0.9em; color:#a0b0d0; border-bottom:1px solid #1a2040; }
+  .summary li:last-child { border:none; }
+  .summary li::before { content:'→ '; color:#e74c3c; font-weight:700; }
+  .summary li.pos::before { color:#2ecc71; content:'✓ '; }
+
+  .footer { text-align:center; padding:20px; font-size:0.75em; color:#3a4a6a; margin-top:30px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>DENN — Opposition Analysis</h1>
+  <div class="sub">Strengths, Weaknesses &amp; Key Patterns</div>
+  <div class="match-ref">Source: Cuchulainns 1-18 v 0-12 Denn</div>
+</div>
+
+<!-- ============ DENN LINEUP ============ -->
+<div class="section-title blue">Denn Starting Lineup</div>
+<div class="card blue">
+  <table class="player-table">
+    <tr><th>#</th><th>Player</th><th>Position</th></tr>
+    <tr><td>1</td><td>Mark Fegan</td><td>Goalkeeper</td></tr>
+    <tr><td>2</td><td>Mark McSherry</td><td>Corner Back</td></tr>
+    <tr><td>3</td><td>Michael Gaffney</td><td>Full Back</td></tr>
+    <tr><td>4</td><td>Leon Cobey</td><td>Corner Back</td></tr>
+    <tr><td>5</td><td>James Brady</td><td>Half Back</td></tr>
+    <tr><td>6</td><td>Caolain McCabe</td><td>Centre Back</td></tr>
+    <tr><td>7</td><td>Brandon Keoghan</td><td>Half Back</td></tr>
+    <tr><td>8</td><td>Sean Donohue</td><td>Midfield</td></tr>
+    <tr><td>9</td><td>Oisin Kiernan</td><td>Midfield</td></tr>
+    <tr><td>10</td><td>Oran Callaghan</td><td>Half Forward</td></tr>
+    <tr><td>11</td><td>Cavell Keoghan</td><td>Centre Forward</td></tr>
+    <tr><td>12</td><td>Oisin Smith</td><td>Half Forward</td></tr>
+    <tr><td>13</td><td>Thomas Edward Donohue</td><td>Corner Forward</td></tr>
+    <tr><td>14</td><td>Ben Conaty</td><td>Full Forward</td></tr>
+    <tr><td>15</td><td>Oisin Reilly</td><td>Corner Forward</td></tr>
+  </table>
+</div>
+
+<!-- ============ SCOREBOARD OVERVIEW ============ -->
+<div class="section-title">Match Scoreboard</div>
+<div class="grid2">
+  <div class="card blue">
+    <h3>Denn Total Score</h3>
+    <div class="big-num blue">0-12</div>
+    <div class="detail">12 points, 0 goals — 12 total scoring units</div>
+  </div>
+  <div class="card amber">
+    <h3>Score Breakdown</h3>
+    <div class="detail" style="margin-top:4px;">
+      <strong style="color:#f39c12;">From Play:</strong> 0-06 (50%) — 4pts + 1× 2pts<br>
+      <strong style="color:#f39c12;">Frees:</strong> 0-06 (50%) — 3× 2pts<br>
+      <strong style="color:#f39c12;">Goals:</strong> 0
+    </div>
+  </div>
+</div>
+
+<!-- ============ SHOOTING ============ -->
+<div class="section-title red">Shots from Play</div>
+<div class="grid3">
+  <div class="card red">
+    <h3>Shots from Play</h3>
+    <div class="big-num red">15</div>
+    <div class="detail">5 scored, 9 wides, 1 save, 0 goals</div>
+  </div>
+  <div class="card red">
+    <h3>Accuracy from Play</h3>
+    <div class="big-num red">33%</div>
+    <div class="detail">5 of 15 shots scored — very wasteful</div>
+  </div>
+  <div class="card red">
+    <h3>Wides from Play</h3>
+    <div class="big-num amber">9</div>
+    <div class="detail">60% of from-play shots went wide</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Shot from Play Outcomes</h3>
+  <div class="bar-row">
+    <span class="bar-label">Point</span>
+    <div class="bar-track"><div class="bar-fill green" style="width:27%">4</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">2 Points</span>
+    <div class="bar-track"><div class="bar-fill blue" style="width:7%">1</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Wide</span>
+    <div class="bar-track"><div class="bar-fill red" style="width:60%">9</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Save</span>
+    <div class="bar-track"><div class="bar-fill amber" style="width:7%">1</div></div>
+  </div>
+</div>
+
+<!-- ============ SHOOTING BY HALF ============ -->
+<div class="card" style="margin-top:16px;">
+  <h3>Shots from Play by Half</h3>
+  <div class="half-compare">
+    <div class="half-box">
+      <div class="label">1st Half</div>
+      <div class="val amber">7</div>
+      <div class="detail">3 scored (43%) · 4 wides</div>
+    </div>
+    <div class="half-box">
+      <div class="label">2nd Half</div>
+      <div class="val red">8</div>
+      <div class="detail">2 scored (25%) · 5 wides · 1 save</div>
+    </div>
+  </div>
+  <div class="detail" style="padding:10px; text-align:center;">
+    From-play accuracy drops from 43% to 25% in the 2nd half. Very wasteful throughout.
+  </div>
+</div>
+
+<!-- ============ KICKOUTS ============ -->
+<div class="section-title blue">Kickout Strategy</div>
+<div class="grid2">
+  <div class="card blue">
+    <h3>Denn Kickouts (Restarts)</h3>
+    <div class="big-num blue">22</div>
+    <div class="detail">Won: 14 (64%) · Lost: 8 (36%)</div>
+  </div>
+  <div class="card green">
+    <h3>Short Kickout Preference</h3>
+    <div class="big-num green">11</div>
+    <div class="detail">50% of all kickouts went short — <strong>all 11 won</strong></div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Kickout Outcome Breakdown</h3>
+  <div class="bar-row">
+    <span class="bar-label">Short Won</span>
+    <div class="bar-track"><div class="bar-fill green" style="width:50%">11 (100% retention)</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Won Clean</span>
+    <div class="bar-track"><div class="bar-fill blue" style="width:23%">5</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Break Won</span>
+    <div class="bar-track"><div class="bar-fill blue" style="width:9%">2</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Break Lost</span>
+    <div class="bar-track"><div class="bar-fill red" style="width:14%">3</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Lost Clean</span>
+    <div class="bar-track"><div class="bar-fill red" style="width:5%">1</div></div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Key Kickout Targets (Denn's Own Restarts)</h3>
+  <table class="player-table">
+    <tr><th>Player</th><th>Times Targeted</th><th>Outcome</th></tr>
+    <tr><td>#6 Caolain McCabe</td><td>5</td><td><span class="tag ko">All short — all won</span></td></tr>
+    <tr><td>#8 Sean Donohue</td><td>4</td><td><span class="tag ko">3 short won, 1 won clean</span></td></tr>
+    <tr><td>#3 Michael Gaffney</td><td>2</td><td><span class="tag ko">2 short won</span></td></tr>
+    <tr><td>#12 Oisin Smith</td><td>2</td><td><span class="tag ko">1 break won, 1 lost clean</span></td></tr>
+  </table>
+  <div class="detail" style="margin-top:8px;">
+    <strong>Pattern:</strong> #6 Caolain McCabe is the primary short kickout receiver. #8 Sean Donohue is the secondary option. When they go long, they are far less reliable.
+  </div>
+</div>
+
+<!-- ============ OPP KICKOUT PRESSURE ============ -->
+<div class="section-title amber">Pressure on Opposition Kickouts</div>
+<div class="card amber">
+  <h3>Cuchulainns Kickouts — Denn's Contest</h3>
+  <div class="detail" style="margin-top:4px;">
+    Cuchulainns had <strong>17 kickouts</strong> in the match.<br><br>
+    <strong style="color:#2ecc71;">Denn won 7 (41%)</strong> — 5 break won, 2 via opposition break lost<br>
+    <strong style="color:#e74c3c;">Cuchulainns retained 10 (59%)</strong> — 5 won clean, 5 break won
+  </div>
+  <div class="detail" style="margin-top:10px;">
+    Denn are competitive on opposition restarts — they won 41% of Cuchulainns kickouts. This is a strength.
+  </div>
+</div>
+
+<!-- ============ FREES ============ -->
+<div class="section-title amber">Frees &amp; Discipline</div>
+<div class="grid2">
+  <div class="card green">
+    <h3>Scoreable Frees Won</h3>
+    <div class="big-num green">4</div>
+    <div class="detail">Converted: 3 (75%) · Missed: 1 wide</div>
+  </div>
+  <div class="card amber">
+    <h3>Free Dependency</h3>
+    <div class="big-num amber">50%</div>
+    <div class="detail">6 of 12 points came from frees (3× '2 Point' frees)</div>
+  </div>
+</div>
+
+<!-- ============ KEY PLAYERS ============ -->
+<div class="section-title green">Key Players — Threat Assessment</div>
+<div class="card">
+  <table class="player-table">
+    <tr><th>Player</th><th>Scores</th><th>Shots</th><th>Accuracy</th><th>Role</th></tr>
+    <tr>
+      <td><strong>#11 Cavell Keoghan</strong></td>
+      <td>0-04 (2 frees as '2pts')</td>
+      <td>2</td>
+      <td>100%</td>
+      <td><span class="tag scorer">Primary Free Taker</span></td>
+    </tr>
+    <tr>
+      <td><strong>#8 Sean Donohue</strong></td>
+      <td>0-02 (from play as '2pts')</td>
+      <td>1</td>
+      <td>100%</td>
+      <td><span class="tag scorer">Scorer</span> <span class="tag ko">Kickout Target</span></td>
+    </tr>
+    <tr>
+      <td><strong>#14 Ben Conaty</strong></td>
+      <td>0-01</td>
+      <td>2</td>
+      <td>50%</td>
+      <td><span class="tag scorer">Forward</span></td>
+    </tr>
+    <tr>
+      <td><strong>#12 Oisin Smith</strong></td>
+      <td>0-02</td>
+      <td>3</td>
+      <td>67%</td>
+      <td><span class="tag scorer">Forward</span></td>
+    </tr>
+    <tr>
+      <td><strong>#15 Oisin Reilly</strong></td>
+      <td>0-01</td>
+      <td>3</td>
+      <td>33%</td>
+      <td><span class="tag foul">Wasteful — 2 wides</span></td>
+    </tr>
+    <tr>
+      <td><strong>#6 Caolain McCabe</strong></td>
+      <td>0-01</td>
+      <td>2</td>
+      <td>50%</td>
+      <td><span class="tag ko">Key Kickout Receiver</span></td>
+    </tr>
+    <tr>
+      <td><strong>#1 Mark Fegan</strong></td>
+      <td>0-01 (free as '2pts')</td>
+      <td>1</td>
+      <td>100%</td>
+      <td><span class="tag scorer">Goalkeeper Free</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============ HALF-BY-HALF SCORING ============ -->
+<div class="section-title blue">Scoring Periods</div>
+<div class="card">
+  <h3>Scores by Quarter</h3>
+  <div class="bar-row">
+    <span class="bar-label">Q1 (0-15 min)</span>
+    <div class="bar-track"><div class="bar-fill green" style="width:42%">0-05</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Q2 (15-33 min)</span>
+    <div class="bar-track"><div class="bar-fill blue" style="width:33%">0-04</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Q3 (33-49 min)</span>
+    <div class="bar-track"><div class="bar-fill amber" style="width:17%">0-02</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Q4 (49-63 min)</span>
+    <div class="bar-track"><div class="bar-fill red" style="width:8%">0-01</div></div>
+  </div>
+  <div class="detail" style="margin-top:10px; text-align:center;">
+    <strong style="color:#e74c3c;">Denn's scoring dried up significantly in the final quarter — only 1 point after the 49th minute.</strong>
+  </div>
+</div>
+
+<!-- ============ STRENGTHS & WEAKNESSES ============ -->
+<div class="section-title green">Strengths</div>
+<div class="sw-list">
+  <span class="pill strength">Short kickout retention: 100% (11/11)</span>
+  <span class="pill strength">Free conversion: 75% (3 of 4)</span>
+  <span class="pill strength">Competitive on opposition kickouts (41% won)</span>
+  <span class="pill strength">#11 Cavell Keoghan — reliable free taker</span>
+  <span class="pill strength">Strong 1st quarter — fast starters (0-05 in Q1)</span>
+  <span class="pill strength">#6 Caolain McCabe — key link man from kickouts</span>
+</div>
+
+<div class="section-title" style="border-left-color:#e74c3c;">Weaknesses</div>
+<div class="sw-list">
+  <span class="pill weakness">9 wides from play — 60% waste rate from play</span>
+  <span class="pill weakness">Zero goals — no green flag threat in this game</span>
+  <span class="pill weakness">Scoring fades badly: Q1 0-05 → Q4 0-01</span>
+  <span class="pill weakness">Over-reliant on frees (50% of points from frees)</span>
+  <span class="pill weakness">Long kickouts vulnerable — only 64% overall retention</span>
+  <span class="pill weakness">#15 Oisin Reilly wasteful — 1 from 3 shooting</span>
+  <span class="pill weakness">Limited scoring spread — only 7 different scorers</span>
+  <span class="pill weakness">2nd half output drops — 5 scores vs 7 in 1st half</span>
+</div>
+
+<!-- ============ TACTICAL RECOMMENDATIONS ============ -->
+<div class="summary">
+  <h3>🎯 Tactical Recommendations for Our Squad</h3>
+  <ul>
+    <li><strong>Press their short kickouts:</strong> #6 Caolain McCabe and #8 Sean Donohue are the go-to targets. Deny the short option and force them long where they only retain 55%.</li>
+    <li><strong>Stay disciplined — don't give away frees:</strong> 50% of their points came from frees. Reduce fouls in scoring range and you cut off their main supply.</li>
+    <li><strong>#11 Cavell Keoghan:</strong> Their primary free taker. Avoid giving away frees in his range.</li>
+    <li><strong>Be patient — they fade:</strong> Denn scored 0-05 in Q1 but only 0-01 in Q4. Keep the game tight early and push hard in the final quarter.</li>
+    <li><strong>Force them to shoot from distance:</strong> Only 33% accuracy from play with 9 wides. Funnel them wide and they'll waste chances.</li>
+    <li class="pos"><strong>Their goal threat is low:</strong> Zero goals in this game. They rely on points — keep your shape and don't overcommit.</li>
+    <li class="pos"><strong>Contest their long kickouts aggressively:</strong> When forced to go long, they lose possession regularly. Win the restart battle and you control the game.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  Opposition Analysis · Denn · Source: Cuchulainns 1-18 v 0-12 Denn
+</div>
+
+</div>
+<script src="../auth.js"></script></body>
+</html>

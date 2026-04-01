@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Match Analysis - Killinkere vs Aughadrumsee</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 3em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .score-display { display: flex; justify-content: center; align-items: center; gap: 40px; margin: 30px 0; }
+        .team-score { text-align: center; }
+        .team-name { font-size: 2em; font-weight: bold; margin-bottom: 10px; }
+        .score-big { font-size: 5em; font-weight: bold; }
+        .score-breakdown { font-size: 1.2em; opacity: 0.9; margin-top: 10px; }
+        .vs-divider { font-size: 2.5em; opacity: 0.7; }
+        .killinkere { color: #2ecc71; }
+        .aughadrumsee { color: #e74c3c; }
+        
+        .tabs { display: flex; background: #34495e; }
+        .tab { flex: 1; padding: 20px; text-align: center; color: white; cursor: pointer; transition: all 0.3s; font-size: 1.1em; font-weight: bold; }
+        .tab:hover { background: #2c3e50; }
+        .tab.active { background: #2a5298; }
+        
+        .tab-content { display: none; padding: 40px; }
+        .tab-content.active { display: block; }
+        
+        .stats-grid { display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .stat-row { display: flex; align-items: center; background: white; border-radius: 10px; padding: 15px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .stat-row:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.15); transform: translateX(5px); }
+        .stat-label { min-width: 180px; font-weight: bold; color: #2c3e50; font-size: 1em; }
+        .stat-bars { flex: 1; display: flex; align-items: center; gap: 10px; }
+        .bar-container { flex: 1; display: flex; align-items: center; }
+        .bar-left { display: flex; justify-content: flex-end; align-items: center; }
+        .bar-right { display: flex; justify-content: flex-start; align-items: center; }
+        .bar { height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.95em; min-width: 30px; transition: all 0.5s; }
+        .bar-killinkere { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .bar-aughadrumsee { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+        .vs-divider { font-size: 1.1em; color: #95a5a6; font-weight: bold; min-width: 30px; text-align: center; }
+        
+        .chart-container { background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .chart-title { font-size: 1.8em; color: #2c3e50; margin-bottom: 20px; text-align: center; font-weight: bold; }
+        
+        .period-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+        .period-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px; padding: 30px; }
+        .period-title { font-size: 1.8em; font-weight: bold; margin-bottom: 20px; text-align: center; }
+        .period-stats { display: grid; gap: 15px; }
+        .period-stat { display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        
+        .player-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .player-table th { background: #34495e; color: white; padding: 15px; text-align: left; font-size: 1.1em; cursor: pointer; user-select: none; position: relative; }
+        .player-table th:hover { background: #2c3e50; }
+        .player-table th::after { content: ' ⇅'; opacity: 0.3; font-size: 0.8em; }
+        .player-table td { padding: 12px 15px; border-bottom: 1px solid #ecf0f1; }
+        .player-table tr:hover { background: #f8f9fa; }
+        .player-table tr:nth-child(even) { background: #f8f9fa; }
+        
+        .accuracy-bar { width: 100%; height: 30px; background: #ecf0f1; border-radius: 15px; overflow: hidden; margin: 10px 0; }
+        .accuracy-fill { height: 100%; background: linear-gradient(90deg, #2ecc71, #27ae60); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; transition: width 1s; }
+        
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline-event { display: flex; align-items: center; margin: 15px 0; padding: 15px; border-radius: 10px; transition: all 0.3s; }
+        .timeline-event:hover { transform: translateX(10px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .timeline-event.killinkere { background: linear-gradient(90deg, rgba(46,204,113,0.1), rgba(46,204,113,0.3)); border-left: 4px solid #2ecc71; }
+        .timeline-event.aughadrumsee { background: linear-gradient(90deg, rgba(231,76,60,0.1), rgba(231,76,60,0.3)); border-left: 4px solid #e74c3c; }
+        .timeline-time { font-weight: bold; min-width: 80px; font-size: 1.1em; }
+        .timeline-desc { flex: 1; font-size: 1.05em; }
+        .timeline-icon { font-size: 1.5em; margin: 0 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏐 MATCH ANALYSIS</h1>
+            <div style="font-size: 1.3em; margin-bottom: 15px; opacity: 0.95;">TBD</div>
+            <div class="score-display">
+                <div class="team-score">
+                    <div class="team-name killinkere">KILLINKERE</div>
+                    <div class="score-big killinkere">4-9</div>
+                    <div class="score-breakdown">21 Points (4 Goals, 9 Points)</div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="team-score">
+                    <div class="team-name aughadrumsee">AUGHADRUMSEE</div>
+                    <div class="score-big aughadrumsee">0-12</div>
+                    <div class="score-breakdown">12 Points (0 Goals, 12 Points)</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px; font-size: 1.1em; opacity: 0.9;">
+                <span style="margin: 0 15px;">🏟️ <strong>Venue:</strong> TBD</span>
+                <span style="margin: 0 15px;">📅 <strong>Date:</strong> TBD</span>
+                <span style="margin: 0 15px;">⏰ <strong>Time:</strong> TBD</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('overview')">📊 Overview</div>
+            <div class="tab" onclick="showTab('periods')">⏱️ Period Analysis</div>
+            <div class="tab" onclick="showTab('players')">👥 Player Stats</div>
+            <div class="tab" onclick="showTab('timeline')">📅 Timeline</div>
+            <div class="tab" onclick="showTab('targets')">🎯 Targets</div>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <h2 style="color: #2c3e50; margin: 20px 0 15px; font-size: 1.8em; text-align: center;">🏐 Shooting Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Shots from Play Accuracy <span style="font-size: 0.85em; color: #95a5a6;">(Target: 70%)</span></div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: 58%">58%</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 50%">50%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Total Shots / Scores</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(19 * 4%)">19 / 11</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(18 * 4%)">18 / 9</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">📊 Score Breakdown</h2>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Goals</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(4 * 20%)">4</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Points</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(7 * 7%)">7</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(12 * 7%)">12</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">2 Points</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(1 * 30%)">1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">❌ Missed Shots</h2>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Wides</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(7 * 10%)">7</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(5 * 10%)">5</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Shorts</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(2 * 15%)">2</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(3 * 15%)">3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">🎯 Scoreable Frees</h2>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Total Scoreable Frees</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(SF_TOTAL_T1 * 30%)">SF_TOTAL_T1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(SF_TOTAL_T2 * 30%)">SF_TOTAL_T2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Scoreable Frees - Goals</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(SF_GOALS_T1 * 30%)">SF_GOALS_T1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(SF_GOALS_T2 * 30%)">SF_GOALS_T2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Scoreable Frees - Points</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(SF_POINTS_T1 * 20%)">SF_POINTS_T1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(SF_POINTS_T2 * 20%)">SF_POINTS_T2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Scoreable Frees - Wides</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(SF_WIDES_T1 * 20%)">SF_WIDES_T1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(SF_WIDES_T2 * 20%)">SF_WIDES_T2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Scoreable Frees - Shorts</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(SF_SHORTS_T1 * 20%)">SF_SHORTS_T1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(SF_SHORTS_T2 * 20%)">SF_SHORTS_T2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Scoreable Frees Accuracy</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: SF_ACC_T1%">SF_ACC_T1%</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: SF_ACC_T2%">SF_ACC_T2%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">⚡ Attack Statistics</h2>
+            <div style="text-align: center; margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <p style="color: #7f8c8d; font-size: 0.95em; margin: 0;">This section shows how the <strong>TOTAL_ATTACKS attacks</strong> ended - either with a shot taken or possession lost during the attack.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Total Attacks / Shot Taken <span style="font-size: 0.85em; color: #95a5a6;">(Target: 75%)</span></div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(29 * 3%)">29 / 18 (62%)</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0 / 0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Attacks - Kick Lost</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(3 * 12%)">3</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Attacks - Carry Lost</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(2 * 20%)">2</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">🔄 Possession Statistics</h2>
+            <div style="text-align: center; margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <p style="color: #7f8c8d; font-size: 0.95em; margin: 0;">General possession lost events throughout the match (not part of the attack breakdown above).</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Possession Lost</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(13 * 6%)">13</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Poss. Lost - In Contact</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(6 * 12%)">6</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Poss. Lost - Hand Pass</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(4 * 15%)">4</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Poss. Lost - Kick Pass</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(3 * 20%)">3</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Poss. Lost - Handling</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(1 * 30%)">1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Turnovers</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(13 * 6%)">13</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Frees Conceded</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(9 * 9%)">9</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(2 * 9%)">2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Scores Conceded from Frees</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(3 * 20%)">3 pts</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(1 * 20%)">1 pt</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Frees Conceded by Zone - TEAM_NAME_PLACEHOLDER</div>
+                <div style="max-width: 700px; margin: 0 auto;">
+                    <svg viewBox="0 0 600 250" style="width: 100%; height: auto;">
+                        <!-- Pitch outline -->
+                        <rect x="10" y="10" width="580" height="230" fill="#2ecc71" stroke="#fff" stroke-width="3"/>
+                        
+                        <!-- Zone lines (vertical) -->
+                        <line x1="203" y1="10" x2="203" y2="240" stroke="#fff" stroke-width="2" stroke-dasharray="8,5"/>
+                        <line x1="397" y1="10" x2="397" y2="240" stroke="#fff" stroke-width="2" stroke-dasharray="8,5"/>
+                        
+                        <!-- Defensive third (left) -->
+                        <text x="106" y="110" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">Defensive</text>
+                        <text x="106" y="135" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Third</text>
+                        <text x="106" y="170" text-anchor="middle" fill="#fff" font-size="36" font-weight="bold">DEFENSIVE_FREES</text>
+                        
+                        <!-- Middle third (center) -->
+                        <text x="300" y="110" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">Middle</text>
+                        <text x="300" y="135" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Third</text>
+                        <text x="300" y="170" text-anchor="middle" fill="#fff" font-size="36" font-weight="bold">MIDDLE_FREES</text>
+                        
+                        <!-- Attacking third (right) -->
+                        <text x="494" y="110" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">Attacking</text>
+                        <text x="494" y="135" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Third</text>
+                        <text x="494" y="170" text-anchor="middle" fill="#fff" font-size="36" font-weight="bold">ATTACKING_FREES</text>
+                    </svg>
+                </div>
+            </div>
+
+            <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">🏐 Kickout Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <div class="stat-label">Total Kickouts / Won</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(20 * 4%)">20 / 17 (85%)</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(15 * 4%)">15 / 8 (53%)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Kickouts Won Clean</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(10 * 10%)">10</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(3 * 10%)">3</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Kickouts Short Won</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(5 * 15%)">5</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: 0%">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Kickouts Break Won</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(2 * 20%)">2</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(5 * 20%)">5</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Kickouts Lost Clean</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(1 * 25%)">1</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(3 * 25%)">3</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Kickouts Break Lost</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(2 * 20%)">2</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(4 * 20%)">4</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Kickouts Sideline Ball</div>
+                    <div class="stat-bars">
+                        <div class="bar-container bar-left">
+                            <div class="bar bar-killinkere" style="width: calc(0 * 25%)">0</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="bar-container bar-right">
+                            <div class="bar bar-aughadrumsee" style="width: calc(0 * 25%)">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Scoring Comparison</div>
+                <canvas id="scoringChart"></canvas>
+            </div>
+        </div>
+
+        <div id="periods" class="tab-content">
+            <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
+                <h3 style="margin-bottom: 15px; font-size: 1.5em;">📊 Overall Match Accuracy</h3>
+                <div style="display: flex; justify-content: center; gap: 50px; font-size: 1.2em;">
+                    <div>
+                        <strong>Killinkere:</strong> 58%
+                    </div>
+                    <div>
+                        <strong>Aughadrumsee:</strong> 50%
+                    </div>
+                </div>
+            </div>
+            <div class="period-comparison">
+                <div class="period-card">
+                    <div class="period-title">⏱️ 1ST HALF</div>
+                    <div class="period-stats">
+                        <div class="period-stat">
+                            <span>Killinkere Score:</span>
+                            <strong>3-5 (14 pts)</strong>
+                        </div>
+                        <div class="period-stat">
+                            <span>Aughadrumsee Score:</span>
+                            <strong>0-7 (7 pts)</strong>
+                        </div>
+                        <div class="period-stat">
+                            <span>Killinkere Shots:</span>
+                            <strong>5/8 (62.5% accuracy)</strong>
+                        </div>
+                        <div class="period-stat">
+                            <span>Aughadrumsee Shots:</span>
+                            <strong>7/11 (63.6% accuracy)</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="period-card">
+                    <div class="period-title">⏱️ 2ND HALF</div>
+                    <div class="period-stats">
+                        <div class="period-stat">
+                            <span>Killinkere Score:</span>
+                            <strong>1-4 (7 pts)</strong>
+                        </div>
+                        <div class="period-stat">
+                            <span>Aughadrumsee Score:</span>
+                            <strong>0-5 (5 pts)</strong>
+                        </div>
+                        <div class="period-stat">
+                            <span>Killinkere Shots:</span>
+                            <strong>6/11 (54.5% accuracy)</strong>
+                        </div>
+                        <div class="period-stat">
+                            <span>Aughadrumsee Shots:</span>
+                            <strong>2/7 (28.6% accuracy)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Score Timeline</div>
+                <canvas id="periodChart"></canvas>
+            </div>
+        </div>
+
+        <div id="players" class="tab-content">
+            <h2 style="color: #2ecc71; margin: 20px 0; font-size: 2em;">🟢 Killinkere Top Performers</h2>
+            <table class="player-table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Goals</th>
+                        <th>Points</th>
+                        <th>Total Score</th>
+                        <th>Shots</th>
+                        <th>Accuracy</th>
+                        <th>Turnovers</th>
+                        <th>Poss. Lost</th>
+                        <th>Frees Conc.</th>
+                        <th>Kickouts Won</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fiachra Mooney</strong></td>
+                        <td>1</td>
+                        <td>6</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 78%">78%</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Keiran Smith</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Neill McCabe</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">0%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>4</td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alex Sweeney</strong></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
+                            </div>
+                        </td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ryan Smith</strong></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Luke Crossan</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Philip Corrigan</strong></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 50%">50%</div>
+                            </div>
+                        </td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>James Farrelly</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">0%</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Darrell Dolan</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sean Brady</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dara Sharkey</strong></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evan Markey</strong></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Emmett Fitzsimons</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">0%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="color: #e74c3c; margin: 40px 0 20px; font-size: 2em;">🔴 Aughadrumsee Top Performers</h2>
+            <table class="player-table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Goals</th>
+                        <th>Points</th>
+                        <th>Total Score</th>
+                        <th>Shots</th>
+                        <th>Accuracy</th>
+                        <th>Turnovers</th>
+                        <th>Poss. Lost</th>
+                        <th>Frees Conc.</th>
+                        <th>Kickouts Won</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Player 11</strong></td>
+                        <td>0</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>12</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 58%; background: linear-gradient(90deg, #c0392b, #e74c3c);">58%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 8</strong></td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #c0392b, #e74c3c);">100%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 10</strong></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #c0392b, #e74c3c);">100%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 24</strong></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #c0392b, #e74c3c);">100%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 9</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%; background: linear-gradient(90deg, #c0392b, #e74c3c);">0%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 6</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%; background: linear-gradient(90deg, #c0392b, #e74c3c);">-</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 12</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%; background: linear-gradient(90deg, #c0392b, #e74c3c);">0%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="targets" class="tab-content">
+            <div class="chart-container">
+                <div class="chart-title">📈 Accumulative Shot Accuracy Across Season (Target: 70%)</div>
+                <canvas id="accAccuracyChart" style="max-height: 350px;"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">📈 Accumulative Attack Efficiency Across Season (Target: 75%)</div>
+                <canvas id="accAttackChart" style="max-height: 350px;"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">📈 Accumulative Scores Across Season</div>
+                <canvas id="accScoresChart" style="max-height: 350px;"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Shot Accuracy: 2025 vs 2026</div>
+                <canvas id="yearComparisonChart" style="max-height: 300px;"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Attack Efficiency</div>
+                <canvas id="attacksChart" style="max-height: 150px;"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Total Scores: 2025 vs 2026</div>
+                <canvas id="totalScoresChart" style="max-height: 300px;"></canvas>
+            </div>
+        </div>
+
+        <div id="timeline" class="tab-content">
+            <h2 style="text-align: center; font-size: 2em; color: #2c3e50; margin-bottom: 30px;">⚡ Key Moments</h2>
+            <div class="timeline">
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">02:32</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Ryan Smith</strong> scores first point for Killinkere <span style="color: #95a5a6; font-weight: normal;">(0-1 vs 0-0)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">03:44</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 11</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(0-1 vs 0-1)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">06:28</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 11</strong> scores from free for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(0-1 vs 0-2)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">07:10</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Fiachra Mooney</strong> scores point for Killinkere <span style="color: #95a5a6; font-weight: normal;">(0-2 vs 0-2)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">08:20</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 11</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(0-2 vs 0-3)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">08:57</span>
+                    <span class="timeline-icon">🥅</span>
+                    <span class="timeline-desc"><strong>GOAL! Evan Markey</strong> puts Killinkere ahead <span style="color: #95a5a6; font-weight: normal;">(1-2 vs 0-3)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">14:10</span>
+                    <span class="timeline-icon">🥅</span>
+                    <span class="timeline-desc"><strong>GOAL! Fiachra Mooney</strong> from scoreable free <span style="color: #95a5a6; font-weight: normal;">(2-3 vs 0-3)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">17:01</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 11</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(2-3 vs 0-4)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">19:59</span>
+                    <span class="timeline-icon">🏐🏐</span>
+                    <span class="timeline-desc"><strong>Fiachra Mooney</strong> scores 2 points! <span style="color: #95a5a6; font-weight: normal;">(2-5 vs 0-4)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">21:06</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc">Aughadrumsee scores point <span style="color: #95a5a6; font-weight: normal;">(2-5 vs 0-5)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">22:57</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 10</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(2-5 vs 0-6)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">27:30</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Fiachra Mooney</strong> scores point for Killinkere <span style="color: #95a5a6; font-weight: normal;">(3-5 vs 0-6)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">29:27</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 11</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(3-5 vs 0-7 at HT)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">31:45</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 11</strong> scores from free for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(3-5 vs 0-8)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">37:49</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Fiachra Mooney</strong> scores point for Killinkere <span style="color: #95a5a6; font-weight: normal;">(3-6 vs 0-8)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">39:46</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc">Aughadrumsee scores point <span style="color: #95a5a6; font-weight: normal;">(3-6 vs 0-9)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">42:34</span>
+                    <span class="timeline-icon">🥅</span>
+                    <span class="timeline-desc"><strong>GOAL! Dara Sharkey</strong> extends lead <span style="color: #95a5a6; font-weight: normal;">(3-7 vs 0-9)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">43:08</span>
+                    <span class="timeline-icon">🥅</span>
+                    <span class="timeline-desc"><strong>GOAL! Alex Sweeney</strong> - Quick response! <span style="color: #95a5a6; font-weight: normal;">(4-7 vs 0-9)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">44:20</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 24</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(4-7 vs 0-10)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">44:59</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Fiachra Mooney</strong> scores point for Killinkere <span style="color: #95a5a6; font-weight: normal;">(4-8 vs 0-10)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">49:17</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Player 8</strong> scores point for Aughadrumsee <span style="color: #95a5a6; font-weight: normal;">(4-8 vs 0-11)</span></span>
+                </div>
+                <div class="timeline-event killinkere">
+                    <span class="timeline-time">51:26</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc"><strong>Philip Corrigan</strong> scores late point <span style="color: #95a5a6; font-weight: normal;">(4-9 vs 0-11)</span></span>
+                </div>
+                <div class="timeline-event aughadrumsee">
+                    <span class="timeline-time">After 51:26</span>
+                    <span class="timeline-icon">🏐</span>
+                    <span class="timeline-desc">Aughadrumsee scores final point <span style="color: #95a5a6; font-weight: normal;">(4-9 vs 0-12 FT)</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Table sorting function
+        function sortTable(table, column, asc = true) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                let aVal = a.children[column].textContent.trim();
+                let bVal = b.children[column].textContent.trim();
+                
+                // Handle numeric values
+                if (!isNaN(aVal) && !isNaN(bVal)) {
+                    aVal = parseFloat(aVal);
+                    bVal = parseFloat(bVal);
+                } else if (aVal.includes('%')) {
+                    aVal = parseFloat(aVal);
+                    bVal = parseFloat(bVal);
+                }
+                
+                if (aVal < bVal) return asc ? -1 : 1;
+                if (aVal > bVal) return asc ? 1 : -1;
+                return 0;
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Add click handlers to all table headers
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.player-table').forEach(table => {
+                const headers = table.querySelectorAll('th');
+                const sortStates = new Array(headers.length).fill(null);
+                
+                headers.forEach((header, index) => {
+                    header.addEventListener('click', () => {
+                        // Toggle sort direction
+                        if (sortStates[index] === null || sortStates[index] === false) {
+                            sortStates[index] = true; // ascending
+                        } else {
+                            sortStates[index] = false; // descending
+                        }
+                        
+                        sortTable(table, index, sortStates[index]);
+                        
+                        // Update header indicators
+                        headers.forEach((h, i) => {
+                            if (i === index) {
+                                h.style.background = '#2c3e50';
+                                h.querySelector('::after') || (h.innerHTML += sortStates[index] ? ' ↑' : ' ↓');
+                                const arrow = sortStates[index] ? ' ↑' : ' ↓';
+                                h.innerHTML = h.innerHTML.replace(/ [↑↓]$/, '') + arrow;
+                            } else {
+                                h.style.background = '#34495e';
+                            }
+                        });
+                    });
+                });
+            });
+        });
+
+        // Accumulative Shot Accuracy Chart
+        new Chart(document.getElementById('accAccuracyChart'), {
+            type: 'line',
+            data: {
+                labels: GAME_LABELS_JSON,
+                datasets: [{
+                    label: 'Accumulative Accuracy %',
+                    data: ACC_ACCURACY_JSON,
+                    borderColor: 'rgba(46, 204, 113, 1)',
+                    backgroundColor: 'rgba(46, 204, 113, 0.15)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 6,
+                    pointBackgroundColor: 'rgba(46, 204, 113, 1)',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }, {
+                    label: 'Per Game Accuracy %',
+                    data: PER_GAME_ACCURACY_JSON,
+                    borderColor: 'rgba(52, 152, 219, 0.8)',
+                    backgroundColor: 'rgba(52, 152, 219, 0.08)',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } },
+                    x: { ticks: { maxRotation: 45, minRotation: 45 } }
+                },
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
+                }
+            },
+            plugins: [{
+                id: 'accAccTarget',
+                afterDatasetsDraw(chart) {
+                    const {ctx, chartArea: {left, right}, scales: {y}} = chart;
+                    const yPos = y.getPixelForValue(70);
+                    ctx.save();
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = 'rgb(231, 76, 60)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(left, yPos);
+                    ctx.lineTo(right, yPos);
+                    ctx.stroke();
+                    ctx.fillStyle = 'rgb(231, 76, 60)';
+                    ctx.fillRect(right - 90, yPos - 12, 85, 24);
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('70% Target', right - 47, yPos + 4);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        // Accumulative Attack Efficiency Chart
+        new Chart(document.getElementById('accAttackChart'), {
+            type: 'line',
+            data: {
+                labels: GAME_LABELS_JSON,
+                datasets: [{
+                    label: 'Accumulative Attack Efficiency %',
+                    data: ACC_ATTACK_PCT_JSON,
+                    borderColor: 'rgba(155, 89, 182, 1)',
+                    backgroundColor: 'rgba(155, 89, 182, 0.15)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 6,
+                    pointBackgroundColor: 'rgba(155, 89, 182, 1)',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } },
+                    x: { ticks: { maxRotation: 45, minRotation: 45 } }
+                },
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
+                }
+            },
+            plugins: [{
+                id: 'accAttTarget',
+                afterDatasetsDraw(chart) {
+                    const {ctx, chartArea: {left, right}, scales: {y}} = chart;
+                    const yPos = y.getPixelForValue(75);
+                    ctx.save();
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = 'rgb(231, 76, 60)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(left, yPos);
+                    ctx.lineTo(right, yPos);
+                    ctx.stroke();
+                    ctx.fillStyle = 'rgb(231, 76, 60)';
+                    ctx.fillRect(right - 90, yPos - 12, 85, 24);
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('75% Target', right - 47, yPos + 4);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        // Accumulative Scores Chart
+        new Chart(document.getElementById('accScoresChart'), {
+            type: 'line',
+            data: {
+                labels: GAME_LABELS_JSON,
+                datasets: [{
+                    label: 'Goals',
+                    data: ACC_GOALS_JSON,
+                    borderColor: 'rgba(231, 76, 60, 1)',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 6,
+                    pointBackgroundColor: 'rgba(231, 76, 60, 1)',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }, {
+                    label: '2 Pointers',
+                    data: ACC_TWO_PTS_JSON,
+                    borderColor: 'rgba(243, 156, 18, 1)',
+                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 6,
+                    pointBackgroundColor: 'rgba(243, 156, 18, 1)',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }, {
+                    label: 'Points',
+                    data: ACC_POINTS_JSON,
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 6,
+                    pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true },
+                    x: { ticks: { maxRotation: 45, minRotation: 45 } }
+                },
+                plugins: { legend: { display: true, position: 'top' } }
+            }
+        });
+
+        // Year Comparison Chart
+        const yearCtx = document.getElementById('yearComparisonChart');
+        const yearChart = new Chart(yearCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2025', '2026'],
+                datasets: [{
+                    label: 'Shot Accuracy %',
+                    data: [50, YEAR_2026_ACCURACY],
+                    backgroundColor: ['rgba(52, 152, 219, 0.8)', 'rgba(46, 204, 113, 0.8)'],
+                    borderColor: ['rgba(41, 128, 185, 1)', 'rgba(39, 174, 96, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { callback: value => value + '%' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    annotation: {
+                        annotations: {
+                            targetLine: {
+                                type: 'line',
+                                yMin: 70,
+                                yMax: 70,
+                                borderColor: 'rgb(231, 76, 60)',
+                                borderWidth: 3,
+                                borderDash: [5, 5],
+                                label: {
+                                    display: true,
+                                    content: '70% Target',
+                                    position: 'end',
+                                    backgroundColor: 'rgb(231, 76, 60)',
+                                    color: 'white',
+                                    font: { weight: 'bold' }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'targetLine',
+                afterDatasetsDraw(chart) {
+                    const {ctx, chartArea: {left, right, top, bottom}, scales: {y}} = chart;
+                    const yPos = y.getPixelForValue(70);
+                    ctx.save();
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = 'rgb(231, 76, 60)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(left, yPos);
+                    ctx.lineTo(right, yPos);
+                    ctx.stroke();
+                    ctx.fillStyle = 'rgb(231, 76, 60)';
+                    ctx.fillRect(right - 90, yPos - 12, 85, 24);
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('70% Target', right - 47, yPos + 4);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        // Attacks Chart
+        new Chart(document.getElementById('attacksChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2026 Season'],
+                datasets: [{
+                    label: 'Attack Efficiency %',
+                    data: [ATTACKS_2026_PCT],
+                    backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                    borderColor: 'rgba(39, 174, 96, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { callback: value => value + '%' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            },
+            plugins: [{
+                id: 'attacksTargetLine',
+                afterDatasetsDraw(chart) {
+                    const {ctx, chartArea: {top, bottom, left}, scales: {x}} = chart;
+                    const xPos = x.getPixelForValue(75);
+                    ctx.save();
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = 'rgb(231, 76, 60)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(xPos, top);
+                    ctx.lineTo(xPos, bottom);
+                    ctx.stroke();
+                    ctx.fillStyle = 'rgb(231, 76, 60)';
+                    ctx.fillRect(xPos - 42, top - 5, 85, 24);
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('75% Target', xPos, top + 9);
+                    ctx.restore();
+                },
+                afterDraw(chart) {
+                    const {ctx, chartArea: {top, bottom}} = chart;
+                    const meta = chart.getDatasetMeta(0);
+                    const bar = meta.data[0];
+                    ctx.save();
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 14px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('ATTACKS_WITH_SHOT / TOTAL_ATTACKS', bar.x / 2, (top + bottom) / 2);
+                    ctx.restore();
+                }
+            }]
+        });
+
+        // Total Scores Chart
+        new Chart(document.getElementById('totalScoresChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Goals', '2 Pointers', 'Points'],
+                datasets: [{
+                    label: '2025',
+                    data: [24, 15, 169],
+                    backgroundColor: 'rgba(52, 152, 219, 0.8)',
+                    borderColor: 'rgba(41, 128, 185, 1)',
+                    borderWidth: 2
+                }, {
+                    label: '2026',
+                    data: [GOALS_2026, TWO_POINTERS_2026, POINTS_2026],
+                    backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                    borderColor: 'rgba(39, 174, 96, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } },
+                plugins: { legend: { display: true, position: 'top' } }
+            }
+        });
+
+        // Scoring Chart
+        new Chart(document.getElementById('scoringChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Goals', 'Points', '2 Points', 'Total Score'],
+                datasets: [{
+                    label: 'Killinkere',
+                    data: [4, 7, 1, 21],
+                    backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                    borderColor: 'rgba(46, 204, 113, 1)',
+                    borderWidth: 2
+                }, {
+                    label: 'Aughadrumsee',
+                    data: [0, 12, 0, 12],
+                    backgroundColor: 'rgba(231, 76, 60, 0.8)',
+                    borderColor: 'rgba(231, 76, 60, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } },
+                plugins: { legend: { display: true, position: 'top' } }
+            }
+        });
+
+        // Period Chart - Stepped line showing cumulative score over time
+        const halftimePlugin = {
+            id: 'halftimePlugin',
+            afterDatasetsDraw(chart) {
+                const {ctx, chartArea: {top, bottom}, scales: {x}} = chart;
+                const htIndex = 13; // Halftime position
+                const xPos = x.getPixelForValue(htIndex);
+                
+                ctx.save();
+                ctx.setLineDash([5, 5]);
+                ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(xPos, top);
+                ctx.lineTo(xPos, bottom);
+                ctx.stroke();
+                
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(xPos - 30, top - 5, 60, 20);
+                ctx.fillStyle = 'white';
+                ctx.font = '11px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Half Time', xPos, top + 8);
+                ctx.restore();
+            }
+        };
+        
+        new Chart(document.getElementById('periodChart'), {
+            type: 'line',
+            data: {
+                labels: ['Start', '02:32', '03:44', '06:28', '07:10', '08:20', '08:57', '14:10', '17:01', '19:59', '21:06', '22:57', '27:30', '29:27', 'HT', '31:45', '37:49', '39:46', '42:34', '43:08', '44:20', '44:59', '49:17', '51:26', 'FT'],
+                datasets: [{
+                    label: 'Killinkere',
+                    data: [0],
+                    borderColor: '#2ecc71',
+                    backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                    stepped: true,
+                    fill: true,
+                    borderWidth: 3,
+                    pointRadius: [0],
+                    pointHoverRadius: 9,
+                    pointStyle: function(context) {
+                        const index = context.dataIndex;
+                        const scoreTypes = [0];
+                        return scoreTypes[index];
+                    },
+                    pointBackgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        const scoreTypes = [0];
+                        const colors = { 'green': '#27ae60', 'orange': '#f39c12', 'white': '#ecf0f1' };
+                        return colors[scoreTypes[index]] || '#2ecc71';
+                    },
+                    pointBorderColor: '#1e8449',
+                    pointBorderWidth: 2
+                }, {
+                    label: 'Aughadrumsee',
+                    data: [0],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    stepped: true,
+                    fill: true,
+                    borderWidth: 3,
+                    pointRadius: 7,
+                    pointHoverRadius: 9,
+                    pointStyle: function(context) {
+                        const index = context.dataIndex;
+                        const scoreTypes = [0];
+                        return scoreTypes[index];
+                    },
+                    pointBackgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        const scoreTypes = [0];
+                        const colors = { 'red': '#e74c3c', 'orange': '#f39c12', 'white': '#ecf0f1' };
+                        return colors[scoreTypes[index]] || '#e74c3c';
+                    },
+                    pointBorderColor: '#c0392b',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { 
+                    y: { 
+                        beginAtZero: true, 
+                        title: { display: true, text: 'Cumulative Score' },
+                        ticks: { stepSize: 3 }
+                    },
+                    x: {
+                        title: { display: true, text: 'Match Time' }
+                    }
+                },
+                plugins: {
+                    legend: { 
+                        display: true, 
+                        position: 'top',
+                        labels: {
+                            generateLabels: function(chart) {
+                                const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                original.push(
+                                    { text: '🚩 Goal', fillStyle: '#27ae60', strokeStyle: '#1e8449', lineWidth: 2, pointStyle: 'rectRot' },
+                                    { text: '🚩 2 Points', fillStyle: '#f39c12', strokeStyle: '#e67e22', lineWidth: 2, pointStyle: 'rectRot' },
+                                    { text: '🚩 1 Point', fillStyle: '#ecf0f1', strokeStyle: '#95a5a6', lineWidth: 2, pointStyle: 'circle' }
+                                );
+                                return original;
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                return 'Time: ' + context[0].label;
+                            },
+                            afterLabel: function(context) {
+                                const index = context.dataIndex;
+                                if (context.datasetIndex === 0) {
+                                    const scoreTypes = [0];
+                                    return scoreTypes[index] || '';
+                                } else {
+                                    return context.parsed.y > context.dataset.data[index-1] ? '1pt' : '';
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [halftimePlugin]
+        });
+    </script>
+<script src="../auth.js"></script></body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Killinkere 2026 Season Overview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; }
+        .header h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 10px; }
+        .header p { color: #7f8c8d; font-size: 1.2em; }
+        .chart-container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .chart-title { font-size: 1.8em; color: #2c3e50; margin-bottom: 20px; text-align: center; font-weight: bold; }
+        .bar-chart { position: relative; height: 400px; margin-top: 40px; }
+        .bars { display: flex; justify-content: space-around; align-items: flex-end; height: 100%; position: relative; }
+        .bar-wrapper { flex: 1; max-width: 200px; display: flex; flex-direction: column; align-items: center; }
+        .bar { width: 100%; background: linear-gradient(180deg, #3498db 0%, #2980b9 100%); border-radius: 8px 8px 0 0; position: relative; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .bar:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .bar-2026 { background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%); }
+        .bar-value { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 1.5em; font-weight: bold; color: #2c3e50; }
+        .bar-label { margin-top: 15px; font-size: 1.2em; color: #2c3e50; font-weight: bold; }
+        .target-line { position: absolute; width: 100%; height: 2px; background: #e74c3c; left: 0; z-index: 10; }
+        .target-line::before { content: '70% Target'; position: absolute; right: 10px; top: -25px; background: #e74c3c; color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.9em; font-weight: bold; }
+        .target-line::after { content: ''; position: absolute; right: 0; top: -5px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid #e74c3c; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 2em; font-weight: bold; color: #2ecc71; }
+        .stat-label { color: #7f8c8d; margin-top: 5px; }
+        .nav-button { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s; }
+        .nav-button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏐 Killinkere 2026 Season Overview</h1>
+            <p>Performance Analytics & Statistics</p>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Shot Accuracy: 2025 vs 2026</div>
+            <div class="bar-chart">
+                <div class="target-line" id="targetLine"></div>
+                <div class="bars">
+                    <div class="bar-wrapper">
+                        <div class="bar" style="height: 50%;">
+                            <div class="bar-value">50%</div>
+                        </div>
+                        <div class="bar-label">2025</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="bar bar-2026" id="bar2026">
+                            <div class="bar-value" id="value2026">Calculating...</div>
+                        </div>
+                        <div class="bar-label">2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalShots">-</div>
+                    <div class="stat-label">Total Shots (2026)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="successfulShots">-</div>
+                    <div class="stat-label">Successful Shots</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="gamesPlayed">-</div>
+                    <div class="stat-label">Games Played</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="ALL_GAMES_FULL.html" class="nav-button">View Individual Match Analysis →</a>
+        </div>
+    </div>
+
+    <script>
+        const csvFiles = [
+            'Killinkere 1 - 14 v 1 - 12 Clones.csv',
+            'Killinkere 3 - 11 v 1 - 13 Denn.csv',
+            'Killinkere 3 - 14 v 1 - 10 Pearse OG.csv',
+            'Killinkere 4 - 9 v 0 - 12 Aughadrumsee.csv'
+        ];
+
+        async function calculateAccuracy() {
+            let totalShots = 0;
+            let successfulShots = 0;
+
+            for (const file of csvFiles) {
+                try {
+                    const response = await fetch(file);
+                    const text = await response.text();
+                    const lines = text.split('\n').slice(1); // Skip header
+
+                    lines.forEach(line => {
+                        if (!line.trim()) return;
+                        const cols = line.split(',');
+                        const event = cols[0];
+                        const teamName = cols[3];
+                        const outcome = cols[5];
+
+                        if (teamName === 'Killinkere' && (event.includes('Shot from play') || event.includes('Scoreable free'))) {
+                            totalShots++;
+                            if (outcome === 'Point' || outcome === 'Goal' || outcome === '2 Points') {
+                                successfulShots++;
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error(`Error loading ${file}:`, error);
+                }
+            }
+
+            const accuracy = totalShots > 0 ? (successfulShots / totalShots * 100).toFixed(1) : 0;
+            
+            // Update UI
+            document.getElementById('value2026').textContent = accuracy + '%';
+            document.getElementById('bar2026').style.height = accuracy + '%';
+            document.getElementById('totalShots').textContent = totalShots;
+            document.getElementById('successfulShots').textContent = successfulShots;
+            document.getElementById('gamesPlayed').textContent = csvFiles.length;
+
+            // Position target line at 70%
+            document.getElementById('targetLine').style.bottom = '70%';
+        }
+
+        calculateAccuracy();
+    </script>
+<script src="../auth.js"></script></body>
+</html>

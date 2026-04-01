@@ -1,0 +1,112 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:14,1,Cuchulainns,Shot from play,Point,Player 12
+2,00:00:45,1,Denn,Kickout,Break won,Sean Donohue
+3,00:02:53,1,Denn,Kickout,Short won,Oisin Smith
+4,00:03:22,1,Denn,Shot from play,2 Points,Sean Donohue
+5,00:03:40,1,Cuchulainns,Kickout,Won clean,Player 15
+6,00:04:13,1,Cuchulainns,Shot from play,Point,Player 14
+7,00:04:24,1,Denn,Kickout,Short won,Cavell Keoghan
+8,00:04:54,1,Denn,Shot from play,Point,Ben Conaty
+9,00:05:11,1,Cuchulainns,Kickout,Short won,Caolain McCabe
+10,00:05:59,1,Cuchulainns,Shot from play,Point,Player 11
+11,00:06:34,1,Denn,Kickout,Break won,Oisin Smith
+12,00:06:50,1,Denn,Shot from play,Point,Oisin Smith
+13,00:08:43,1,Cuchulainns,Kickout,Won clean,Player 9
+14,00:09:25,1,Cuchulainns,Shot from play,Wide,Player 13
+15,00:09:54,1,Denn,Kickout,Short won,
+16,00:11:17,1,Denn,Shot from play,Wide,Oisin Reilly
+17,00:11:40,1,Cuchulainns,Kickout,Won clean,Player 15
+18,00:12:31,1,Cuchulainns,Scoreable free,Point,Player 11
+19,00:12:55,1,Denn,Kickout,Won clean,Sean Donohue
+20,00:13:44,1,Cuchulainns,Scoreable free,Point,Player 11
+21,00:14:15,1,Denn,Kickout,Lost clean,Oisin Smith
+22,00:14:44,1,Cuchulainns,Shot from play,Point,
+23,00:15:04,1,Denn,Kickout,Short won,Michael Gaffney
+24,00:15:43,1,Denn,Shot from play,Wide,
+25,00:16:07,1,Cuchulainns,Kickout,Break lost,Player 5
+26,00:16:18,1,Denn,Shot from play,Wide,Oisin Smith
+27,00:16:49,1,Cuchulainns,Kickout,Break lost,Player 6
+28,00:17:23,1,Denn,Scoreable free,2 Points,Cavell Keoghan
+29,00:17:53,1,Cuchulainns,Kickout,Break lost,Player 20
+30,00:18:14,1,Cuchulainns,Shot from play,Wide,Player 10
+31,00:18:35,1,Denn,Kickout,Short won,Caolain McCabe
+32,00:20:23,1,Denn,Scoreable free,Wide,Thomas Edward Donohue
+33,00:20:41,1,Cuchulainns,Kickout,Break lost,Player 13
+34,00:21:50,1,Denn,Shot from play,Wide,Ben Conaty
+35,00:22:11,1,Cuchulainns,Kickout,Break lost,Player 12
+36,00:22:49,1,Cuchulainns,Shot from play,Point,Player 12
+37,00:23:21,1,Denn,Kickout,Break lost,Oisin Kiernan
+38,00:24:22,1,Cuchulainns,Scoreable free,2 Points,Player 11
+39,00:24:45,1,Denn,Kickout,Short won,Caolain McCabe
+40,00:27:12,1,Cuchulainns,Shot from play,Point,Player 3
+41,00:27:47,1,Denn,Kickout,Won clean,Ben Conaty
+42,00:29:15,1,Denn,Scoreable free,2 Points,Cavell Keoghan
+43,00:29:28,1,Cuchulainns,Kickout,Break won,Player 14
+44,00:30:04,1,Cuchulainns,Shot from play,Save,Player 10
+45,00:31:14,1,Cuchulainns,Scoreable free,Point,Player 1
+46,00:31:51,1,Denn,Kickout,Break lost,Player 2
+47,00:33:00,1,Cuchulainns,Scoreable free,Point,Player 11
+48,00:32:30,2,Denn,Kickout,Short won,Caolain McCabe
+49,00:34:04,2,Cuchulainns,Shot from play,Wide,Player 2
+50,00:34:36,2,Denn,Kickout,Won clean,Player 10
+51,00:36:28,2,Denn,Shot from play,Wide,Caolain McCabe
+52,00:36:51,2,Cuchulainns,Kickout,Break lost,Player 6
+53,00:37:33,2,Denn,Shot from play,Save,Oisin Smith
+54,00:38:10,2,Cuchulainns,Shot from play,Point,Player 11
+55,00:38:21,2,Denn,Kickout,Short won,Caolain McCabe
+56,00:39:31,2,Cuchulainns,Shot from play,Point,Player 8
+57,00:40:02,2,Denn,Kickout,Break lost,Oisin Reilly
+58,00:41:06,2,Cuchulainns,Shot from play,Wide,Player 15
+59,00:41:33,2,Denn,Kickout,Short won,Michael Gaffney
+60,00:43:02,2,Denn,Shot from play,Point,Oisin Reilly
+61,00:43:28,2,Cuchulainns,Kickout,Won clean,Player 5
+62,00:43:30,2,Cuchulainns,Possession lost,Handling,Player 5
+63,00:43:32,2,Denn,Ball Won,In Contact,Oisin Smith
+64,00:43:42,2,Denn,Possession lost,Hand pass,Caolain McCabe
+65,00:43:56,2,Denn,Shot from play,Wide,Oisin Kiernan
+66,00:44:28,2,Cuchulainns,Kickout,Break won,Player 10
+67,00:45:05,2,Cuchulainns,Shot from play,Point,Player 11
+68,00:45:59,2,Denn,Kickout,Break won,Sean Donohue
+69,00:46:55,2,Cuchulainns,Shot from play,Wide,Player 10
+70,00:47:20,2,Denn,Kickout,Won clean,Caolain McCabe
+71,00:48:56,2,Denn,Scoreable free,2 Points,Mark Fegan
+72,00:49:19,2,Cuchulainns,Kickout,Break won,Player 14
+73,00:49:35,2,Cuchulainns,Shot from play,Point,Player 10
+74,00:50:13,2,Denn,Kickout,Break lost,Player 10
+75,00:51:21,2,Denn,Kickout,Short won,Sean Donohue
+76,00:53:12,2,Cuchulainns,Shot from play,Point,Player 15
+77,00:54:43,2,Denn,Shot from play,Point,Caolain McCabe
+78,00:55:15,2,Cuchulainns,Kickout,Break lost,Player 5
+79,00:57:33,2,Cuchulainns,Shot from play,Point,Player 7
+80,00:57:40,2,Denn,Kickout,Short won,Sean Donohue
+81,00:58:04,2,Denn,Shot from play,Wide,Oisin Reilly
+82,00:58:46,2,Cuchulainns,Kickout,Break won,Player 5
+83,00:59:59,2,Denn,Shot from play,Wide,Oisin Kiernan
+84,01:00:29,2,Cuchulainns,Kickout,Break won,Player 24
+85,01:00:41,2,Cuchulainns,Shot from play,Goal,Player 23
+86,01:01:13,2,Denn,Kickout,Won clean,Player 10
+87,01:01:34,2,Denn,Shot from play,Wide,
+88,01:02:01,2,Cuchulainns,Kickout,Won clean,Player 24
+89,01:02:14,2,Cuchulainns,Shot from play,Save,Player 23
+90,01:02:17,2,Cuchulainns,Shot from play,Blocked,Player 18
+91,01:03:35,2,Denn,Kickout,Break lost,Player 18
+
+
+=====================================================
+Denn
+=====================================================
+1. Mark Fegan
+2. Mark McSherry
+3. Michael Gaffney
+4. Leon Cobey
+5. James Brady
+6. Caolain McCabe
+7. Brandon Keoghan
+8. Sean Donohue
+9. Oisin Kiernan
+10. Oran Callaghan
+11. Cavell Keoghan
+12. Oisin Smith
+13. Thomas Edward Donohue
+14. Ben Conaty
+15. Oisin Reilly
