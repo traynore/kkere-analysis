@@ -424,7 +424,7 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(7 \* 7%\)">7</div>',
                   f'<div class="bar bar-killinkere" style="width: calc({stats["t1_points"]} * 7%)">{stats["t1_points"]}</div>', html, count=1)
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(12 \* 7%\)">12</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points"]+stats["t2_two_pts"]*2} * 7%)">{stats["t2_points"]+stats["t2_two_pts"]*2}</div>', html, count=1)
+                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points"]} * 7%)">{stats["t2_points"]}</div>', html, count=1)
     
     # Replace 2 Points
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(1 \* 30%\)">1</div>',
