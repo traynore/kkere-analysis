@@ -2,9 +2,6 @@
   if (window !== window.top) return;
 
   var sections = [
-    {heading:'All Games', games:[
-      {label:'📊 All Games Dashboard', file:'ALL_GAMES_FULL.html'}
-    ]},
     {heading:'🏆 Ulster Spring League', games:[
       {label:'v Clones (W) 1-14 to 1-12', file:'Killinkere 1 - 14 v 1 - 12 Clones_FULL_infographic.html'},
       {label:'v Denn (W) 3-11 to 1-13', file:'Killinkere 3 - 11 v 1 - 13 Denn_FULL_infographic.html'},
