@@ -1,4 +1,6 @@
 (function() {
+  if (window !== window.top) return;
+
   var sections = [
     {heading:'All Games', games:[
       {label:'📊 All Games Dashboard', file:'ALL_GAMES_FULL.html'}
