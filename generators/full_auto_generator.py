@@ -283,6 +283,7 @@ def generate_html(csv_file):
     acc_points = []         # accumulative points
     acc_attack_pct = []     # accumulative attack efficiency
     per_game_accuracy = []  # individual game accuracy
+    per_game_attack_pct = [] # individual game attack efficiency
     
     for csv_path in all_csvs:
         if Path(csv_path).exists():
@@ -328,6 +329,7 @@ def generate_html(csv_file):
             acc_points.append(points_2026)
             acc_attack_pct.append(round((attacks_with_shot_2026 / total_attacks_2026 * 100), 1) if total_attacks_2026 > 0 else 0)
             per_game_accuracy.append(round((game_scored / game_shots * 100), 1) if game_shots > 0 else 0)
+            per_game_attack_pct.append(round((len(game_attack_shots) / len(game_attacks) * 100), 1) if len(game_attacks) > 0 else 0)
     
     year_2026_accuracy = round((successful_shots_2026 / total_shots_2026 * 100), 1) if total_shots_2026 > 0 else 0
     attacks_2026_pct = round((attacks_with_shot_2026 / total_attacks_2026 * 100), 1) if total_attacks_2026 > 0 else 0
@@ -702,6 +704,7 @@ def generate_html(csv_file):
     html = html.replace('ACC_TWO_PTS_JSON', str(acc_two_pts))
     html = html.replace('ACC_POINTS_JSON', str(acc_points))
     html = html.replace('ACC_ATTACK_PCT_JSON', str(acc_attack_pct))
+    html = html.replace('PER_GAME_ATTACK_PCT_JSON', str(per_game_attack_pct))
     
     # Replace scoreable frees - using unique placeholders, MUST be after all regex replacements
     html = html.replace('SF_TOTAL_T1', str(stats['t1_sf_total']))
