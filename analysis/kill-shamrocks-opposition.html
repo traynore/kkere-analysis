@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kill Shamrocks — Opposition Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%); color: white; padding: 35px; border-radius: 20px 20px 0 0; text-align: center; }
+        .header h1 { font-size: 2.2em; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header .subtitle { font-size: 1.1em; opacity: 0.9; }
+        .header .result { font-size: 1.4em; font-weight: bold; margin-top: 10px; }
+        .content { background: white; padding: 30px; border-radius: 0 0 20px 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 1.3em; color: #2c3e50; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 3px solid #e74c3c; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .stat-box { background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 12px; padding: 15px; text-align: center; border-left: 4px solid #e74c3c; }
+        .stat-box .number { font-size: 2em; font-weight: bold; color: #2c3e50; }
+        .stat-box .label { font-size: 0.8em; color: #666; margin-top: 4px; }
+        .chart-container { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+        .chart-container canvas { max-height: 300px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 10px 12px; text-align: left; font-size: 0.85em; }
+        td { padding: 9px 12px; border-bottom: 1px solid #eee; font-size: 0.9em; }
+        tr:hover { background: #f8f9fa; }
+        .badge-scored { background: #27ae60; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.8em; font-weight: bold; }
+        .badge-missed { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.8em; font-weight: bold; }
+        .badge-short { background: #f39c12; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.8em; font-weight: bold; }
+        .badge-won { background: #27ae60; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.8em; font-weight: bold; }
+        .badge-lost { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.8em; font-weight: bold; }
+        .insight { background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-left: 4px solid #f39c12; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 10px; font-size: 0.9em; }
+        .insight strong { color: #e67e22; }
+        .bar-row { display: flex; align-items: center; margin-bottom: 8px; }
+        .bar-label { width: 120px; font-size: 0.85em; font-weight: bold; color: #2c3e50; }
+        .bar-track { flex: 1; height: 28px; background: #eee; border-radius: 14px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8em; min-width: 40px; }
+        .bar-fill.won { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .bar-fill.lost { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+        .bar-fill.scored { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .bar-fill.missed { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        .footer { text-align: center; color: rgba(255,255,255,0.7); margin-top: 20px; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Kill Shamrocks</h1>
+            <div class="subtitle">Opposition Analysis</div>
+            <div class="result">Kill Shamrocks 1-9 (12) beat Drumgoon 0-9 (9)</div>
+        </div>
+        <div class="content">
+
+            <!-- SHOTS OVERVIEW -->
+            <div class="section">
+                <div class="section-title">🎯 Shots Overview</div>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="number">16</div>
+                        <div class="label">Total Shots</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">10</div>
+                        <div class="label">Scored</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">63%</div>
+                        <div class="label">Accuracy</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">1-9</div>
+                        <div class="label">Total Score</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="shotBreakdownChart"></canvas>
+                </div>
+
+                <div class="two-col">
+                    <div>
+                        <h4 style="margin-bottom:8px;color:#2c3e50">From Frees/Dead Balls (14)</h4>
+                        <div class="bar-row">
+                            <div class="bar-label">Scored (8)</div>
+                            <div class="bar-track"><div class="bar-fill scored" style="width:57%">57%</div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-label">Missed (6)</div>
+                            <div class="bar-track"><div class="bar-fill missed" style="width:43%">43%</div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom:8px;color:#2c3e50">From Play (2)</h4>
+                        <div class="bar-row">
+                            <div class="bar-label">Scored (2)</div>
+                            <div class="bar-track"><div class="bar-fill scored" style="width:100%">2 pts</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FREE TAKERS -->
+            <div class="section">
+                <div class="section-title">🦶 Free Takers</div>
+                <table>
+                    <thead>
+                        <tr><th>Player</th><th>Attempts</th><th>Scored</th><th>Missed</th><th>Short</th><th>Accuracy</th><th>Notes</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>No. 1 Killian Brady (GK)</strong></td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>33%</td>
+                            <td>Takes frees + 45s. Inconsistent — missed 4 of 6</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No. 9 Liam Gaffney</strong></td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>67%</td>
+                            <td>Left footer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No. 13</strong></td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>100%</td>
+                            <td>Right footer. Took penalty (goal) + 1 free (point)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No. 23</strong></td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>50%</td>
+                            <td>Sub — came on 2nd half</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="insight" style="margin-top:15px">
+                    <strong>⚠️ Key Insight:</strong> 4 different free takers used — No. 1 Killian Brady (GK) takes majority but only 33% accuracy. No. 9 Liam Gaffney and No. 13 more reliable. Watch for Brady coming up for long-range frees and 45s.
+                </div>
+            </div>
+
+            <!-- SHOT TIMELINE -->
+            <div class="section">
+                <div class="section-title">⏱️ Shot Timeline</div>
+                <table>
+                    <thead>
+                        <tr><th>Time</th><th>Type</th><th>Player</th><th>Result</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>13:45</td><td>Free</td><td>No. 9 Liam Gaffney</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                        <tr><td>18:20</td><td>Free</td><td>No. 13</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                        <tr><td>23:20</td><td>Free</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-missed">Miss ✗</span></td></tr>
+                        <tr><td>25:40</td><td>Free</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                        <tr><td>28:45</td><td>45</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-scored">2 Pointer ✓</span></td></tr>
+                        <tr><td>30:20</td><td>Play</td><td>No. 11</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                        <tr><td>36:55</td><td>Free</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-missed">Miss ✗</span></td></tr>
+                        <tr><td>41:45</td><td>Free</td><td>No. 9 Liam Gaffney</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                        <tr style="background:#fff3cd"><td colspan="4" style="text-align:center;font-weight:bold;color:#666">⏱️ HALF TIME</td></tr>
+                        <tr><td>64:25</td><td>Free</td><td>No. 9 Liam Gaffney</td><td><span class="badge-missed">Miss ✗</span></td></tr>
+                        <tr><td>73:30</td><td>Free</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-missed">Miss ✗</span></td></tr>
+                        <tr><td>74:50</td><td>Penalty</td><td>No. 13</td><td><span class="badge-scored">GOAL ✓</span></td></tr>
+                        <tr><td>77:10</td><td>45</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-missed">Miss ✗</span></td></tr>
+                        <tr><td>77:55</td><td>Play</td><td>No. 10</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                        <tr><td>80:50</td><td>Free</td><td>No. 1 Killian Brady (GK)</td><td><span class="badge-short">Short</span></td></tr>
+                        <tr><td>88:15</td><td>Free</td><td>No. 23</td><td><span class="badge-missed">Miss ✗</span></td></tr>
+                        <tr><td>90:50</td><td>Free</td><td>No. 23</td><td><span class="badge-scored">Point ✓</span></td></tr>
+                    </tbody>
+                </table>
+                <div class="insight" style="margin-top:15px">
+                    <strong>⚠️ Key Insight:</strong> Only 2 scores from play in the entire game (No. 11 and No. 10). Heavily reliant on frees — 8 of 10 scores came from dead balls.
+                </div>
+            </div>
+
+            <!-- KICKOUTS -->
+            <div class="section">
+                <div class="section-title">🏐 Kickout Analysis</div>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="number">14</div>
+                        <div class="label">Total Kickouts</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">6</div>
+                        <div class="label">Won</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">8</div>
+                        <div class="label">Lost</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" style="color:#e74c3c">43%</div>
+                        <div class="label">Win Rate</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="kickoutChart"></canvas>
+                </div>
+
+                <h4 style="margin:15px 0 8px;color:#2c3e50">Kickout Strategy Breakdown</h4>
+                <div class="bar-row">
+                    <div class="bar-label">Short (2)</div>
+                    <div class="bar-track">
+                        <div class="bar-fill won" style="width:50%">1 Won</div>
+                        <div class="bar-fill lost" style="width:50%;border-radius:0 14px 14px 0">1 Lost</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">To Wing (9)</div>
+                    <div class="bar-track">
+                        <div class="bar-fill won" style="width:44%">4 Won</div>
+                        <div class="bar-fill lost" style="width:56%;border-radius:0 14px 14px 0">5 Lost</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Long Centre (3)</div>
+                    <div class="bar-track">
+                        <div class="bar-fill won" style="width:33%">1 Won</div>
+                        <div class="bar-fill lost" style="width:67%;border-radius:0 14px 14px 0">2 Lost</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KICKOUT DETAIL -->
+            <div class="section">
+                <div class="section-title">📋 Kickout Detail</div>
+                <table>
+                    <thead>
+                        <tr><th>Time</th><th>Strategy</th><th>Target</th><th>Result</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>10:50</td><td>To Wing</td><td>No. 5</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>16:50</td><td>Long Centre</td><td>No. 9 Liam Gaffney</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>17:45</td><td>To Wing</td><td>No. 7</td><td><span class="badge-won">Won</span></td></tr>
+                        <tr><td>27:50</td><td>Long Centre</td><td>No. 7</td><td><span class="badge-won">Won</span></td></tr>
+                        <tr><td>33:00</td><td>Short (mis-kick)</td><td>—</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>39:27</td><td>Short</td><td>No. 3</td><td><span class="badge-won">Won</span></td></tr>
+                        <tr style="background:#fff3cd"><td colspan="4" style="text-align:center;font-weight:bold;color:#666">⏱️ HALF TIME</td></tr>
+                        <tr><td>59:22</td><td>Long Centre</td><td>No. 9 Liam Gaffney</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>60:40</td><td>To Wing</td><td>No. 10</td><td><span class="badge-won">Won</span></td></tr>
+                        <tr><td>63:05</td><td>To Wing</td><td>No. 9 Liam Gaffney</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>68:45</td><td>To Wing</td><td>No. 8 & 9 Liam Gaffney</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>70:50</td><td>To Wing</td><td>No. 9 Liam Gaffney</td><td><span class="badge-won">Won</span></td></tr>
+                        <tr><td>77:30</td><td>To Wing</td><td>No. 8</td><td><span class="badge-won">Won</span></td></tr>
+                        <tr><td>82:40</td><td>Long Centre</td><td>No. 9 Liam Gaffney</td><td><span class="badge-lost">Lost</span></td></tr>
+                        <tr><td>86:55</td><td>To Wing</td><td>No. 9 Liam Gaffney</td><td><span class="badge-lost">Sideline Ball</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- KEY TARGETS -->
+            <div class="section">
+                <div class="section-title">🎯 Kickout Targets</div>
+                <table>
+                    <thead>
+                        <tr><th>Player</th><th>Times Targeted</th><th>Won</th><th>Lost</th><th>Win %</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>No. 9 Liam Gaffney</strong></td><td>6</td><td>1</td><td>5</td><td style="color:#e74c3c;font-weight:bold">17%</td></tr>
+                        <tr><td><strong>No. 7</strong></td><td>2</td><td>2</td><td>0</td><td style="color:#27ae60;font-weight:bold">100%</td></tr>
+                        <tr><td><strong>No. 8</strong></td><td>2</td><td>1</td><td>1</td><td>50%</td></tr>
+                        <tr><td><strong>No. 10</strong></td><td>1</td><td>1</td><td>0</td><td style="color:#27ae60;font-weight:bold">100%</td></tr>
+                        <tr><td><strong>No. 5</strong></td><td>1</td><td>0</td><td>1</td><td style="color:#e74c3c;font-weight:bold">0%</td></tr>
+                        <tr><td><strong>No. 3</strong></td><td>1</td><td>1</td><td>0</td><td style="color:#27ae60;font-weight:bold">100%</td></tr>
+                    </tbody>
+                </table>
+                <div class="insight" style="margin-top:15px">
+                    <strong>⚠️ Key Insight:</strong> No. 9 Liam Gaffney is the primary kickout target (6 of 14) but only won 1 — a major weakness. No. 7 is their most reliable target (2/2). GK favours kicking to the wing (9 of 14 kickouts).
+                </div>
+            </div>
+
+            <!-- TACTICAL TAKEAWAYS -->
+            <div class="section">
+                <div class="section-title">📝 Tactical Takeaways</div>
+                <div class="insight"><strong>1. Dead Ball Dependent:</strong> 8 of 10 scores came from dead balls (frees, 45s, penalty). Only 2 from play. Discipline is key — don't give away frees in scoreable positions.</div>
+                <div class="insight"><strong>2. GK Free Taking is Weak:</strong> No. 1 Killian Brady (GK) takes the majority of frees and 45s but only converts at 33%. Don't foul in his range — let him take them.</div>
+                <div class="insight"><strong>3. Kickouts are Vulnerable:</strong> 43% win rate. They target No. 9 Liam Gaffney heavily but he only wins 17% of them. Press Gaffney on kickouts — this is their biggest weakness.</div>
+                <div class="insight"><strong>4. Wing Kickouts Dominant:</strong> 9 of 14 kickouts go to the wing. Set up to contest wing kickouts and force them long to centre where they only win 33%.</div>
+                <div class="insight"><strong>5. Watch No. 13:</strong> 100% from frees and took the penalty. If No. 9 Liam Gaffney or No. 1 Killian Brady miss early, No. 13 may take over free-taking duties.</div>
+                <div class="insight"><strong>6. 2nd Half Scoring Dried Up:</strong> Only 3 scores in the 2nd half (1 goal from penalty, 2 points). They struggled to score from play throughout.</div>
+            </div>
+
+        </div>
+        <div class="footer">Kill Shamrocks Opposition Analysis · Killinkere GAA 2026</div>
+    </div>
+
+    <script>
+        new Chart(document.getElementById('shotBreakdownChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Points from Frees (5)', 'Points from Play (2)', '2-Pointer from 45 (2)', 'Goal from Penalty (1)', 'Missed Dead Balls (6)'],
+                datasets: [{
+                    data: [5, 2, 2, 1, 6],
+                    backgroundColor: [
+                        '#27ae60', '#2ecc71', '#1abc9c', '#16a085',
+                        '#e74c3c'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'right', labels: { font: { size: 11 } } },
+                    title: { display: true, text: 'Shot Outcomes Breakdown', font: { size: 14 } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('kickoutChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Short', 'To Wing', 'Long Centre'],
+                datasets: [{
+                    label: 'Won',
+                    data: [1, 4, 1],
+                    backgroundColor: 'rgba(39, 174, 96, 0.85)',
+                    borderRadius: 4
+                },{
+                    label: 'Lost',
+                    data: [1, 5, 2],
+                    backgroundColor: 'rgba(231, 76, 60, 0.85)',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true, ticks: { stepSize: 1 } }
+                },
+                plugins: {
+                    title: { display: true, text: 'Kickout Strategy — Won vs Lost', font: { size: 14 } },
+                    legend: { position: 'top' }
+                }
+            }
+        });
+    </script>
+<script src="../nav.js"></script><script src="../auth.js"></script></body>
+</html>
