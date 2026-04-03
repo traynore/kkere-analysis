@@ -1,0 +1,183 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:05,1,Killinkere,Other,Throw Up Won,Darren Smith
+2,00:00:12,1,Killinkere,Possession lost,Kick pass,James Farrelly
+3,00:00:47,1,Liatroim,Shot from play,Short,Player 9
+4,00:00:49,1,Liatroim,Attacks,Shot taken,Player 9
+5,00:01:01,1,Liatroim,Free conceded,Attacking third,Player 13
+6,00:01:15,1,Killinkere,Possession lost,Hand pass,Phelim Cusack
+7,00:01:20,1,Killinkere,Free conceded,Middle third,Alex Sweeney
+8,00:02:26,1,Liatroim,Shot from play,Short,Player 12
+9,00:02:33,1,Liatroim,Attacks,Shot taken,Player 12
+10,00:03:33,1,Killinkere,Possession lost,Hand pass,Conall Mooney
+11,00:03:48,1,Killinkere,Free conceded,Defensive third,Nathan McQuade
+12,00:04:09,1,Liatroim,Scoreable free,Point,Player 14
+13,00:04:23,1,Killinkere,Kickout,Short won,Gearoid Traynor
+14,00:04:45,1,Killinkere,Shot from play,Wide,Fiachra Mooney
+15,00:04:50,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+16,00:05:02,1,Liatroim,Kickout,Break lost,Fiachra Mooney
+17,00:05:23,1,Liatroim,Free conceded,Defensive third,
+18,00:05:41,1,Killinkere,Shot from play,Wide,Conall Mooney
+19,00:05:45,1,Killinkere,Attacks,Shot taken,Conall Mooney
+20,00:06:01,1,Liatroim,Kickout,Break won,Player 10
+21,00:06:47,1,Liatroim,Shot from play,Short,Player 11
+22,00:06:52,1,Liatroim,Attacks,Shot taken,Player 11
+23,00:07:27,1,Killinkere,Shot from play,Short,Fintan O’Connell
+24,00:07:32,1,Killinkere,Attacks,Shot taken,Fintan O’Connell
+25,00:07:46,1,Killinkere,Turnover,Interception,Alex Sweeney
+26,00:07:55,1,Killinkere,Shot from play,Goal,Alex Sweeney
+27,00:08:10,1,Killinkere,Attacks,Shot taken,Alex Sweeney
+28,00:08:20,1,Liatroim,Kickout,Break lost,Fintan O’Connell
+29,00:08:52,1,Killinkere,Shot from play,45,Ryan Smith
+30,00:08:59,1,Killinkere,Attacks,Shot taken,Ryan Smith
+31,00:09:32,1,Killinkere,Scoreable free,Short,Jake Norris
+32,00:09:42,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+33,00:10:13,1,Liatroim,Shot from play,2 Points,Player 9
+34,00:10:29,1,Killinkere,Kickout,Short won,Nathan McQuade
+35,00:10:50,1,Killinkere,Possession lost,Handling,Emmett Fitzsimons
+36,00:12:05,1,Liatroim,Shot from play,Wide,Player 9
+37,00:12:21,1,Killinkere,Kickout,Won clean,Fintan O’Connell
+38,00:12:59,1,Killinkere,Shot from play,Point,Phelim Cusack
+39,00:13:04,1,Killinkere,Attacks,Shot taken,Phelim Cusack
+40,00:13:19,1,Liatroim,Kickout,Lost clean,Alex Sweeney
+41,00:13:32,1,Liatroim,Free conceded,Middle third,Player 7
+42,00:14:33,1,Liatroim,Free conceded,Defensive third,Player 8
+43,00:15:16,1,Killinkere,Shot from play,Point,Fiachra Mooney
+44,00:15:27,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+45,00:15:38,1,Liatroim,Kickout,Break lost,Fintan O’Connell
+46,00:16:57,1,Killinkere,Attacks,Shot taken,
+47,00:17:02,1,Killinkere,Kickout,Short won,Shane Ryan
+48,00:17:32,1,Killinkere,Shot from play,Goal,Alex Sweeney
+49,00:17:36,1,Killinkere,Attacks,Shot taken,Alex Sweeney
+50,00:17:56,1,Liatroim,Kickout,Break lost,Fintan O’Connell
+51,00:18:22,1,Killinkere,Shot from play,Point,Fintan O’Connell
+52,00:18:36,1,Killinkere,Attacks,Shot taken,Fintan O’Connell
+53,00:18:47,1,Liatroim,Kickout,Lost clean,Emmett Fitzsimons
+54,00:19:00,1,Killinkere,Shot from play,Point,Darren Smith
+55,00:19:12,1,Killinkere,Attacks,Shot taken,Darren Smith
+56,00:19:25,1,Liatroim,Kickout,Lost clean,James Farrelly
+57,00:19:41,1,Killinkere,Attacks,Kick lost,James Farrelly
+58,00:19:51,1,Killinkere,Free conceded,Attacking third,Darren Smith
+59,00:20:05,1,Liatroim,Shot from play,Short,Player 11
+60,00:20:13,1,Liatroim,Attacks,Shot taken,Player 11
+61,00:20:28,1,Killinkere,Shot from play,Point,Fiachra Mooney
+62,00:20:35,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+63,00:20:54,1,Liatroim,Substitution,Substitution,
+64,00:21:08,1,Liatroim,Kickout,Break lost,Fintan O’Connell
+65,00:23:14,1,Liatroim,Free conceded,Defensive third,Player 8
+66,00:23:30,1,Killinkere,Attacks,Carry retained,
+67,00:23:43,1,Killinkere,Scoreable free,Wide,Emmett Fitzsimons
+68,00:24:06,1,Liatroim,Kickout,Break lost,Conall Mooney
+69,00:24:27,1,Killinkere,Shot from play,Short,James Farrelly
+70,00:24:35,1,Killinkere,Attacks,Shot taken,James Farrelly
+71,00:25:04,1,Liatroim,Shot from play,Point,Player 11
+72,00:25:09,1,Liatroim,Attacks,Shot taken,Player 11
+73,00:25:22,1,Killinkere,Kickout,Lost clean,Player 20
+74,00:25:46,1,Liatroim,Shot from play,Short,Player 14
+75,00:25:54,1,Liatroim,Attacks,Shot taken,Player 14
+76,00:26:03,1,Liatroim,Shot from play,Short,Player 13
+77,00:26:08,1,Liatroim,Attacks,Shot taken,Player 13
+78,00:26:42,1,Killinkere,Possession lost,Handling,Ryan Smith
+79,00:26:55,1,Killinkere,Turnover,Interception,Nathan McQuade
+80,00:27:37,1,Liatroim,Free conceded,Attacking third,Player 8
+81,00:28:44,1,Liatroim,Free conceded,Defensive third,
+82,00:29:00,1,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+83,00:29:04,1,Killinkere,Attacks,Carry retained,Fintan O’Connell
+84,00:29:13,1,Liatroim,Kickout,Lost clean,Phelim Cusack
+85,00:29:49,1,Killinkere,Possession lost,In Contact,James Farrelly
+86,00:30:00,1,Killinkere,Attacks,Carry lost,James Farrelly
+87,00:30:40,1,Killinkere,Free conceded,Defensive third,Emmett Fitzsimons
+88,00:31:11,1,Liatroim,Scoreable free,Short,
+89,00:30:07,2,Killinkere,Other,Throw Up Won,Phelim Cusack
+90,00:30:52,2,Killinkere,Shot from play,Goal,Fintan O’Connell
+91,00:30:57,2,Killinkere,Attacks,Shot taken,Fintan O’Connell
+92,00:31:09,2,Liatroim,Kickout,Break won,Player 6
+93,00:31:35,2,Killinkere,Turnover,Interception,Shane Ryan
+94,00:32:15,2,Killinkere,Shot from play,Point,Conall Mooney
+95,00:32:22,2,Killinkere,Attacks,Shot taken,Conall Mooney
+96,00:32:31,2,Liatroim,Kickout,Break lost,Conall Mooney
+97,00:32:48,2,Killinkere,Shot from play,Goal,Alex Sweeney
+98,00:32:55,2,Killinkere,Attacks,Shot taken,Alex Sweeney
+99,00:33:06,2,Liatroim,Kickout,Break won,Player 9
+100,00:33:54,2,Liatroim,Free conceded,Defensive third,Player 9
+101,00:34:11,2,Liatroim,Scoreable free,Point,Player 13
+102,00:34:19,2,Liatroim,Attacks,Carry retained,Player 13
+103,00:34:33,2,Killinkere,Kickout,Break lost,Player 1
+104,00:35:34,2,Liatroim,Shot from play,Wide,Player 8
+105,00:35:39,2,Liatroim,Attacks,Shot taken,Player 8
+106,00:35:58,2,Killinkere,Kickout,Break won,Ryan Smith
+107,00:36:12,2,Liatroim,Free conceded,Middle third,Player 1
+108,00:36:33,2,Killinkere,Shot from play,Wide,Emmett Fitzsimons
+109,00:36:42,2,Killinkere,Attacks,Shot taken,Emmett Fitzsimons
+110,00:37:03,2,Killinkere,Substitution,Substitution,Ryan Smith
+111,00:37:31,2,Killinkere,Shot from play,Point,Emmett Fitzsimons
+112,00:37:51,2,Killinkere,Substitution,Substitution,James Farrelly
+113,00:37:53,2,Liatroim,Kickout,Won clean,Player 8
+114,00:38:02,2,Killinkere,Turnover,In Contact,Conall Mooney
+115,00:38:11,2,Killinkere,Shot from play,Save,Conall Mooney
+116,00:38:17,2,Killinkere,Attacks,Shot taken,Conall Mooney
+117,00:38:35,2,Killinkere,Free conceded,Defensive third,Fintan O’Connell
+118,00:38:58,2,Liatroim,Scoreable free,Point,Player 13
+119,00:39:02,2,Liatroim,Attacks,Carry retained,Player 13
+120,00:39:30,2,Liatroim,Substitution,Substitution,
+121,00:39:42,2,Liatroim,Substitution,Substitution,
+122,00:39:44,2,Killinkere,Kickout,Won clean,Liam McCabe
+123,00:40:51,2,Killinkere,Shot from play,Wide,Conall Mooney
+124,00:40:59,2,Killinkere,Attacks,Shot taken,Conall Mooney
+125,00:41:07,2,Liatroim,Kickout,Short won,Player 2
+126,00:41:30,2,Liatroim,Shot from play,Short,
+127,00:41:38,2,Liatroim,Attacks,Shot taken,Player 21
+128,00:42:21,2,Killinkere,Shot from play,Wide,Philip Corrigan
+129,00:42:34,2,Killinkere,Attacks,Shot taken,Philip Corrigan
+130,00:42:52,2,Liatroim,Kickout,Won clean,
+131,00:43:17,2,Killinkere,Turnover,In Contact,Alex Sweeney
+132,00:43:34,2,Killinkere,Free conceded,Middle third,Luke Crossan
+133,00:43:42,2,Killinkere,Free conceded,Middle third,Luke Crossan
+134,00:43:54,2,Liatroim,Shot from play,Point,Player 11
+135,00:43:58,2,Liatroim,Attacks,Shot taken,Player 11
+136,00:44:10,2,Killinkere,Kickout,Short won,Shane Ryan
+137,00:44:33,2,Killinkere,Attacks,Kick lost,Liam McCabe
+138,00:45:13,2,Killinkere,Free conceded,Defensive third,Gearoid Traynor
+139,00:45:34,2,Liatroim,Scoreable free,Wide,Player 21
+140,00:45:39,2,Liatroim,Attacks,Carry retained,Player 21
+141,00:45:50,2,Killinkere,Kickout,Lost clean,Player 9
+142,00:46:05,2,Liatroim,Shot from play,Goal,
+143,00:46:18,2,Liatroim,Attacks,Shot taken,
+144,00:46:23,2,Killinkere,Kickout,Won clean,Fintan O’Connell
+145,00:46:50,2,Liatroim,Free conceded,Defensive third,Player 10
+146,00:47:14,2,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+147,00:47:21,2,Killinkere,Attacks,Carry retained,Fiachra Mooney
+148,00:47:36,2,Liatroim,Kickout,Break won,
+149,00:47:59,2,Killinkere,Turnover,Interception,Shane Ryan
+150,00:48:06,2,Killinkere,Possession lost,Hand pass,Shane Ryan
+151,00:48:21,2,Liatroim,Shot from play,Short,Player 20
+152,00:48:29,2,Liatroim,Attacks,Shot taken,Player 20
+153,00:49:11,2,Killinkere,Substitution,Substitution,Shane Ryan
+154,00:49:44,2,Killinkere,Turnover,Interception,Fintan O’Connell
+155,00:50:16,2,Killinkere,Shot from play,Wide,Phelim Cusack
+156,00:50:27,2,Killinkere,Attacks,Shot taken,Phelim Cusack
+157,00:50:50,2,Liatroim,Kickout,Lost clean,Player 10
+158,00:51:04,2,Killinkere,Shot from play,Point,Darren Smith
+159,00:51:10,2,Killinkere,Attacks,Shot taken,Darren Smith
+160,00:51:20,2,Liatroim,Kickout,Lost clean,Player 10
+161,00:51:57,2,Killinkere,Shot from play,Wide,Alex Sweeney
+162,00:52:03,2,Killinkere,Attacks,Shot taken,Alex Sweeney
+163,00:52:15,2,Liatroim,Kickout,Break won,
+164,00:53:07,2,Killinkere,Turnover,In Contact,Fiachra Mooney
+165,00:53:31,2,Killinkere,Substitution,Substitution,Fiachra Mooney
+166,00:54:21,2,Killinkere,Substitution,Substitution,Luke Crossan
+167,00:54:39,2,Killinkere,Shot from play,Wide,Alex Sweeney
+168,00:54:45,2,Killinkere,Attacks,Shot taken,Alex Sweeney
+169,00:54:51,2,Liatroim,Kickout,Short won,
+170,00:55:11,2,Killinkere,Turnover,Interception,Mark Farrelly (S)
+171,00:55:45,2,Liatroim,Free conceded,Defensive third,Player 10
+172,00:56:19,2,Killinkere,Possession lost,Handling,Emmett Fitzsimons
+173,00:57:07,2,Killinkere,Possession lost,Kick pass,
+174,00:57:29,2,Killinkere,Turnover,Interception,Mark Farrelly (S)
+175,00:57:40,2,Killinkere,Possession lost,Kick pass,Darren Smith
+176,00:58:53,2,Liatroim,Shot from play,Goal,Player 23
+177,00:59:05,2,Liatroim,Attacks,Shot taken,Player 23
+178,00:59:26,2,Killinkere,Kickout,Lost clean,
+179,00:59:34,2,Killinkere,Turnover,In Contact,Liam McCabe
+180,01:00:03,2,Killinkere,Possession lost,In Contact,Emmett Fitzsimons
+181,01:00:46,2,Liatroim,Shot from play,Point,Player 21
+182,01:00:50,2,Liatroim,Attacks,Shot taken,Player 21

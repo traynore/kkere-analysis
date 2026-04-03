@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opposition Analysis — Denn (Combined)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a0e1a; color:#e0e6f0; }
+  .page { max-width:1100px; margin:0 auto; padding:30px 20px; }
+  .header { text-align:center; padding:30px 20px; margin-bottom:30px;
+    background:linear-gradient(135deg,#1a1f35 0%,#0d1225 100%);
+    border-radius:16px; border:1px solid #2a3050; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,#e74c3c,#f39c12,#e74c3c); }
+  .header h1 { font-size:2.4em; font-weight:900; letter-spacing:-1px;
+    background:linear-gradient(135deg,#fff,#a0b0d0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .header .sub { color:#8090b0; font-size:1em; margin-top:6px; }
+  .header .match-ref { display:inline-block; margin-top:12px; padding:6px 18px;
+    background:#1e2540; border-radius:20px; font-size:0.85em; color:#6080c0; border:1px solid #2a3560; }
+  .section-title { font-size:1.15em; font-weight:700; margin:28px 0 14px;
+    padding-left:14px; border-left:4px solid #e74c3c; color:#f0f4ff; }
+  .section-title.green { border-left-color:#2ecc71; }
+  .section-title.amber { border-left-color:#f39c12; }
+  .section-title.blue  { border-left-color:#3498db; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+  .grid4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; }
+  @media(max-width:700px){ .grid2,.grid3,.grid4{ grid-template-columns:1fr; } }
+  .card { background:#131829; border:1px solid #1e2540; border-radius:12px; padding:20px; }
+  .card.red    { border-left:4px solid #e74c3c; }
+  .card.green  { border-left:4px solid #2ecc71; }
+  .card.amber  { border-left:4px solid #f39c12; }
+  .card.blue   { border-left:4px solid #3498db; }
+  .card h3 { font-size:0.85em; text-transform:uppercase; letter-spacing:1px; color:#6080a0; margin-bottom:10px; }
+  .big-num { font-size:2.6em; font-weight:900; line-height:1; }
+  .big-num.red   { color:#e74c3c; }
+  .big-num.green { color:#2ecc71; }
+  .big-num.amber { color:#f39c12; }
+  .big-num.blue  { color:#3498db; }
+  .card .detail { font-size:0.85em; color:#7890b0; margin-top:6px; }
+  .bar-row { display:flex; align-items:center; margin:6px 0; }
+  .bar-label { width:130px; font-size:0.82em; color:#8090b0; flex-shrink:0; }
+  .bar-track { flex:1; height:22px; background:#1a2040; border-radius:4px; overflow:hidden; position:relative; }
+  .bar-fill { height:100%; border-radius:4px; display:flex; align-items:center; padding-left:8px;
+    font-size:0.75em; font-weight:700; color:#fff; min-width:28px; transition:width .6s; }
+  .bar-fill.red   { background:linear-gradient(90deg,#c0392b,#e74c3c); }
+  .bar-fill.green { background:linear-gradient(90deg,#27ae60,#2ecc71); }
+  .bar-fill.amber { background:linear-gradient(90deg,#d68910,#f39c12); }
+  .bar-fill.blue  { background:linear-gradient(90deg,#2471a3,#3498db); }
+  .sw-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .pill { padding:8px 16px; border-radius:8px; font-size:0.82em; font-weight:600; }
+  .pill.strength { background:#1a3328; color:#2ecc71; border:1px solid #2ecc7140; }
+  .pill.weakness { background:#331a1a; color:#e74c3c; border:1px solid #e74c3c40; }
+  .pill.pattern  { background:#1a2540; color:#3498db; border:1px solid #3498db40; }
+  .player-table { width:100%; border-collapse:collapse; margin-top:8px; }
+  .player-table th { text-align:left; font-size:0.75em; text-transform:uppercase; letter-spacing:1px;
+    color:#5070a0; padding:8px 10px; border-bottom:1px solid #1e2540; }
+  .player-table td { padding:8px 10px; font-size:0.85em; border-bottom:1px solid #141a30; color:#c0d0e0; }
+  .player-table tr:hover td { background:#1a2040; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75em; font-weight:600; }
+  .tag.scorer { background:#1a3328; color:#2ecc71; }
+  .tag.ko     { background:#1a2540; color:#3498db; }
+  .tag.foul   { background:#331a1a; color:#e74c3c; }
+  .tag.pattern { background:#2a1a40; color:#9b59b6; }
+  .compare-row { display:flex; gap:16px; margin:8px 0; }
+  .compare-box { flex:1; background:#1a2040; border-radius:8px; padding:12px; text-align:center; }
+  .compare-box .label { font-size:0.7em; text-transform:uppercase; letter-spacing:1px; color:#5070a0; }
+  .compare-box .val { font-size:1.4em; font-weight:900; margin-top:4px; }
+  .compare-box .val.green { color:#2ecc71; }
+  .compare-box .val.red { color:#e74c3c; }
+  .compare-box .val.amber { color:#f39c12; }
+  .compare-box .val.blue { color:#3498db; }
+  .summary { background:linear-gradient(135deg,#1a1f35,#0d1225); border:1px solid #2a3050;
+    border-radius:12px; padding:24px; margin-top:28px; }
+  .summary h3 { font-size:1em; font-weight:700; margin-bottom:12px; color:#f0f4ff; }
+  .summary ul { list-style:none; padding:0; }
+  .summary li { padding:6px 0; font-size:0.9em; color:#a0b0d0; border-bottom:1px solid #1a2040; }
+  .summary li:last-child { border:none; }
+  .summary li::before { content:'→ '; color:#e74c3c; font-weight:700; }
+  .summary li.pos::before { color:#2ecc71; content:'✓ '; }
+  .footer { text-align:center; padding:20px; font-size:0.75em; color:#3a4a6a; margin-top:30px; }
+  .pattern-box { background:linear-gradient(135deg,#1a2540,#0d1830); border:2px solid #3498db40;
+    border-radius:12px; padding:20px; margin:16px 0; }
+  .pattern-box h4 { color:#3498db; font-size:0.9em; margin-bottom:10px; text-transform:uppercase; letter-spacing:1px; }
+  .pattern-box p { color:#a0b0d0; font-size:0.9em; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <h1>DENN — Combined Opposition Analysis</h1>
+  <div class="sub">Patterns Identified Across 2 Games</div>
+  <div class="match-ref">Sources: Cuchulainns 1-18 v 0-12 Denn · Killinkere 3-11 v 1-13 Denn</div>
+</div>
+
+<!-- COMBINED SCOREBOARD -->
+<div class="section-title">Combined Results</div>
+<div class="grid2">
+  <div class="card blue">
+    <h3>Total Denn Scoring (2 Games)</h3>
+    <div class="big-num blue">1-25</div>
+    <div class="detail">1 goal, 25 points — 28 total scoring units · Avg 0.5-12.5 per game</div>
+  </div>
+  <div class="card red">
+    <h3>Record</h3>
+    <div class="big-num red">L2</div>
+    <div class="detail">Lost both games · Conceded 4-29 (41 units) · Avg deficit: -6.5 pts</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Game-by-Game Comparison</h3>
+  <div class="compare-row">
+    <div class="compare-box">
+      <div class="label">v Cuchulainns</div>
+      <div class="val red">0-12</div>
+      <div class="detail">Lost by 9</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">v Killinkere</div>
+      <div class="val amber">1-13</div>
+      <div class="detail">Lost by 4</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">Combined</div>
+      <div class="val blue">1-25</div>
+      <div class="detail">28 units total</div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOTS FROM PLAY PATTERNS -->
+<div class="section-title red">Shots from Play</div>
+<div class="grid4">
+  <div class="card red">
+    <h3>Shots from Play</h3>
+    <div class="big-num red">36</div>
+    <div class="detail">Across 2 games</div>
+  </div>
+  <div class="card red">
+    <h3>Accuracy from Play</h3>
+    <div class="big-num red">36%</div>
+    <div class="detail">13 scores from 36 shots</div>
+  </div>
+  <div class="card red">
+    <h3>Wides from Play</h3>
+    <div class="big-num red">19</div>
+    <div class="detail">53% waste rate from play</div>
+  </div>
+  <div class="card blue">
+    <h3>Goals</h3>
+    <div class="big-num blue">1</div>
+    <div class="detail">Low goal threat</div>
+  </div>
+</div>
+
+<div class="pattern-box">
+  <h4>🎯 Pattern: Consistently Wasteful from Play</h4>
+  <p>Denn converted only <strong>33% from play v Cuchulainns and 38% v Killinkere</strong>. Over half their from-play shots are wasted. This is not an off day — it's a reliable weakness. Force them into shots from play and they'll miss more than they score.</p>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Shots from Play Comparison by Game</h3>
+  <div class="compare-row">
+    <div class="compare-box">
+      <div class="label">v Cuchulainns</div>
+      <div class="val red">33%</div>
+      <div class="detail">5/15 · 9 wides</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">v Killinkere</div>
+      <div class="val red">38%</div>
+      <div class="detail">8/21 · 10 wides</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">Combined</div>
+      <div class="val red">36%</div>
+      <div class="detail">13/36 · 19 wides</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2ND HALF FADE -->
+<div class="section-title amber">2nd Half Fade Pattern</div>
+<div class="card amber">
+  <h3>From Play Accuracy by Half (Combined)</h3>
+  <div class="compare-row">
+    <div class="compare-box">
+      <div class="label">1st Half from Play</div>
+      <div class="val amber">50%</div>
+      <div class="detail">10/20 scored</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">2nd Half from Play</div>
+      <div class="val red">19%</div>
+      <div class="detail">3/16 scored</div>
+    </div>
+  </div>
+</div>
+
+<div class="pattern-box">
+  <h4>🔥 Pattern: They Fade Badly from Play</h4>
+  <p>From play accuracy <strong>drops from 50% to 19%</strong> between halves. In the 2nd half across both games, Denn scored just <strong>3 from 16 from-play shots</strong>. In Q4 specifically, they managed just <strong>0-02 combined</strong>. They tire, lose accuracy, and can be outworked late in games.</p>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Quarter-by-Quarter Breakdown</h3>
+  <div class="bar-row">
+    <span class="bar-label">Q1 (Combined)</span>
+    <div class="bar-track"><div class="bar-fill green" style="width:32%">0-09</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Q2 (Combined)</span>
+    <div class="bar-track"><div class="bar-fill green" style="width:39%">1-08</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Q3 (Combined)</span>
+    <div class="bar-track"><div class="bar-fill amber" style="width:14%">0-04</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Q4 (Combined)</span>
+    <div class="bar-track"><div class="bar-fill red" style="width:7%">0-02</div></div>
+  </div>
+</div>
+
+<!-- KICKOUT PATTERNS -->
+<div class="section-title blue">Kickout Patterns</div>
+<div class="grid2">
+  <div class="card blue">
+    <h3>Total Denn Kickouts</h3>
+    <div class="big-num blue">43</div>
+    <div class="detail">22 v Cuchulainns · 21 v Killinkere</div>
+  </div>
+  <div class="card amber">
+    <h3>Overall Retention</h3>
+    <div class="big-num amber">56%</div>
+    <div class="detail">24 won, 19 lost</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Kickout Retention by Game</h3>
+  <div class="compare-row">
+    <div class="compare-box">
+      <div class="label">v Cuchulainns</div>
+      <div class="val green">64%</div>
+      <div class="detail">14/22 retained</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">v Killinkere</div>
+      <div class="val red">48%</div>
+      <div class="detail">10/21 retained</div>
+    </div>
+    <div class="compare-box">
+      <div class="label">Combined</div>
+      <div class="val amber">56%</div>
+      <div class="detail">24/43 retained</div>
+    </div>
+  </div>
+</div>
+
+<div class="pattern-box">
+  <h4>📊 Pattern: Short Kickouts Are Key</h4>
+  <p>When Denn go <strong>short, they retain 100%</strong> (14/14 across both games). When forced to go <strong>long, retention drops to ~45%</strong>. The key is to press their short options and force them into contested long kickouts where they struggle.</p>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Short vs Long Kickout Success</h3>
+  <div class="bar-row">
+    <span class="bar-label">Short Kickouts</span>
+    <div class="bar-track"><div class="bar-fill green" style="width:100%">14/14 (100%)</div></div>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Long Kickouts</span>
+    <div class="bar-track"><div class="bar-fill red" style="width:45%">10/29 (~45%)</div></div>
+  </div>
+</div>
+
+<!-- SQUAD COMPARISON -->
+<div class="section-title green">Squad Comparison — Side by Side</div>
+
+<div class="pattern-box">
+  <h4>⚠️ Key Note: Different Lineups</h4>
+  <p>Only <strong>2 of 15 players kept the same jersey</strong> across both games (Mark Fegan #1, Ben Conaty #14). A further 4 players featured in both but in different positions. <strong>9 of the 15 jerseys had completely different players</strong>. The team they play against us next is expected to be closer to the Cuchulainns lineup. Players who featured in <strong>both games</strong> are highlighted — these are the ones most likely to start.</p>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h3>Jersey-by-Jersey Comparison</h3>
+  <table class="player-table">
+    <tr><th>#</th><th>v Cuchulainns</th><th>v Killinkere</th><th>Same?</th><th>Notes</th></tr>
+    <tr>
+      <td><strong>1</strong></td>
+      <td>Mark Fegan</td>
+      <td>Mark Fegan</td>
+      <td><span class="tag scorer">✓ SAME</span></td>
+      <td>Hit a '2pt' free v Cuchulainns</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>Mark McSherry</td>
+      <td>Stephen Callaghan</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td>Michael Gaffney</td>
+      <td>Leon Cobey</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Gaffney was short KO target v Cuch</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td>Leon Cobey</td>
+      <td>Oran Smith</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Cobey moved from #4 to #3. Oran Smith scored 0-01 v Killinkere</td>
+    </tr>
+    <tr>
+      <td><strong>5</strong></td>
+      <td>James Brady</td>
+      <td>Finnian Smith</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Finnian Smith scored 0-01 v Killinkere</td>
+    </tr>
+    <tr>
+      <td><strong>6</strong></td>
+      <td>Caolain McCabe</td>
+      <td>Bernard Gaffney</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>McCabe was primary short KO target v Cuch (5 times)</td>
+    </tr>
+    <tr>
+      <td><strong>7</strong></td>
+      <td>Brandon Keoghan</td>
+      <td>Caolain Donohue</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>8</strong></td>
+      <td>Sean Donohue</td>
+      <td>Caolain McCabe</td>
+      <td><span class="tag foul">SWAPPED</span></td>
+      <td>Both featured in both games but in different jerseys</td>
+    </tr>
+    <tr>
+      <td><strong>9</strong></td>
+      <td>Oisin Kiernan</td>
+      <td>Oran Callaghan</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Callaghan wore #10 v Cuch</td>
+    </tr>
+    <tr>
+      <td><strong>10</strong></td>
+      <td>Oran Callaghan</td>
+      <td>Sean Donohue</td>
+      <td><span class="tag foul">SWAPPED</span></td>
+      <td>Donohue wore #8 v Cuch, #10 v Killinkere — scored in both</td>
+    </tr>
+    <tr>
+      <td><strong>11</strong></td>
+      <td>Cavell Keoghan</td>
+      <td>Oisin O'Reilly</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Both scored big: 0-04 and 1-02. Whoever wears #11 is the main man</td>
+    </tr>
+    <tr>
+      <td><strong>12</strong></td>
+      <td>Oisin Smith</td>
+      <td>Cian Courtney</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Smith scored 0-02 v Cuch</td>
+    </tr>
+    <tr>
+      <td><strong>13</strong></td>
+      <td>Thomas Edward Donohue</td>
+      <td>Gary Conaty</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>T.E. Donohue missed a free v Cuch. G. Conaty hit 0-02 frees v Killinkere</td>
+    </tr>
+    <tr>
+      <td><strong>14</strong></td>
+      <td>Ben Conaty</td>
+      <td>Ben Conaty</td>
+      <td><span class="tag scorer">✓ SAME</span></td>
+      <td>Consistent threat: 0-01 + 0-03. Takes frees too</td>
+    </tr>
+    <tr>
+      <td><strong>15</strong></td>
+      <td>Oisin Reilly</td>
+      <td>Mark Reilly</td>
+      <td><span class="tag foul">DIFFERENT</span></td>
+      <td>Both wasteful — combined 1 from 6 from play</td>
+    </tr>
+  </table>
+</div>
+
+<!-- PLAYERS IN BOTH GAMES -->
+<div class="card" style="margin-top:16px;">
+  <h3>Players Who Featured in Both Games (Most Likely to Start)</h3>
+  <table class="player-table">
+    <tr><th>Player</th><th>v Cuchulainns</th><th>v Killinkere</th><th>Combined Score</th><th>Key Role</th></tr>
+    <tr>
+      <td><strong>Mark Fegan</strong></td>
+      <td>#1</td>
+      <td>#1</td>
+      <td>0-01 (free)</td>
+      <td><span class="tag ko">Goalkeeper · Takes long frees</span></td>
+    </tr>
+    <tr>
+      <td><strong>Leon Cobey</strong></td>
+      <td>#4</td>
+      <td>#3</td>
+      <td>—</td>
+      <td><span class="tag ko">Defender</span></td>
+    </tr>
+    <tr>
+      <td><strong>Caolain McCabe</strong></td>
+      <td>#6</td>
+      <td>#8</td>
+      <td>0-01</td>
+      <td><span class="tag ko">Primary short KO receiver v Cuch</span></td>
+    </tr>
+    <tr>
+      <td><strong>Sean Donohue</strong></td>
+      <td>#8</td>
+      <td>#10</td>
+      <td>0-04</td>
+      <td><span class="tag scorer">Scorer</span> <span class="tag ko">Kickout target</span></td>
+    </tr>
+    <tr>
+      <td><strong>Oran Callaghan</strong></td>
+      <td>#10</td>
+      <td>#9</td>
+      <td>—</td>
+      <td><span class="tag ko">Midfielder</span></td>
+    </tr>
+    <tr>
+      <td><strong>Ben Conaty</strong></td>
+      <td>#14</td>
+      <td>#14</td>
+      <td>0-04</td>
+      <td><span class="tag scorer">Consistent scorer · Free taker</span></td>
+    </tr>
+  </table>
+  <div class="detail" style="margin-top:10px;">
+    <strong>Key takeaway:</strong> 6 players featured in both games. Sean Donohue and Caolain McCabe swapped jerseys but both play central roles — Donohue as a scorer and McCabe as the kickout link man. Ben Conaty is the only player who kept the same jersey and scored in both.
+  </div>
+</div>
+
+<!-- SCORING THREAT BY PLAYER -->
+<div class="section-title green">Scoring Threat — Combined</div>
+<div class="card">
+  <table class="player-table">
+    <tr><th>Player</th><th>v Cuchulainns</th><th>v Killinkere</th><th>Combined</th><th>Threat Level</th></tr>
+    <tr>
+      <td><strong>#11 (Cavell Keoghan / Oisin O'Reilly)</strong></td>
+      <td>0-04</td>
+      <td>1-02</td>
+      <td>1-06</td>
+      <td><span class="tag scorer">🔴 PRIMARY — whoever wears #11</span></td>
+    </tr>
+    <tr>
+      <td><strong>Ben Conaty (#14)</strong></td>
+      <td>0-01</td>
+      <td>0-03</td>
+      <td>0-04</td>
+      <td><span class="tag scorer">🟠 HIGH — same player both games</span></td>
+    </tr>
+    <tr>
+      <td><strong>Sean Donohue (#8/#10)</strong></td>
+      <td>0-02</td>
+      <td>0-02</td>
+      <td>0-04</td>
+      <td><span class="tag scorer">🟠 HIGH — same player both games</span></td>
+    </tr>
+    <tr>
+      <td><strong>Oisin Smith (#12 v Cuch)</strong></td>
+      <td>0-02</td>
+      <td>—</td>
+      <td>0-02</td>
+      <td><span class="tag foul">Inconsistent — wides</span></td>
+    </tr>
+    <tr>
+      <td><strong>Gary Conaty (#13 v Killinkere)</strong></td>
+      <td>—</td>
+      <td>0-02 (frees)</td>
+      <td>0-02</td>
+      <td><span class="tag scorer">Free taker v Killinkere only</span></td>
+    </tr>
+    <tr>
+      <td><strong>#15 (Oisin Reilly / Mark Reilly)</strong></td>
+      <td>0-01</td>
+      <td>0-00</td>
+      <td>0-01</td>
+      <td><span class="tag foul">Wasteful — both versions</span></td>
+    </tr>
+  </table>
+</div>
+
+<div class="pattern-box">
+  <h4>👤 Pattern: #11 Is Always The Main Threat</h4>
+  <p>Different player wore #11 in each game, but <strong>both were the top scorer</strong> — Cavell Keoghan (0-04 v Cuch) and Oisin O'Reilly (1-02 v Killinkere). Combined 1-06 from the #11 jersey. <strong>Ben Conaty (#14)</strong> and <strong>Sean Donohue</strong> are the consistent threats across both games — same players, 0-04 each combined.</p>
+</div>
+
+<!-- FREE PATTERNS -->
+<div class="section-title amber">Free Kick Patterns</div>
+<div class="grid2">
+  <div class="card green">
+    <h3>Free Conversion</h3>
+    <div class="big-num green">67%</div>
+    <div class="detail">6 converted from 9 scoreable frees</div>
+  </div>
+  <div class="card amber">
+    <h3>Free Dependency</h3>
+    <div class="big-num amber">32%</div>
+    <div class="detail">9 of 28 scoring units came from frees</div>
+  </div>
+</div>
+
+<div class="pattern-box">
+  <h4>⚠️ Pattern: Reliant on Frees</h4>
+  <p>Denn get <strong>32% of their scoring units from frees</strong>. In the Cuchulainns game it was 50%. Stay disciplined, avoid fouling in scoring range, and you cut off a significant source of their scores. Their from-play conversion is only 36% — force them to earn scores from play.</p>
+</div>
+
+<!-- CONFIRMED PATTERNS -->
+<div class="section-title" style="border-left-color:#9b59b6;">Confirmed Patterns (Both Games)</div>
+<div class="sw-list">
+  <span class="pill pattern">🎯 Only 36% from-play accuracy — consistent across both games</span>
+  <span class="pill pattern">📉 2nd half fade — from-play accuracy drops from 50% to 19%</span>
+  <span class="pill pattern">🏃 Q4 collapse — only 0-02 combined in final quarters</span>
+  <span class="pill pattern">⚽ Short kickouts = 100% retention, long = ~45%</span>
+  <span class="pill pattern">👤 #11 is the main threat — 1-06 combined (36% of total)</span>
+  <span class="pill pattern">🎯 Reliant on frees — 32% of scoring units from placed balls</span>
+  <span class="pill pattern">❌ Low goal threat — only 1 goal in 2 games</span>
+</div>
+
+<!-- STRENGTHS -->
+<div class="section-title green">Confirmed Strengths</div>
+<div class="sw-list">
+  <span class="pill strength">Short kickout retention: 100% (14/14)</span>
+  <span class="pill strength">Free conversion: 67% (6/9)</span>
+  <span class="pill strength">#11 — reliable scorer and free taker</span>
+  <span class="pill strength">Strong starters — good Q1 and Q2 output</span>
+  <span class="pill strength">Can capitalise on opposition kickout errors</span>
+  <span class="pill strength">Multiple scoring threats (#11, #14, #12/#10)</span>
+</div>
+
+<!-- WEAKNESSES -->
+<div class="section-title" style="border-left-color:#e74c3c;">Confirmed Weaknesses</div>
+<div class="sw-list">
+  <span class="pill weakness">19 wides from play in 2 games — only 36% from-play accuracy</span>
+  <span class="pill weakness">2nd half collapse — only 3 from 16 from play (19%) after break</span>
+  <span class="pill weakness">Q4 disappearing act — 0-02 combined</span>
+  <span class="pill weakness">Long kickout retention only ~45%</span>
+  <span class="pill weakness">Over-reliant on frees (32% of scoring units from frees)</span>
+  <span class="pill weakness">Only 1 goal in 2 games — limited green flag threat</span>
+  <span class="pill weakness">Lost both games — can't close out tight matches</span>
+  <span class="pill weakness">Discipline issues — conceded 18 frees v Killinkere</span>
+</div>
+
+<!-- TACTICAL RECOMMENDATIONS -->
+<div class="summary">
+  <h3>🎯 Tactical Game Plan for Our Squad</h3>
+  <ul>
+    <li><strong>Press their short kickouts hard:</strong> #6 Caolain McCabe and #8 Sean Donohue are the primary short targets. Deny the short option and force them long — their retention drops from 100% to ~45%.</li>
+    <li><strong>Man-mark #11 (Cavell Keoghan):</strong> He's scored 1-06 across both games (36% of their total). Shut him down and you remove their main threat and free taker.</li>
+    <li><strong>Stay disciplined — don't foul:</strong> 32% of their scoring units come from frees. Reduce fouls in scoring range and you cut off a significant supply line. Their from-play accuracy is only 36%.</li>
+    <li><strong>Be patient in the 1st half:</strong> Denn score 71% of their total before halftime. Weather the storm early, stay in the game, and you'll have the advantage late.</li>
+    <li><strong>Push hard in Q4:</strong> Denn have scored just 0-02 combined in final quarters. This is when they're most vulnerable — increase intensity and outscore them late.</li>
+    <li><strong>Force them into shots from play:</strong> They only convert 36% from play with 19 wides across 2 games. Funnel them wide, close down space, and let them take difficult shots they'll miss.</li>
+    <li class="pos"><strong>Protect your own kickouts:</strong> Denn scored 3 times from opposition kickout errors v Killinkere. Be clinical on restarts.</li>
+    <li class="pos"><strong>Attack their long kickouts:</strong> When forced to go long, they lose ~55% of restarts. Win the kickout battle and you control the game.</li>
+    <li class="pos"><strong>Draw frees:</strong> They conceded 18 frees v Killinkere. Run at them and you'll win scoreable frees.</li>
+    <li class="pos"><strong>Back yourselves in the 2nd half:</strong> Denn's from-play accuracy drops from 50% to 19% after the break. They tire and lose accuracy — exploit this.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  Combined Opposition Analysis · Denn · 2 Games Analysed<br>
+  Cuchulainns 1-18 v 0-12 Denn · Killinkere 3-11 v 1-13 Denn
+</div>
+
+</div>
+<script src="../nav.js"></script><script src="../auth.js"></script></body>
+</html>

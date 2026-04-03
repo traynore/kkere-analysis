@@ -1,0 +1,202 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:18,1,Killinkere,Substitution,Substitution,Fiachra Mooney
+2,00:00:27,1,Killinkere,Attacks,Kick lost,Phelim Cusack
+3,00:00:39,1,Killinkere,Possession lost,Kick pass,Phelim Cusack
+4,00:00:56,1,Killinkere,Turnover,Interception,James Farrelly
+5,00:01:16,1,Killinkere,Possession lost,Hand pass,Neill McCabe
+6,00:01:22,1,Killinkere,Attacks,Possession lost,Neill McCabe
+7,00:01:33,1,Killinkere,Turnover,In Contact,Sean Brady
+8,00:02:23,1,Killinkere,Possession lost,Hand pass,Cian Fitzsimons
+9,00:02:35,1,Killinkere,Shot from play,Point,James Farrelly
+10,00:02:41,1,Killinkere,Attacks,Shot taken,James Farrelly
+11,00:02:52,1,Drung,Kickout,Won clean,Player 10
+12,00:03:03,1,Killinkere,Turnover,Interception,Harry Banville
+13,00:03:08,1,Killinkere,Possession lost,Kick pass,Harry Banville
+14,00:03:19,1,Drung,Shot from play,Save,Player 12
+15,00:03:30,1,Drung,Shot from play,45,Player 15
+16,00:03:42,1,Killinkere,Turnover,In Contact,Darrell Dolan
+17,00:04:05,1,Drung,Scoreable free,Wide,Player 14
+18,00:04:41,1,Killinkere,Kickout,Break lost,Player 12
+19,00:04:53,1,Killinkere,Turnover,In Contact,Neill McCabe
+20,00:04:58,1,Killinkere,Free conceded,Middle third,Phelim Cusack
+21,00:05:10,1,Drung,Shot from play,Point,Player 10
+22,00:05:15,1,Drung,Attacks,Shot taken,Player 10
+23,00:05:34,1,Killinkere,Kickout,Sideline ball,
+24,00:06:30,1,Drung,Shot from play,Short,Player 6
+25,00:06:35,1,Drung,Attacks,Shot taken,Player 6
+26,00:06:49,1,Drung,Shot from play,Goal,Player 14
+27,00:07:00,1,Drung,Attacks,Shot taken,Player 14
+28,00:07:07,1,Killinkere,Kickout,Won clean,David Ryan
+29,00:07:30,1,Killinkere,Possession lost,Hand pass,James Farrelly
+30,00:07:36,1,Killinkere,Attacks,Carry lost,Ben Philingham
+31,00:07:47,1,Killinkere,Shot from play,Wide,Ben Philingham
+32,00:07:58,1,Killinkere,Attacks,Shot taken,Ben Philingham
+33,00:08:04,1,Drung,Kickout,Break won,Player 11
+34,00:08:31,1,Killinkere,Turnover,In Contact,Phelim Cusack
+35,00:08:43,1,Killinkere,Possession lost,Handling,Kevin McCabe
+36,00:09:20,1,Killinkere,Turnover,Interception,Keiran Smith
+37,00:10:07,1,Killinkere,Possession lost,Handling,Phelim Cusack
+38,00:10:35,1,Killinkere,Turnover,Interception,Darrell Dolan
+39,00:10:54,1,Killinkere,Possession lost,Foul,Keiran Smith
+40,00:11:20,1,Drung,Shot from play,Wide,Player 11
+41,00:11:28,1,Drung,Attacks,Shot taken,Player 11
+42,00:11:36,1,Killinkere,Kickout,Won clean,James Farrelly
+43,00:12:00,1,Killinkere,Possession lost,Handling,Phelim Cusack
+44,00:12:03,1,Killinkere,Turnover,Interception,
+45,00:12:41,1,Killinkere,Shot from play,2 Points,Neill McCabe
+46,00:12:48,1,Killinkere,Attacks,Shot taken,Neill McCabe
+47,00:13:11,1,Drung,Kickout,Break won,Player 9
+48,00:13:27,1,Killinkere,Turnover,Interception,Sean Brady
+49,00:13:42,1,Killinkere,Possession lost,Handling,Harry Banville
+50,00:13:55,1,Killinkere,Turnover,Interception,Darrell Dolan
+51,00:14:28,1,Killinkere,Shot from play,Short,Dara Sharkey
+52,00:14:36,1,Killinkere,Attacks,Shot taken,Dara Sharkey
+53,00:14:47,1,Killinkere,Shot from play,Point,Keiran Smith
+54,00:14:55,1,Killinkere,Attacks,Shot taken,Keiran Smith
+55,00:15:23,1,Killinkere,Free conceded,Middle third,Benny McConnell
+56,00:16:04,1,Drung,Shot from play,Point,Player 15
+57,00:16:11,1,Drung,Attacks,Shot taken,Player 15
+58,00:16:17,1,Killinkere,Kickout,Won clean,James Farrelly
+59,00:16:58,1,Killinkere,Shot from play,Wide,Cian Fitzsimons
+60,00:17:07,1,Killinkere,Attacks,Shot taken,Cian Fitzsimons
+61,00:17:23,1,Drung,Kickout,Break won,Player 8
+62,00:17:41,1,Killinkere,Turnover,Interception,Benny McConnell
+63,00:18:36,1,Killinkere,Shot from play,Goal,Phelim Cusack
+64,00:18:45,1,Killinkere,Attacks,Shot taken,Phelim Cusack
+65,00:18:57,1,Drung,Kickout,Short lost,Neill McCabe
+66,00:19:16,1,Drung,Free conceded,Defensive third,Player 2
+67,00:19:40,1,Killinkere,Scoreable free,Point,Neill McCabe
+68,00:19:51,1,Killinkere,Attacks,Mark taken,Benny McConnell
+69,00:20:04,1,Drung,Kickout,Break won,Player 14
+70,00:20:26,1,Drung,Shot from play,Short,Player 15
+71,00:20:37,1,Drung,Attacks,Shot taken,Player 15
+72,00:21:02,1,Killinkere,Shot from play,Point,Dara Sharkey
+73,00:21:07,1,Killinkere,Attacks,Shot taken,Dara Sharkey
+74,00:21:34,1,Drung,Kickout,Break won,Player 9
+75,00:22:06,1,Killinkere,Shot from play,Point,Ben Philingham
+76,00:22:12,1,Killinkere,Attacks,Shot taken,Ben Philingham
+77,00:22:37,1,Drung,Kickout,Lost clean,Phelim Cusack
+78,00:23:14,1,Killinkere,Possession lost,In Contact,Cian Fitzsimons
+79,00:23:54,1,Killinkere,Free conceded,Defensive third,Kevin McCabe
+80,00:24:23,1,Drung,Shot from play,Wide,Player 2
+81,00:24:42,1,Killinkere,Kickout,Won clean,James Farrelly
+82,00:24:54,1,Killinkere,Possession lost,Handling,Ben Philingham
+83,00:25:12,1,Killinkere,Free conceded,Defensive third,Darrell Dolan
+84,00:25:50,1,Drung,Scoreable free,Wide,Player 14
+85,00:26:17,1,Killinkere,Kickout,Short lost,Player 15
+86,00:26:28,1,Drung,Shot from play,Goal,Player 14
+87,00:26:37,1,Drung,Attacks,Shot taken,Player 14
+88,00:26:58,1,Killinkere,Kickout,Break lost,
+89,00:27:23,1,Drung,Shot from play,Save,Player 15
+90,00:27:32,1,Drung,Attacks,Shot taken,Player 15
+91,00:27:35,1,Drung,Shot from play,Goal,
+92,00:27:41,1,Drung,Attacks,Shot taken,
+93,00:27:45,1,Killinkere,Kickout,Break lost,
+94,00:28:35,1,Drung,Shot from play,Wide,Player 11
+95,00:29:03,1,Killinkere,Kickout,Break won,Phelim Cusack
+96,00:29:25,1,Killinkere,Possession lost,In Contact,Benny McConnell
+97,00:29:49,1,Drung,Shot from play,Wide,
+98,00:29:59,1,Drung,Attacks,Shot taken,
+99,00:30:21,2,Killinkere,Shot from play,Point,Phelim Cusack
+100,00:30:26,2,Killinkere,Attacks,Shot taken,Phelim Cusack
+101,00:30:43,2,Drung,Kickout,Won clean,Player 10
+102,00:31:31,2,Killinkere,Possession lost,In Contact,Phelim Cusack
+103,00:31:51,2,Drung,Shot from play,Wide,Player 12
+104,00:31:55,2,Drung,Attacks,Shot taken,Player 12
+105,00:32:07,2,Killinkere,Kickout,Won clean,Cian Fitzsimons
+106,00:32:29,2,Killinkere,Shot from play,Wide,Keiran Smith
+107,00:32:37,2,Killinkere,Attacks,Shot taken,Keiran Smith
+108,00:33:01,2,Drung,Kickout,Break won,Player 5
+109,00:33:59,2,Killinkere,Shot from play,Short,Dara Sharkey
+110,00:34:04,2,Killinkere,Attacks,Shot taken,Dara Sharkey
+111,00:34:22,2,Killinkere,Turnover,In Contact,Dara Sharkey
+112,00:34:41,2,Killinkere,Shot from play,Short,Cian Fitzsimons
+113,00:34:47,2,Killinkere,Attacks,Shot taken,Cian Fitzsimons
+114,00:35:31,2,Drung,Shot from play,Point,Player 14
+115,00:35:36,2,Drung,Attacks,Shot taken,
+116,00:35:40,2,Killinkere,Kickout,Sideline ball,
+117,00:36:00,2,Killinkere,Turnover,Interception,David Ryan
+118,00:36:10,2,Killinkere,Turnover,In Contact,Ben Philingham
+119,00:36:24,2,Drung,Free conceded,Middle third,
+120,00:37:03,2,Killinkere,Possession lost,In Contact,Ben Philingham
+121,00:38:42,2,Killinkere,Turnover,In Contact,Benny McConnell
+122,00:38:52,2,Killinkere,Free conceded,Defensive third,Mark Farrelly (S)
+123,00:39:19,2,Killinkere,Substitution,Substitution,Phelim Cusack
+124,00:39:25,2,Drung,Scoreable free,Wide,
+125,00:39:30,2,Drung,Attacks,Mark taken,
+126,00:39:41,2,Killinkere,Kickout,Lost clean,Player 10
+127,00:40:48,2,Drung,Shot from play,Short,
+128,00:40:58,2,Killinkere,Free conceded,Defensive third,Darrell Dolan
+129,00:41:25,2,Drung,Scoreable free,Point,Player 14
+130,00:41:42,2,Killinkere,Kickout,Lost clean,Player 6
+131,00:42:02,2,Drung,Shot from play,Wide,Player 14
+132,00:42:06,2,Drung,Attacks,Shot taken,Player 14
+133,00:42:15,2,Killinkere,Kickout,Won clean,Ruairi O Connell
+134,00:42:32,2,Killinkere,Possession lost,In Contact,Ben Philingham
+135,00:42:46,2,Killinkere,Substitution,Substitution,James Farrelly
+136,00:43:15,2,Killinkere,Free conceded,Middle third,Cian Fitzsimons
+137,00:43:49,2,Drung,Scoreable free,Wide,
+138,00:43:56,2,Drung,Attacks,Mark taken,
+139,00:44:07,2,Killinkere,Kickout,Won clean,Kevin McCabe
+140,00:44:18,2,Drung,Free conceded,Middle third,Player 5
+141,00:44:59,2,Killinkere,Possession lost,Handling,Keiran Smith
+142,00:45:23,2,Killinkere,Turnover,Interception,Darrell Dolan
+143,00:45:36,2,Killinkere,Possession lost,Hand pass,
+144,00:46:00,2,Drung,Shot from play,Point,Player 13
+145,00:46:04,2,Drung,Attacks,Shot taken,Player 13
+146,00:46:16,2,Killinkere,Kickout,Lost clean,Player 8
+147,00:46:39,2,Drung,Shot from play,Wide,Player 8
+148,00:46:45,2,Drung,Attacks,Shot taken,Player 8
+149,00:46:56,2,Killinkere,Kickout,Sideline ball,
+150,00:47:35,2,Killinkere,Free conceded,Defensive third,Cian Fitzsimons
+151,00:48:15,2,Drung,Shot from play,2 Points,Player 14
+152,00:48:20,2,Drung,Attacks,Shot taken,Player 14
+153,00:48:44,2,Killinkere,Kickout,Short won,Mark Farrelly (S)
+154,00:48:59,2,Killinkere,Shot from play,Point,Darren Smith
+155,00:49:04,2,Killinkere,Attacks,Shot taken,Darren Smith
+156,00:49:25,2,Drung,Kickout,Lost clean,Benny McConnell
+157,00:49:42,2,Killinkere,Shot from play,Goal,Ben Philingham
+158,00:49:49,2,Killinkere,Attacks,Shot taken,Ben Philingham
+159,00:50:14,2,Drung,Kickout,Break won,Player 14
+160,00:50:28,2,Killinkere,Turnover,Interception,Harry Banville
+161,00:50:49,2,Killinkere,Shot from play,Point,Ben Philingham
+162,00:50:53,2,Killinkere,Attacks,Shot taken,Ben Philingham
+163,00:51:35,2,Drung,Kickout,Break won,
+164,00:52:51,2,Drung,Shot from play,Short,Player 11
+165,00:52:55,2,Drung,Attacks,Shot taken,
+166,00:53:59,2,Killinkere,Free conceded,Defensive third,Cian Fitzsimons
+167,00:54:12,2,Drung,Shot from play,Wide,Player 14
+168,00:54:19,2,Drung,Attacks,Shot taken,Player 14
+169,00:54:25,2,Killinkere,Kickout,Won clean,Benny McConnell
+170,00:55:02,2,Killinkere,Shot from play,Point,Darren Smith
+171,00:55:05,2,Killinkere,Attacks,Shot taken,Darren Smith
+172,00:55:46,2,Drung,Kickout,Short lost,Ben Philingham
+173,00:56:03,2,Killinkere,Shot from play,Short,Neill McCabe
+174,00:56:16,2,Killinkere,Attacks,Shot taken,Neill McCabe
+175,00:56:27,2,Killinkere,Shot from play,Short,Neill McCabe
+176,00:56:31,2,Killinkere,Attacks,Shot taken,Neill McCabe
+177,00:57:08,2,Killinkere,Turnover,Interception,Mark Farrelly (S)
+178,00:57:19,2,Killinkere,Turnover,Interception,Mark Farrelly (S)
+179,00:57:45,2,Killinkere,Possession lost,Kick pass,Ruairi O Connell
+180,00:58:18,2,Killinkere,Turnover,Interception,Darrell Dolan
+181,00:58:39,2,Killinkere,Shot from play,Point,Keiran Smith
+182,00:58:43,2,Killinkere,Attacks,Shot taken,Keiran Smith
+183,00:59:02,2,Drung,Kickout,Lost clean,Benny McConnell
+184,00:59:13,2,Killinkere,Shot from play,Point,David Ryan
+185,00:59:16,2,Killinkere,Attacks,Shot taken,David Ryan
+186,00:59:40,2,Drung,Kickout,Won clean,Player 14
+187,01:00:01,2,Drung,Shot from play,Wide,
+188,01:00:08,2,Drung,Attacks,Shot taken,
+189,01:00:12,2,Killinkere,Kickout,Break won,Darren Smith
+190,01:00:28,2,Killinkere,Shot from play,Wide,Neill McCabe
+191,01:00:32,2,Killinkere,Attacks,Shot taken,Neill McCabe
+192,01:00:52,2,Drung,Kickout,Break won,
+193,01:01:04,2,Drung,Free conceded,Middle third,
+194,01:01:17,2,Killinkere,Shot from play,Save,Darren Smith
+195,01:01:24,2,Killinkere,Attacks,Shot taken,Darren Smith
+196,01:01:31,2,Killinkere,Free conceded,Attacking third,David Ryan
+197,01:02:04,2,Killinkere,Turnover,Interception,Sean Brady
+198,01:02:59,2,Drung,Free conceded,Defensive third,
+199,01:03:20,2,Killinkere,Scoreable free,Short,Darren Smith
+200,01:03:44,2,Killinkere,Free conceded,Attacking third,Darren Smith
+201,01:04:04,2,Killinkere,Turnover,In Contact,Darrell Dolan

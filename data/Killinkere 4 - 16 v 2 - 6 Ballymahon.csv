@@ -1,0 +1,197 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:16,1,Ballymahon,Shot from play,Wide,Player 6
+2,00:00:29,1,Killinkere,Kickout,Break lost,Player 12
+3,00:01:23,1,Killinkere,Shot from play,Point,Ryan Smith
+4,00:01:47,1,Ballymahon,Kickout,Break won,Player 7
+5,00:02:02,1,Killinkere,Turnover,Interception,Nathan McQuade
+6,00:03:14,1,Killinkere,Shot from play,Point,Emmett Fitzsimons
+7,00:03:22,1,Killinkere,Attacks,Shot taken,Ben Philingham
+8,00:03:36,1,Ballymahon,Kickout,Break won,Player 12
+9,00:03:51,1,Killinkere,Free conceded,Defensive third,Alex Sweeney
+10,00:04:22,1,Ballymahon,Scoreable free,Point,Player 11
+11,00:05:19,1,Killinkere,Shot from play,Point,Conall Mooney
+12,00:05:27,1,Killinkere,Attacks,Shot taken,Conall Mooney
+13,00:05:41,1,Ballymahon,Kickout,Break won,Player 9
+14,00:05:55,1,Killinkere,Turnover,Interception,Nathan McQuade
+15,00:06:02,1,Killinkere,Turnover,Interception,Darren Smith
+16,00:06:22,1,Killinkere,Shot from play,Point,Jason McMahon
+17,00:06:30,1,Killinkere,Attacks,Shot taken,Jason McMahon
+18,00:06:44,1,Ballymahon,Kickout,Break lost,Jason McMahon
+19,00:07:06,1,Killinkere,Possession lost,Hand pass,Fintan O’Connell
+20,00:07:12,1,Killinkere,Attacks,Carry lost,Fintan O’Connell
+21,00:07:24,1,Killinkere,Free conceded,Attacking third,Jason McMahon
+22,00:08:07,1,Killinkere,Turnover,Interception,Gearoid Traynor
+23,00:08:25,1,Killinkere,Shot from play,Goal,Ryan Smith
+24,00:08:33,1,Killinkere,Attacks,Shot taken,Ryan Smith
+25,00:08:48,1,Ballymahon,Kickout,Won clean,Player 6
+26,00:09:24,1,Ballymahon,Shot from play,Point,Player 13
+27,00:09:30,1,Ballymahon,Attacks,Shot taken,Player 13
+28,00:09:48,1,Killinkere,Kickout,Break lost,
+29,00:09:58,1,Ballymahon,Shot from play,Point,Player 10
+30,00:10:13,1,Killinkere,Kickout,Lost clean,
+31,00:10:57,1,Killinkere,Turnover,Interception,Jason McMahon
+32,00:11:05,1,Killinkere,Possession lost,Hand pass,James Farrelly
+33,00:11:23,1,Killinkere,Shot from play,Wide,Darren Smith
+34,00:11:29,1,Killinkere,Attacks,Shot taken,Darren Smith
+35,00:11:46,1,Ballymahon,Kickout,Break won,Player 10
+36,00:12:02,1,Killinkere,Turnover,In Contact,Nathan McQuade
+37,00:12:06,1,Killinkere,Turnover,Interception,Emmett Fitzsimons
+38,00:12:52,1,Killinkere,Shot from play,Point,Phelim Cusack
+39,00:12:59,1,Killinkere,Attacks,Shot taken,Phelim Cusack
+40,00:13:16,1,Ballymahon,Kickout,Won clean,Player 8
+41,00:13:34,1,Killinkere,Turnover,In Contact,Gearoid Traynor
+42,00:13:38,1,Killinkere,Free conceded,Defensive third,Shane Ryan
+43,00:14:17,1,Ballymahon,Scoreable free,Wide,Player 11
+44,00:14:29,1,Killinkere,Kickout,Sideline ball,
+45,00:14:43,1,Killinkere,Turnover,Interception,Jason McMahon
+46,00:15:10,1,Killinkere,Shot from play,Point,Emmett Fitzsimons
+47,00:15:14,1,Killinkere,Attacks,Shot taken,Emmett Fitzsimons
+48,00:15:35,1,Ballymahon,Kickout,Break lost,Alex Sweeney
+49,00:15:54,1,Killinkere,Shot from play,Point,Alex Sweeney
+50,00:15:59,1,Killinkere,Attacks,Shot taken,Alex Sweeney
+51,00:16:20,1,Ballymahon,Kickout,Lost clean,James Farrelly
+52,00:16:41,1,Killinkere,Shot from play,Point,Jason McMahon
+53,00:16:45,1,Killinkere,Attacks,Shot taken,Jason McMahon
+54,00:17:14,1,Ballymahon,Kickout,Short lost,Emmett Fitzsimons
+55,00:17:29,1,Killinkere,Possession lost,In Contact,Conall Mooney
+56,00:17:57,1,Killinkere,Turnover,Interception,Jason McMahon
+57,00:18:31,1,Killinkere,Shot from play,Short,Emmett Fitzsimons
+58,00:19:21,1,Ballymahon,Shot from play,Short,
+59,00:19:43,1,Killinkere,Free conceded,Attacking third,Shane Ryan
+60,00:20:14,1,Killinkere,Free conceded,Middle third,Emmett Fitzsimons
+61,00:21:00,1,Killinkere,Turnover,In Contact,Gearoid Traynor
+62,00:21:18,1,Killinkere,Shot from play,Short,Emmett Fitzsimons
+63,00:21:23,1,Killinkere,Attacks,Shot taken,Emmett Fitzsimons
+64,00:21:37,1,Killinkere,Turnover,Interception,Shane Ryan
+65,00:21:56,1,Ballymahon,Shot from play,Short,Player 5
+66,00:22:40,1,Killinkere,Shot from play,Wide,Alex Sweeney
+67,00:22:47,1,Killinkere,Attacks,Shot taken,Alex Sweeney
+68,00:23:05,1,Ballymahon,Kickout,Won clean,Player 8
+69,00:24:23,1,Killinkere,Turnover,In Contact,Fintan O’Connell
+70,00:24:36,1,Killinkere,Free conceded,Attacking third,Ben Philingham
+71,00:25:04,1,Ballymahon,Shot from play,Point,Player 6
+72,00:25:17,1,Killinkere,Kickout,Won clean,Gearoid Traynor
+73,00:25:33,1,Killinkere,Possession lost,Hand pass,Fintan O’Connell
+74,00:25:38,1,Killinkere,Turnover,Interception,Nathan McQuade
+75,00:26:04,1,Killinkere,Possession lost,In Contact,Conall Mooney
+76,00:26:22,1,Ballymahon,Free conceded,Penalty,
+77,00:26:49,1,Killinkere,Scoreable free,Goal,Jason McMahon
+78,00:27:12,1,Ballymahon,Kickout,Lost clean,Ben Philingham
+79,00:27:30,1,Killinkere,Shot from play,Point,James Farrelly
+80,00:27:36,1,Killinkere,Attacks,Shot taken,James Farrelly
+81,00:28:10,1,Killinkere,Substitution,Substitution,Jason McMahon
+82,00:28:14,1,Ballymahon,Kickout,Won clean,Player 8
+83,00:28:24,1,Killinkere,Turnover,In Contact,Shane Ryan
+84,00:29:09,1,Killinkere,Shot from play,Point,James Farrelly
+85,00:29:13,1,Killinkere,Attacks,Shot taken,James Farrelly
+86,00:29:32,1,Ballymahon,Kickout,Break lost,Gearoid Traynor
+87,00:30:08,1,Killinkere,Possession lost,In Contact,Gearoid Traynor
+88,00:30:47,1,Ballymahon,Shot from play,Point,Player 8
+89,00:31:09,1,Killinkere,Kickout,Won clean,Fintan O’Connell
+90,00:31:44,1,Killinkere,Possession lost,Kick pass,Emmett Fitzsimons
+91,00:31:53,1,Killinkere,Attacks,Kick lost,Emmett Fitzsimons
+92,00:30:02,2,Killinkere,Substitution,Substitution,Phelim Cusack
+93,00:30:05,2,Killinkere,Other,Throw Up Won,Alex Sweeney
+94,00:30:09,2,Killinkere,Substitution,Substitution,Ryan Smith
+95,00:30:20,2,Killinkere,Shot from play,Wide,Alex Sweeney
+96,00:30:25,2,Killinkere,Attacks,Shot taken,Alex Sweeney
+97,00:30:44,2,Ballymahon,Kickout,Lost clean,Alex Sweeney
+98,00:31:11,2,Killinkere,Shot from play,Point,Kevin McCabe
+99,00:31:25,2,Killinkere,Attacks,Shot taken,Kevin McCabe
+100,00:31:32,2,Ballymahon,Kickout,Lost clean,Kevin McCabe
+101,00:32:03,2,Killinkere,Shot from play,Wide,Fintan O’Connell
+102,00:32:12,2,Killinkere,Attacks,Shot taken,Fintan O’Connell
+103,00:32:32,2,Ballymahon,Kickout,Won clean,Player 8
+104,00:32:58,2,Killinkere,Turnover,In Contact,Nathan McQuade
+105,00:33:19,2,Killinkere,Attacks,Kick lost,
+106,00:33:25,2,Killinkere,Possession lost,Kick pass,
+107,00:34:09,2,Killinkere,Turnover,In Contact,Shane Ryan
+108,00:34:30,2,Killinkere,Shot from play,Goal,Fiachra Mooney
+109,00:34:36,2,Killinkere,Attacks,Shot taken,Fiachra Mooney
+110,00:34:51,2,Ballymahon,Kickout,Break lost,Darren Smith
+111,00:35:05,2,Killinkere,Possession lost,Hand pass,James Farrelly
+112,00:35:37,2,Ballymahon,Shot from play,Short,Player 11
+113,00:35:44,2,Killinkere,Turnover,Interception,Benny McConnell
+114,00:35:58,2,Killinkere,Shot from play,Point,Kevin McCabe
+115,00:36:04,2,Killinkere,Attacks,Shot taken,Kevin McCabe
+116,00:36:23,2,Ballymahon,Kickout,Break lost,Gearoid Traynor
+117,00:36:49,2,Killinkere,Shot from play,Short,Darren Smith
+118,00:36:57,2,Killinkere,Attacks,Shot taken,Darren Smith
+119,00:37:59,2,Killinkere,Free conceded,Attacking third,
+120,00:38:23,2,Killinkere,Substitution,Substitution,Emmett Fitzsimons
+121,00:38:31,2,Killinkere,Substitution,Substitution,Fintan O’Connell
+122,00:38:38,2,Ballymahon,Scoreable free,Short,Player 11
+123,00:38:52,2,Killinkere,Turnover,In Contact,Philip Corrigan
+124,00:39:21,2,Killinkere,Shot from play,Wide,Ben Philingham
+125,00:39:27,2,Killinkere,Attacks,Shot taken,Ben Philingham
+126,00:39:43,2,Ballymahon,Kickout,Lost clean,Ben Philingham
+127,00:40:11,2,Killinkere,Free conceded,Attacking third,Gearoid Traynor
+128,00:40:38,2,Killinkere,Turnover,In Contact,Alex Sweeney
+129,00:40:47,2,Ballymahon,Free conceded,Attacking third,Player 10
+130,00:41:44,2,Killinkere,Shot from play,Goal,Kevin McCabe
+131,00:41:49,2,Killinkere,Attacks,Shot taken,Kevin McCabe
+132,00:42:04,2,Ballymahon,Kickout,Break lost,Neill McCabe
+133,00:42:20,2,Killinkere,Shot from play,Point,Darren Smith
+134,00:42:23,2,Killinkere,Attacks,Shot taken,Darren Smith
+135,00:42:38,2,Ballymahon,Kickout,Break won,Player 5
+136,00:42:59,2,Ballymahon,Shot from play,Goal,Player 13
+137,00:43:31,2,Killinkere,Substitution,Substitution,Liam McCabe
+138,00:43:34,2,Killinkere,Kickout,Won clean,Kevin McCabe
+139,00:43:42,2,Killinkere,Possession lost,In Contact,Kevin McCabe
+140,00:43:48,2,Killinkere,Turnover,In Contact,Neill McCabe
+141,00:43:58,2,Killinkere,Possession lost,Handling,Benny McConnell
+142,00:44:10,2,Killinkere,Substitution,Substitution,Shane Ryan
+143,00:44:29,2,Killinkere,Turnover,Interception,Benny McConnell
+144,00:44:56,2,Killinkere,Attacks,Kick lost,Ben Philingham
+145,00:45:24,2,Killinkere,Turnover,In Contact,Harry Banville
+146,00:45:34,2,Killinkere,Turnover,In Contact,James Farrelly
+147,00:45:53,2,Killinkere,Free conceded,Attacking third,Conall Mooney
+148,00:46:23,2,Killinkere,Attacks,Carry lost,
+149,00:46:35,2,Killinkere,Turnover,In Contact,Philip Corrigan
+150,00:46:58,2,Killinkere,Shot from play,Point,Philip Corrigan
+151,00:47:05,2,Killinkere,Attacks,Shot taken,Philip Corrigan
+152,00:47:21,2,Ballymahon,Kickout,Break won,Player 8
+153,00:47:52,2,Killinkere,Free conceded,Attacking third,
+154,00:48:38,2,Ballymahon,Scoreable free,Wide,Player 11
+155,00:48:55,2,Killinkere,Substitution,Substitution,Darren Smith
+156,00:48:58,2,Killinkere,Kickout,Lost clean,
+157,00:49:08,2,Killinkere,Free conceded,Attacking third,Conall Mooney
+158,00:49:26,2,Ballymahon,Scoreable free,Point,Player 10
+159,00:49:30,2,Ballymahon,Attacks,Shot taken,Player 10
+160,00:49:44,2,Killinkere,Substitution,Substitution,Nathan McQuade
+161,00:49:47,2,Killinkere,Kickout,Break won,Benny McConnell
+162,00:50:13,2,Killinkere,Shot from play,Point,Kevin McCabe
+163,00:50:17,2,Killinkere,Attacks,Shot taken,Kevin McCabe
+164,00:50:26,2,Ballymahon,Kickout,Short won,Player 7
+165,00:50:50,2,Killinkere,Substitution,Substitution,Gearoid Traynor
+166,00:51:35,2,Killinkere,Free conceded,Defensive third,Philip Corrigan
+167,00:52:15,2,Ballymahon,Scoreable free,Short,Player 11
+168,00:52:29,2,Killinkere,Possession lost,In Contact,
+169,00:52:41,2,Ballymahon,Shot from play,Goal,Player 8
+170,00:53:00,2,Killinkere,Kickout,Short won,Lee Philingham
+171,00:53:18,2,Ballymahon,Shot from play,Blocked,Player 5
+172,00:53:29,2,Ballymahon,Shot from play,Wide,Player 8
+173,00:54:07,2,Killinkere,Kickout,Short won,Darrell Dolan
+174,00:54:31,2,Killinkere,Possession lost,Kick pass,Keiran Smith
+175,00:54:42,2,Ballymahon,Shot from play,Wide,Player 7
+176,00:54:46,2,Ballymahon,Attacks,Shot taken,Player 7
+177,00:55:02,2,Killinkere,Kickout,Lost clean,Player 8
+178,00:55:17,2,Killinkere,Turnover,Interception,Alex Sweeney
+179,00:55:38,2,Killinkere,Shot from play,Point,Neill McCabe
+180,00:55:54,2,Ballymahon,Kickout,Break won,Player 10
+181,00:56:05,2,Killinkere,Turnover,In Contact,Philip Corrigan
+182,00:56:37,2,Killinkere,Shot from play,Wide,Fiachra Mooney
+183,00:56:45,2,Killinkere,Attacks,Shot taken,Fiachra Mooney
+184,00:57:03,2,Ballymahon,Kickout,Break won,Player 7
+185,00:57:44,2,Ballymahon,Shot from play,Short,
+186,00:58:11,2,Killinkere,Shot from play,Wide,Kevin McCabe
+187,00:58:17,2,Killinkere,Attacks,Shot taken,Kevin McCabe
+188,00:58:29,2,Ballymahon,Kickout,Break won,
+189,00:58:49,2,Killinkere,Turnover,Interception,Mark Farrelly (S)
+190,00:59:05,2,Ballymahon,Free conceded,Defensive third,Player 11
+191,00:59:40,2,Killinkere,Scoreable free,Wide,Fiachra Mooney
+192,00:59:45,2,Killinkere,Attacks,Shot taken,Fiachra Mooney
+193,00:59:57,2,Ballymahon,Kickout,Break lost,Keiran Smith
+194,01:00:11,2,Killinkere,Possession lost,In Contact,James Farrelly
+195,01:00:44,2,Ballymahon,Shot from play,Short,Player 7
+196,01:00:52,2,Ballymahon,Attacks,Kick lost,Player 7

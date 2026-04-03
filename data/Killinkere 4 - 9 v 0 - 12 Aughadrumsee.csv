@@ -1,0 +1,168 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:08,1,Aughadrumsee,Ball Won,In Contact,Player 10
+2,00:00:19,1,Killinkere,Turnover,In Contact,Mark Farrelly (S)
+3,00:00:33,1,Aughadrumsee,Free conceded,Attacking third,
+4,00:00:51,1,Killinkere,Attacks,Carry lost,Keiran Smith
+5,00:00:57,1,Killinkere,Possession lost,In Contact,Keiran Smith
+6,00:01:36,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+7,00:02:02,1,Aughadrumsee,Shot from play,Short,Player 9
+8,00:02:31,1,Killinkere,Attacks,Shot taken,Ryan Smith
+9,00:02:32,1,Killinkere,Shot from play,Point,Ryan Smith
+10,00:03:03,1,Aughadrumsee,Kickout,Break won,Player 10
+11,00:03:44,1,Aughadrumsee,Shot from play,Point,Player 11
+12,00:04:11,1,Killinkere,Kickout,Short won,Keiran Smith
+13,00:04:51,1,Killinkere,Possession lost,Kick pass,Ryan Smith
+14,00:04:51,1,Killinkere,Attacks,Kick lost,Ryan Smith
+15,00:05:37,1,Killinkere,Turnover,Interception,Darrell Dolan
+16,00:05:51,1,Killinkere,Free conceded,Defensive third,James Farrelly
+17,00:06:28,1,Aughadrumsee,Scoreable free,Point,Player 11
+18,00:06:47,1,Killinkere,Kickout,Short won,James Farrelly
+19,00:07:10,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+20,00:07:10,1,Killinkere,Shot from play,Point,Fiachra Mooney
+21,00:07:44,1,Aughadrumsee,Kickout,Break won,
+22,00:08:20,1,Aughadrumsee,Shot from play,Point,Player 11
+23,00:08:36,1,Killinkere,Kickout,Short won,Darrell Dolan
+24,00:08:55,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+25,00:08:57,1,Killinkere,Shot from play,Goal,Evan Markey
+26,00:09:26,1,Aughadrumsee,Kickout,Break lost,Cian Fitzsimons
+27,00:09:46,1,Killinkere,Attacks,Carry lost,James Farrelly
+28,00:10:17,1,Killinkere,Possession lost,Handling,Neill McCabe
+29,00:11:23,1,Killinkere,Turnover,In Contact,Sean Brady
+30,00:11:38,1,Killinkere,Possession lost,Handling,Dara Sharkey
+31,00:12:01,1,Killinkere,Turnover,Interception,Luke Crossan
+32,00:12:22,1,Killinkere,Attacks,Kick lost,Fiachra Mooney
+33,00:12:56,1,Aughadrumsee,Shot from play,Wide,Player 11
+34,00:13:11,1,Killinkere,Kickout,Won clean,Neill McCabe
+35,00:13:19,1,Killinkere,Attacks,Kick lost,Neill McCabe
+36,00:13:20,1,Killinkere,Possession lost,Kick pass,Neill McCabe
+37,00:13:26,1,Aughadrumsee,Free conceded,Defensive third,
+38,00:14:10,1,Killinkere,Scoreable free,Goal,Fiachra Mooney
+39,00:14:41,1,Aughadrumsee,Kickout,Break lost,Cian Fitzsimons
+40,00:16:07,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+41,00:16:09,1,Killinkere,Shot from play,Wide,Fiachra Mooney
+42,00:16:36,1,Aughadrumsee,Kickout,Break lost,Neill McCabe
+43,00:16:37,1,Killinkere,Possession lost,Hand pass,Neill McCabe
+44,00:17:01,1,Aughadrumsee,Shot from play,Point,Player 11
+45,00:17:19,1,Killinkere,Kickout,Won clean,Luke Crossan
+46,00:17:48,1,Killinkere,Attacks,Carry lost,Evan Markey
+47,00:18:15,1,Killinkere,Free conceded,Defensive third,James Farrelly
+48,00:18:48,1,Aughadrumsee,Scoreable free,Wide,
+49,00:19:08,1,Killinkere,Kickout,Break won,Philip Corrigan
+50,00:19:17,1,Killinkere,Possession lost,Kick pass,Philip Corrigan
+51,00:19:44,1,Killinkere,Turnover,In Contact,Fiachra Mooney
+52,00:19:58,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+53,00:19:59,1,Killinkere,Shot from play,2 Points,Fiachra Mooney
+54,00:20:30,1,Aughadrumsee,Kickout,Won clean,Player 6
+55,00:21:06,1,Aughadrumsee,Shot from play,Point,
+56,00:21:21,1,Killinkere,Kickout,Won clean,Keiran Smith
+57,00:21:32,1,Killinkere,Possession lost,Hand pass,Sean Brady
+58,00:21:35,1,Killinkere,Attacks,Possession lost,Sean Brady
+59,00:22:57,1,Aughadrumsee,Shot from play,Point,Player 10
+60,00:23:26,1,Killinkere,Kickout,Break lost,Player 10
+61,00:23:36,1,Killinkere,Turnover,In Contact,Ryan Smith
+62,00:23:50,1,Killinkere,Attacks,Shot taken,Neill McCabe
+63,00:23:51,1,Killinkere,Shot from play,Short,Neill McCabe
+64,00:24:14,1,Killinkere,Turnover,In Contact,Philip Corrigan
+65,00:24:18,1,Killinkere,Possession lost,In Contact,Ryan Smith
+66,00:25:20,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+67,00:25:59,1,Aughadrumsee,Scoreable free,Wide,Player 11
+68,00:26:21,1,Killinkere,Kickout,Lost clean,Player 3
+69,00:26:46,1,Aughadrumsee,Shot from play,Wide,
+70,00:27:13,1,Killinkere,Kickout,Won clean,James Farrelly
+71,00:27:29,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+72,00:27:30,1,Killinkere,Shot from play,Point,Fiachra Mooney
+73,00:27:57,1,Aughadrumsee,Kickout,Lost clean,Keiran Smith
+74,00:28:06,1,Killinkere,Shot from play,Wide,Neill McCabe
+75,00:28:08,1,Killinkere,Attacks,Shot taken,Neill McCabe
+76,00:28:42,1,Aughadrumsee,Kickout,Break lost,Philip Corrigan
+77,00:28:54,1,Killinkere,Possession lost,Kick pass,Luke Crossan
+78,00:29:27,1,Aughadrumsee,Shot from play,Point,Player 11
+79,00:29:43,1,Killinkere,Kickout,Won clean,Ryan Smith
+80,00:29:49,1,Killinkere,Possession lost,Hand pass,Darrell Dolan
+81,00:30:08,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+82,00:30:30,1,Aughadrumsee,Shot from play,Short,Player 11
+83,00:30:04,2,Killinkere,Other,Throw Up Won,James Farrelly
+84,00:30:46,2,Killinkere,Possession lost,Kick pass,Emmett Fitzsimons
+85,00:30:47,2,Killinkere,Attacks,Kick lost,Emmett Fitzsimons
+86,00:31:06,2,Aughadrumsee,Shot from play,Short,Player 12
+87,00:31:11,2,Killinkere,Free conceded,Defensive third,Jake Norris
+88,00:31:45,2,Aughadrumsee,Scoreable free,Point,Player 11
+89,00:32:02,2,Killinkere,Kickout,Won clean,Keiran Smith
+90,00:33:15,2,Killinkere,Substitution,Substitution,Enda Traynor
+91,00:34:41,2,Killinkere,Possession lost,Kick pass,Neill McCabe
+92,00:34:42,2,Killinkere,Attacks,Kick lost,Neill McCabe
+93,00:34:50,2,Killinkere,Turnover,In Contact,Alex Sweeney
+94,00:35:06,2,Killinkere,Shot from play,Short,Fiachra Mooney
+95,00:35:25,2,Killinkere,Turnover,In Contact,Evan Markey
+96,00:35:35,2,Killinkere,Shot from play,Wide,Philip Corrigan
+97,00:36:00,2,Aughadrumsee,Kickout,Break won,
+98,00:36:30,2,Aughadrumsee,Shot from play,Wide,Player 12
+99,00:37:16,2,Killinkere,Kickout,Won clean,Keiran Smith
+100,00:37:49,2,Killinkere,Shot from play,Point,Fiachra Mooney
+101,00:37:50,2,Killinkere,Attacks,Shot taken,Fiachra Mooney
+102,00:38:19,2,Aughadrumsee,Kickout,Won clean,Player 9
+103,00:38:47,2,Killinkere,Free conceded,Defensive third,Cian Fitzsimons
+104,00:38:54,2,Killinkere,Turnover,In Contact,Alex Sweeney
+105,00:39:16,2,Killinkere,Attacks,Kick lost,Emmett Fitzsimons
+106,00:39:16,2,Killinkere,Possession lost,Kick pass,Emmett Fitzsimons
+107,00:39:46,2,Aughadrumsee,Shot from play,Point,
+108,00:40:16,2,Killinkere,Kickout,Short won,Alex Sweeney
+109,00:40:25,2,Killinkere,Possession lost,In Contact,Sean Brady
+110,00:40:47,2,Killinkere,Turnover,In Contact,Alex Sweeney
+111,00:41:29,2,Killinkere,Possession lost,Foul,Jake Norris
+112,00:42:06,2,Killinkere,Turnover,Interception,Philip Corrigan
+113,00:42:34,2,Killinkere,Shot from play,Goal,Dara Sharkey
+114,00:42:36,2,Killinkere,Attacks,Shot taken,Dara Sharkey
+115,00:42:37,2,Killinkere,Attacks,Shot taken,Dara Sharkey
+116,00:43:02,2,Aughadrumsee,Kickout,Lost clean,Alex Sweeney
+117,00:43:08,2,Killinkere,Shot from play,Goal,Alex Sweeney
+118,00:43:09,2,Killinkere,Attacks,Shot taken,Alex Sweeney
+119,00:43:53,2,Aughadrumsee,Kickout,Won clean,Player 8
+120,00:44:20,2,Aughadrumsee,Shot from play,Point,Player 24
+121,00:44:47,2,Killinkere,Kickout,Won clean,Alex Sweeney
+122,00:44:59,2,Killinkere,Attacks,Shot taken,Fiachra Mooney
+123,00:44:59,2,Killinkere,Shot from play,Point,Fiachra Mooney
+124,00:45:29,2,Aughadrumsee,Kickout,Lost clean,Keiran Smith
+125,00:45:39,2,Killinkere,Possession lost,Hand pass,Philip Corrigan
+126,00:46:32,2,Aughadrumsee,Shot from play,Wide,
+127,00:46:47,2,Killinkere,Kickout,Won clean,Neill McCabe
+128,00:46:51,2,Killinkere,Possession lost,Kick pass,Neill McCabe
+129,00:47:02,2,Killinkere,Turnover,Interception,Keiran Smith
+130,00:47:11,2,Killinkere,Possession lost,Hand pass,Emmett Fitzsimons
+131,00:47:29,2,Killinkere,Turnover,In Contact,James Farrelly
+132,00:48:18,2,Killinkere,Attacks,Shot taken,Emmett Fitzsimons
+133,00:48:19,2,Killinkere,Shot from play,Wide,Emmett Fitzsimons
+134,00:48:57,2,Aughadrumsee,Kickout,Break won,
+135,00:49:01,2,Killinkere,Free conceded,Middle third,Neill McCabe
+136,00:49:17,2,Aughadrumsee,Shot from play,Point,Player 8
+137,00:49:31,2,Killinkere,Kickout,Short won,Sean Brady
+138,00:50:12,2,Killinkere,Possession lost,Handling,Evan Markey
+139,00:50:14,2,Killinkere,Attacks,Possession lost,Evan Markey
+140,00:50:46,2,Killinkere,Turnover,Interception,Cian Fitzsimons
+141,00:51:26,2,Killinkere,Shot from play,Point,Philip Corrigan
+142,00:51:26,2,Killinkere,Attacks,Shot taken,Philip Corrigan
+143,00:52:04,2,Killinkere,Attacks,Shot taken,James Farrelly
+144,00:52:05,2,Killinkere,Shot from play,Wide,James Farrelly
+145,00:52:34,2,Aughadrumsee,Kickout,Break won,
+146,00:53:00,2,Killinkere,Turnover,Interception,Darrell Dolan
+147,00:53:17,2,Killinkere,Possession lost,Kick pass,Neill McCabe
+148,00:53:56,2,Killinkere,Turnover,Interception,Philip Corrigan
+149,00:54:12,2,Killinkere,Possession lost,Handling,Evan Markey
+150,00:54:30,2,Aughadrumsee,Shot from play,Short,Player 9
+151,00:55:09,2,Killinkere,Attacks,Shot taken,Darren Smith
+152,00:55:10,2,Killinkere,Shot from play,Short,Darren Smith
+153,00:55:41,2,Killinkere,Free conceded,Defensive third,Alex Sweeney
+154,00:56:21,2,Aughadrumsee,Scoreable free,Point,Player 11
+155,00:56:45,2,Killinkere,Kickout,Break lost,
+156,00:56:50,2,Aughadrumsee,Shot from play,Wide,
+157,00:57:21,2,Killinkere,Kickout,Break won,Alex Sweeney
+158,00:57:38,2,Killinkere,Possession lost,In Contact,Emmett Fitzsimons
+159,00:58:20,2,Killinkere,Free conceded,Defensive third,Cian Fitzsimons
+160,00:59:05,2,Aughadrumsee,Scoreable free,Wide,Player 11
+161,00:59:30,2,Killinkere,Kickout,Won clean,Philip Corrigan
+162,00:59:45,2,Killinkere,Possession lost,Hand pass,Alex Sweeney
+163,01:00:04,2,Killinkere,Turnover,Interception,Sean Brady
+164,01:00:39,2,Killinkere,Free conceded,Attacking third,Emmett Fitzsimons
+165,01:00:53,2,Killinkere,Turnover,In Contact,Philip Corrigan
+166,01:01:09,2,Killinkere,Shot from play,Point,Evan Markey
+167,01:01:10,2,Killinkere,Attacks,Shot taken,Evan Markey

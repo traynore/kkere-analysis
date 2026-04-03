@@ -1,0 +1,208 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:05,1,Denn,Substitution,Substitution,Player 10
+2,00:00:21,1,Killinkere,Possession lost,Kick pass,Darren Smith
+3,00:00:36,1,Killinkere,Turnover,In Contact,Benny McConnell
+4,00:00:41,1,Denn,Attacks,Kick lost,
+5,00:00:46,1,Killinkere,Attacks,Kick lost,
+6,00:01:07,1,Killinkere,Free conceded,Attacking third,Kevin McCabe
+7,00:01:13,1,Killinkere,Attacks,Kick lost,Kevin McCabe
+8,00:01:41,1,Denn,Shot from play,Short,Player 8
+9,00:01:47,1,Denn,Attacks,Shot taken,Player 8
+10,00:01:59,1,Killinkere,Possession lost,Kick pass,Luke Crossan
+11,00:02:03,1,Killinkere,Attacks,Kick lost,Luke Crossan
+12,00:03:04,1,Denn,Shot from play,2 Points,Player 13
+13,00:03:10,1,Denn,Attacks,Shot taken,Player 13
+14,00:03:53,1,Killinkere,Kickout,Won clean,Kevin McCabe
+15,00:04:10,1,Denn,Free conceded,Middle third,Player 14
+16,00:04:32,1,Denn,Free conceded,Defensive third,Player 9
+17,00:04:52,1,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+18,00:04:59,1,Killinkere,Attacks,Mark taken,Darren Smith
+19,00:05:19,1,Killinkere,Free conceded,Middle third,
+20,00:05:44,1,Denn,Shot from play,Point,Player 14
+21,00:05:55,1,Denn,Attacks,Shot taken,
+22,00:05:58,1,Killinkere,Kickout,Short won,Gearoid Traynor
+23,00:06:24,1,Killinkere,Possession lost,Handling,James Farrelly
+24,00:06:28,1,Killinkere,Attacks,Carry lost,James Farrelly
+25,00:07:16,1,Denn,Free conceded,Attacking third,Player 3
+26,00:07:39,1,Denn,Free conceded,Middle third,Player 13
+27,00:07:58,1,Killinkere,Shot from play,Point,Ryan Smith
+28,00:08:06,1,Killinkere,Attacks,Shot taken,Ryan Smith
+29,00:08:10,1,Denn,Kickout,Won clean,Player 7
+30,00:08:29,1,Denn,Shot from play,Point,Player 15
+31,00:08:36,1,Denn,Attacks,Shot taken,Player 15
+32,00:08:42,1,Killinkere,Kickout,Break won,Kevin McCabe
+33,00:09:09,1,Killinkere,Possession lost,Kick pass,Fintan O’Connell
+34,00:09:12,1,Killinkere,Attacks,Kick lost,Fintan O’Connell
+35,00:09:47,1,Killinkere,Free conceded,Defensive third,Gearoid Traynor
+36,00:10:27,1,Denn,Scoreable free,2 Points,Player 15
+37,00:10:40,1,Killinkere,Kickout,Break won,Phelim Cusack
+38,00:10:57,1,Killinkere,Free conceded,Middle third,Phelim Cusack
+39,00:11:06,1,Denn,Scoreable free,2 Points,Player 15
+40,00:11:26,1,Killinkere,Kickout,Break won,Kevin McCabe
+41,00:11:47,1,Killinkere,Possession lost,Handling,Fiachra Mooney
+42,00:12:06,1,Killinkere,Free conceded,Middle third,Alex Sweeney
+43,00:12:31,1,Denn,Shot from play,Wide,Player 15
+44,00:12:41,1,Denn,Attacks,Shot taken,Player 15
+45,00:12:49,1,Killinkere,Kickout,Break won,Kevin McCabe
+46,00:13:10,1,Killinkere,Possession lost,Hand pass,Kevin McCabe
+47,00:13:14,1,Killinkere,Attacks,Carry lost,Kevin McCabe
+48,00:13:40,1,Killinkere,Turnover,Interception,Nathan McQuade
+49,00:13:52,1,Denn,Attacks,Kick lost,
+50,00:14:06,1,Denn,Free conceded,Attacking third,
+51,00:14:34,1,Killinkere,Scoreable free,Short,Fiachra Mooney
+52,00:14:44,1,Killinkere,Attacks,Mark taken,Fiachra Mooney
+53,00:14:49,1,Denn,Free conceded,Defensive third,
+54,00:15:22,1,Killinkere,Scoreable free,Point,Darren Smith
+55,00:15:27,1,Killinkere,Attacks,Mark taken,Ryan Smith
+56,00:15:34,1,Denn,Kickout,Won clean,Player 8
+57,00:15:50,1,Denn,Shot from play,Goal,Player 17
+58,00:16:24,1,Denn,Free conceded,Attacking third,Player 15
+59,00:16:30,1,Killinkere,Kickout,Short won,Luke Crossan
+60,00:16:45,1,Killinkere,Shot from play,Goal,Ryan Smith
+61,00:16:51,1,Killinkere,Attacks,Shot taken,Ryan Smith
+62,00:17:05,1,Denn,Kickout,Break lost,Alex Sweeney
+63,00:17:22,1,Killinkere,Possession lost,Hand pass,Darren Smith
+64,00:17:27,1,Killinkere,Attacks,Carry lost,Darren Smith
+65,00:17:44,1,Killinkere,Turnover,Interception,Benny McConnell
+66,00:17:52,1,Killinkere,Free conceded,Defensive third,Benny McConnell
+67,00:17:57,1,Denn,Scoreable free,Point,Player 15
+68,00:18:19,1,Killinkere,Kickout,Won clean,Alex Sweeney
+69,00:18:29,1,Killinkere,Possession lost,Kick pass,Alex Sweeney
+70,00:18:33,1,Killinkere,Attacks,Kick lost,Alex Sweeney
+71,00:18:55,1,Denn,Shot from play,Point,Player 15
+72,00:18:59,1,Denn,Attacks,Shot taken,Player 15
+73,00:19:03,1,Killinkere,Kickout,Won clean,Fintan O’Connell
+74,00:19:43,1,Killinkere,Shot from play,Short,Fiachra Mooney
+75,00:19:49,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+76,00:19:51,1,Denn,Free conceded,Defensive third,
+77,00:20:13,1,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+78,00:20:22,1,Killinkere,Attacks,Mark taken,Fiachra Mooney
+79,00:20:32,1,Denn,Kickout,Short won,Player 17
+80,00:20:57,1,Denn,Shot from play,Wide,Player 12
+81,00:21:02,1,Denn,Attacks,Kick lost,Player 12
+82,00:21:28,1,Killinkere,Free conceded,Middle third,
+83,00:21:50,1,Killinkere,Free conceded,Defensive third,
+84,00:22:13,1,Denn,Scoreable free,Point,Player 15
+85,00:22:17,1,Denn,Attacks,Mark taken,Player 15
+86,00:22:36,1,Killinkere,Kickout,Short won,Kevin McCabe
+87,00:23:00,1,Killinkere,Shot from play,Point,Alex Sweeney
+88,00:23:06,1,Killinkere,Attacks,Shot taken,Alex Sweeney
+89,00:23:19,1,Denn,Kickout,Break lost,Nathan McQuade
+90,00:24:10,1,Killinkere,Possession lost,Hand pass,Ryan Smith
+91,00:24:14,1,Killinkere,Attacks,Carry lost,Ryan Smith
+92,00:24:45,1,Denn,Shot from play,Wide,Player 14
+93,00:24:50,1,Denn,Attacks,Shot taken,Player 14
+94,00:25:02,1,Killinkere,Kickout,Break won,Kevin McCabe
+95,00:25:33,1,Killinkere,Possession lost,Kick pass,Emmett Fitzsimons
+96,00:26:01,1,Denn,Shot from play,Point,Player 15
+97,00:26:06,1,Denn,Attacks,Shot taken,Player 15
+98,00:26:16,1,Killinkere,Kickout,Break lost,Player 13
+99,00:26:38,1,Denn,Shot from play,Wide,Player 15
+100,00:26:42,1,Denn,Attacks,Shot taken,Player 15
+101,00:26:59,1,Killinkere,Kickout,Break won,Darren Smith
+102,00:27:21,1,Killinkere,Shot from play,Point,Fiachra Mooney
+103,00:27:28,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+104,00:27:42,1,Denn,Kickout,Break lost,Conall Mooney
+105,00:28:05,1,Killinkere,Shot from play,Short,Fiachra Mooney
+106,00:28:10,1,Killinkere,Attacks,Shot taken,Fiachra Mooney
+107,00:29:06,1,Killinkere,Turnover,Interception,Luke Crossan
+108,00:30:32,1,Denn,Free conceded,Defensive third,
+109,00:31:03,1,Denn,Free conceded,Defensive third,Player 4
+110,00:31:45,1,Killinkere,Scoreable free,Short,Emmett Fitzsimons
+111,00:30:16,2,Denn,Shot from play,Wide,Player 12
+112,00:30:23,2,Denn,Attacks,Shot taken,Player 12
+113,00:30:33,2,Killinkere,Kickout,Lost clean,
+114,00:30:55,2,Denn,Shot from play,Point,Player 15
+115,00:30:59,2,Denn,Attacks,Shot taken,Player 15
+116,00:31:17,2,Killinkere,Kickout,Break won,Gearoid Traynor
+117,00:31:33,2,Denn,Free conceded,Middle third,Player 6
+118,00:32:19,2,Killinkere,Possession lost,Handling,Alex Sweeney
+119,00:32:22,2,Killinkere,Attacks,Carry lost,Ryan Smith
+120,00:32:44,2,Killinkere,Turnover,In Contact,Luke Crossan
+121,00:33:02,2,Denn,Free conceded,Attacking third,
+122,00:33:24,2,Denn,Free conceded,Middle third,Player 6
+123,00:33:54,2,Denn,Bookings,Yellow,Player 6
+124,00:34:05,2,Killinkere,Scoreable free,2 Points,Conall Mooney
+125,00:34:17,2,Killinkere,Attacks,Mark taken,Benny McConnell
+126,00:34:32,2,Denn,Kickout,Won clean,Player 9
+127,00:34:52,2,Killinkere,Turnover,In Contact,Gearoid Traynor
+128,00:35:04,2,Killinkere,Possession lost,Hand pass,Nathan McQuade
+129,00:35:39,2,Denn,Shot from play,Goal,Player 11
+130,00:36:23,2,Denn,Substitution,Substitution,Player 2
+131,00:36:27,2,Killinkere,Kickout,Won clean,Kevin McCabe
+132,00:36:43,2,Killinkere,Possession lost,Handling,Kevin McCabe
+133,00:36:59,2,Denn,Attacks,Kick lost,
+134,00:37:09,2,Killinkere,Kickout,Break won,Kevin McCabe
+135,00:37:41,2,Killinkere,Shot from play,Save,Ryan Smith
+136,00:37:47,2,Killinkere,Attacks,Shot taken,Ryan Smith
+137,00:37:56,2,Killinkere,Free conceded,Middle third,Alex Sweeney
+138,00:38:13,2,Killinkere,Turnover,Interception,Nathan McQuade
+139,00:38:37,2,Killinkere,Possession lost,Handling,Fiachra Mooney
+140,00:38:40,2,Killinkere,Attacks,Carry lost,Fiachra Mooney
+141,00:39:16,2,Denn,Shot from play,Point,Player 14
+142,00:39:20,2,Denn,Attacks,Shot taken,Player 14
+143,00:39:39,2,Killinkere,Kickout,Lost clean,Player 8
+144,00:40:02,2,Denn,Shot from play,Goal,Player 17
+145,00:40:08,2,Denn,Attacks,Shot taken,Player 17
+146,00:40:31,2,Killinkere,Kickout,Lost clean,Player 8
+147,00:40:56,2,Killinkere,Shot from play,Wide,Emmett Fitzsimons
+148,00:41:02,2,Killinkere,Attacks,Shot taken,Emmett Fitzsimons
+149,00:41:16,2,Denn,Kickout,Lost clean,James Farrelly
+150,00:41:43,2,Killinkere,Shot from play,Wide,Darren Smith
+151,00:41:49,2,Killinkere,Attacks,Shot taken,Darren Smith
+152,00:42:09,2,Denn,Kickout,Short won,Player 20
+153,00:42:33,2,Killinkere,Free conceded,Middle third,Conall Mooney
+154,00:42:59,2,Killinkere,Substitution,Substitution,Phelim Cusack
+155,00:43:09,2,Denn,Scoreable free,Short,Player 15
+156,00:43:30,2,Denn,Attacks,Mark taken,Player 15
+157,00:45:02,2,Killinkere,Substitution,Substitution,Jake Norris
+158,00:45:45,2,Killinkere,Possession lost,Kick pass,Lee Philingham
+159,00:46:07,2,Killinkere,Free conceded,Defensive third,Ben Philingham
+160,00:46:48,2,Denn,Scoreable free,2 Points,Player 15
+161,00:47:12,2,Killinkere,Kickout,Won clean,Kevin McCabe
+162,00:47:32,2,Denn,Free conceded,Middle third,Player 15
+163,00:48:04,2,Killinkere,Shot from play,Wide,Ben Philingham
+164,00:48:11,2,Killinkere,Attacks,Shot taken,Ben Philingham
+165,00:48:29,2,Denn,Kickout,Lost clean,Gearoid Traynor
+166,00:48:48,2,Killinkere,Possession lost,Kick pass,Ben Philingham
+167,00:48:51,2,Killinkere,Attacks,Kick lost,Ryan Smith
+168,00:49:51,2,Denn,Shot from play,Wide,Player 8
+169,00:49:55,2,Denn,Attacks,Shot taken,Player 8
+170,00:50:06,2,Killinkere,Kickout,Lost clean,
+171,00:50:21,2,Denn,Shot from play,Point,Player 11
+172,00:50:25,2,Denn,Attacks,Shot taken,Player 11
+173,00:50:48,2,Killinkere,Kickout,Lost clean,Player 5
+174,00:51:11,2,Killinkere,Turnover,In Contact,Gearoid Traynor
+175,00:51:51,2,Killinkere,Shot from play,2 Points,Conall Mooney
+176,00:51:58,2,Killinkere,Attacks,Shot taken,Conall Mooney
+177,00:52:15,2,Denn,Kickout,Break lost,Alex Sweeney
+178,00:52:30,2,Killinkere,Possession lost,Hand pass,Kevin McCabe
+179,00:52:40,2,Killinkere,Free conceded,Defensive third,James Farrelly
+180,00:53:22,2,Denn,Scoreable free,Point,Player 15
+181,00:53:31,2,Denn,Attacks,Mark taken,Player 15
+182,00:54:13,2,Denn,Free conceded,Middle third,
+183,00:54:20,2,Killinkere,Possession lost,Hand pass,Darren Smith
+184,00:54:28,2,Killinkere,Turnover,In Contact,Emmett Fitzsimons
+185,00:54:53,2,Killinkere,Shot from play,Goal,Fintan O’Connell
+186,00:54:57,2,Killinkere,Attacks,Shot taken,Fintan O’Connell
+187,00:55:30,2,Killinkere,Substitution,Substitution,James Farrelly
+188,00:55:38,2,Denn,Kickout,Break won,Player 17
+189,00:56:02,2,Killinkere,Turnover,Interception,Benny McConnell
+190,00:56:14,2,Denn,Free conceded,Attacking third,
+191,00:56:44,2,Killinkere,Shot from play,Goal,Kevin McCabe
+192,00:56:48,2,Killinkere,Attacks,Shot taken,Kevin McCabe
+193,00:57:17,2,Denn,Kickout,Lost clean,Alex Sweeney
+194,00:57:41,2,Killinkere,Substitution,Substitution,Nathan McQuade
+195,00:59:13,2,Denn,Shot from play,45,
+196,00:59:20,2,Denn,Attacks,Shot taken,
+197,01:00:02,2,Denn,Scoreable free,Point,Player 15
+198,01:00:25,2,Killinkere,Kickout,Lost clean,Player 17
+199,01:01:00,2,Killinkere,Substitution,Substitution,Fiachra Mooney
+200,01:01:10,2,Killinkere,Free conceded,Middle third,Alex Sweeney
+201,01:01:14,2,Killinkere,Turnover,Interception,Conall Mooney
+202,01:01:40,2,Killinkere,Shot from play,Goal,Ruairi O Connell
+203,01:01:46,2,Killinkere,Attacks,Shot taken,Ruairi O Connell
+204,01:02:09,2,Denn,Kickout,Break won,Player 6
+205,01:02:26,2,Killinkere,Free conceded,Middle third,Ruairi O Connell
+206,01:02:54,2,Denn,Shot from play,Point,Player 20
+207,01:03:01,2,Denn,Attacks,Shot taken,Player 20
