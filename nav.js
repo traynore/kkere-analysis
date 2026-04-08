@@ -20,6 +20,15 @@
     {heading:'📋 ACFL Division 5', games:[
       {label:'v Arva (D) 1-13 to 1-13', file:'Killinkere 1 - 13 v 1 - 13 Arva_FULL_infographic.html'},
       {label:'v Denn (W) 3-14 to 1-5 ⚠️ WIP', file:'Killinkere 3 - 14 v 1 - 5 Denn_FULL_infographic.html'}
+    ]},
+    {heading:'📡 GPS Reports', games:[
+      {label:'v Denn — GPS (15 Feb)', file:'v_Denn_Spring League_GPS_report.html'},
+      {label:'v Aghadrumsee — GPS (27 Feb)', file:'v_Aghadrumsee_Spring_League_GPS_report.html'},
+      {label:'v Liatroim — GPS (15 Mar)', file:'v_Liatroim_Fontenoys_Spring_League_GPS_report.html'},
+      {label:'v Arva — GPS (21 Mar)', file:'v_Arva_ACFL_Div7_GPS_report.html'},
+      {label:'v Denn Senior — GPS (28 Mar)', file:'v_Denn__ACFL_Div3_GPS_report.html'},
+      {label:'v Denn Reserve — GPS (29 Mar)', file:'v_Denn__ACFL_Div7_GPS_report.html'},
+      {label:'v Lavey Reserve — GPS (5 Apr)', file:'v_Lavey__ACFL_Div7_GPS_report.html'}
     ]}
   ];
 
