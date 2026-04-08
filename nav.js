@@ -17,9 +17,10 @@
     {heading:'📋 ACFL Division 3', games:[
       {label:'v Denn (L) 4-10 to 3-20', file:'Killinkere 4 - 10 v 3 - 20 Denn_FULL_infographic.html'}
     ]},
-    {heading:'📋 ACFL Division 5', games:[
+    {heading:'📋 ACFL Division 7', games:[
       {label:'v Arva (D) 1-13 to 1-13', file:'Killinkere 1 - 13 v 1 - 13 Arva_FULL_infographic.html'},
-      {label:'v Denn (W) 3-14 to 1-5 ⚠️ WIP', file:'Killinkere 3 - 14 v 1 - 5 Denn_FULL_infographic.html'}
+      {label:'v Denn (W) 3-14 to 1-5 ⚠️ WIP', file:'Killinkere 3 - 14 v 1 - 5 Denn_FULL_infographic.html'},
+      {label:'v Lavey (L) 1-11 to 1-14', file:'Killinkere 1 - 11 v 1 - 14 Lavey_FULL_infographic.html'}
     ]},
     {heading:'📡 GPS Reports', games:[
       {label:'v Denn — GPS (15 Feb)', file:'v_Denn_Spring League_GPS_report.html'},

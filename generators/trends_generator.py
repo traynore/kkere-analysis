@@ -288,7 +288,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-green">
 <h3>🎯 Score First After Half Time</h3>
-<div class="insight">When Killinkere score first after the break, the team almost never loses. Both defeats came when the opposition got the first score of the second half.</div>
+<div class="insight">When Killinkere score first after the break, the team almost never loses. All three defeats came when the opposition got the first score of the second half.</div>
 <div class="record-row">
 <div class="rec rec-good">✅ Yes: {record(first_ht_yes)}</div>
 <div class="rec rec-bad">❌ No: {record(first_ht_no)}</div>
@@ -297,7 +297,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-red">
 <h3>🛑 Opposition Scoring Runs (4+)</h3>
-<div class="insight">When the opposition strings together 4 or more unanswered scores, Killinkere struggle. Limiting runs to 3 or fewer has meant a perfect record.</div>
+<div class="insight">When the opposition strings together 4 or more unanswered scores, Killinkere struggle. Limiting runs to 3 or fewer has been strong but not bulletproof \u2014 the Lavey loss came despite limiting them to just 3 in a row.</div>
 <div class="record-row">
 <div class="rec rec-good">≤3 run: {record(opp_run_low)}</div>
 <div class="rec rec-bad">4+ run: {record(opp_run_high)}</div>
@@ -306,7 +306,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-blue">
 <h3>⏱️ Win the Second Half</h3>
-<div class="insight">Killinkere have never lost a game where they won the second half scoring. Every defeat came when the opposition outscored them after the break.</div>
+<div class="insight">Winning the second half is a strong indicator but not a guarantee \u2014 the Lavey loss came despite outscoring them 10-8 after the break. The HT deficit (4-9) was too much to overcome. Every other game where Killinkere won the 2nd half ended in a win.</div>
 <div class="record-row">
 <div class="rec rec-good">Won 2H: {record(won_2h)}</div>
 <div class="rec rec-neutral">Drew 2H: {record(drew_2h)}</div>
@@ -348,11 +348,11 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 <div class="pattern-grid">
 <div class="pattern-card pattern-red">
 <h3>🚨 The Loss Profile</h3>
-<div class="insight">Both losses share the same DNA: opposition scored first after half time AND put together a run of 5 unanswered scores. The Arva draw was a near-miss — scored first after HT but allowed a 4-score run.</div>
+<div class="insight">The Greenlough and Denn (Div 3) losses share the same DNA: opposition scored first after half time AND put together a run of 5 unanswered scores. The Lavey loss was different — opp only managed a 3-score run and Killinkere won the 2nd half, but the 5-point HT deficit was too deep. Common thread across all 3 losses: opposition scored first after the break.</div>
 </div>
 <div class="pattern-card pattern-red">
 <h3>📉 2nd Half Collapses</h3>
-<div class="insight">v Arva: led by 3 at HT, drew. v Greenlough: 2 down at HT, lost by 5. v Denn (Div 3): 6 down at HT, lost by 7. Only comebacks from behind were v Pearse OG (5-7 at HT, won 23-13) and v Drung (10-11 at HT, won 19-16).</div>
+<div class="insight">v Arva: led by 3 at HT, drew. v Greenlough: 2 down at HT, lost by 5. v Denn (Div 3): 6 down at HT, lost by 7. v Lavey: 5 down at HT, won the 2nd half but couldn't close the gap. Only full comebacks from behind were v Pearse OG (5-7 at HT, won 23-13) and v Drung (10-11 at HT, won 19-16).</div>
 </div>
 </div>
 

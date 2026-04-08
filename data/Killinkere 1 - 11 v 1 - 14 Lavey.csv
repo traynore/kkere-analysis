@@ -1,0 +1,204 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:29,1,Lavey,Free conceded,Defensive third,
+2,00:01:49,1,Killinkere,Possession lost,Kick pass,David Ryan
+3,00:02:07,1,Killinkere,Attacks,Kick lost,David Ryan
+4,00:02:12,1,Lavey,Kickout,Sideline ball,Darrell Dolan
+5,00:02:47,1,Killinkere,Possession lost,Kick pass,Philip Corrigan
+6,00:03:31,1,Lavey,Shot from play,2 Points,Player 9
+7,00:03:44,1,Killinkere,Kickout,Lost clean,Player 13
+8,00:04:02,1,Killinkere,Turnover,In Contact,Philip Furlong
+9,00:04:05,1,Lavey,Attacks,Carry lost,
+10,00:04:40,1,Killinkere,Possession lost,Kick pass,Mark Farrelly (S)
+11,00:05:12,1,Lavey,Shot from play,Point,Player 7
+12,00:05:15,1,Lavey,Attacks,Shot taken,Player 7
+13,00:05:33,1,Killinkere,Kickout,Won clean,Ruairi O Connell
+14,00:05:54,1,Lavey,Free conceded,Middle third,
+15,00:06:46,1,Killinkere,Shot from play,Wide,Ben Philingham
+16,00:06:53,1,Killinkere,Attacks,Shot taken,Ben Philingham
+17,00:07:06,1,Lavey,Kickout,Break won,Player 11
+18,00:07:18,1,Killinkere,Free conceded,Middle third,Philip Furlong
+19,00:07:28,1,Lavey,Shot from play,Point,Player 6
+20,00:07:42,1,Lavey,Attacks,Shot taken,Player 6
+21,00:07:47,1,Killinkere,Kickout,Break won,Keiran Smith
+22,00:08:19,1,Killinkere,Possession lost,In Contact,Philip Corrigan
+23,00:08:23,1,Killinkere,Attacks,Carry lost,Philip Corrigan
+24,00:09:11,1,Killinkere,Turnover,In Contact,Shaun Clarke
+25,00:09:19,1,Lavey,Attacks,Carry lost,
+26,00:09:43,1,Killinkere,Shot from play,Wide,Ben Philingham
+27,00:09:48,1,Killinkere,Attacks,Shot taken,Ben Philingham
+28,00:10:06,1,Lavey,Kickout,Break won,Player 6
+29,00:10:27,1,Killinkere,Turnover,Interception,Philip Furlong
+30,00:11:08,1,Killinkere,Turnover,Interception,Philip Corrigan
+31,00:11:22,1,Killinkere,Free conceded,Attacking third,Ryan Smith
+32,00:11:35,1,Killinkere,Turnover,Interception,Sean Brady
+33,00:12:03,1,Killinkere,Shot from play,Wide,
+34,00:12:25,1,Lavey,Free conceded,Defensive third,
+35,00:12:35,1,Killinkere,Scoreable free,Point,Ryan Smith
+36,00:12:55,1,Lavey,Kickout,Break won,Player 6
+37,00:13:11,1,Killinkere,Shot from play,Save,Ben Philingham
+38,00:13:29,1,Killinkere,Shot from play,Point,Keiran Smith
+39,00:13:33,1,Killinkere,Attacks,Shot taken,Keiran Smith
+40,00:13:54,1,Lavey,Kickout,Lost clean,Philip Corrigan
+41,00:14:10,1,Killinkere,Possession lost,Kick pass,Ben Philingham
+42,00:14:15,1,Killinkere,Attacks,Kick lost,Ben Philingham
+43,00:14:28,1,Lavey,Shot from play,Wide,Player 13
+44,00:14:37,1,Lavey,Attacks,Shot taken,Player 14
+45,00:14:48,1,Killinkere,Kickout,Won clean,Ruairi O Connell
+46,00:15:08,1,Killinkere,Shot from play,Point,Philip Corrigan
+47,00:15:16,1,Killinkere,Attacks,Shot taken,Philip Corrigan
+48,00:15:33,1,Lavey,Kickout,Break won,
+49,00:15:43,1,Killinkere,Turnover,In Contact,Ben Philingham
+50,00:16:01,1,Killinkere,Shot from play,Wide,Ryan Smith
+51,00:16:06,1,Killinkere,Attacks,Shot taken,Ryan Smith
+52,00:16:25,1,Lavey,Kickout,Break won,Player 6
+53,00:17:12,1,Lavey,Shot from play,Point,Player 9
+54,00:17:18,1,Lavey,Attacks,Shot taken,Player 9
+55,00:17:33,1,Killinkere,Kickout,Won clean,Ruairi O Connell
+56,00:17:47,1,Lavey,Free conceded,Middle third,Player 14
+57,00:18:05,1,Killinkere,Free conceded,Middle third,Philip Corrigan
+58,00:18:18,1,Lavey,Shot from play,Point,Player 10
+59,00:18:23,1,Lavey,Attacks,Shot taken,Player 10
+60,00:18:34,1,Killinkere,Kickout,Break won,Mark Farrelly (S)
+61,00:18:50,1,Killinkere,Possession lost,Kick pass,Mark Farrelly (S)
+62,00:19:23,1,Lavey,Shot from play,2 Points,Player 8
+63,00:19:30,1,Lavey,Attacks,Shot taken,Player 8
+64,00:19:44,1,Killinkere,Kickout,Break won,Philip Furlong
+65,00:20:05,1,Killinkere,Shot from play,Point,Keiran Smith
+66,00:20:10,1,Killinkere,Attacks,Shot taken,Ben Philingham
+67,00:20:32,1,Lavey,Kickout,Lost clean,Philip Corrigan
+68,00:20:58,1,Killinkere,Shot from play,Short,
+69,00:21:05,1,Lavey,Free conceded,Attacking third,
+70,00:21:25,1,Killinkere,Shot from play,Wide,Ryan Smith
+71,00:21:29,1,Killinkere,Attacks,Shot taken,Ryan Smith
+72,00:21:48,1,Lavey,Kickout,Break lost,
+73,00:21:58,1,Killinkere,Free conceded,Middle third,
+74,00:22:10,1,Lavey,Shot from play,Wide,
+75,00:22:16,1,Lavey,Attacks,Shot taken,
+76,00:22:28,1,Killinkere,Kickout,Lost clean,Player 8
+77,00:22:52,1,Lavey,Shot from play,Point,Player 7
+78,00:22:58,1,Lavey,Attacks,Shot taken,Player 7
+79,00:23:10,1,Killinkere,Kickout,Lost clean,Player 11
+80,00:23:33,1,Lavey,Shot from play,Short,
+81,00:23:39,1,Killinkere,Turnover,Interception,Philip Furlong
+82,00:24:00,1,Killinkere,Shot from play,Save,Ryan Smith
+83,00:24:05,1,Killinkere,Attacks,Shot taken,Ryan Smith
+84,00:24:20,1,Killinkere,Turnover,Interception,Sean Brady
+85,00:24:33,1,Killinkere,Possession lost,Kick pass,Cian Fitzsimons
+86,00:25:14,1,Killinkere,Turnover,In Contact,David Ryan
+87,00:26:18,1,Killinkere,Possession lost,Kick pass,Keiran Smith
+88,00:26:30,1,Killinkere,Turnover,In Contact,Shaun Clarke
+89,00:27:12,1,Killinkere,Possession lost,Kick pass,Ruairi O Connell
+90,00:27:15,1,Killinkere,Attacks,Kick lost,Ruairi O Connell
+91,00:27:32,1,Killinkere,Turnover,In Contact,Sean Brady
+92,00:29:03,1,Lavey,Free conceded,Attacking third,
+93,00:30:16,1,Killinkere,Scoreable free,Wide,Keiran Smith
+94,00:30:20,1,Killinkere,Attacks,Shot taken,Keiran Smith
+95,00:30:25,1,Lavey,Kickout,Sideline ball,
+96,00:30:06,2,Killinkere,Possession lost,Kick pass,Ruairi O Connell
+97,00:30:50,2,Lavey,Shot from play,Point,
+98,00:30:55,2,Lavey,Attacks,Shot taken,
+99,00:31:06,2,Killinkere,Kickout,Won clean,Phelim Cusack
+100,00:31:22,2,Killinkere,Free conceded,Middle third,Phelim Cusack
+101,00:31:35,2,Lavey,Shot from play,Short,Player 14
+102,00:31:43,2,Killinkere,Turnover,In Contact,Sean Brady
+103,00:31:54,2,Killinkere,Shot from play,Point,Ryan Smith
+104,00:32:03,2,Killinkere,Attacks,Shot taken,Ryan Smith
+105,00:32:20,2,Lavey,Kickout,Break lost,Philip Corrigan
+106,00:32:37,2,Killinkere,Possession lost,Kick pass,Keiran Smith
+107,00:32:39,2,Killinkere,Attacks,Kick lost,Keiran Smith
+108,00:32:51,2,Killinkere,Free conceded,Attacking third,
+109,00:33:20,2,Killinkere,Free conceded,Middle third,Ruairi O Connell
+110,00:33:39,2,Killinkere,Turnover,In Contact,Philip Furlong
+111,00:33:44,2,Lavey,Attacks,Carry lost,
+112,00:33:58,2,Killinkere,Shot from play,Wide,Ben Philingham
+113,00:34:03,2,Killinkere,Attacks,Shot taken,Ben Philingham
+114,00:34:08,2,Lavey,Kickout,Break won,Player 4
+115,00:34:21,2,Killinkere,Free conceded,Middle third,Cian Fitzsimons
+116,00:34:47,2,Lavey,Shot from play,Short,Player 8
+117,00:34:54,2,Lavey,Free conceded,Attacking third,
+118,00:35:27,2,Killinkere,Shot from play,2 Points,Ben Philingham
+119,00:35:30,2,Killinkere,Attacks,Shot taken,Ben Philingham
+120,00:35:52,2,Lavey,Kickout,Won clean,Player 13
+121,00:36:14,2,Lavey,Shot from play,Short,Player 6
+122,00:36:18,2,Lavey,Attacks,Shot taken,Player 6
+123,00:36:33,2,Killinkere,Possession lost,Kick pass,Darrell Dolan
+124,00:36:43,2,Killinkere,Turnover,In Contact,Ben Philingham
+125,00:36:51,2,Killinkere,Free conceded,Middle third,Ben Philingham
+126,00:37:44,2,Lavey,Shot from play,Point,
+127,00:37:48,2,Lavey,Attacks,Shot taken,
+128,00:38:08,2,Killinkere,Kickout,Break won,Mark Farrelly (S)
+129,00:38:25,2,Killinkere,Possession lost,Hand pass,Keiran Smith
+130,00:38:41,2,Killinkere,Free conceded,Defensive third,
+131,00:40:18,2,Lavey,Scoreable free,Short,Player 8
+132,00:40:28,2,Lavey,Shot from play,Point,Player 13
+133,00:40:42,2,Lavey,Attacks,Shot taken,Player 8
+134,00:40:54,2,Killinkere,Kickout,Lost clean,
+135,00:41:11,2,Lavey,Shot from play,Short,
+136,00:41:19,2,Lavey,Attacks,Shot taken,
+137,00:41:34,2,Killinkere,Possession lost,Kick pass,Philip Corrigan
+138,00:42:18,2,Lavey,Shot from play,Wide,Player 9
+139,00:42:23,2,Lavey,Attacks,Shot taken,Player 9
+140,00:42:42,2,Killinkere,Kickout,Won clean,
+141,00:42:53,2,Killinkere,Possession lost,In Contact,Ben Philingham
+142,00:42:58,2,Killinkere,Attacks,Carry lost,
+143,00:44:11,2,Lavey,Shot from play,2 Points,
+144,00:44:15,2,Lavey,Attacks,Shot taken,
+145,00:44:36,2,Killinkere,Substitution,Substitution,Cian Fitzsimons
+146,00:45:04,2,Killinkere,Kickout,Won clean,
+147,00:45:27,2,Killinkere,Substitution,Substitution,Neill McCabe
+148,00:45:46,2,Killinkere,Shot from play,Wide,Ben Philingham
+149,00:45:51,2,Killinkere,Attacks,Shot taken,Ben Philingham
+150,00:46:07,2,Lavey,Kickout,Short won,
+151,00:46:36,2,Lavey,Shot from play,Blocked,Player 7
+152,00:47:48,2,Killinkere,Possession lost,In Contact,Neill McCabe
+153,00:47:54,2,Killinkere,Turnover,In Contact,Mark Farrelly (S)
+154,00:48:12,2,Killinkere,Shot from play,Goal,Ryan Smith
+155,00:48:16,2,Killinkere,Attacks,Shot taken,Ryan Smith
+156,00:48:36,2,Lavey,Kickout,Break won,
+157,00:49:04,2,Lavey,Shot from play,Goal,
+158,00:49:11,2,Lavey,Attacks,Shot taken,
+159,00:49:25,2,Killinkere,Kickout,Break won,
+160,00:49:53,2,Killinkere,Free conceded,Attacking third,
+161,00:50:44,2,Lavey,Shot from play,Wide,Player 12
+162,00:50:48,2,Lavey,Attacks,Shot taken,
+163,00:51:15,2,Killinkere,Substitution,Substitution,Keiran Smith
+164,00:51:38,2,Killinkere,Kickout,Break won,
+165,00:51:49,2,Killinkere,Free conceded,Middle third,Phelim Cusack
+166,00:52:15,2,Lavey,Shot from play,Wide,Player 11
+167,00:52:31,2,Lavey,Attacks,Shot taken,Player 11
+168,00:52:35,2,Killinkere,Kickout,Won clean,Fiachra Mooney
+169,00:52:53,2,Killinkere,Shot from play,Wide,Ben Philingham
+170,00:52:57,2,Killinkere,Attacks,Shot taken,Ben Philingham
+171,00:53:12,2,Lavey,Kickout,Break lost,Harry Banville
+172,00:53:33,2,Killinkere,Shot from play,Point,Philip Corrigan
+173,00:53:37,2,Killinkere,Attacks,Shot taken,Philip Corrigan
+174,00:54:01,2,Lavey,Kickout,Break won,
+175,00:54:37,2,Killinkere,Turnover,Interception,Sean Brady
+176,00:54:49,2,Lavey,Free conceded,Middle third,Player 8
+177,00:55:05,2,Killinkere,Substitution,Substitution,Phelim Cusack
+178,00:55:32,2,Killinkere,Shot from play,Save,Ruairi O Connell
+179,00:55:48,2,Killinkere,Attacks,Shot taken,Ruairi O Connell
+180,00:57:04,2,Lavey,Attacks,Carry lost,
+181,00:57:14,2,Killinkere,Kickout,Break lost,
+182,00:57:30,2,Killinkere,Turnover,Interception,Darrell Dolan
+183,00:57:51,2,Killinkere,Shot from play,Point,Neill McCabe
+184,00:57:59,2,Killinkere,Attacks,Shot taken,Neill McCabe
+185,00:58:18,2,Lavey,Kickout,Break won,Player 8
+186,00:58:43,2,Lavey,Shot from play,Short,
+187,00:58:48,2,Lavey,Attacks,Shot taken,
+188,00:59:10,2,Killinkere,Shot from play,Wide,Fiachra Mooney
+189,00:59:21,2,Killinkere,Attacks,Shot taken,Fiachra Mooney
+190,00:59:33,2,Lavey,Kickout,Short won,
+191,00:59:46,2,Lavey,Free conceded,Defensive third,
+192,01:00:00,2,Killinkere,Free conceded,Middle third,Fiachra Mooney
+193,01:00:27,2,Killinkere,Turnover,In Contact,Darrell Dolan
+194,01:00:32,2,Lavey,Free conceded,Attacking third,
+195,01:00:51,2,Killinkere,Shot from play,45,Ryan Smith
+196,01:00:55,2,Killinkere,Attacks,Shot taken,Ryan Smith
+197,01:01:30,2,Killinkere,Scoreable free,Short,Fiachra Mooney
+198,01:02:16,2,Killinkere,Scoreable free,Short,
+199,01:02:39,2,Killinkere,Shot from play,2 Points,Neill McCabe
+200,01:02:49,2,Killinkere,Attacks,Shot taken,Neill McCabe
+201,01:03:05,2,Lavey,Kickout,Lost clean,
+202,01:03:26,2,Killinkere,Shot from play,45,
+203,01:03:55,2,Killinkere,Scoreable free,Wide,Fiachra Mooney

@@ -257,9 +257,10 @@ def generate_html(csv_file):
     
     # Calculate 2026 season stats from all Killinkere CSV files (auto-discovered, sorted by date)
     from datetime import datetime
-    all_csv_files = [str(p.name) for p in Path('.').glob('Killinkere*.csv')]
+    data_dir = Path(csv_file).parent if Path(csv_file).is_absolute() else Path(csv_file).resolve().parent
+    all_csv_files = [str(p.name) for p in data_dir.glob('Killinkere*.csv')]
     def get_game_date(csv_name):
-        meta = read_metadata(csv_name)
+        meta = read_metadata(str(data_dir / csv_name))
         if meta['date']:
             try:
                 return datetime.strptime(meta['date'], '%d/%m/%Y')
@@ -286,8 +287,9 @@ def generate_html(csv_file):
     per_game_attack_pct = [] # individual game attack efficiency
     
     for csv_path in all_csvs:
-        if Path(csv_path).exists():
-            csv_events = read_csv(csv_path)
+        full_path = str(data_dir / csv_path)
+        if Path(full_path).exists():
+            csv_events = read_csv(full_path)
             game_shots = 0
             game_scored = 0
             for e in csv_events:
