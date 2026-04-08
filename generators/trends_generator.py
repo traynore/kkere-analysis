@@ -325,7 +325,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-gold">
 <h3>📊 Half Time Position</h3>
-<div class="insight">Being ahead at half time is a strong indicator but not bulletproof — the Arva draw came despite leading by 3 at the break. When behind at HT, the team hasn't been able to turn it around.</div>
+<div class="insight">Being ahead at half time is a strong indicator but not bulletproof — the Arva draw came despite leading by 3 at the break. The team has come from behind at HT once (v Pearse OG, down 5-7, won 23-13) but otherwise hasn't turned around a deficit.</div>
 <div class="record-row">
 <div class="rec rec-good">Ahead: {record(ahead_ht)}</div>
 <div class="rec rec-neutral">Level: {record(level_ht)}</div>
@@ -352,7 +352,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 </div>
 <div class="pattern-card pattern-red">
 <h3>📉 2nd Half Collapses</h3>
-<div class="insight">v Arva: led by 3 at HT, drew. v Greenlough: 2 down at HT, lost by 5. v Denn (Div 3): 6 down at HT, lost by 7. When behind at HT, the team hasn't been able to turn it around.</div>
+<div class="insight">v Arva: led by 3 at HT, drew. v Greenlough: 2 down at HT, lost by 5. v Denn (Div 3): 6 down at HT, lost by 7. Only comeback from behind was v Pearse OG (5-7 at HT, won 23-13).</div>
 </div>
 </div>
 
