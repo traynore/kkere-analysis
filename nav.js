@@ -29,6 +29,9 @@
       {label:'v Denn Senior — GPS (28 Mar)', file:'v_Denn__ACFL_Div3_GPS_report.html'},
       {label:'v Denn Reserve — GPS (29 Mar)', file:'v_Denn__ACFL_Div7_GPS_report.html'},
       {label:'v Lavey Reserve — GPS (5 Apr)', file:'v_Lavey__ACFL_Div7_GPS_report.html'}
+    ]},
+    {heading:'📊 Analysis', isAnalysis:true, games:[
+      {label:'Season Trends & Patterns', file:'season_trends.html'}
     ]}
   ];
 
@@ -65,7 +68,8 @@
     section.games.forEach(function(g) {
       var isCurrent = currentFile === g.file;
       var a = document.createElement('a');
-      a.href = prefix + g.file;
+      var linkPrefix = section.isAnalysis ? (isAnalysisDir ? '' : (isGamesDir ? '../analysis/' : 'analysis/')) : prefix;
+      a.href = linkPrefix + g.file;
       a.textContent = g.label;
       a.style.cssText = 'display:block;padding:8px 16px;text-decoration:none;color:' + (isCurrent ? '#27ae60' : '#2c3e50') + ';font-size:.88em;font-weight:' + (isCurrent ? 'bold' : 'normal') + ';border-left:3px solid ' + (isCurrent ? '#27ae60' : 'transparent');
       a.onmouseover = function() { this.style.background = '#f0f0f0'; };
