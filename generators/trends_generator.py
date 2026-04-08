@@ -325,7 +325,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-gold">
 <h3>📊 Half Time Position</h3>
-<div class="insight">Being ahead at half time is a strong indicator but not bulletproof — the Arva draw came despite leading by 3 at the break. The team has come from behind at HT once (v Pearse OG, down 5-7, won 23-13) but otherwise hasn't turned around a deficit.</div>
+<div class="insight">Being ahead at half time is a strong indicator but not bulletproof — the Arva draw came despite leading by 3 at the break. The team has come from behind at HT twice (v Pearse OG, down 5-7, won 23-13 and v Drung, down 10-11, won 19-16) but the other two deficits ended in defeat.</div>
 <div class="record-row">
 <div class="rec rec-good">Ahead: {record(ahead_ht)}</div>
 <div class="rec rec-neutral">Level: {record(level_ht)}</div>
