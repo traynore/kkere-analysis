@@ -97,6 +97,18 @@ def analyze_game(csv_file):
     except ValueError:
         date_obj = datetime.max
 
+    # Shooting stats
+    ke = [e for e in events if e['Team Name'] == 'Killinkere']
+    shots = [e for e in ke if e.get('Name') == 'Shot from play']
+    shots_scored = [s for s in shots if s['Outcome'] in ['Goal', 'Point', '2 Points']]
+    shot_acc = round(len(shots_scored) / len(shots) * 100, 1) if shots else 0
+    wides = len([s for s in shots if s['Outcome'] == 'Wide'])
+
+    attacks = [e for e in ke if e.get('Name') == 'Attacks']
+    attacks_shot = [a for a in attacks if a['Outcome'] == 'Shot taken']
+    has_attack_data = len(attacks_shot) > 0
+    attack_eff = round(len(attacks_shot) / len(attacks) * 100, 1) if attacks else 0
+
     return {
         'opponent': opp,
         'date': date_str,
@@ -118,6 +130,14 @@ def analyze_game(csv_file):
         'longest_drought_mins': round(longest_drought / 60, 1),
         'margin': k_total - o_total,
         'ht_lead': k_ht - o_ht,
+        'shot_acc': shot_acc,
+        'total_shots': len(shots),
+        'total_scored': len(shots_scored),
+        'wides': wides,
+        'attack_eff': attack_eff,
+        'total_attacks': len(attacks),
+        'attacks_shot': len(attacks_shot),
+        'has_attack_data': has_attack_data,
     }
 
 
@@ -196,6 +216,26 @@ def generate():
     behind_ht = [g for g in games if g['ht_lead'] < 0]
     level_ht = [g for g in games if g['ht_lead'] == 0]
 
+    # Shooting patterns (only games with attack data)
+    games_with_attacks = [g for g in games if g['has_attack_data']]
+    acc_above_50 = [g for g in games if g['shot_acc'] >= 50]
+    acc_below_50 = [g for g in games if g['shot_acc'] < 50]
+    att_above_80 = [g for g in games_with_attacks if g['attack_eff'] >= 80]
+    att_below_80 = [g for g in games_with_attacks if g['attack_eff'] < 80]
+    shooting_combo_yes = [g for g in games_with_attacks if g['shot_acc'] >= 50 and g['attack_eff'] >= 80]
+    shooting_combo_no = [g for g in games_with_attacks if g['shot_acc'] < 50 or g['attack_eff'] < 80]
+
+    # Chart data for shooting
+    chart_acc = json.dumps([g['shot_acc'] for g in games])
+    chart_att_eff = json.dumps([g['attack_eff'] for g in games_with_attacks])
+    chart_att_labels = json.dumps([f"v {g['opponent']}" for g in games_with_attacks])
+    chart_att_colors = json.dumps(['rgba(46,204,113,0.8)' if g['result'] == 'W' else ('rgba(231,76,60,0.8)' if g['result'] == 'L' else 'rgba(243,156,18,0.8)') for g in games_with_attacks])
+    chart_att_borders = json.dumps(['rgba(39,174,96,1)' if g['result'] == 'W' else ('rgba(192,57,43,1)' if g['result'] == 'L' else 'rgba(230,126,34,1)') for g in games_with_attacks])
+    chart_wides = json.dumps([g['wides'] for g in games])
+    # Scatter data: accuracy vs attack efficiency
+    scatter_data = json.dumps([{'x': g['attack_eff'], 'y': g['shot_acc'], 'label': f"v {g['opponent']}"} for g in games_with_attacks])
+    scatter_colors = json.dumps(['rgba(46,204,113,0.9)' if g['result'] == 'W' else ('rgba(231,76,60,0.9)' if g['result'] == 'L' else 'rgba(243,156,18,0.9)') for g in games_with_attacks])
+
     html = f'''<!DOCTYPE html>
 <html lang="en">
 <head><meta name="robots" content="noindex, nofollow">
@@ -270,6 +310,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 <div class="tabs">
 <div class="tab active" onclick="showTab('patterns')">🔍 Key Patterns</div>
 <div class="tab" onclick="showTab('charts')">📈 Charts</div>
+<div class="tab" onclick="showTab('shooting')">🎯 Shooting</div>
 <div class="tab" onclick="showTab('table')">📋 Game-by-Game</div>
 </div>
 
@@ -377,6 +418,62 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 </div>
 
+<div id="shooting" class="tab-content">
+
+<div class="formula-box">
+<h2>🎯 The Shooting Formula</h2>
+<div class="formula">Shot accuracy ≥ 50% + Attack efficiency ≥ 80%</div>
+<div class="formula-result">= {record(shooting_combo_yes)} ({len(shooting_combo_yes)} games)</div>
+<div style="margin-top:10px;opacity:.8;font-size:.95em">When either drops below: {record(shooting_combo_no)} ({len(shooting_combo_no)} games)</div>
+</div>
+
+<h2 style="color:#2c3e50;text-align:center;margin:30px 0 20px;font-size:1.7em">🔍 Shooting Patterns</h2>
+
+<div class="pattern-grid">
+
+<div class="pattern-card pattern-green">
+<h3>🎯 Shot Accuracy (Target: 70%)</h3>
+<div class="insight">Killinkere have never won a game shooting below 50% from play. The two worst accuracy games (Greenlough 23.8%, Lavey 37.5%) were both losses. Above 50%, the team is strong.</div>
+<div class="record-row">
+<div class="rec rec-good">≥50%: {record(acc_above_50)}</div>
+<div class="rec rec-bad">&lt;50%: {record(acc_below_50)}</div>
+</div>
+</div>
+
+<div class="pattern-card pattern-blue">
+<h3>⚡ Attack Efficiency (Target: 75%)</h3>
+<div class="insight">When 80%+ of attacks end with a shot, Killinkere are unbeaten. Below 80%, the record drops sharply. The Denn Div 3 loss (45.2%) shows what happens when attacks break down before a shot is taken.</div>
+<div class="record-row">
+<div class="rec rec-good">≥80%: {record(att_above_80)}</div>
+<div class="rec rec-bad">&lt;80%: {record(att_below_80)}</div>
+</div>
+</div>
+
+<div class="pattern-card pattern-red">
+<h3>🚨 Two Ways to Lose</h3>
+<div class="insight"><strong>Can't convert:</strong> Get the shots but accuracy is poor (Greenlough 23.8%, Lavey 37.5%).<br><strong>Can't create:</strong> Decent accuracy but can't get the shot away (Denn Div 3: 57.1% accuracy but only 45.2% attack efficiency — 17 of 31 attacks ended without a shot).</div>
+</div>
+
+</div>
+
+<div class="chart-box">
+<div class="chart-title">🎯 Shot Accuracy vs Attack Efficiency</div>
+<div style="text-align:center;margin-bottom:10px;font-size:.9em;color:#7f8c8d">🟢 Win · 🟡 Draw · 🔴 Loss — Top-right quadrant is the sweet spot</div>
+<canvas id="scatterChart"></canvas>
+</div>
+
+<div class="chart-box">
+<div class="chart-title">📊 Shot Accuracy by Game (Target: 70%)</div>
+<canvas id="accChart"></canvas>
+</div>
+
+<div class="chart-box">
+<div class="chart-title">⚡ Attack Efficiency by Game (Target: 75%)</div>
+<canvas id="attEffChart"></canvas>
+</div>
+
+</div>
+
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📋 Game-by-Game Breakdown</h2>
 <div style="overflow-x:auto">
@@ -452,6 +549,68 @@ return asc?av.localeCompare(bv):bv.localeCompare(av);
 rows.forEach(r=>tbody.appendChild(r));
 asc=!asc;
 }});
+}});
+
+new Chart(document.getElementById('scatterChart'),{{
+type:'scatter',
+data:{{datasets:[{{data:{scatter_data},backgroundColor:{scatter_colors},pointRadius:10,pointHoverRadius:13}}]}},
+options:{{responsive:true,scales:{{x:{{title:{{display:true,text:'Attack Efficiency %'}},min:30,max:100}},y:{{title:{{display:true,text:'Shot Accuracy %'}},min:15,max:75}}}},plugins:{{legend:{{display:false}},tooltip:{{callbacks:{{label:ctx=>ctx.raw.label+' (Acc:'+ctx.raw.y+'%, Att:'+ctx.raw.x+'%)'}}}}}}}},
+plugins:[{{
+id:'quadrants',
+afterDatasetsDraw(chart){{
+const{{ctx,chartArea:{{left,right,top,bottom}},scales:{{x,y}}}}=chart;
+const xPos=x.getPixelForValue(80);
+const yPos=y.getPixelForValue(50);
+ctx.save();
+ctx.setLineDash([5,5]);
+ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(xPos,top);ctx.lineTo(xPos,bottom);ctx.stroke();
+ctx.beginPath();ctx.moveTo(left,yPos);ctx.lineTo(right,yPos);ctx.stroke();
+ctx.fillStyle='rgba(46,204,113,0.08)';
+ctx.fillRect(xPos,top,right-xPos,yPos-top);
+ctx.fillStyle='rgba(46,204,113,0.5)';ctx.font='bold 11px Arial';ctx.textAlign='right';
+ctx.fillText('SWEET SPOT',right-5,top+15);
+ctx.restore();
+}}
+}}]
+}});
+
+new Chart(document.getElementById('accChart'),{{
+type:'bar',
+data:{{labels:labels,datasets:[{{label:'Accuracy %',data:{chart_acc},backgroundColor:{chart_bar_colors},borderColor:{chart_bar_borders},borderWidth:2}}]}},
+options:{{responsive:true,scales:{{y:{{beginAtZero:true,max:100,ticks:{{callback:v=>v+'%'}}}}}},plugins:{{legend:{{display:false}}}}}},
+plugins:[{{
+id:'accTargets',
+afterDatasetsDraw(chart){{
+const{{ctx,chartArea:{{left,right}},scales:{{y}}}}=chart;
+[{{val:70,label:'70% Target',color:'rgb(231,76,60)'}},{{val:50,label:'50% Floor',color:'rgb(243,156,18)'}}].forEach(t=>{{
+const yPos=y.getPixelForValue(t.val);
+ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle=t.color;ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(left,yPos);ctx.lineTo(right,yPos);ctx.stroke();
+ctx.fillStyle=t.color;ctx.font='bold 10px Arial';ctx.textAlign='right';
+ctx.fillText(t.label,right,yPos-4);ctx.restore();
+}});
+}}
+}}]
+}});
+
+new Chart(document.getElementById('attEffChart'),{{
+type:'bar',
+data:{{labels:{chart_att_labels},datasets:[{{label:'Attack Efficiency %',data:{chart_att_eff},backgroundColor:{chart_att_colors},borderColor:{chart_att_borders},borderWidth:2}}]}},
+options:{{responsive:true,scales:{{y:{{beginAtZero:true,max:100,ticks:{{callback:v=>v+'%'}}}}}},plugins:{{legend:{{display:false}}}}}},
+plugins:[{{
+id:'attTargets',
+afterDatasetsDraw(chart){{
+const{{ctx,chartArea:{{left,right}},scales:{{y}}}}=chart;
+[{{val:80,label:'80% Sweet Spot',color:'rgb(46,204,113)'}},{{val:75,label:'75% Target',color:'rgb(231,76,60)'}}].forEach(t=>{{
+const yPos=y.getPixelForValue(t.val);
+ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle=t.color;ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(left,yPos);ctx.lineTo(right,yPos);ctx.stroke();
+ctx.fillStyle=t.color;ctx.font='bold 10px Arial';ctx.textAlign='right';
+ctx.fillText(t.label,right,yPos-4);ctx.restore();
+}});
+}}
+}}]
 }});
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
