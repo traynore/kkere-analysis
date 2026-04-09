@@ -449,21 +449,23 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(15 \* 4%\)">15 / 8 \(53%\)</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_ko_total"]} * 4%)">{stats["t2_ko_total"]} / {stats["t2_ko_won"]} ({stats["t2_ko_pct"]}%)</div>', html)
     
-    # Replace kickout won clean
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(10 \* 10%\)">10</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_ko_wc"]} * 10%)">{stats["t1_ko_wc"]}</div>', html, count=1)
-    html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(3 \* 10%\)">3</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_ko_wc"]} * 10%)">{stats["t2_ko_wc"]}</div>', html, count=1)
+    # Replace kickout won clean (context-aware)
+    html = re.sub(r'(<div class="stat-label">Kickouts Won Clean</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t1_ko_wc"]} * 10%)">{stats["t1_ko_wc"]}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">Kickouts Won Clean</div>.*?bar-aughadrumsee" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t2_ko_wc"]} * 10%)">{stats["t2_ko_wc"]}\\2', html, count=1, flags=re.DOTALL)
     
-    # Replace kickout short won
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(5 \* 15%\)">5</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_ko_sw"]} * 15%)">{stats["t1_ko_sw"]}</div>', html, count=1)
+    # Replace kickout short won (context-aware)
+    html = re.sub(r'(<div class="stat-label">Kickouts Short Won</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t1_ko_sw"]} * 15%)">{stats["t1_ko_sw"]}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">Kickouts Short Won</div>.*?bar-aughadrumsee" style=")width: [^"]+">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t2_ko_sw"]} * 15%)">{stats["t2_ko_sw"]}\\2', html, count=1, flags=re.DOTALL)
     
-    # Replace kickout break won
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(2 \* 20%\)">2</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_ko_bw"]} * 20%)">{stats["t1_ko_bw"]}</div>', html, count=1)
-    html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(5 \* 20%\)">5</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_ko_bw"]} * 20%)">{stats["t2_ko_bw"]}</div>', html, count=1)
+    # Replace kickout break won (context-aware)
+    html = re.sub(r'(<div class="stat-label">Kickouts Break Won</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t1_ko_bw"]} * 20%)">{stats["t1_ko_bw"]}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">Kickouts Break Won</div>.*?bar-aughadrumsee" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t2_ko_bw"]} * 20%)">{stats["t2_ko_bw"]}\\2', html, count=1, flags=re.DOTALL)
     
     # Replace kickout sideline ball
     html = re.sub(r'(<div class="stat-label">Kickouts Sideline Ball</div>.*?bar-killinkere" style=")width: calc\(0 \* 25%\)">0(</div>)',
