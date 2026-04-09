@@ -83,6 +83,7 @@ def calc_all_stats(events, csv_filename):
         
         stats[f'{prefix}_goals'] = total_goals
         stats[f'{prefix}_points'] = total_points
+        stats[f'{prefix}_points_from_play'] = play_points
         stats[f'{prefix}_two_pts'] = total_two_pts
         stats[f'{prefix}_total_score'] = total_goals * 3 + total_points + total_two_pts * 2
         stats[f'{prefix}_shots_total'] = len(shots_from_play)
@@ -424,11 +425,11 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 0%">0</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_goals"]} * 20%)">{stats["t2_goals"]}</div>', html, count=1)
     
-    # Replace score breakdown - Points
+    # Replace score breakdown - Points (from play only, frees shown separately)
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(7 \* 7%\)">7</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_points"]} * 7%)">{stats["t1_points"]}</div>', html, count=1)
+                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_points_from_play"]} * 7%)">{stats["t1_points_from_play"]}</div>', html, count=1)
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(12 \* 7%\)">12</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points"]} * 7%)">{stats["t2_points"]}</div>', html, count=1)
+                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points_from_play"]} * 7%)">{stats["t2_points_from_play"]}</div>', html, count=1)
     
     # Replace 2 Points
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(1 \* 30%\)">1</div>',
