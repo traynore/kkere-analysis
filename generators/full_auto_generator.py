@@ -791,6 +791,7 @@ def generate_html(csv_file):
             rows += f'''                    <tr>
                         <td><strong>{name}</strong></td>
                         <td>{data['goals']}</td>
+                        <td>{data['two_pts']}</td>
                         <td>{data['points']}</td>
                         <td>{total_score}</td>
                         <td>{data['shots']}</td>
