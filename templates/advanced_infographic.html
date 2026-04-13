@@ -50,7 +50,8 @@
         .period-stats { display: grid; gap: 15px; }
         .period-stat { display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
         
-        .player-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .player-table { width: 100%; border-collapse: collapse; margin: 20px 0; min-width: 700px; }
+        .player-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -10px; padding: 0 10px; }
         .player-table th { background: #34495e; color: white; padding: 15px; text-align: left; font-size: 1.1em; cursor: pointer; user-select: none; position: relative; }
         .player-table th:hover { background: #2c3e50; }
         .player-table th::after { content: ' ⇅'; opacity: 0.3; font-size: 0.8em; }
@@ -641,6 +642,7 @@
 
         <div id="players" class="tab-content">
             <h2 style="color: #2ecc71; margin: 20px 0; font-size: 2em;">🟢 Killinkere Top Performers</h2>
+            <div class="player-table-wrap">
             <table class="player-table">
                 <thead>
                     <tr>
@@ -868,8 +870,10 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <h2 style="color: #e74c3c; margin: 40px 0 20px; font-size: 2em;">🔴 Aughadrumsee Top Performers</h2>
+            <div class="player-table-wrap">
             <table class="player-table">
                 <thead>
                     <tr>
@@ -1001,6 +1005,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div id="targets" class="tab-content">

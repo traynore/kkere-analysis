@@ -50,7 +50,8 @@
         .period-stats { display: grid; gap: 15px; }
         .period-stat { display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
         
-        .player-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .player-table { width: 100%; border-collapse: collapse; margin: 20px 0; min-width: 700px; }
+        .player-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -10px; padding: 0 10px; }
         .player-table th { background: #34495e; color: white; padding: 15px; text-align: left; font-size: 1.1em; cursor: pointer; user-select: none; position: relative; }
         .player-table th:hover { background: #2c3e50; }
         .player-table th::after { content: ' ⇅'; opacity: 0.3; font-size: 0.8em; }
@@ -641,6 +642,7 @@
 
         <div id="players" class="tab-content">
             <h2 style="color: #2ecc71; margin: 20px 0; font-size: 2em;">🟢 Killinkere Top Performers</h2>
+            <div class="player-table-wrap">
             <table class="player-table">
                 <thead>
                     <tr>
@@ -659,157 +661,84 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Jason McMahon</strong></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>3</td>
-                        <td>6</td>
-                        <td>6</td>
-                        <td>
-                            <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 67%; background: linear-gradient(90deg, #27ae60, #2ecc71);">67%</div>
-                            </div>
-                        </td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Darren Smith</strong></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>
-                            <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 75%; background: linear-gradient(90deg, #27ae60, #2ecc71);">75%</div>
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
                         <td><strong>Fiachra Mooney</strong></td>
                         <td>1</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>5</td>
-                        <td>4</td>
+                        <td>6</td>
+                        <td>9</td>
+                        <td>9</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 75%; background: linear-gradient(90deg, #27ae60, #2ecc71);">75%</div>
+                                <div class="accuracy-fill" style="width: 78%">78%</div>
                             </div>
                         </td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
                         <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
                     </tr>
                     <tr>
-                        <td><strong>Emmett Fitzsimons</strong></td>
+                        <td><strong>Keiran Smith</strong></td>
                         <td>0</td>
                         <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
+                        <td>0</td>
+                        <td>0</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 33%; background: linear-gradient(90deg, #27ae60, #2ecc71);">33%</div>
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Neill McCabe</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">0%</div>
                             </div>
                         </td>
                         <td>0</td>
+                        <td>4</td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
                     </tr>
                     <tr>
                         <td><strong>Alex Sweeney</strong></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>
-                            <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 50%; background: linear-gradient(90deg, #27ae60, #2ecc71);">50%</div>
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Conall Mooney</strong></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>
-                            <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 50%; background: linear-gradient(90deg, #27ae60, #2ecc71);">50%</div>
-                            </div>
-                        </td>
-                        <td>2</td>
                         <td>1</td>
                         <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Phelim Cusack</strong></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
+                        <td>3</td>
                         <td>1</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #27ae60, #2ecc71);">100%</div>
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
                             </div>
                         </td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kevin McCabe</strong></td>
+                        <td>3</td>
                         <td>0</td>
                         <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>
-                            <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #27ae60, #2ecc71);">100%</div>
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>1</td>
+                        <td>2</td>
                     </tr>
                     <tr>
                         <td><strong>Ryan Smith</strong></td>
                         <td>0</td>
-                        <td>0</td>
                         <td>1</td>
                         <td>1</td>
                         <td>1</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #27ae60, #2ecc71);">100%</div>
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
                             </div>
                         </td>
-                        <td>0</td>
-                        <td>3</td>
+                        <td>1</td>
                         <td>2</td>
                         <td>0</td>
+                        <td>1</td>
                     </tr>
                     <tr>
                         <td><strong>Luke Crossan</strong></td>
@@ -817,21 +746,134 @@
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Philip Corrigan</strong></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 50%">50%</div>
+                            </div>
+                        </td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>James Farrelly</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
                         <td>1</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 0%; background: linear-gradient(90deg, #27ae60, #2ecc71);">0%</div>
+                                <div class="accuracy-fill" style="width: 0%">0%</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Darrell Dolan</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sean Brady</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">-</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dara Sharkey</strong></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
                             </div>
                         </td>
                         <td>0</td>
+                        <td>1</td>
                         <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evan Markey</strong></td>
+                        <td>1</td>
                         <td>0</td>
                         <td>3</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%">100%</div>
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Emmett Fitzsimons</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%">0%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0</td>
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <h2 style="color: #e74c3c; margin: 40px 0 20px; font-size: 2em;">🔴 Pearse OG Top Performers</h2>
+            <div class="player-table-wrap">
             <table class="player-table">
                 <thead>
                     <tr>
@@ -850,15 +892,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Player 14</strong></td>
+                        <td><strong>Player 11</strong></td>
                         <td>0</td>
-                        <td>0</td>
-                        <td>3</td>
-                        <td>3</td>
                         <td>7</td>
+                        <td>7</td>
+                        <td>12</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 43%; background: linear-gradient(90deg, #c0392b, #e74c3c);">43%</div>
+                                <div class="accuracy-fill" style="width: 58%; background: linear-gradient(90deg, #c0392b, #e74c3c);">58%</div>
                             </div>
                         </td>
                         <td>0</td>
@@ -867,28 +908,10 @@
                         <td>0</td>
                     </tr>
                     <tr>
-                        <td><strong>Player 11</strong></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>3</td>
-                        <td>5</td>
-                        <td>
-                            <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 20%; background: linear-gradient(90deg, #c0392b, #e74c3c);">20%</div>
-                            </div>
-                        </td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td><strong>Player 8</strong></td>
                         <td>0</td>
                         <td>2</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Player 13</strong></td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
+                        <td>2</td>
                         <td>2</td>
                         <td>
                             <div class="accuracy-bar">
@@ -904,22 +927,36 @@
                         <td><strong>Player 10</strong></td>
                         <td>0</td>
                         <td>1</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
                         <td>
                             <div class="accuracy-bar">
-                                <div class="accuracy-fill" style="width: 50%; background: linear-gradient(90deg, #c0392b, #e74c3c);">50%</div>
+                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #c0392b, #e74c3c);">100%</div>
                             </div>
                         </td>
                         <td>0</td>
                         <td>0</td>
+                        <td>0</td>
                         <td>1</td>
-                        <td>2</td>
                     </tr>
                     <tr>
-                        <td><strong>Player 6</strong></td>
+                        <td><strong>Player 24</strong></td>
                         <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 100%; background: linear-gradient(90deg, #c0392b, #e74c3c);">100%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 9</strong></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
@@ -932,10 +969,43 @@
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 6</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%; background: linear-gradient(90deg, #c0392b, #e74c3c);">-</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Player 12</strong></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
                         <td>2</td>
+                        <td>
+                            <div class="accuracy-bar">
+                                <div class="accuracy-fill" style="width: 0%; background: linear-gradient(90deg, #c0392b, #e74c3c);">0%</div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div id="targets" class="tab-content">
