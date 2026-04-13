@@ -420,10 +420,8 @@ def generate_html(csv_file):
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_shots_total"]} * 4%)">{stats["t2_shots_total"]} / {stats["t2_shots_scored"]}</div>', html)
     
     # Replace score breakdown - Goals
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(4 \* 20%\)">4</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_goals"]} * 20%)">{stats["t1_goals"]}</div>', html, count=1)
-    html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 0%">0</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_goals"]} * 20%)">{stats["t2_goals"]}</div>', html, count=1)
+    html = html.replace('T1_GOALS_VAL', str(stats['t1_goals']))
+    html = html.replace('T2_GOALS_VAL', str(stats['t2_goals']))
     
     # Replace score breakdown - Points (from play only, frees shown separately)
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(7 \* 7%\)">7</div>',
