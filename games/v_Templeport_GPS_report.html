@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPS Report — v Templeport</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
+.container{max-width:1400px;margin:0 auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.header{background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);color:#fff;padding:40px;text-align:center}
+.header h1{font-size:2.8em;margin-bottom:8px;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.header p{font-size:1.2em;opacity:.85}
+.meta-row{display:flex;justify-content:center;gap:30px;margin-top:18px;font-size:1.05em;opacity:.9}
+.tabs{display:flex;background:#34495e}
+.tab{flex:1;padding:18px;text-align:center;color:#fff;cursor:pointer;transition:.3s;font-size:1.05em;font-weight:bold}
+.tab:hover{background:#2c3e50}
+.tab.active{background:#2a5298}
+.tab-content{display:none;padding:35px}
+.tab-content.active{display:block}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:35px}
+.summary-card{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border-radius:14px;padding:22px;text-align:center}
+.summary-card .val{font-size:2.2em;font-weight:bold}
+.summary-card .lbl{font-size:.85em;opacity:.85;margin-top:4px}
+.player-card{background:#f8f9fa;border-radius:14px;padding:22px;margin-bottom:18px;border-left:5px solid #2a5298;transition:.2s}
+.player-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.1);transform:translateX(4px)}
+.player-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.player-card-name{font-size:1.35em;font-weight:bold;color:#2c3e50}
+.player-badge{background:#2a5298;color:#fff;padding:3px 10px;border-radius:12px;font-size:.75em;margin-left:6px}
+.player-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.metric{background:#fff;border-radius:8px;padding:10px;text-align:center}
+.metric-value{font-size:1.3em;font-weight:bold;color:#2c3e50}
+.metric-label{font-size:.72em;color:#7f8c8d;margin-top:2px}
+.half-compare{margin-top:12px}
+.half-section-label{font-size:.78em;font-weight:bold;color:#2a5298;margin:10px 0 4px;padding-left:68px}
+.half-section-label:first-child{margin-top:0}
+.half-bar-row{display:flex;align-items:center;margin-bottom:4px}
+.half-label{min-width:65px;font-size:.82em;font-weight:bold;color:#555}
+.half-bar{flex:1;height:22px;background:#ecf0f1;border-radius:6px;overflow:hidden}
+.half-fill{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78em;font-weight:bold;min-width:40px}
+.half-fill.h1{background:linear-gradient(90deg,#27ae60,#2ecc71)}
+.half-fill.h2{background:linear-gradient(90deg,#2980b9,#3498db)}
+.chart-box{background:#fff;border-radius:15px;padding:28px;margin:22px 0;box-shadow:0 4px 6px rgba(0,0,0,.1)}
+.chart-title{font-size:1.6em;color:#2c3e50;margin-bottom:18px;text-align:center;font-weight:bold}
+table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92em}
+.gps-table th{background:#34495e;color:#fff;padding:12px 10px;text-align:left;cursor:pointer;user-select:none;white-space:nowrap}
+.gps-table th:hover{background:#2c3e50}
+.gps-table td{padding:10px;border-bottom:1px solid #ecf0f1}
+.gps-table tr:hover{background:#f0f4ff}
+.gps-table tr:nth-child(even){background:#f8f9fa}
+.bar-mini{width:100%;height:14px;background:#ecf0f1;border-radius:7px;overflow:hidden}
+.bar-fill-green{height:100%;background:linear-gradient(90deg,#27ae60,#2ecc71);border-radius:7px}
+.footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>📡 GPS PERFORMANCE REPORT</h1>
+<p>v Templeport — Killinkere G.F.C.</p>
+<div class="meta-row">
+<span>📅 12/04/2026</span>
+<span>👥 Killinkere Mens 2026</span>
+<span>🏃 7 Players Tracked</span>
+</div>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="showTab('overview')">📊 Overview</div>
+<div class="tab" onclick="showTab('players')">👤 Player Cards</div>
+<div class="tab" onclick="showTab('charts')">📈 Charts</div>
+<div class="tab" onclick="showTab('halves')">⏱️ Half Comparison</div>
+<div class="tab" onclick="showTab('table')">📋 Full Table</div>
+</div>
+
+<div id="overview" class="tab-content active">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:22px;font-size:1.7em">⚡ Team Averages</h2>
+<div class="summary-grid">
+<div class="summary-card"><div class="val">4785m</div><div class="lbl">Avg Distance</div></div>
+<div class="summary-card"><div class="val">276m</div><div class="lbl">Avg HSR</div></div>
+<div class="summary-card"><div class="val">845m</div><div class="lbl">Avg High Intensity</div></div>
+<div class="summary-card"><div class="val">8.19 m/s</div><div class="lbl">Top Speed</div></div>
+<div class="summary-card"><div class="val">16</div><div class="lbl">Avg Sprints</div></div>
+<div class="summary-card"><div class="val">333m</div><div class="lbl">Avg Sprint Dist</div></div>
+<div class="summary-card"><div class="val">80</div><div class="lbl">Avg Dist/min</div></div>
+<div class="summary-card"><div class="val">74</div><div class="lbl">Avg Impacts</div></div>
+<div class="summary-card"><div class="val">20</div><div class="lbl">Avg Accels</div></div>
+<div class="summary-card"><div class="val">26</div><div class="lbl">Avg Decels</div></div>
+</div>
+
+<div class="chart-box">
+<div class="chart-title">🏃 Total Distance by Player</div>
+<canvas id="distChart"></canvas>
+</div>
+
+<div class="chart-box">
+<div class="chart-title">💨 Max Speed by Player (m/s)</div>
+<canvas id="speedChart"></canvas>
+</div>
+</div>
+
+<div id="players" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:22px;font-size:1.7em">👤 Individual Player Reports</h2>
+<div style="background:#f0f4ff;border:1px solid #c8d6f0;border-radius:12px;margin-bottom:25px;overflow:hidden">
+<div onclick="this.parentElement.querySelector('.info-body').style.display=this.parentElement.querySelector('.info-body').style.display==='none'?'block':'none'" style="padding:14px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:#2a5298;font-size:.95em">
+<span>ℹ️ How to read your 2nd Half Drop-off</span><span style="font-size:.8em">▾ tap to expand</span>
+</div>
+<div class="info-body" style="display:none;padding:0 20px 18px;font-size:.88em;color:#444;line-height:1.7">
+<p style="margin-bottom:10px">The <strong>2nd Half Drop-off %</strong> measures how much your high-intensity output declined from the 1st half to the 2nd. It's a weighted composite of three metrics:</p>
+<table style="width:100%;border-collapse:collapse;margin-bottom:12px;font-size:.95em">
+<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">HSR (High Speed Running)</td><td style="padding:8px 12px;text-align:center;font-weight:bold">40%</td><td style="padding:8px 12px">Most sensitive to fatigue — the first thing to drop when you're tiring</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold">Sprint Distance</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">Ability to maintain explosive efforts in the 2nd half</td></tr>
+<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">Total Distance</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">Overall volume of running — includes jogging and walking</td></tr>
+</table>
+<p style="margin-bottom:8px"><strong>The breakdown (D / H / S)</strong> shows each component individually. If a component shows <strong>0%</strong>, it means you maintained or improved in that area — only actual declines count.</p>
+<p style="margin-bottom:8px"><strong>Traffic light colours:</strong></p>
+<p style="margin-bottom:4px"><span style="color:#2ecc71;font-weight:bold">● Green (0–5%)</span> — Excellent. Output maintained across both halves.</p>
+<p style="margin-bottom:4px"><span style="color:#f39c12;font-weight:bold">● Amber (6–15%)</span> — Moderate fade. Normal for most players, nothing to worry about.</p>
+<p style="margin-bottom:8px"><span style="color:#e74c3c;font-weight:bold">● Red (>15%)</span> — Significant drop. Worth looking at which component drove it.</p>
+<p style="color:#888;font-size:.9em"><strong>Example:</strong> A drop-off of 2% with D:0% H:6% S:0% means distance and sprints were fully maintained, with only a small dip in high-speed running. The 2% composite = (6% × 0.4) + (0% × 0.3) + (0% × 0.3).</p>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Mark Farrelly Sr</div>
+<div><span class="player-badge">🏃 Most Distance</span><span class="player-badge">⚡ Most HSR</span></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">6571m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">6.94 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">110</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">17</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">24</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">45</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#f39c12">9%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">3557m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:85%">3014m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">273m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:88%">240m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:88%">159m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">180m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:88%">7 · 23m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">8 · 22m avg</div></div></div>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Ruari Oconnell</div>
+<div></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">5908m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">7.02 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">98</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">121</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">17</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">31</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c">20%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">3341m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:77%">2567m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">91m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:75%">68m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">41m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:90%">37m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">3 · 14m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:33%">1 · 37m avg</div></div></div>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Harry Mc Quade</div>
+<div></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">5290m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">7.65 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">88</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">137</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">16</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">20</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c">33%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">3475m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:52%">1815m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">295m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:54%">160m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">163m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:98%">160m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:83%">5 · 33m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">6 · 27m avg</div></div></div>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Darrell Dolan</div>
+<div></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">5208m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">7.83 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">87</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">78</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">14</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">21</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c">21%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">2879m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:81%">2329m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">190m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:73%">139m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">239m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:85%">202m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">11 · 22m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:91%">10 · 20m avg</div></div></div>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Darragh Sharkey</div>
+<div><span class="player-badge">🔥 Most Sprints</span></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">4595m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">7.71 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">77</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">46</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">26</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">21</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c">22%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">2731m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:68%">1864m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:67%">64m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">96m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">585m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:60%">353m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">36 · 16m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:44%">16 · 22m avg</div></div></div>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Brendan Mcconnell</div>
+<div><span class="player-badge">💨 Top Speed</span></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">4057m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">8.19 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">68</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">28</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">33</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">31</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c">60%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">2446m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:66%">1611m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">131m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:34%">44m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">79m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:23%">18m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:100%">6 · 13m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:17%">1 · 18m avg</div></div></div>
+</div>
+</div>
+<div class="player-card">
+<div class="player-card-header">
+<div class="player-card-name">Ben Phillingham</div>
+<div></div>
+</div>
+<div class="player-card-grid">
+<div class="metric"><div class="metric-value">1866m</div><div class="metric-label">Total Distance</div></div>
+<div class="metric"><div class="metric-value">7.31 m/s</div><div class="metric-label">Max Speed</div></div>
+<div class="metric"><div class="metric-value">31</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">90</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">11</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">16</div><div class="metric-label">Decelerations</div></div>
+<div class="metric"><div class="metric-value" style="color:#2ecc71">0%</div><div class="metric-label">2nd Half Drop-off</div></div>
+</div>
+<div class="half-compare">
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:0%">0m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">1866m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:0%">0m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">142m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:0%">0m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">111m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:0%">0 · 0m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:100%">5 · 22m avg</div></div></div>
+</div>
+</div>
+
+</div>
+
+<div id="charts" class="tab-content">
+<div class="chart-box">
+<div class="chart-title">⚡ High Speed Running by Player</div>
+<canvas id="hsrChart"></canvas>
+</div>
+<div class="chart-box">
+<div class="chart-title">🔥 High Intensity Distance by Player</div>
+<canvas id="hidChart"></canvas>
+</div>
+<div class="chart-box">
+<div class="chart-title">🏃‍♂️ Number of Sprints by Player</div>
+<canvas id="sprintChart"></canvas>
+</div>
+</div>
+
+<div id="halves" class="tab-content">
+<div class="chart-box">
+<div class="chart-title">⏱️ Distance — 1st Half vs 2nd Half</div>
+<canvas id="halvesDistChart"></canvas>
+</div>
+<div class="chart-box">
+<div class="chart-title">⚡ HSR — 1st Half vs 2nd Half</div>
+<canvas id="halvesHsrChart"></canvas>
+</div>
+<div class="chart-box">
+<div class="chart-title">🏃‍♂️ Sprints — 1st Half vs 2nd Half</div>
+<canvas id="halvesSprintChart"></canvas>
+</div>
+</div>
+
+<div id="table" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📋 Full GPS Data</h2>
+<div style="overflow-x:auto">
+<table class="gps-table" id="gpsTable">
+<thead><tr>
+<th>Player</th><th>Distance</th><th></th><th>HSR</th><th>HID</th><th>Max Spd</th><th>Sprints</th><th>Sprint Dist</th><th>Dist/min</th><th>Accels</th><th>Decels</th><th>Impacts</th><th>2H Drop</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Mark Farrelly Sr</strong></td>
+<td>6571m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:100%"></div></div></td>
+<td>513m</td>
+<td>1342m</td>
+<td>6.94</td>
+<td>15</td>
+<td>339m</td>
+<td>110</td>
+<td>24</td>
+<td>45</td>
+<td>17</td>
+<td style="color:#f39c12;font-weight:bold" title="Dist:15% | HSR:12% | Sprint:0%">9%</td>
+</tr>
+<tr>
+<td><strong>Ruari Oconnell</strong></td>
+<td>5908m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:90%"></div></div></td>
+<td>159m</td>
+<td>952m</td>
+<td>7.02</td>
+<td>4</td>
+<td>78m</td>
+<td>98</td>
+<td>17</td>
+<td>31</td>
+<td>121</td>
+<td style="color:#e74c3c;font-weight:bold" title="Dist:23% | HSR:25% | Sprint:10%">20%</td>
+</tr>
+<tr>
+<td><strong>Harry Mc Quade</strong></td>
+<td>5290m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:81%"></div></div></td>
+<td>455m</td>
+<td>1020m</td>
+<td>7.65</td>
+<td>11</td>
+<td>323m</td>
+<td>88</td>
+<td>16</td>
+<td>20</td>
+<td>137</td>
+<td style="color:#e74c3c;font-weight:bold" title="Dist:48% | HSR:46% | Sprint:2%">33%</td>
+</tr>
+<tr>
+<td><strong>Darrell Dolan</strong></td>
+<td>5208m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:79%"></div></div></td>
+<td>328m</td>
+<td>772m</td>
+<td>7.83</td>
+<td>21</td>
+<td>441m</td>
+<td>87</td>
+<td>14</td>
+<td>21</td>
+<td>78</td>
+<td style="color:#e74c3c;font-weight:bold" title="Dist:19% | HSR:27% | Sprint:15%">21%</td>
+</tr>
+<tr>
+<td><strong>Darragh Sharkey</strong></td>
+<td>4595m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:70%"></div></div></td>
+<td>160m</td>
+<td>822m</td>
+<td>7.71</td>
+<td>52</td>
+<td>938m</td>
+<td>77</td>
+<td>26</td>
+<td>21</td>
+<td>46</td>
+<td style="color:#e74c3c;font-weight:bold" title="Dist:32% | HSR:0% | Sprint:40%">22%</td>
+</tr>
+<tr>
+<td><strong>Brendan Mcconnell</strong></td>
+<td>4057m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:62%"></div></div></td>
+<td>175m</td>
+<td>657m</td>
+<td>8.19</td>
+<td>7</td>
+<td>98m</td>
+<td>68</td>
+<td>33</td>
+<td>31</td>
+<td>28</td>
+<td style="color:#e74c3c;font-weight:bold" title="Dist:34% | HSR:66% | Sprint:77%">60%</td>
+</tr>
+<tr>
+<td><strong>Ben Phillingham</strong></td>
+<td>1866m</td>
+<td><div class="bar-mini"><div class="bar-fill-green" style="width:28%"></div></div></td>
+<td>142m</td>
+<td>348m</td>
+<td>7.31</td>
+<td>5</td>
+<td>111m</td>
+<td>31</td>
+<td>11</td>
+<td>16</td>
+<td>90</td>
+<td style="color:#2ecc71;font-weight:bold" title="Dist:0% | HSR:0% | Sprint:0%">0%</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="footer">Killinkere G.F.C. · GPS Performance Report · 12/04/2026</div>
+
+<script>
+function showTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
+
+const names=["Mark Farrelly Sr", "Ruari Oconnell", "Harry Mc Quade", "Darrell Dolan", "Darragh Sharkey", "Brendan Mcconnell", "Ben Phillingham"];
+const green='rgba(46,204,113,0.8)',greenBorder='rgba(39,174,96,1)';
+const blue='rgba(52,152,219,0.8)',blueBorder='rgba(41,128,185,1)';
+const purple='rgba(155,89,182,0.8)',purpleBorder='rgba(142,68,173,1)';
+const orange='rgba(243,156,18,0.8)',orangeBorder='rgba(230,126,34,1)';
+
+function hBar(id,data,label,bg,border){
+new Chart(document.getElementById(id),{type:'bar',data:{labels:names,datasets:[{label:label,data:data,backgroundColor:bg,borderColor:border,borderWidth:2}]},options:{indexAxis:'y',responsive:true,scales:{x:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+}
+
+hBar('distChart',[6571, 5908, 5290, 5208, 4595, 4057, 1866],'Distance (m)',green,greenBorder);
+hBar('hsrChart',[513, 159, 455, 328, 160, 175, 142],'HSR (m)',orange,orangeBorder);
+hBar('hidChart',[1342, 952, 1020, 772, 822, 657, 348],'HID (m)',purple,purpleBorder);
+hBar('sprintChart',[15, 4, 11, 21, 52, 7, 5],'Sprints',blue,blueBorder);
+
+new Chart(document.getElementById('speedChart'),{type:'bar',data:{labels:names,datasets:[{label:'Max Speed (m/s)',data:[6.94, 7.02, 7.65, 7.83, 7.71, 8.19, 7.31],backgroundColor:'rgba(231,76,60,0.8)',borderColor:'rgba(192,57,43,1)',borderWidth:2}]},options:{indexAxis:'y',responsive:true,scales:{x:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+
+function halvesChart(id,h1,h2,label){
+new Chart(document.getElementById(id),{type:'bar',data:{labels:names,datasets:[{label:'1st Half',data:h1,backgroundColor:green,borderColor:greenBorder,borderWidth:2},{label:'2nd Half',data:h2,backgroundColor:blue,borderColor:blueBorder,borderWidth:2}]},options:{indexAxis:'y',responsive:true,scales:{x:{beginAtZero:true,stacked:false}},plugins:{legend:{display:true,position:'top'}}}});
+}
+
+halvesChart('halvesDistChart',[3557, 3341, 3475, 2879, 2731, 2446, 0],[3014, 2567, 1815, 2329, 1864, 1611, 1866],'Distance');
+halvesChart('halvesHsrChart',[273, 91, 295, 190, 64, 131, 0],[240, 68, 160, 139, 96, 44, 142],'HSR');
+halvesChart('halvesSprintChart',[7, 3, 5, 11, 36, 6, 0],[8, 1, 6, 10, 16, 1, 5],'Sprints');
+
+// Table sorting
+document.querySelectorAll('.gps-table th').forEach((th,i)=>{
+let asc=true;
+th.addEventListener('click',()=>{
+const tbody=th.closest('table').querySelector('tbody');
+const rows=Array.from(tbody.querySelectorAll('tr'));
+rows.sort((a,b)=>{
+let av=a.children[i].textContent.replace(/[m%]/g,'').trim();
+let bv=b.children[i].textContent.replace(/[m%]/g,'').trim();
+if(!isNaN(av)&&!isNaN(bv))return asc?av-bv:bv-av;
+return asc?av.localeCompare(bv):bv.localeCompare(av);
+});
+rows.forEach(r=>tbody.appendChild(r));
+asc=!asc;
+});
+});
+</script>
+<script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
+</body>
+</html>

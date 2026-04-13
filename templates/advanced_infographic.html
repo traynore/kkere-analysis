@@ -105,6 +105,36 @@
         </div>
 
         <div id="overview" class="tab-content active">
+            <div style="background:linear-gradient(135deg,#1e3c72,#2a5298);border-radius:14px;padding:28px;margin-bottom:30px;color:#fff">
+                <h2 style="text-align:center;margin:0 0 6px;font-size:1.6em">⚡ Attack Efficiency Pipeline</h2>
+                <p style="text-align:center;opacity:.75;font-size:.85em;margin:0 0 22px">How attacks converted to shots and scores (from play)</p>
+                <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+                    <div style="text-align:center;flex:1;min-width:120px">
+                        <div style="font-size:2.4em;font-weight:bold" id="funnel-attacks">FUNNEL_ATTACKS</div>
+                        <div style="font-size:.8em;opacity:.8">Attacks</div>
+                    </div>
+                    <div style="font-size:1.8em;opacity:.5">→</div>
+                    <div style="text-align:center;flex:1;min-width:120px">
+                        <div style="font-size:2.4em;font-weight:bold" id="funnel-shots">FUNNEL_SHOTS</div>
+                        <div style="font-size:.8em;opacity:.8">Shots Taken</div>
+                        <div style="font-size:.75em;margin-top:4px;padding:3px 10px;background:rgba(255,255,255,.15);border-radius:10px;display:inline-block" id="funnel-shot-pct">FUNNEL_SHOT_PCT%</div>
+                    </div>
+                    <div style="font-size:1.8em;opacity:.5">→</div>
+                    <div style="text-align:center;flex:1;min-width:120px">
+                        <div style="font-size:2.4em;font-weight:bold" id="funnel-scores">FUNNEL_SCORES</div>
+                        <div style="font-size:.8em;opacity:.8">Scores</div>
+                        <div style="font-size:.75em;margin-top:4px;padding:3px 10px;background:rgba(255,255,255,.15);border-radius:10px;display:inline-block" id="funnel-acc-pct">FUNNEL_ACC_PCT%</div>
+                    </div>
+                </div>
+                <div style="margin-top:18px;background:rgba(255,255,255,.1);border-radius:8px;overflow:hidden;height:24px;display:flex">
+                    <div style="width:FUNNEL_SCORE_OF_ATTACK_PCT%;background:linear-gradient(90deg,#2ecc71,#27ae60);display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:bold;color:#fff;min-width:40px">FUNNEL_SCORES scored</div>
+                    <div style="width:FUNNEL_MISSED_OF_ATTACK_PCT%;background:linear-gradient(90deg,#e74c3c,#c0392b);display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:bold;color:#fff;min-width:40px">FUNNEL_MISSED missed</div>
+                    <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:bold;color:rgba(255,255,255,.6)">FUNNEL_NO_SHOT no shot</div>
+                </div>
+                <div style="display:flex;justify-content:center;gap:20px;margin-top:10px;font-size:.75em;opacity:.7">
+                    <span>🟢 Scored</span><span>🔴 Shot &amp; missed</span><span>⚪ No shot from attack</span>
+                </div>
+            </div>
             <h2 style="color: #2c3e50; margin: 20px 0 15px; font-size: 1.8em; text-align: center;">🏐 Shooting Statistics</h2>
             <div class="stats-grid">
                 <div class="stat-row">

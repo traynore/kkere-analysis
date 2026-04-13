@@ -523,8 +523,25 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(1 \* 20%\)">1 pt</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points_from_frees"]} * 20%)">{stats["t2_points_from_frees"]} {t2_pts_suffix}</div>', html, count=1)
     
-    # Replace attacks stats
+    # Replace funnel
     attacks_pct = round((stats['t1_attacks_shot'] / stats['t1_attacks'] * 100)) if stats['t1_attacks'] > 0 else 0
+    funnel_missed = stats['t1_attacks_shot'] - stats['t1_shots_scored']
+    funnel_no_shot = stats['t1_attacks'] - stats['t1_attacks_shot']
+    funnel_score_pct = round(stats['t1_shots_scored'] / stats['t1_attacks'] * 100) if stats['t1_attacks'] > 0 else 0
+    funnel_missed_pct = round(funnel_missed / stats['t1_attacks'] * 100) if stats['t1_attacks'] > 0 else 0
+    funnel_no_shot_pct = 100 - funnel_score_pct - funnel_missed_pct
+    html = html.replace('FUNNEL_ATTACKS', str(stats['t1_attacks']))
+    html = html.replace('FUNNEL_SHOTS', str(stats['t1_attacks_shot']))
+    html = html.replace('FUNNEL_SHOT_PCT', str(attacks_pct))
+    html = html.replace('FUNNEL_SCORES', str(stats['t1_shots_scored']))
+    html = html.replace('FUNNEL_ACC_PCT', str(stats['t1_acc']))
+    html = html.replace('FUNNEL_SCORE_OF_ATTACK_PCT', str(funnel_score_pct))
+    html = html.replace('FUNNEL_MISSED_OF_ATTACK_PCT', str(funnel_missed_pct))
+    html = html.replace('FUNNEL_MISSED', str(funnel_missed))
+    html = html.replace('FUNNEL_NO_SHOT_PCT', str(funnel_no_shot_pct))
+    html = html.replace('FUNNEL_NO_SHOT', str(funnel_no_shot))
+
+    # Replace attacks stats
     html = html.replace('ATTACKS_WITH_SHOT / TOTAL_ATTACKS', f'{attacks_with_shot_2026} / {total_attacks_2026}')
     html = html.replace('TOTAL_ATTACKS', str(stats['t1_attacks']))
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(29 \* 3%\)">29 / 18 \(62%\)</div>',

@@ -42,6 +42,7 @@ def read_gps_csv(filename):
     return players
 
 
+
 def generate_html(csv_file):
     print(f"\n{'='*60}")
     print("GPS PERFORMANCE REPORT GENERATOR")
@@ -102,8 +103,16 @@ def generate_html(csv_file):
         dist_pct = round(t['total_distance'] / max_dist * 100)
         h1d = h1.get('total_distance', 0)
         h2d = h2.get('total_distance', 0)
-        dropoff = round((1 - h2d / h1d) * 100) if h1d > 0 else 0
+        h1_hsr_val = h1.get('hsr', 0)
+        h2_hsr_val = h2.get('hsr', 0)
+        h1_sprint_val = h1.get('sprint_distance', 0)
+        h2_sprint_val = h2.get('sprint_distance', 0)
+        dist_drop = max(0, round((1 - h2d / h1d) * 100)) if h1d > 0 else 0
+        hsr_drop = max(0, round((1 - h2_hsr_val / h1_hsr_val) * 100)) if h1_hsr_val > 0 else 0
+        sprint_drop = max(0, round((1 - h2_sprint_val / h1_sprint_val) * 100)) if h1_sprint_val > 0 else 0
+        dropoff = round(hsr_drop * 0.4 + sprint_drop * 0.3 + dist_drop * 0.3)
         dropoff_color = '#e74c3c' if dropoff > 15 else ('#f39c12' if dropoff > 5 else '#2ecc71')
+        dropoff_tip = f'Dist:{dist_drop}% | HSR:{hsr_drop}% | Sprint:{sprint_drop}%'
         table_rows += f'''<tr>
 <td><strong>{name}</strong></td>
 <td>{t['total_distance']}m</td>
@@ -117,7 +126,7 @@ def generate_html(csv_file):
 <td>{t['accelerations']}</td>
 <td>{t['decelerations']}</td>
 <td>{t['impacts']}</td>
-<td style="color:{dropoff_color};font-weight:bold">{dropoff}%</td>
+<td style="color:{dropoff_color};font-weight:bold" title="{dropoff_tip}">{dropoff}%</td>
 </tr>
 '''
 
@@ -135,7 +144,14 @@ def generate_html(csv_file):
         h2 = players[name].get('Second Half', {})
         h1d = h1.get('total_distance', 0)
         h2d = h2.get('total_distance', 0)
-        dropoff = round((1 - h2d / h1d) * 100) if h1d > 0 else 0
+        h1_hsr_val = h1.get('hsr', 0)
+        h2_hsr_val = h2.get('hsr', 0)
+        h1_sprint_val = h1.get('sprint_distance', 0)
+        h2_sprint_val = h2.get('sprint_distance', 0)
+        dist_drop = max(0, round((1 - h2d / h1d) * 100)) if h1d > 0 else 0
+        hsr_drop = max(0, round((1 - h2_hsr_val / h1_hsr_val) * 100)) if h1_hsr_val > 0 else 0
+        sprint_drop = max(0, round((1 - h2_sprint_val / h1_sprint_val) * 100)) if h1_sprint_val > 0 else 0
+        dropoff = round(hsr_drop * 0.4 + sprint_drop * 0.3 + dist_drop * 0.3)
 
         badges = []
         if dist_rank[0] == name:
@@ -149,6 +165,19 @@ def generate_html(csv_file):
         badge_html = ''.join(f'<span class="player-badge">{b}</span>' for b in badges)
 
         dropoff_color = '#e74c3c' if dropoff > 15 else ('#f39c12' if dropoff > 5 else '#2ecc71')
+
+        h1_sprints_n = h1.get('sprints', 0)
+        h2_sprints_n = h2.get('sprints', 0)
+        h1_avg_sprint = round(h1.get('sprint_distance', 0) / h1_sprints_n) if h1_sprints_n > 0 else 0
+        h2_avg_sprint = round(h2.get('sprint_distance', 0) / h2_sprints_n) if h2_sprints_n > 0 else 0
+        avg_sprint = round(t['sprint_distance'] / t['sprints']) if t['sprints'] > 0 else 0
+
+        # Max values for bar scaling across halves
+        bar_max_dist = max(h1d, h2d) or 1
+        bar_max_hsr = max(h1_hsr_val, h2_hsr_val) or 1
+        bar_max_sd = max(h1_sprint_val, h2_sprint_val) or 1
+        bar_max_sn = max(h1_sprints_n, h2_sprints_n) or 1
+
         player_cards += f'''<div class="player-card">
 <div class="player-card-header">
 <div class="player-card-name">{name}</div>
@@ -156,17 +185,26 @@ def generate_html(csv_file):
 </div>
 <div class="player-card-grid">
 <div class="metric"><div class="metric-value">{t['total_distance']}m</div><div class="metric-label">Total Distance</div></div>
-<div class="metric"><div class="metric-value">{t['hsr']}m</div><div class="metric-label">High Speed Running</div></div>
 <div class="metric"><div class="metric-value">{t['max_speed']} m/s</div><div class="metric-label">Max Speed</div></div>
-<div class="metric"><div class="metric-value">{t['sprints']}</div><div class="metric-label">Sprints</div></div>
-<div class="metric"><div class="metric-value">{t['hid']}m</div><div class="metric-label">High Intensity Dist</div></div>
-<div class="metric"><div class="metric-value">{t['impacts']}</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">{t['dist_per_min']}</div><div class="metric-label">Dist/min</div></div>
+<div class="metric"><div class="metric-value">{t['impacts']}</div><div class="metric-label">Impacts</div></div>
+<div class="metric"><div class="metric-value">{t['accelerations']}</div><div class="metric-label">Accelerations</div></div>
+<div class="metric"><div class="metric-value">{t['decelerations']}</div><div class="metric-label">Decelerations</div></div>
 <div class="metric"><div class="metric-value" style="color:{dropoff_color}">{dropoff}%</div><div class="metric-label">2nd Half Drop-off</div></div>
 </div>
 <div class="half-compare">
-<div class="half-bar-row"><span class="half-label">1st Half</span><div class="half-bar"><div class="half-fill h1" style="width:{round(h1d/max_dist*100)}%">{h1d}m</div></div></div>
-<div class="half-bar-row"><span class="half-label">2nd Half</span><div class="half-bar"><div class="half-fill h2" style="width:{round(h2d/max_dist*100)}%">{h2d}m</div></div></div>
+<div class="half-section-label">Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:{round(h1d/bar_max_dist*100)}%">{h1d}m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:{round(h2d/bar_max_dist*100)}%">{h2d}m</div></div></div>
+<div class="half-section-label">High Speed Running</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:{round(h1_hsr_val/bar_max_hsr*100)}%">{h1_hsr_val}m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:{round(h2_hsr_val/bar_max_hsr*100)}%">{h2_hsr_val}m</div></div></div>
+<div class="half-section-label">Sprint Distance</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:{round(h1_sprint_val/bar_max_sd*100)}%">{h1_sprint_val}m</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:{round(h2_sprint_val/bar_max_sd*100)}%">{h2_sprint_val}m</div></div></div>
+<div class="half-section-label">Sprints (count · avg length)</div>
+<div class="half-bar-row"><span class="half-label">1st</span><div class="half-bar"><div class="half-fill h1" style="width:{round(h1_sprints_n/bar_max_sn*100)}%">{h1_sprints_n} · {h1_avg_sprint}m avg</div></div></div>
+<div class="half-bar-row"><span class="half-label">2nd</span><div class="half-bar"><div class="half-fill h2" style="width:{round(h2_sprints_n/bar_max_sn*100)}%">{h2_sprints_n} · {h2_avg_sprint}m avg</div></div></div>
 </div>
 </div>
 '''
@@ -205,7 +243,9 @@ body{{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-
 .metric{{background:#fff;border-radius:8px;padding:10px;text-align:center}}
 .metric-value{{font-size:1.3em;font-weight:bold;color:#2c3e50}}
 .metric-label{{font-size:.72em;color:#7f8c8d;margin-top:2px}}
-.half-compare{{margin-top:8px}}
+.half-compare{{margin-top:12px}}
+.half-section-label{{font-size:.78em;font-weight:bold;color:#2a5298;margin:10px 0 4px;padding-left:68px}}
+.half-section-label:first-child{{margin-top:0}}
 .half-bar-row{{display:flex;align-items:center;margin-bottom:4px}}
 .half-label{{min-width:65px;font-size:.82em;font-weight:bold;color:#555}}
 .half-bar{{flex:1;height:22px;background:#ecf0f1;border-radius:6px;overflow:hidden}}
@@ -273,6 +313,25 @@ table.gps-table{{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92
 
 <div id="players" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:22px;font-size:1.7em">👤 Individual Player Reports</h2>
+<div style="background:#f0f4ff;border:1px solid #c8d6f0;border-radius:12px;margin-bottom:25px;overflow:hidden">
+<div onclick="this.parentElement.querySelector('.info-body').style.display=this.parentElement.querySelector('.info-body').style.display==='none'?'block':'none'" style="padding:14px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:#2a5298;font-size:.95em">
+<span>ℹ️ How to read your 2nd Half Drop-off</span><span style="font-size:.8em">▾ tap to expand</span>
+</div>
+<div class="info-body" style="display:none;padding:0 20px 18px;font-size:.88em;color:#444;line-height:1.7">
+<p style="margin-bottom:10px">The <strong>2nd Half Drop-off %</strong> measures how much your high-intensity output declined from the 1st half to the 2nd. It's a weighted composite of three metrics:</p>
+<table style="width:100%;border-collapse:collapse;margin-bottom:12px;font-size:.95em">
+<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">HSR (High Speed Running)</td><td style="padding:8px 12px;text-align:center;font-weight:bold">40%</td><td style="padding:8px 12px">Most sensitive to fatigue — the first thing to drop when you're tiring</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold">Sprint Distance</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">Ability to maintain explosive efforts in the 2nd half</td></tr>
+<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">Total Distance</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">Overall volume of running — includes jogging and walking</td></tr>
+</table>
+<p style="margin-bottom:8px"><strong>The breakdown (D / H / S)</strong> shows each component individually. If a component shows <strong>0%</strong>, it means you maintained or improved in that area — only actual declines count.</p>
+<p style="margin-bottom:8px"><strong>Traffic light colours:</strong></p>
+<p style="margin-bottom:4px"><span style="color:#2ecc71;font-weight:bold">● Green (0–5%)</span> — Excellent. Output maintained across both halves.</p>
+<p style="margin-bottom:4px"><span style="color:#f39c12;font-weight:bold">● Amber (6–15%)</span> — Moderate fade. Normal for most players, nothing to worry about.</p>
+<p style="margin-bottom:8px"><span style="color:#e74c3c;font-weight:bold">● Red (>15%)</span> — Significant drop. Worth looking at which component drove it.</p>
+<p style="color:#888;font-size:.9em"><strong>Example:</strong> A drop-off of 2% with D:0% H:6% S:0% means distance and sprints were fully maintained, with only a small dip in high-speed running. The 2% composite = (6% × 0.4) + (0% × 0.3) + (0% × 0.3).</p>
+</div>
+</div>
 {player_cards}
 </div>
 
