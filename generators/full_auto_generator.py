@@ -852,11 +852,11 @@ def generate_html(csv_file):
     t2_table = generate_player_table(stats['t2_players'], stats['team2'], ('#c0392b', '#e74c3c'))
     
     # Replace player tables
-    t1_table_pattern = r'(<h2 style="color: #2ecc71[^>]+>🟢 ' + re.escape(stats['team1']) + r' Top Performers</h2>\s*<table class="player-table">\s*<thead>.*?</thead>\s*<tbody>).*?(</tbody>\s*</table>)'
+    t1_table_pattern = r'(<h2 style="color: #2ecc71[^>]+>🟢 ' + re.escape(stats['team1']) + r' Top Performers</h2>.*?<table class="player-table">\s*<thead>.*?</thead>\s*<tbody>).*?(</tbody>\s*</table>)'
     t1_table_replacement = f"\\1\n{t1_table}                \\2"
     html = re.sub(t1_table_pattern, t1_table_replacement, html, flags=re.DOTALL)
     
-    t2_table_pattern = r'(<h2 style="color: #e74c3c[^>]+>🔴 ' + re.escape(stats['team2']) + r' Top Performers</h2>\s*<table class="player-table">\s*<thead>.*?</thead>\s*<tbody>).*?(</tbody>\s*</table>)'
+    t2_table_pattern = r'(<h2 style="color: #e74c3c[^>]+>🔴 ' + re.escape(stats['team2']) + r' Top Performers</h2>.*?<table class="player-table">\s*<thead>.*?</thead>\s*<tbody>).*?(</tbody>\s*</table>)'
     t2_table_replacement = f"\\1\n{t2_table}                \\2"
     html = re.sub(t2_table_pattern, t2_table_replacement, html, flags=re.DOTALL)
     
