@@ -200,7 +200,7 @@ def generate_html(csv_file):
 <div class="metric"><div class="metric-value">{t['impacts']}</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">{t['accelerations']}</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">{t['decelerations']}</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:{bal['color']}">{bal['label']}<br><span style="font-size:.7em;font-weight:normal">{bal['value']}</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:{bal['color']}" title="{bal['tip']}">{bal['label']}<br><span style="font-size:.7em;font-weight:normal">{bal['value']}</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
