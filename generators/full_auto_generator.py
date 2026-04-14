@@ -182,7 +182,7 @@ def calc_all_stats(events, csv_filename):
     # Player stats
     for team, prefix in [(t1, 't1'), (t2, 't2')]:
         team_events = [e for e in events if e['Team Name'] == team]
-        players = defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'shots': 0, 'scored': 0, 'turnovers': 0, 'poss_lost': 0, 'frees': 0, 'kickouts': 0})
+        players = defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'shots': 0, 'scored': 0, 'frees_scored': 0, 'turnovers': 0, 'poss_lost': 0, 'frees': 0, 'kickouts': 0})
         
         for e in team_events:
             if not e.get('Player'):
@@ -200,6 +200,17 @@ def calc_all_stats(events, csv_filename):
                 elif e['Outcome'] == '2 Points':
                     players[player]['two_pts'] += 1
                     players[player]['scored'] += 1
+            
+            if e.get('Name') == 'Scoreable free':
+                if e['Outcome'] == 'Goal':
+                    players[player]['goals'] += 1
+                    players[player]['frees_scored'] += 1
+                elif e['Outcome'] == 'Point':
+                    players[player]['points'] += 1
+                    players[player]['frees_scored'] += 1
+                elif e['Outcome'] == '2 Points':
+                    players[player]['two_pts'] += 1
+                    players[player]['frees_scored'] += 1
             
             if e.get('Name') in ['Turnover', 'Ball Won']:
                 players[player]['turnovers'] += 1
