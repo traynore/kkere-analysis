@@ -836,6 +836,19 @@ def generate_html(csv_file):
     
     # Generate player tables HTML
     def generate_player_table(players, team_name, color):
+        def gaa_notation(data):
+            parts = []
+            if data['free_goals'] > 0:  parts.append(f"{data['free_goals']}gf")
+            if data['free_points'] > 0: parts.append(f"{data['free_points']}f")
+            play_two = data['two_pts'] - data['free_two_pts']
+            if play_two > 0:            parts.append(f"{play_two}x2pt")
+            if data['free_two_pts'] > 0: parts.append(f"{data['free_two_pts']}x2ptf")
+            base = f"{data['goals']}-{data['points']}"
+            if parts:
+                qualifier = ', '.join(parts)
+                return f'{base} <span style="color:#888">({qualifier})</span>'
+            return base
+        
         rows = ''
         for name, data in players:
             total_score = data['goals'] * 3 + data['points'] + data['two_pts'] * 2
@@ -850,7 +863,7 @@ def generate_html(csv_file):
                         <td>{data['goals']}</td>
                         <td>{data['two_pts']}</td>
                         <td>{data['points']}</td>
-                        <td>{total_score}</td>
+                        <td>{gaa_notation(data)}</td>
                         <td>{total_attempts}</td>
                         <td>
                             <div class="accuracy-bar">
