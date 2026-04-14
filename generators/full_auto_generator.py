@@ -182,7 +182,7 @@ def calc_all_stats(events, csv_filename):
     # Player stats
     for team, prefix in [(t1, 't1'), (t2, 't2')]:
         team_events = [e for e in events if e['Team Name'] == team]
-        players = defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'shots': 0, 'scored': 0, 'free_attempts': 0, 'frees_scored': 0, 'turnovers': 0, 'poss_lost': 0, 'frees': 0, 'kickouts': 0})
+        players = defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'shots': 0, 'scored': 0, 'free_attempts': 0, 'frees_scored': 0, 'free_goals': 0, 'free_points': 0, 'free_two_pts': 0, 'turnovers': 0, 'poss_lost': 0, 'frees': 0, 'kickouts': 0})
         
         for e in team_events:
             if not e.get('Player'):
@@ -206,12 +206,15 @@ def calc_all_stats(events, csv_filename):
                 if e['Outcome'] == 'Goal':
                     players[player]['goals'] += 1
                     players[player]['frees_scored'] += 1
+                    players[player]['free_goals'] += 1
                 elif e['Outcome'] == 'Point':
                     players[player]['points'] += 1
                     players[player]['frees_scored'] += 1
+                    players[player]['free_points'] += 1
                 elif e['Outcome'] == '2 Points':
                     players[player]['two_pts'] += 1
                     players[player]['frees_scored'] += 1
+                    players[player]['free_two_pts'] += 1
             
             if e.get('Name') in ['Turnover', 'Ball Won']:
                 players[player]['turnovers'] += 1
@@ -848,7 +851,7 @@ def generate_html(csv_file):
                         <td>{data['two_pts']}</td>
                         <td>{data['points']}</td>
                         <td>{total_score}</td>
-                        <td>{data['shots']}</td>
+                        <td>{total_attempts}</td>
                         <td>
                             <div class="accuracy-bar">
                                 <div class="accuracy-fill" style="width: {acc}%; {bg_style}">{acc_display}</div>
