@@ -182,7 +182,7 @@ def calc_all_stats(events, csv_filename):
     # Player stats
     for team, prefix in [(t1, 't1'), (t2, 't2')]:
         team_events = [e for e in events if e['Team Name'] == team]
-        players = defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'shots': 0, 'scored': 0, 'frees_scored': 0, 'turnovers': 0, 'poss_lost': 0, 'frees': 0, 'kickouts': 0})
+        players = defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'shots': 0, 'scored': 0, 'free_attempts': 0, 'frees_scored': 0, 'turnovers': 0, 'poss_lost': 0, 'frees': 0, 'kickouts': 0})
         
         for e in team_events:
             if not e.get('Player'):
@@ -202,6 +202,7 @@ def calc_all_stats(events, csv_filename):
                     players[player]['scored'] += 1
             
             if e.get('Name') == 'Scoreable free':
+                players[player]['free_attempts'] += 1
                 if e['Outcome'] == 'Goal':
                     players[player]['goals'] += 1
                     players[player]['frees_scored'] += 1
@@ -835,8 +836,10 @@ def generate_html(csv_file):
         rows = ''
         for name, data in players:
             total_score = data['goals'] * 3 + data['points'] + data['two_pts'] * 2
-            acc = round((data['scored'] / data['shots'] * 100)) if data['shots'] > 0 else 0
-            acc_display = f"{acc}%" if data['shots'] > 0 else "-"
+            total_attempts = data['shots'] + data['free_attempts']
+            total_scored = data['scored'] + data['frees_scored']
+            acc = round((total_scored / total_attempts * 100)) if total_attempts > 0 else 0
+            acc_display = f"{acc}%" if total_attempts > 0 else "-"
             bg_style = f"background: linear-gradient(90deg, {color[0]}, {color[1]});" if color else ""
             
             rows += f'''                    <tr>
