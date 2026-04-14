@@ -17,6 +17,8 @@ def read_csv(filename):
         reader = csv.DictReader(f)
         for row in reader:
             if row.get('Team Name'):
+                if 'Game Period' in row and 'Period' not in row:
+                    row['Period'] = row['Game Period']
                 events.append(row)
     return events
 
@@ -171,9 +173,10 @@ def calc_all_stats(events, csv_filename):
         stats[f'{prefix}_sf_total'] = len(sf)
         stats[f'{prefix}_sf_goals'] = len([s for s in sf if s['Outcome'] == 'Goal'])
         stats[f'{prefix}_sf_points'] = len([s for s in sf if s['Outcome'] == 'Point'])
+        stats[f'{prefix}_sf_two_pts'] = len([s for s in sf if s['Outcome'] == '2 Points'])
         stats[f'{prefix}_sf_wides'] = len([s for s in sf if s['Outcome'] == 'Wide'])
         stats[f'{prefix}_sf_shorts'] = len([s for s in sf if s['Outcome'] == 'Short'])
-        stats[f'{prefix}_sf_scored'] = stats[f'{prefix}_sf_goals'] + stats[f'{prefix}_sf_points']
+        stats[f'{prefix}_sf_scored'] = stats[f'{prefix}_sf_goals'] + stats[f'{prefix}_sf_points'] + stats[f'{prefix}_sf_two_pts']
         stats[f'{prefix}_sf_acc'] = round((stats[f'{prefix}_sf_scored'] / stats[f'{prefix}_sf_total'] * 100)) if stats[f'{prefix}_sf_total'] > 0 else 0
     
     # Player stats
@@ -420,8 +423,13 @@ def generate_html(csv_file):
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_shots_total"]} * 4%)">{stats["t2_shots_total"]} / {stats["t2_shots_scored"]}</div>', html)
     
     # Replace score breakdown - Goals
-    html = html.replace('T1_GOALS_VAL', str(stats['t1_goals']))
-    html = html.replace('T2_GOALS_VAL', str(stats['t2_goals']))
+    # Score Breakdown shows FROM PLAY only (frees shown separately)
+    t1_goals_from_play = stats['t1_goals'] - stats['t1_sf_goals']
+    t2_goals_from_play = stats['t2_goals'] - stats['t2_sf_goals']
+    t1_two_pts_from_play = stats['t1_two_pts'] - stats['t1_sf_two_pts']
+    t2_two_pts_from_play = stats['t2_two_pts'] - stats['t2_sf_two_pts']
+    html = html.replace('T1_GOALS_VAL', str(t1_goals_from_play))
+    html = html.replace('T2_GOALS_VAL', str(t2_goals_from_play))
     
     # Replace score breakdown - Points (from play only, frees shown separately)
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(7 \* 7%\)">7</div>',
@@ -429,11 +437,11 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(12 \* 7%\)">12</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points_from_play"]} * 7%)">{stats["t2_points_from_play"]}</div>', html, count=1)
     
-    # Replace 2 Points
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(1 \* 30%\)">1</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_two_pts"]} * 30%)">{stats["t1_two_pts"]}</div>', html, count=1)
-    html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 0%">0</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_two_pts"]} * 30%)">{stats["t2_two_pts"]}</div>', html, count=2)
+    # Replace 2 Points (from play only - context-aware to avoid collision with Handling)
+    html = re.sub(r'(<div class="stat-label">2 Points \(from play\)</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({t1_two_pts_from_play} * 30%)">{t1_two_pts_from_play}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">2 Points \(from play\)</div>.*?bar-aughadrumsee" style=")width: [^"]+">[^<]+(</div>)',
+                  f'\\1width: calc({t2_two_pts_from_play} * 30%)">{t2_two_pts_from_play}\\2', html, count=1, flags=re.DOTALL)
     
     # Replace wides
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(7 \* 10%\)">7</div>',
@@ -465,6 +473,18 @@ def generate_html(csv_file):
     html = re.sub(r'(<div class="stat-label">Kickouts Break Won</div>.*?bar-aughadrumsee" style=")width: calc\([^)]+\)">[^<]+(</div>)',
                   f'\\1width: calc({stats["t2_ko_bw"]} * 20%)">{stats["t2_ko_bw"]}\\2', html, count=1, flags=re.DOTALL)
     
+    # Replace kickout lost clean (context-aware)
+    html = re.sub(r'(<div class="stat-label">Kickouts Lost Clean</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t1_ko_lc"]} * 25%)">{stats["t1_ko_lc"]}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">Kickouts Lost Clean</div>.*?bar-aughadrumsee" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t2_ko_lc"]} * 25%)">{stats["t2_ko_lc"]}\\2', html, count=1, flags=re.DOTALL)
+    
+    # Replace kickout break lost (context-aware)
+    html = re.sub(r'(<div class="stat-label">Kickouts Break Lost</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t1_ko_bl"]} * 20%)">{stats["t1_ko_bl"]}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">Kickouts Break Lost</div>.*?bar-aughadrumsee" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t2_ko_bl"]} * 20%)">{stats["t2_ko_bl"]}\\2', html, count=1, flags=re.DOTALL)
+    
     # Replace kickout sideline ball
     html = re.sub(r'(<div class="stat-label">Kickouts Sideline Ball</div>.*?bar-killinkere" style=")width: calc\(0 \* 25%\)">0(</div>)',
                   f'\\1width: calc({stats["t1_ko_sl"]} * 25%)">{stats["t1_ko_sl"]}\\2', html, count=1, flags=re.DOTALL)
@@ -495,11 +515,11 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 0%">0</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_poss_lost_kickpass"]} * 20%)">{stats["t2_poss_lost_kickpass"]}</div>', html, count=1)
     
-    # Replace possession lost - handling
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(1 \* 30%\)">1</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_poss_lost_handling"]} * 30%)">{stats["t1_poss_lost_handling"]}</div>', html, count=1)
-    html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 0%">0</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_poss_lost_handling"]} * 30%)">{stats["t2_poss_lost_handling"]}</div>', html, count=1)
+    # Replace possession lost - handling (context-aware)
+    html = re.sub(r'(<div class="stat-label">Poss\. Lost - Handling</div>.*?bar-killinkere" style=")width: calc\([^)]+\)">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t1_poss_lost_handling"]} * 30%)">{stats["t1_poss_lost_handling"]}\\2', html, count=1, flags=re.DOTALL)
+    html = re.sub(r'(<div class="stat-label">Poss\. Lost - Handling</div>.*?bar-aughadrumsee" style=")width: [^"]+">[^<]+(</div>)',
+                  f'\\1width: calc({stats["t2_poss_lost_handling"]} * 30%)">{stats["t2_poss_lost_handling"]}\\2', html, count=1, flags=re.DOTALL)
     
     # Replace turnovers
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(13 \* 6%\)">13</div>',
@@ -731,6 +751,8 @@ def generate_html(csv_file):
     html = html.replace('SF_TOTAL_T2', str(stats['t2_sf_total']))
     html = html.replace('SF_GOALS_T1', str(stats['t1_sf_goals']))
     html = html.replace('SF_GOALS_T2', str(stats['t2_sf_goals']))
+    html = html.replace('SF_TWO_PTS_T1', str(stats['t1_sf_two_pts']))
+    html = html.replace('SF_TWO_PTS_T2', str(stats['t2_sf_two_pts']))
     html = html.replace('SF_POINTS_T1', str(stats['t1_sf_points']))
     html = html.replace('SF_POINTS_T2', str(stats['t2_sf_points']))
     html = html.replace('SF_WIDES_T1', str(stats['t1_sf_wides']))

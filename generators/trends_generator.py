@@ -17,6 +17,8 @@ def read_csv(f):
         reader = csv.DictReader(fh)
         for row in reader:
             if row.get('Team Name'):
+                if 'Game Period' in row and 'Period' not in row:
+                    row['Period'] = row['Game Period']
                 events.append(row)
     return events
 
@@ -433,7 +435,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-green">
 <h3>🎯 Shot Accuracy (Target: 70%)</h3>
-<div class="insight">Killinkere have never won a game shooting below 50% from play. The two worst accuracy games (Greenlough 23.8%, Lavey 37.5%) were both losses. Above 50%, the team is strong.</div>
+<div class="insight">Shooting below 50% from play is dangerous but not fatal — the Munterconnaught win (30.4%) shows frees and 2-pointers can compensate. However, the two heaviest defeats (Greenlough 23.8%, Lavey 37.5%) both came with poor accuracy. Above 50%, the team rarely loses.</div>
 <div class="record-row">
 <div class="rec rec-good">≥50%: {record(acc_above_50)}</div>
 <div class="rec rec-bad">&lt;50%: {record(acc_below_50)}</div>
@@ -451,7 +453,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-red">
 <h3>🚨 Two Ways to Lose</h3>
-<div class="insight"><strong>Can't convert:</strong> Get the shots but accuracy is poor (Greenlough 23.8%, Lavey 37.5%).<br><strong>Can't create:</strong> Decent accuracy but can't get the shot away (Denn Div 3: 57.1% accuracy but only 45.2% attack efficiency — 17 of 31 attacks ended without a shot).</div>
+<div class="insight"><strong>Can't convert:</strong> Get the shots but accuracy is poor (Greenlough 23.8%, Lavey 37.5%).<br><strong>Can't create:</strong> Decent accuracy but can't get the shot away (Denn Div 3: 57.1% accuracy but only 45.2% attack efficiency — 17 of 31 attacks ended without a shot).<br><strong>Exception:</strong> v Munterconnaught won despite 30.4% accuracy — scoreable frees (3/5 converted) and disciplined possession kept the scoreboard ticking.</div>
 </div>
 
 </div>
