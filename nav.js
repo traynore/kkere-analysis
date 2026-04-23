@@ -16,7 +16,8 @@
     ]},
     {heading:'📋 ACFL Division 3', games:[
       {label:'v Denn (L) 4-10 to 3-20', file:'Killinkere 4 - 10 v 3 - 20 Denn_FULL_infographic.html'},
-      {label:'v Munterconnaught (W) 0-11 to 0-9', file:'Killinkere 0 - 11 v 0 - 9 Munterconnaught_FULL_infographic.html'}
+      {label:'v Munterconnaught (W) 0-11 to 0-9', file:'Killinkere 0 - 11 v 0 - 9 Munterconnaught_FULL_infographic.html'},
+      {label:'v Kill Shamrocks (W) 1-14 to 3-6', file:'Killinkere 1 - 14 v 3 - 6 Kill Shamrocks_FULL_infographic.html'}
     ]},
     {heading:'📋 ACFL Division 7', games:[
       {label:'v Arva (D) 1-13 to 1-13', file:'Killinkere 1 - 13 v 1 - 13 Arva_FULL_infographic.html'},
@@ -33,7 +34,8 @@
       {label:'v Denn Reserve — GPS (29 Mar)', file:'v_Denn__ACFL_Div7_GPS_report.html'},
       {label:'v Lavey Reserve — GPS (5 Apr)', file:'v_Lavey__ACFL_Div7_GPS_report.html'},
       {label:'v Munterconnaught — GPS (11 Apr)', file:'v_Munterconnaught_GPS_report.html'},
-      {label:'v Templeport — GPS (12 Apr)', file:'v_Templeport_GPS_report.html'}
+      {label:'v Templeport — GPS (12 Apr)', file:'v_Templeport_GPS_report.html'},
+      {label:'v Kill Shamrocks — GPS (22 Apr)', file:'v_Kill_Shamrocks__ACFL_Div3_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
       {label:'Season Trends & Patterns', file:'season_trends.html'}

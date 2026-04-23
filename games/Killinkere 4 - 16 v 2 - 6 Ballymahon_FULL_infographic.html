@@ -166,6 +166,8 @@
             </div>
 
             <h2 style="color: #2c3e50; margin: 40px 0 15px; font-size: 1.8em; text-align: center;">📊 Score Breakdown</h2>
+
+            
             <div class="stats-grid">
                 <div class="stat-row">
                     <div class="stat-label">Goals (from play)</div>
@@ -1243,10 +1245,10 @@
         new Chart(document.getElementById('accAccuracyChart'), {
             type: 'line',
             data: {
-                labels: ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport'],
+                labels: ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport', 'Kill Shamrocks'],
                 datasets: [{
                     label: 'Accumulative Accuracy %',
-                    data: [55.0, 45.2, 52.2, 53.5, 56.5, 55.4, 55.6, 55.5, 52.2, 52.5, 53.0, 51.7, 50.0, 51.1],
+                    data: [55.0, 45.2, 52.2, 53.5, 56.5, 55.4, 55.6, 55.5, 52.2, 52.5, 53.0, 51.7, 50.0, 51.1, 51.9],
                     borderColor: 'rgba(46, 204, 113, 1)',
                     backgroundColor: 'rgba(46, 204, 113, 0.15)',
                     borderWidth: 3,
@@ -1258,7 +1260,7 @@
                     pointBorderWidth: 2
                 }, {
                     label: 'Per Game Accuracy %',
-                    data: [55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0],
+                    data: [55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6],
                     borderColor: 'rgba(52, 152, 219, 0.8)',
                     backgroundColor: 'rgba(52, 152, 219, 0.08)',
                     borderWidth: 2,
@@ -1310,10 +1312,10 @@
         new Chart(document.getElementById('accAttackChart'), {
             type: 'line',
             data: {
-                labels: ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport'],
+                labels: ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport', 'Kill Shamrocks'],
                 datasets: [{
                     label: 'Accumulative Attack Efficiency %',
-                    data: [0, 0, 0, 62.1, 73.8, 76.1, 78.2, 78.6, 77.1, 72.1, 73.5, 74.0, 73.7, 74.7],
+                    data: [0, 0, 0, 62.1, 73.8, 76.1, 78.2, 78.6, 77.1, 72.1, 73.5, 74.0, 73.7, 74.7, 75.0],
                     borderColor: 'rgba(155, 89, 182, 1)',
                     backgroundColor: 'rgba(155, 89, 182, 0.15)',
                     borderWidth: 3,
@@ -1325,7 +1327,7 @@
                     pointBorderWidth: 2
                 },{
                     label: 'Per Game Attack Efficiency %',
-                    data: [0, 0.0, 0.0, 62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2],
+                    data: [0, 0.0, 0.0, 62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6],
                     borderColor: 'rgba(52, 152, 219, 0.8)',
                     borderWidth: 2,
                     borderDash: [5, 5],
@@ -1376,10 +1378,10 @@
         new Chart(document.getElementById('accScoresChart'), {
             type: 'line',
             data: {
-                labels: ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport'],
+                labels: ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport', 'Kill Shamrocks'],
                 datasets: [{
                     label: 'Goals',
-                    data: [1, 4, 7, 11, 15, 19, 21, 22, 22, 26, 29, 30, 30, 33],
+                    data: [1, 4, 7, 11, 15, 19, 21, 22, 22, 26, 29, 30, 30, 33, 34],
                     borderColor: 'rgba(231, 76, 60, 1)',
                     backgroundColor: 'rgba(231, 76, 60, 0.1)',
                     borderWidth: 3,
@@ -1391,7 +1393,7 @@
                     pointBorderWidth: 2
                 }, {
                     label: '2 Pointers',
-                    data: [2, 3, 3, 4, 4, 4, 5, 6, 6, 8, 8, 10, 11, 13],
+                    data: [2, 3, 3, 4, 4, 4, 5, 6, 6, 8, 8, 10, 11, 13, 13],
                     borderColor: 'rgba(243, 156, 18, 1)',
                     backgroundColor: 'rgba(243, 156, 18, 0.1)',
                     borderWidth: 3,
@@ -1403,7 +1405,7 @@
                     pointBorderWidth: 2
                 }, {
                     label: 'Points',
-                    data: [10, 19, 33, 40, 56, 66, 77, 88, 96, 102, 116, 123, 132, 146],
+                    data: [10, 19, 33, 40, 56, 66, 77, 88, 96, 102, 116, 123, 132, 146, 160],
                     borderColor: 'rgba(52, 152, 219, 1)',
                     backgroundColor: 'rgba(52, 152, 219, 0.1)',
                     borderWidth: 3,
@@ -1433,7 +1435,7 @@
                 labels: ['2025', '2026'],
                 datasets: [{
                     label: 'Shot Accuracy %',
-                    data: [50, 51.1],
+                    data: [50, 51.9],
                     backgroundColor: ['rgba(52, 152, 219, 0.8)', 'rgba(46, 204, 113, 0.8)'],
                     borderColor: ['rgba(41, 128, 185, 1)', 'rgba(39, 174, 96, 1)'],
                     borderWidth: 2
@@ -1504,7 +1506,7 @@
                 labels: ['2026 Season'],
                 datasets: [{
                     label: 'Attack Efficiency %',
-                    data: [74.7],
+                    data: [75.0],
                     backgroundColor: 'rgba(46, 204, 113, 0.8)',
                     borderColor: 'rgba(39, 174, 96, 1)',
                     borderWidth: 2
@@ -1555,7 +1557,7 @@
                     ctx.font = 'bold 14px Arial';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('242 / 324', bar.x / 2, (top + bottom) / 2);
+                    ctx.fillText('264 / 352', bar.x / 2, (top + bottom) / 2);
                     ctx.restore();
                 }
             }]
@@ -1574,7 +1576,7 @@
                     borderWidth: 2
                 }, {
                     label: '2026',
-                    data: [33, 13, 146],
+                    data: [34, 13, 160],
                     backgroundColor: 'rgba(46, 204, 113, 0.8)',
                     borderColor: 'rgba(39, 174, 96, 1)',
                     borderWidth: 2

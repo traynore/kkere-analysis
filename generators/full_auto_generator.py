@@ -574,6 +574,206 @@ def generate_html(csv_file):
     html = html.replace('FUNNEL_NO_SHOT_PCT', str(funnel_no_shot_pct))
     html = html.replace('FUNNEL_NO_SHOT', str(funnel_no_shot))
 
+    # Shot map disabled for now — WIP
+    html = html.replace('<!-- SHOT_MAP_PLACEHOLDER -->', '')
+    if False:  # noqa - shot map WIP
+        # Determine which direction team1 attacks in each half
+        t1_p1_shots = [s for s in k_shots_xy if s.get('Period') == '1']
+        has_period_data = any(s.get('Period') in ('1', '2') for s in k_shots_xy)
+        attacks_low_x_p1 = True
+        if t1_p1_shots:
+            avg_x = sum(float(s['Location X']) for s in t1_p1_shots) / len(t1_p1_shots)
+            attacks_low_x_p1 = avg_x < 0.5
+        
+        # To-scale SVG half-pitch (goal at top, halfway at bottom)
+        # GAA pitch: 145m long, 85m wide. Half = 72.5m.
+        PW = 85       # pitch width (metres)
+        PH = 72.5     # half pitch length
+        PAD = 4       # padding around pitch
+        S = 8         # scale: 1m = 8 SVG units
+        sw = PW * S
+        sh = PH * S
+        vb_w = sw + PAD * 2 * S
+        vb_h = sh + PAD * 2 * S
+        ox = PAD * S   # origin x offset
+        oy = PAD * S   # origin y offset
+        cx = PW / 2    # centre x in metres
+        
+        # Goal dimensions
+        goal_w = 6.4
+        goal_post_l = cx - goal_w / 2
+        goal_post_r = cx + goal_w / 2
+        
+        # Small rectangle: 4.5m deep x 14m wide
+        sm_w, sm_d = 14, 4.5
+        sm_l = cx - sm_w / 2
+        
+        import math
+        
+        def m2svg(mx, my):
+            """Convert metres (0,0 = top-left of pitch) to SVG coords."""
+            return ox + mx * S, oy + my * S
+        
+        def build_pitch_svg():
+            """Build a to-scale GAA half-pitch SVG with all markings."""
+            lines = []
+            lc = '#fff'   # line colour
+            lw = 1.5      # line width
+            
+            # Pitch background
+            px, py = m2svg(0, 0)
+            lines.append(f'<rect x="{px}" y="{py}" width="{sw}" height="{sh}" fill="#2d8a4e" rx="4"/>')
+            
+            # Sidelines
+            x0, y0 = m2svg(0, 0)
+            x1, y1 = m2svg(0, PH)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}"/>')
+            x0, y0 = m2svg(PW, 0)
+            x1, y1 = m2svg(PW, PH)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}"/>')
+            
+            # End line (goal line)
+            x0, y0 = m2svg(0, 0)
+            x1, y1 = m2svg(PW, 0)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}"/>')
+            
+            # Halfway line
+            x0, y0 = m2svg(0, PH)
+            x1, y1 = m2svg(PW, PH)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}"/>')
+            
+            # Small rectangle
+            sx, sy = m2svg(sm_l, 0)
+            lines.append(f'<rect x="{sx}" y="{sy}" width="{sm_w * S}" height="{sm_d * S}" fill="none" stroke="{lc}" stroke-width="{lw}"/>')
+            
+            # 13m line (full width) with semicircular arc
+            arc_r = 13 * S
+            acx, acy = m2svg(cx, 0)
+            ax0 = acx - arc_r
+            ax1 = acx + arc_r
+            lines.append(f'<path d="M {ax0} {acy} A {arc_r} {arc_r} 0 0 1 {ax1} {acy}" fill="none" stroke="{lc}" stroke-width="{lw}"/>')
+            x0_13, y0_13 = m2svg(0, 13)
+            x1_13, y1_13 = m2svg(PW, 13)
+            lines.append(f'<line x1="{x0_13}" y1="{y0_13}" x2="{x1_13}" y2="{y1_13}" stroke="{lc}" stroke-width="{lw}"/>') 
+            
+            # 20m line
+            x0, y0 = m2svg(0, 20)
+            x1, y1 = m2svg(PW, 20)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}" stroke-dasharray="{S},{S*0.6}"/>')
+            
+            # 45m line
+            x0, y0 = m2svg(0, 45)
+            x1, y1 = m2svg(PW, 45)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}" stroke-dasharray="{S},{S*0.6}"/>')
+            
+            # 65m line
+            x0, y0 = m2svg(0, 65)
+            x1, y1 = m2svg(PW, 65)
+            lines.append(f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{lc}" stroke-width="{lw}" stroke-dasharray="{S},{S*0.6}"/>')
+            
+            # Goal posts and crossbar (behind the end line)
+            gx0, gy = m2svg(goal_post_l, 0)
+            gx1, _ = m2svg(goal_post_r, 0)
+            goal_depth = 2 * S
+            lines.append(f'<rect x="{gx0}" y="{gy - goal_depth}" width="{goal_w * S}" height="{goal_depth}" fill="none" stroke="{lc}" stroke-width="{lw + 0.5}"/>')
+            
+            # Line labels
+            lbl_x, _ = m2svg(PW + 1.5, 0)
+            for dist, label in [(20, '20m'), (45, '45m'), (65, '65m'), (PH, '½')]:
+                _, ly = m2svg(0, dist)
+                lines.append(f'<text x="{lbl_x}" y="{ly + 3}" font-size="9" fill="rgba(255,255,255,0.5)" font-family="sans-serif">{label}</text>')
+            
+            return '\n'.join(lines)
+        
+        def normalize_shot_for_team(e, is_team1):
+            """Return (nx, ny) in 0..1 on the full pitch, all shots normalized
+            to attack toward nx=0 (goal at top)."""
+            x = float(e['Location X'])
+            y = float(e['Location Y'])
+            period = e.get('Period', '')
+            
+            if not has_period_data:
+                return 1 - x, y
+            
+            if is_team1:
+                if (period == '1' and attacks_low_x_p1) or (period == '2' and not attacks_low_x_p1):
+                    return x, y
+                else:
+                    return 1 - x, 1 - y
+            else:
+                if (period == '1' and not attacks_low_x_p1) or (period == '2' and attacks_low_x_p1):
+                    return x, y
+                else:
+                    return 1 - x, 1 - y
+        
+        def make_dot(sx, sy, outcome, player, name, period):
+            cmap = {'Point': '#ffffff', 'Goal': '#ffff00', '2 Points': '#f39c12', 'Wide': '#e74c3c', 'Short': '#e67e22', 'Blocked': '#aaa', 'Save': '#aaa'}
+            color = cmap.get(outcome, '#aaa')
+            half_label = '1st' if period == '1' else '2nd'
+            label = f"{player}: {outcome} ({half_label} half)" + (" (free)" if name == 'Scoreable free' else "")
+            is_second_half = period == '2'
+            opacity = '0.6' if is_second_half else '0.95'
+            dash = ' stroke-dasharray="3,2"' if is_second_half else ''
+            scored = outcome in ['Point', 'Goal', '2 Points']
+            if scored:
+                r = 2.2 if outcome == 'Goal' else 1.6
+                return f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{r * S}" fill="{color}" opacity="{opacity}" stroke="#333" stroke-width="1.5"{dash}><title>{label}</title></circle>'
+            else:
+                s = 1.2 * S
+                return f'<g opacity="{opacity}"><line x1="{sx-s:.1f}" y1="{sy-s:.1f}" x2="{sx+s:.1f}" y2="{sy+s:.1f}" stroke="{color}" stroke-width="2.5" stroke-linecap="round"{dash}/><line x1="{sx+s:.1f}" y1="{sy-s:.1f}" x2="{sx-s:.1f}" y2="{sy+s:.1f}" stroke="{color}" stroke-width="2.5" stroke-linecap="round"{dash}/><title>{label}</title></g>'
+        
+        pitch_markings = build_pitch_svg()
+        
+        # Legend
+        leg_y = vb_h - PAD * S * 0.4
+        leg_cx = vb_w / 2
+        legend = f'<g transform="translate({leg_cx - 200},{leg_y})" font-family="sans-serif">'
+        legend += f'<circle cx="0" cy="0" r="5" fill="#fff" stroke="#333" stroke-width="1"/><text x="8" y="4" font-size="9" fill="#888">Point</text>'
+        legend += f'<circle cx="60" cy="0" r="5" fill="#ffff00" stroke="#333" stroke-width="1"/><text x="68" y="4" font-size="9" fill="#888">Goal</text>'
+        legend += f'<circle cx="115" cy="0" r="5" fill="#f39c12" stroke="#333" stroke-width="1"/><text x="123" y="4" font-size="9" fill="#888">2pt</text>'
+        legend += f'<g opacity="0.85"><line x1="162" y1="-4" x2="170" y2="4" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/><line x1="170" y1="-4" x2="162" y2="4" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/></g><text x="175" y="4" font-size="9" fill="#888">Wide</text>'
+        legend += f'<g opacity="0.85"><line x1="212" y1="-4" x2="220" y2="4" stroke="#e67e22" stroke-width="2" stroke-linecap="round"/><line x1="220" y1="-4" x2="212" y2="4" stroke="#e67e22" stroke-width="2" stroke-linecap="round"/></g><text x="225" y="4" font-size="9" fill="#888">Short</text>'
+        legend += f'<circle cx="272" cy="0" r="5" fill="#fff" stroke="#333" stroke-width="1"/><text x="280" y="4" font-size="9" fill="#888">1st Half</text>'
+        legend += f'<circle cx="340" cy="0" r="5" fill="#fff" stroke="#333" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.6"/><text x="348" y="4" font-size="9" fill="#888">2nd Half</text>'
+        legend += '</g>'
+        
+        def build_shot_map_svg(shots, team_name, is_team1):
+            dots = ''
+            for e in shots:
+                nx, ny = normalize_shot_for_team(e, is_team1)
+                # nx: 0=goal end, 1=far end. ny: 0..1 across width
+                # Convert to metres on half pitch then to SVG
+                my = nx * 145       # metres from goal end (full pitch)
+                mx = ny * PW        # metres across pitch
+                if my > PH + PAD:   # skip shots beyond halfway + padding
+                    continue
+                sx, sy = m2svg(mx, my)
+                dots += make_dot(sx, sy, e['Outcome'], e.get('Player', ''), e.get('Name', ''), e.get('Period', '1'))
+            return f"""<svg viewBox="0 0 {vb_w} {vb_h}" style="width:100%;height:auto;max-width:500px">
+                        {pitch_markings}
+                        {dots}
+                        {legend}
+                    </svg>"""
+        
+        t1_svg = build_shot_map_svg(k_shots_xy, stats['team1'], True) if k_shots_xy else ''
+        t2_svg = build_shot_map_svg(o_shots_xy, stats['team2'], False) if o_shots_xy else ''
+        
+        shot_map_html = ''
+        if t1_svg:
+            shot_map_html += f"""\n            <div class="chart-container" style="margin: 30px 0;">
+                <div class="chart-title">\U0001f5fa\ufe0f Shot Map \u2014 {stats['team1']}</div>
+                <div style="text-align:center;margin-bottom:8px;font-size:.85em;color:#7f8c8d">Hover for player & outcome details</div>
+                <div style="max-width:800px;margin:0 auto">{t1_svg}</div>
+            </div>\n"""
+        if t2_svg:
+            shot_map_html += f"""\n            <div class="chart-container" style="margin: 30px 0;">
+                <div class="chart-title">\U0001f5fa\ufe0f Shot Map \u2014 {stats['team2']}</div>
+                <div style="text-align:center;margin-bottom:8px;font-size:.85em;color:#7f8c8d">Hover for player & outcome details</div>
+                <div style="max-width:800px;margin:0 auto">{t2_svg}</div>
+            </div>\n"""
+        
+        html = html.replace('<!-- SHOT_MAP_PLACEHOLDER -->', shot_map_html)
+
     # Replace attacks stats
     html = html.replace('ATTACKS_WITH_SHOT / TOTAL_ATTACKS', f'{attacks_with_shot_2026} / {total_attacks_2026}')
     html = html.replace('TOTAL_ATTACKS', str(stats['t1_attacks']))
