@@ -166,6 +166,10 @@ def generate():
     won_2h = [g for g in games if g['won_2h']]
     lost_2h = [g for g in games if g['lost_2h']]
     drew_2h = [g for g in games if g['drew_2h']]
+    drought_short = [g for g in games if g['longest_drought_mins'] <= 12]
+    drought_long = [g for g in games if g['longest_drought_mins'] > 12]
+    behind_no_faht = [g for g in games if g['ht_lead'] < 0 and not g['scored_first_after_ht']]
+    behind_yes_faht = [g for g in games if g['ht_lead'] < 0 and g['scored_first_after_ht']]
 
     def record(gs):
         w = sum(1 for g in gs if g['result'] == 'W')
@@ -331,7 +335,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-green">
 <h3>🎯 Score First After Half Time</h3>
-<div class="insight">When Killinkere score first after the break, the team almost never loses. All three defeats came when the opposition got the first score of the second half.</div>
+<div class="insight">The single strongest predictor. When Killinkere score first after the break: {record(first_ht_yes)}. When they don't: {record(first_ht_no)}. All {sum(1 for g in first_ht_no if g['result']=='L')} defeats came when the opposition scored first after half time.</div>
 <div class="record-row">
 <div class="rec rec-good">✅ Yes: {record(first_ht_yes)}</div>
 <div class="rec rec-bad">❌ No: {record(first_ht_no)}</div>
@@ -340,7 +344,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-red">
 <h3>🛑 Opposition Scoring Runs (4+)</h3>
-<div class="insight">When the opposition strings together 4 or more unanswered scores, Killinkere struggle. Limiting runs to 3 or fewer has been strong but not bulletproof \u2014 the Lavey loss came despite limiting them to just 3 in a row.</div>
+<div class="insight">When the opposition strings together 4+ unanswered scores, Killinkere struggle ({record(opp_run_high)}). Limiting runs to 3 or fewer: {record(opp_run_low)}. The Lavey loss is the exception — opp only managed a 3-score run but the HT deficit was too deep.</div>
 <div class="record-row">
 <div class="rec rec-good">≤3 run: {record(opp_run_low)}</div>
 <div class="rec rec-bad">4+ run: {record(opp_run_high)}</div>
@@ -348,27 +352,17 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 </div>
 
 <div class="pattern-card pattern-blue">
-<h3>⏱️ Win the Second Half</h3>
-<div class="insight">Winning the second half is a strong indicator but not a guarantee \u2014 the Lavey loss came despite outscoring them 10-8 after the break. The HT deficit (4-9) was too much to overcome. Every other game where Killinkere won the 2nd half ended in a win.</div>
+<h3>⏱️ Scoring Drought</h3>
+<div class="insight">When the longest gap between Killinkere scores stays under 12 minutes: {record(drought_short)} — unbeaten. When droughts stretch beyond 12 minutes: {record(drought_long)}. Keeping the scoreboard ticking is critical.</div>
 <div class="record-row">
-<div class="rec rec-good">Won 2H: {record(won_2h)}</div>
-<div class="rec rec-neutral">Drew 2H: {record(drew_2h)}</div>
-<div class="rec rec-bad">Lost 2H: {record(lost_2h)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-purple">
-<h3>🏁 Score First Overall</h3>
-<div class="insight">Scoring first doesn't guarantee a win — Killinkere have won games where the opposition scored first. It's less predictive than the half-time restart.</div>
-<div class="record-row">
-<div class="rec rec-good">✅ Yes: {record([g for g in games if g['scored_first']])}</div>
-<div class="rec rec-neutral">❌ No: {record([g for g in games if not g['scored_first']])}</div>
+<div class="rec rec-good">≤12min: {record(drought_short)}</div>
+<div class="rec rec-bad">&gt;12min: {record(drought_long)}</div>
 </div>
 </div>
 
 <div class="pattern-card pattern-gold">
 <h3>📊 Half Time Position</h3>
-<div class="insight">Being ahead at half time is a strong indicator but not bulletproof — the Arva draw came despite leading by 3 at the break. The team has come from behind at HT twice (v Pearse OG, down 5-7, won 23-13 and v Drung, down 10-11, won 19-16) but the other two deficits ended in defeat.</div>
+<div class="insight">Leading at half time: {record(ahead_ht)} — near-perfect. Behind at HT: {record(behind_ht)} — the two wins from behind (v Pearse OG down 5-7, v Drung down 10-11) both required scoring first after the break. Behind at HT AND opp scores first after HT: {record(behind_no_faht)} — guaranteed defeat.</div>
 <div class="record-row">
 <div class="rec rec-good">Ahead: {record(ahead_ht)}</div>
 <div class="rec rec-neutral">Level: {record(level_ht)}</div>
@@ -376,9 +370,19 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 </div>
 </div>
 
+<div class="pattern-card pattern-blue">
+<h3>⏱️ Win the Second Half</h3>
+<div class="insight">Winning the 2nd half: {record(won_2h)}. Losing it: {record(lost_2h)}. The Lavey loss came despite winning the 2nd half 10-8 — the 5-point HT deficit was too deep. v Kill Shamrocks won despite losing the 2nd half 7-8, protected by a 3-point HT lead.</div>
+<div class="record-row">
+<div class="rec rec-good">Won 2H: {record(won_2h)}</div>
+<div class="rec rec-neutral">Drew 2H: {record(drew_2h)}</div>
+<div class="rec rec-bad">Lost 2H: {record(lost_2h)}</div>
+</div>
+</div>
+
 <div class="pattern-card pattern-green">
 <h3>🏐 Score Last</h3>
-<div class="insight">Killinkere scored last in {sum(1 for g in games if g['scored_last'])} of {total} games — a strong finishing mentality. The only game where they didn't score last and still won was v Liatroim.</div>
+<div class="insight">Killinkere scored last in {sum(1 for g in games if g['scored_last'])} of {total} games — a strong finishing mentality. {record([g for g in games if g['scored_last']])} when scoring last vs {record([g for g in games if not g['scored_last']])} when not.</div>
 <div class="record-row">
 <div class="rec rec-good">✅ Yes: {record([g for g in games if g['scored_last']])}</div>
 <div class="rec rec-bad">❌ No: {record([g for g in games if not g['scored_last']])}</div>
@@ -391,11 +395,11 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 <div class="pattern-grid">
 <div class="pattern-card pattern-red">
 <h3>🚨 The Loss Profile</h3>
-<div class="insight">The Greenlough and Denn (Div 3) losses share the same DNA: opposition scored first after half time AND put together a run of 5 unanswered scores. The Lavey loss was different — opp only managed a 3-score run and Killinkere won the 2nd half, but the 5-point HT deficit was too deep. Common thread across all 3 losses: opposition scored first after the break.</div>
+<div class="insight">Common thread across all {losses} defeats: opposition scored first after the break. The Greenlough and Denn (Div 3) losses also featured 5+ unanswered opposition scoring runs. The Lavey loss was different — only a 3-score opp run and Killinkere won the 2nd half, but the 5-point HT deficit was too deep to recover from.</div>
 </div>
 <div class="pattern-card pattern-red">
-<h3>📉 2nd Half Collapses</h3>
-<div class="insight">v Arva: led by 3 at HT, drew. v Greenlough: 2 down at HT, lost by 5. v Denn (Div 3): 6 down at HT, lost by 7. v Lavey: 5 down at HT, won the 2nd half but couldn't close the gap. Only full comebacks from behind were v Pearse OG (5-7 at HT, won 23-13) and v Drung (10-11 at HT, won 19-16).</div>
+<h3>📉 Behind at HT + Opp Scores First After HT</h3>
+<div class="insight">This is the deadliest combination: {record(behind_no_faht)}. When behind at HT but Killinkere score first after the break, the record flips to {record(behind_yes_faht)} — both comebacks (v Pearse OG, v Drung) followed this pattern. The restart after half time is the key moment when chasing a game.</div>
 </div>
 </div>
 
@@ -435,7 +439,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-green">
 <h3>🎯 Shot Accuracy (Target: 70%)</h3>
-<div class="insight">Shooting below 50% from play is dangerous but not fatal — the Munterconnaught win (30.4%) shows frees and 2-pointers can compensate. However, the two heaviest defeats (Greenlough 23.8%, Lavey 37.5%) both came with poor accuracy. Above 50%, the team rarely loses.</div>
+<div class="insight">Above 50% accuracy: {record(acc_above_50)}. Below 50%: {record(acc_below_50)}. The Munterconnaught win (30.4%) shows frees can compensate, but the heaviest defeats (Greenlough 23.8%, Lavey 37.5%) both came with poor accuracy.</div>
 <div class="record-row">
 <div class="rec rec-good">≥50%: {record(acc_above_50)}</div>
 <div class="rec rec-bad">&lt;50%: {record(acc_below_50)}</div>
@@ -444,7 +448,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-blue">
 <h3>⚡ Attack Efficiency (Target: 75%)</h3>
-<div class="insight">When 80%+ of attacks end with a shot, Killinkere are unbeaten. Below 80%, the record drops sharply. The Denn Div 3 loss (45.2%) shows what happens when attacks break down before a shot is taken.</div>
+<div class="insight">When 80%+ of attacks end with a shot: {record(att_above_80)} — unbeaten. Below 80%: {record(att_below_80)}. The Denn Div 3 loss (45.2%) is the worst example of attacks breaking down. v Kill Shamrocks (78.6%) shows high accuracy can compensate for slightly lower creation.</div>
 <div class="record-row">
 <div class="rec rec-good">≥80%: {record(att_above_80)}</div>
 <div class="rec rec-bad">&lt;80%: {record(att_below_80)}</div>
@@ -453,7 +457,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div class="pattern-card pattern-red">
 <h3>🚨 Two Ways to Lose</h3>
-<div class="insight"><strong>Can't convert:</strong> Get the shots but accuracy is poor (Greenlough 23.8%, Lavey 37.5%).<br><strong>Can't create:</strong> Decent accuracy but can't get the shot away (Denn Div 3: 57.1% accuracy but only 45.2% attack efficiency — 17 of 31 attacks ended without a shot).<br><strong>Exception:</strong> v Munterconnaught won despite 30.4% accuracy — scoreable frees (3/5 converted) and disciplined possession kept the scoreboard ticking.</div>
+<div class="insight"><strong>Can't convert:</strong> Get the shots but accuracy is poor (Greenlough 23.8%, Lavey 37.5%).<br><strong>Can't create:</strong> Decent accuracy but can't get the shot away (Denn Div 3: 57.1% accuracy but only 45.2% attack efficiency).<br><strong>Exceptions:</strong> v Munterconnaught won despite 30.4% accuracy — frees compensated. v Kill Shamrocks won with 78.6% attack efficiency (just below 80%) because accuracy was strong at 63.6%.</div>
 </div>
 
 </div>
