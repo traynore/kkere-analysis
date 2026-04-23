@@ -102,9 +102,15 @@ def generate_html(csv_file):
         h2_hid_pm = h2.get('hid_per_min', 0)
         h1_sd_pm = h1.get('sprint_dist_per_min', 0)
         h2_sd_pm = h2.get('sprint_dist_per_min', 0)
-        played_both = h1.get('total_distance', 0) > 0 and h2.get('total_distance', 0) > 0
+        h1d = h1.get('total_distance', 0)
+        h2d = h2.get('total_distance', 0)
+        played_both = h1d > 0 and h2d > 0
         if not played_both:
             return {'label': 'SUB', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': 'Did not play both halves'}
+        if h2d < h1d * 0.65:
+            return {'label': '🔄 Subbed', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': f'Subbed in 2nd half (1H:{h1d}m, 2H:{h2d}m)'}
+        if h1d < h2d * 0.65:
+            return {'label': '🔄 Sub on', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': f'Came on in 2nd half (1H:{h1d}m, 2H:{h2d}m)'}
         total_pm = h1_hsr_pm + h2_hsr_pm
         h1_pct = round(h1_hsr_pm / total_pm * 100) if total_pm > 0 else 50
         hsr_change = round((h2_hsr_pm - h1_hsr_pm) / h1_hsr_pm * 100) if h1_hsr_pm > 0 else 0
