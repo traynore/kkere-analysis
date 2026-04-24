@@ -38,7 +38,8 @@
       {label:'v Kill Shamrocks — GPS (22 Apr)', file:'v_Kill_Shamrocks__ACFL_Div3_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
-      {label:'Season Trends & Patterns', file:'season_trends.html'}
+      {label:'Season Trends & Patterns', file:'season_trends.html'},
+      {label:'Defensive Trends', file:'defensive_trends.html'}
     ]}
   ];
 

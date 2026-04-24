@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Defensive Trends — Killinkere 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#2c3e50,#3498db);padding:20px}
+.container{max-width:1400px;margin:0 auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.header{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;padding:40px;text-align:center}
+.header h1{font-size:2.8em;margin-bottom:8px;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.header p{font-size:1.2em;opacity:.85}
+.summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-bottom:30px}
+.summary-card{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border-radius:14px;padding:20px;text-align:center}
+.summary-card .val{font-size:2em;font-weight:bold}.summary-card .lbl{font-size:.82em;opacity:.85;margin-top:3px}
+.tabs{display:flex;background:#34495e}.tab{flex:1;padding:18px;text-align:center;color:#fff;cursor:pointer;transition:.3s;font-size:1.05em;font-weight:bold}
+.tab:hover{background:#2c3e50}.tab.active{background:#c0392b}
+.tab-content{display:none;padding:35px}.tab-content.active{display:block}
+.pattern-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;margin-bottom:30px}
+.pattern-card{border-radius:14px;padding:25px}.pattern-card h3{font-size:1.15em;margin-bottom:12px}
+.pattern-card .insight{font-size:.92em;color:#555;line-height:1.5;margin-bottom:14px}
+.rec{padding:6px 14px;border-radius:8px;font-weight:bold;font-size:.9em;display:inline-block;margin:4px}
+.rec-good{background:rgba(46,204,113,.15);color:#27ae60;border:1px solid rgba(46,204,113,.3)}
+.rec-bad{background:rgba(231,76,60,.15);color:#c0392b;border:1px solid rgba(231,76,60,.3)}
+.pattern-green{background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(46,204,113,.15));border-left:5px solid #2ecc71}
+.pattern-red{background:linear-gradient(135deg,rgba(231,76,60,.08),rgba(231,76,60,.15));border-left:5px solid #e74c3c}
+.pattern-blue{background:linear-gradient(135deg,rgba(52,152,219,.08),rgba(52,152,219,.15));border-left:5px solid #3498db}
+.pattern-gold{background:linear-gradient(135deg,rgba(243,156,18,.08),rgba(243,156,18,.15));border-left:5px solid #f39c12}
+.chart-box{background:#fff;border-radius:15px;padding:28px;margin:22px 0;box-shadow:0 4px 6px rgba(0,0,0,.1)}
+.chart-title{font-size:1.6em;color:#2c3e50;margin-bottom:18px;text-align:center;font-weight:bold}
+table.def-table{width:100%;border-collapse:collapse;font-size:.85em}
+.def-table th{background:#34495e;color:#fff;padding:10px 8px;text-align:center;white-space:nowrap;cursor:pointer}
+.def-table th:hover{background:#2c3e50}.def-table td{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}
+.def-table tr:hover{background:#f0f4ff}.def-table tr:nth-child(even){background:#f8f9fa}
+.footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+</style></head><body>
+<div class="container">
+<div class="header">
+<h1>🛡️ DEFENSIVE TRENDS</h1>
+<p>Killinkere GAA — 2026 Season · 15 Games Analyzed</p>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="showTab('patterns')">🔍 Patterns</div>
+<div class="tab" onclick="showTab('charts')">📈 Charts</div>
+<div class="tab" onclick="showTab('fouls')">🟨 Fouls & Frees</div>
+<div class="tab" onclick="showTab('table')">📋 Full Table</div>
+</div>
+
+<div id="patterns" class="tab-content active">
+<div class="summary-row">
+<div class="summary-card"><div class="val">14.5</div><div class="lbl">Avg Pts Conceded</div></div>
+<div class="summary-card"><div class="val">19</div><div class="lbl">Total Goals Conc.</div></div>
+<div class="summary-card"><div class="val">12.2</div><div class="lbl">Avg Frees Conc.</div></div>
+<div class="summary-card"><div class="val">52</div><div class="lbl">Total Pts from Frees</div></div>
+</div>
+
+<h2 style="color:#2c3e50;text-align:center;margin:20px 0;font-size:1.7em">🔍 Defensive Patterns</h2>
+<div class="pattern-grid">
+
+<div class="pattern-card pattern-green">
+<h3>🎯 Force Poor Shooting (&lt;40% Opp Accuracy)</h3>
+<div class="insight">The strongest defensive predictor. When opposition accuracy is held below 40%: 8W-1D-0L. When they shoot 40%+: 3W-0D-3L. Making them take difficult shots from distance is the best defence.</div>
+<div><span class="rec rec-good">&lt;40%: 8W-1D-0L</span><span class="rec rec-bad">≥40%: 3W-0D-3L</span></div>
+</div>
+
+<div class="pattern-card pattern-red">
+<h3>🟨 Points Conceded from Frees</h3>
+<div class="insight">When opposition score ≤3pts from frees: 9W-0D-2L. When they score 4+: 2W-1D-1L. The Arva draw (10pts from frees) and Denn Div 3 loss (10pts from frees) are the standout examples of fouling costing results.</div>
+<div><span class="rec rec-good">≤3pts: 9W-0D-2L</span><span class="rec rec-bad">&gt;3pts: 2W-1D-1L</span></div>
+</div>
+
+<div class="pattern-card pattern-blue">
+<h3>🔒 Keep It Tight (≤12pts Conceded)</h3>
+<div class="insight">Unbeaten when holding opposition to 12 points or fewer: 5W-0D-0L. When conceding 13+: 6W-1D-3L. The 12-point mark is the defensive threshold.</div>
+<div><span class="rec rec-good">≤12pts: 5W-0D-0L</span><span class="rec rec-bad">&gt;12pts: 6W-1D-3L</span></div>
+</div>
+
+<div class="pattern-card pattern-gold">
+<h3>🥅 Goals Conceded</h3>
+<div class="insight">0 goals conceded: 3W-0D-1L. 1 goal: 4W-1D-1L. 2+ goals: 4W-0D-1L. Goals conceded doesn't cleanly predict results — Killinkere have won games conceding 3 goals (v Drung, v Kill Shamrocks). But the Denn Div 3 loss (3 goals) shows it can be fatal against quality opposition.</div>
+<div><span class="rec rec-good">0 goals: 3W-0D-1L</span><span class="rec rec-good">1 goal: 4W-1D-1L</span><span class="rec rec-bad">2+ goals: 4W-0D-1L</span></div>
+</div>
+
+<div class="pattern-card pattern-green">
+<h3>🤐 Discipline (≤10 Frees Conceded)</h3>
+<div class="insight">Unbeaten when conceding 10 or fewer frees: 4W-0D-0L. When conceding 11+: 7W-1D-3L. Fewer fouls = fewer scoring chances for the opposition and less pressure on the defence.</div>
+<div><span class="rec rec-good">≤10: 4W-0D-0L</span><span class="rec rec-bad">&gt;10: 7W-1D-3L</span></div>
+</div>
+
+<div class="pattern-card pattern-blue">
+<h3>📊 Where Conceded Scores Come From</h3>
+<div class="insight">Across 15 games: 72% of opposition scores come from play, 28% from frees. 52 points conceded from dead balls across the season — that's 24% of all points conceded.</div>
+</div>
+
+</div>
+</div>
+
+<div id="charts" class="tab-content">
+<div class="chart-box"><div class="chart-title">📊 Points Conceded per Game</div><canvas id="concChart"></canvas></div>
+<div class="chart-box"><div class="chart-title">🥅 Goals Conceded per Game</div><canvas id="goalsChart"></canvas></div>
+<div class="chart-box"><div class="chart-title">🎯 Opposition Shot Accuracy</div><canvas id="accChart"></canvas></div>
+<div class="chart-box"><div class="chart-title">⏱️ Conceded by Half</div><canvas id="halvesChart"></canvas></div>
+<div class="chart-box"><div class="chart-title">🟨 Frees Conceded & Points from Frees</div><canvas id="freesChart"></canvas></div>
+</div>
+
+<div id="fouls" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">🟨 Frees Conceded by Player (Season)</h2>
+<table class="def-table">
+<thead><tr><th>Player</th><th>Total</th><th>Defensive 3rd</th><th>Middle 3rd</th><th>Attacking 3rd</th></tr></thead>
+<tbody><tr><td><strong>Alex Sweeney</strong></td><td>16</td><td>3</td><td>11</td><td>2</td></tr>
+<tr><td><strong>Fintan O’Connell</strong></td><td>13</td><td>3</td><td>4</td><td>6</td></tr>
+<tr><td><strong>Philip Corrigan</strong></td><td>10</td><td>1</td><td>9</td><td>0</td></tr>
+<tr><td><strong>Benny McConnell</strong></td><td>9</td><td>5</td><td>4</td><td>0</td></tr>
+<tr><td><strong>Cian Fitzsimons</strong></td><td>9</td><td>5</td><td>4</td><td>0</td></tr>
+<tr><td><strong>Ben Philingham</strong></td><td>8</td><td>1</td><td>4</td><td>3</td></tr>
+<tr><td><strong>James Farrelly</strong></td><td>8</td><td>3</td><td>3</td><td>2</td></tr>
+<tr><td><strong>Phelim Cusack</strong></td><td>8</td><td>1</td><td>6</td><td>1</td></tr>
+<tr><td><strong>Ruairi O Connell</strong></td><td>8</td><td>1</td><td>5</td><td>2</td></tr>
+<tr><td><strong>Jason McMahon</strong></td><td>7</td><td>3</td><td>2</td><td>2</td></tr>
+<tr><td><strong>Nathan McQuade</strong></td><td>7</td><td>2</td><td>3</td><td>2</td></tr>
+<tr><td><strong>Darren Smith</strong></td><td>6</td><td>3</td><td>0</td><td>3</td></tr>
+<tr><td><strong>Conall Mooney</strong></td><td>5</td><td>0</td><td>3</td><td>2</td></tr>
+<tr><td><strong>Kevin McCabe</strong></td><td>5</td><td>2</td><td>0</td><td>3</td></tr>
+<tr><td><strong>Darrell Dolan</strong></td><td>4</td><td>4</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+</div>
+
+<div id="table" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📋 Defensive Game-by-Game</h2>
+<div style="overflow-x:auto">
+<table class="def-table" id="defTable">
+<thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Conc</th><th>Goals</th><th>Opp Acc (play)</th><th>Wides</th><th>Frees Scored</th><th>Pts from Frees</th><th>Frees Conc</th><th>D/M/A</th><th>1H</th><th>2H</th><th>Opp KO Ret</th></tr></thead>
+<tbody><tr><td>8/2/2026</td><td>v Clones</td><td style="color:#2ecc71;font-weight:bold">W</td><td>15</td><td>1</td><td>10/26 (38.5%)</td><td>8</td><td>2/3</td><td>3</td><td>7</td><td>2/2/3</td><td>10</td><td>5</td><td>71%</td></tr>
+<tr><td>15/2/2026</td><td>v Denn</td><td style="color:#2ecc71;font-weight:bold">W</td><td>16</td><td>1</td><td>8/21 (38.1%)</td><td>10</td><td>3/5</td><td>3</td><td>19</td><td>2/7/9</td><td>14</td><td>2</td><td>48%</td></tr>
+<tr><td>22/2/2026</td><td>v Pearse OG</td><td style="color:#2ecc71;font-weight:bold">W</td><td>13</td><td>1</td><td>7/18 (38.9%)</td><td>8</td><td>2/3</td><td>2</td><td>10</td><td>1/2/7</td><td>7</td><td>6</td><td>48%</td></tr>
+<tr><td>27/2/2026</td><td>v Aughadrumsee</td><td style="color:#2ecc71;font-weight:bold">W</td><td>12</td><td>0</td><td>9/18 (50.0%)</td><td>5</td><td>3/6</td><td>3</td><td>11</td><td>6/4/1</td><td>7</td><td>5</td><td>53%</td></tr>
+<tr><td>7/3/2026</td><td>v Ballymahon</td><td style="color:#2ecc71;font-weight:bold">W</td><td>12</td><td>2</td><td>6/15 (40.0%)</td><td>3</td><td>2/6</td><td>2</td><td>12</td><td>3/1/8</td><td>5</td><td>7</td><td>54%</td></tr>
+<tr><td>15/3/2026</td><td>v Liatroim</td><td style="color:#2ecc71;font-weight:bold">W</td><td>14</td><td>2</td><td>6/16 (37.5%)</td><td>2</td><td>3/5</td><td>3</td><td>8</td><td>4/3/1</td><td>4</td><td>10</td><td>41%</td></tr>
+<tr><td>17/3/2026</td><td>v Drung</td><td style="color:#2ecc71;font-weight:bold">W</td><td>16</td><td>3</td><td>8/24 (33.3%)</td><td>9</td><td>1/5</td><td>1</td><td>11</td><td>6/3/2</td><td>11</td><td>5</td><td>71%</td></tr>
+<tr><td>21/3/2026</td><td>v Arva</td><td style="color:#f39c12;font-weight:bold">D</td><td>16</td><td>1</td><td>6/19 (31.6%)</td><td>6</td><td>7/8</td><td>10</td><td>12</td><td>4/6/1</td><td>4</td><td>12</td><td>71%</td></tr>
+<tr><td>22/3/2026</td><td>v Greenlough</td><td style="color:#e74c3c;font-weight:bold">L</td><td>13</td><td>0</td><td>10/19 (52.6%)</td><td>5</td><td>3/8</td><td>3</td><td>13</td><td>6/4/3</td><td>6</td><td>7</td><td>52%</td></tr>
+<tr><td>28/3/2026</td><td>v Denn</td><td style="color:#e74c3c;font-weight:bold">L</td><td>29</td><td>3</td><td>12/20 (60.0%)</td><td>6</td><td>7/8</td><td>10</td><td>14</td><td>5/8/1</td><td>15</td><td>14</td><td>50%</td></tr>
+<tr><td>29/3/2026</td><td>v Denn</td><td style="color:#2ecc71;font-weight:bold">W</td><td>8</td><td>1</td><td>6/16 (37.5%)</td><td>7</td><td>0/3</td><td>0</td><td>6</td><td>1/5/0</td><td>2</td><td>6</td><td>40%</td></tr>
+<tr><td>5/4/2026</td><td>v Lavey</td><td style="color:#e74c3c;font-weight:bold">L</td><td>17</td><td>1</td><td>12/24 (50.0%)</td><td>5</td><td>0/1</td><td>0</td><td>13</td><td>1/9/3</td><td>9</td><td>8</td><td>60%</td></tr>
+<tr><td>11/4/2026</td><td>v Munterconnaught</td><td style="color:#2ecc71;font-weight:bold">W</td><td>9</td><td>0</td><td>4/14 (28.6%)</td><td>2</td><td>4/9</td><td>5</td><td>18</td><td>5/11/2</td><td>3</td><td>6</td><td>40%</td></tr>
+<tr><td>12/4/2026</td><td>v Templeport</td><td style="color:#2ecc71;font-weight:bold">W</td><td>12</td><td>0</td><td>7/17 (41.2%)</td><td>4</td><td>3/5</td><td>3</td><td>16</td><td>5/10/1</td><td>10</td><td>2</td><td>41%</td></tr>
+<tr><td>22/4/2026</td><td>v Kill</td><td style="color:#2ecc71;font-weight:bold">W</td><td>15</td><td>3</td><td>5/18 (27.8%)</td><td>9</td><td>4/6</td><td>4</td><td>13</td><td>2/9/2</td><td>7</td><td>8</td><td>73%</td></tr>
+</tbody>
+</table></div>
+</div>
+
+</div>
+<div class="footer">Killinkere GAA · Defensive Trends · 2026</div>
+
+<script>
+function showTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
+const L=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill"],C=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)"],B=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)"];
+const green='rgba(46,204,113,0.8)',greenB='rgba(39,174,96,1)',red='rgba(231,76,60,0.8)',redB='rgba(192,57,43,1)',blue='rgba(52,152,219,0.8)',blueB='rgba(41,128,185,1)',orange='rgba(243,156,18,0.8)',orangeB='rgba(230,126,34,1)';
+new Chart(document.getElementById('concChart'),{type:'bar',data:{labels:L,datasets:[{label:'Pts Conceded',data:[15, 16, 13, 12, 12, 14, 16, 16, 13, 29, 8, 17, 9, 12, 15],backgroundColor:C,borderColor:B,borderWidth:2}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}},plugins:[{id:'t',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(12);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(46,204,113,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(46,204,113,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('12pt threshold',right,yp-4);ctx.restore()}}]});
+new Chart(document.getElementById('goalsChart'),{type:'bar',data:{labels:L,datasets:[{label:'Goals',data:[1, 1, 1, 0, 2, 2, 3, 1, 0, 3, 1, 1, 0, 0, 3],backgroundColor:red,borderColor:redB,borderWidth:2}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}});
+new Chart(document.getElementById('accChart'),{type:'bar',data:{labels:L,datasets:[{label:'Opp Accuracy %',data:[38.5, 38.1, 38.9, 50.0, 40.0, 37.5, 33.3, 31.6, 52.6, 60.0, 37.5, 50.0, 28.6, 41.2, 27.8],backgroundColor:C,borderColor:B,borderWidth:2}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'}}}},plugins:[{id:'a',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(40);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(231,76,60,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(231,76,60,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('40% danger line',right,yp-4);ctx.restore()}}]});
+new Chart(document.getElementById('halvesChart'),{type:'bar',data:{labels:L,datasets:[{label:'1st Half',data:[10, 14, 7, 7, 5, 4, 11, 4, 6, 15, 2, 9, 3, 10, 7],backgroundColor:orange,borderColor:orangeB,borderWidth:2},{label:'2nd Half',data:[5, 2, 6, 5, 7, 10, 5, 12, 7, 14, 6, 8, 6, 2, 8],backgroundColor:blue,borderColor:blueB,borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true}},plugins:{legend:{display:true,position:'top'}}}});
+new Chart(document.getElementById('freesChart'),{type:'bar',data:{labels:L,datasets:[{label:'Frees Conceded',data:[7, 19, 10, 11, 12, 8, 11, 12, 13, 14, 6, 13, 18, 16, 13],backgroundColor:orange,borderColor:orangeB,borderWidth:2},{label:'Pts from Frees',data:[3, 3, 2, 3, 2, 3, 1, 10, 3, 10, 0, 0, 5, 3, 4],backgroundColor:red,borderColor:redB,borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true}},plugins:{legend:{display:true,position:'top'}}}});
+document.querySelectorAll('.def-table th').forEach((th,i)=>{let asc=true;th.addEventListener('click',()=>{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{let av=a.children[i].textContent.replace(/[m%]/g,'').trim();let bv=b.children[i].textContent.replace(/[m%]/g,'').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)});rows.forEach(r=>tbody.appendChild(r));asc=!asc});});
+</script>
+<script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
+</body></html>
