@@ -1224,10 +1224,10 @@
         });
 
         // Accumulative Shot Accuracy Chart — filterable by competition
-        const _accLabels = ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport', 'Kill Shamrocks'];
-        const _accData = [55.0, 45.2, 52.2, 53.5, 56.5, 55.4, 55.6, 55.5, 52.2, 52.5, 53.0, 51.7, 50.0, 51.1, 51.9];
-        const _perGameData = [55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6];
-        const _gameComps = ['Spring League', 'Spring League', 'Spring League', 'Challenge', 'Challenge', 'Spring League', 'Challenge', 'ACFL Div 7', 'Spring League', 'ACFL Div 3', 'ACFL Div 7', 'ACFL Div 7', 'ACFL Div 3', 'ACFL Div 7', 'ACFL Div 3'];
+        const _accLabels = ['Clones', 'Denn', 'Pearse OG', 'Aughadrumsee', 'Ballymahon', 'Liatroim', 'Drung', 'Arva', 'Greenlough', 'Denn', 'Denn', 'Lavey', 'Munterconnaught', 'Templeport', 'Kill Shamrocks', 'Ballymchugh', 'Cuchulainns'];
+        const _accData = [55.0, 45.2, 52.2, 53.5, 56.5, 55.4, 55.6, 55.5, 52.2, 52.5, 53.0, 51.7, 50.0, 51.1, 51.9, 52.1, 51.8];
+        const _perGameData = [55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6, 57.1, 42.9];
+        const _gameComps = ['Spring League', 'Spring League', 'Spring League', 'Challenge', 'Challenge', 'Spring League', 'Challenge', 'ACFL Div 7', 'Spring League', 'ACFL Div 3', 'ACFL Div 7', 'ACFL Div 7', 'ACFL Div 3', 'ACFL Div 7', 'ACFL Div 3', 'ACFL Div 3', 'ACFL Div 7'];
         let _accChart = null;
 
         function buildAccAccuracyChart(filterComp) {
@@ -1307,8 +1307,8 @@
         }
 
         // Accumulative Attack Efficiency Chart — filterable
-        const _attData = [0, 0, 0, 62.1, 73.8, 76.1, 78.2, 78.6, 77.1, 72.1, 73.5, 74.0, 73.7, 74.7, 75.0];
-        const _perGameAttData = [0, 0.0, 0.0, 62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6];
+        const _attData = [0, 0, 0, 62.1, 73.8, 76.1, 78.2, 78.6, 77.1, 72.1, 73.5, 74.0, 73.7, 74.7, 75.0, 74.0, 73.2];
+        const _perGameAttData = [0, 0.0, 0.0, 62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6, 60.0, 61.5];
         let _attChart = null;
 
         function buildAccAttackChart(filterComp) {
@@ -1367,9 +1367,9 @@
         buildAccAttackChart('All');
 
         // Accumulative Scores Chart — filterable
-        const _goalsData = [1, 4, 7, 11, 15, 19, 21, 22, 22, 26, 29, 30, 30, 33, 34];
-        const _twoPtsData = [2, 3, 3, 4, 4, 4, 5, 6, 6, 8, 8, 10, 11, 13, 13];
-        const _pointsData = [10, 19, 33, 40, 56, 66, 77, 88, 96, 102, 116, 123, 132, 146, 160];
+        const _goalsData = [1, 4, 7, 11, 15, 19, 21, 22, 22, 26, 29, 30, 30, 33, 34, 35, 35];
+        const _twoPtsData = [2, 3, 3, 4, 4, 4, 5, 6, 6, 8, 8, 10, 11, 13, 13, 14, 15];
+        const _pointsData = [10, 19, 33, 40, 56, 66, 77, 88, 96, 102, 116, 123, 132, 146, 160, 169, 179];
         let _scoresChart = null;
 
         function buildAccScoresChart(filterComp) {

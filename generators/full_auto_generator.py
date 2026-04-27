@@ -1088,7 +1088,7 @@ def generate_html(csv_file):
             play_two = data['two_pts'] - data['free_two_pts']
             if play_two > 0:            parts.append(f"{play_two}x2pt")
             if data['free_two_pts'] > 0: parts.append(f"{data['free_two_pts']}x2ptf")
-            base = f"{data['goals']}-{data['points']}"
+            base = f"{data['goals']}-{data['points'] + data['two_pts'] * 2}"
             if parts:
                 qualifier = ', '.join(parts)
                 return f'{base} <span style="color:#888">({qualifier})</span>'

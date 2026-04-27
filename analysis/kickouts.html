@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kickout Analysis — Killinkere 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#1e3c72,#2a5298);padding:20px}
+.container{max-width:1400px;margin:0 auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.header{background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);color:#fff;padding:40px;text-align:center}
+.header h1{font-size:2.8em;margin-bottom:8px;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.header p{font-size:1.2em;opacity:.85}
+.summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;padding:25px 35px}
+.summary-card{border-radius:14px;padding:18px;text-align:center;color:#fff}
+.summary-card .val{font-size:2em;font-weight:bold}.summary-card .lbl{font-size:.8em;opacity:.85;margin-top:3px}
+.sc-green{background:linear-gradient(135deg,#27ae60,#2ecc71)}
+.sc-blue{background:linear-gradient(135deg,#2980b9,#3498db)}
+.sc-purple{background:linear-gradient(135deg,#8e44ad,#9b59b6)}
+.sc-orange{background:linear-gradient(135deg,#e67e22,#f39c12)}
+.tabs{display:flex;background:#34495e}.tab{flex:1;padding:18px;text-align:center;color:#fff;cursor:pointer;transition:.3s;font-size:1.05em;font-weight:bold}
+.tab:hover{background:#2c3e50}.tab.active{background:#2a5298}
+.tab-content{display:none;padding:35px}.tab-content.active{display:block}
+.pattern-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;margin-bottom:30px}
+.pattern-card{border-radius:14px;padding:25px}.pattern-card h3{font-size:1.15em;margin-bottom:12px}
+.pattern-card .insight{font-size:.92em;color:#555;line-height:1.5;margin-bottom:14px}
+.rec{padding:6px 14px;border-radius:8px;font-weight:bold;font-size:.9em;display:inline-block;margin:4px}
+.rec-good{background:rgba(46,204,113,.15);color:#27ae60;border:1px solid rgba(46,204,113,.3)}
+.rec-bad{background:rgba(231,76,60,.15);color:#c0392b;border:1px solid rgba(231,76,60,.3)}
+.pattern-green{background:linear-gradient(135deg,rgba(46,204,113,.08),rgba(46,204,113,.15));border-left:5px solid #2ecc71}
+.pattern-blue{background:linear-gradient(135deg,rgba(52,152,219,.08),rgba(52,152,219,.15));border-left:5px solid #3498db}
+.chart-box{background:#fff;border-radius:15px;padding:28px;margin:22px 0;box-shadow:0 4px 6px rgba(0,0,0,.1)}
+.chart-title{font-size:1.4em;color:#2c3e50;margin-bottom:18px;text-align:center;font-weight:bold}
+table.ko-table{width:100%;border-collapse:collapse;font-size:.85em}
+.ko-table th{background:#34495e;color:#fff;padding:10px 8px;text-align:center;white-space:nowrap;cursor:pointer}
+.ko-table th:hover{background:#2c3e50}.ko-table td{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}
+.ko-table tr:hover{background:#f0f4ff}
+.footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+</style></head><body>
+<div class="container">
+<div class="header">
+<h1>🏐 KICKOUT ANALYSIS</h1>
+<p>Killinkere GAA — 2026 Season · 17 Games Analyzed</p>
+</div>
+
+<div class="summary-row">
+<div class="summary-card sc-green"><div class="val">66%</div><div class="lbl">Own KO Retention</div></div>
+<div class="summary-card sc-blue"><div class="val">201/305</div><div class="lbl">Own KOs Won</div></div>
+<div class="summary-card sc-purple"><div class="val">45%</div><div class="lbl">Opp KO Won</div></div>
+<div class="summary-card sc-orange"><div class="val">149/329</div><div class="lbl">Opp KOs Taken</div></div>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="showTab('players')">👤 Players</div>
+<div class="tab" onclick="showTab('charts')">📈 Charts</div>
+<div class="tab" onclick="showTab('table')">📋 Game-by-Game</div>
+</div>
+
+<div id="players" class="tab-content active">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">🏐 Own Kickouts — Who Wins Them</h2>
+<div style="overflow-x:auto">
+<table class="ko-table">
+<thead><tr><th>Player</th><th>Won Clean</th><th>Short Won</th><th>Break Won</th><th>Total</th><th>% of All</th></tr></thead>
+<tbody><tr><td><strong>Kevin McCabe</strong></td><td>12</td><td>4</td><td>7</td><td style="font-weight:bold">23</td><td>11.4%</td></tr>
+<tr><td><strong>Alex Sweeney</strong></td><td>6</td><td>3</td><td>4</td><td style="font-weight:bold">13</td><td>6.5%</td></tr>
+<tr><td><strong>Fintan O’Connell</strong></td><td>9</td><td>2</td><td>1</td><td style="font-weight:bold">12</td><td>6.0%</td></tr>
+<tr><td><strong>Jason McMahon</strong></td><td>5</td><td>0</td><td>4</td><td style="font-weight:bold">9</td><td>4.5%</td></tr>
+<tr><td><strong>Phelim Cusack</strong></td><td>4</td><td>1</td><td>4</td><td style="font-weight:bold">9</td><td>4.5%</td></tr>
+<tr><td><strong>Mark Farrelly (S)</strong></td><td>1</td><td>3</td><td>5</td><td style="font-weight:bold">9</td><td>4.5%</td></tr>
+<tr><td><strong>Ruairi O Connell</strong></td><td>8</td><td>0</td><td>0</td><td style="font-weight:bold">8</td><td>4.0%</td></tr>
+<tr><td><strong>Philip Corrigan</strong></td><td>4</td><td>0</td><td>4</td><td style="font-weight:bold">8</td><td>4.0%</td></tr>
+<tr><td><strong>Gearoid Traynor</strong></td><td>1</td><td>4</td><td>3</td><td style="font-weight:bold">8</td><td>4.0%</td></tr>
+<tr><td><strong>Keiran Smith</strong></td><td>5</td><td>2</td><td>1</td><td style="font-weight:bold">8</td><td>4.0%</td></tr>
+<tr><td><strong>James Farrelly</strong></td><td>6</td><td>1</td><td>0</td><td style="font-weight:bold">7</td><td>3.5%</td></tr>
+<tr><td><strong>Luke Crossan</strong></td><td>3</td><td>4</td><td>0</td><td style="font-weight:bold">7</td><td>3.5%</td></tr>
+<tr><td><strong>Benny McConnell</strong></td><td>1</td><td>4</td><td>1</td><td style="font-weight:bold">6</td><td>3.0%</td></tr>
+<tr><td><strong>Ben Philingham</strong></td><td>4</td><td>0</td><td>2</td><td style="font-weight:bold">6</td><td>3.0%</td></tr>
+<tr><td><strong>Shane Ryan</strong></td><td>0</td><td>6</td><td>0</td><td style="font-weight:bold">6</td><td>3.0%</td></tr>
+<tr><td><strong>Darren Smith</strong></td><td>0</td><td>3</td><td>3</td><td style="font-weight:bold">6</td><td>3.0%</td></tr>
+<tr><td><strong>Cian McGovern</strong></td><td>4</td><td>0</td><td>1</td><td style="font-weight:bold">5</td><td>2.5%</td></tr>
+<tr><td><strong>Conall Mooney</strong></td><td>1</td><td>1</td><td>3</td><td style="font-weight:bold">5</td><td>2.5%</td></tr>
+<tr><td><strong>Cian Fitzsimons</strong></td><td>3</td><td>1</td><td>1</td><td style="font-weight:bold">5</td><td>2.5%</td></tr>
+<tr><td><strong>Nathan McQuade</strong></td><td>0</td><td>2</td><td>2</td><td style="font-weight:bold">4</td><td>2.0%</td></tr>
+<tr><td><strong>Liam McCabe</strong></td><td>1</td><td>2</td><td>1</td><td style="font-weight:bold">4</td><td>2.0%</td></tr>
+<tr><td><strong>Shaun Clarke</strong></td><td>1</td><td>2</td><td>1</td><td style="font-weight:bold">4</td><td>2.0%</td></tr>
+<tr><td><strong>Ryan Smith</strong></td><td>3</td><td>0</td><td>1</td><td style="font-weight:bold">4</td><td>2.0%</td></tr>
+<tr><td><strong>Ciaran Flynn</strong></td><td>3</td><td>0</td><td>0</td><td style="font-weight:bold">3</td><td>1.5%</td></tr>
+<tr><td><strong>Harry Banville</strong></td><td>3</td><td>0</td><td>0</td><td style="font-weight:bold">3</td><td>1.5%</td></tr>
+<tr><td><strong>Darrell Dolan</strong></td><td>1</td><td>2</td><td>0</td><td style="font-weight:bold">3</td><td>1.5%</td></tr>
+<tr><td><strong>Fiachra Mooney</strong></td><td>2</td><td>0</td><td>0</td><td style="font-weight:bold">2</td><td>1.0%</td></tr>
+<tr><td><strong>David Ryan</strong></td><td>1</td><td>1</td><td>0</td><td style="font-weight:bold">2</td><td>1.0%</td></tr>
+<tr><td><strong>Neill McCabe</strong></td><td>2</td><td>0</td><td>0</td><td style="font-weight:bold">2</td><td>1.0%</td></tr>
+<tr><td><strong>Philip Furlong</strong></td><td>0</td><td>0</td><td>1</td><td style="font-weight:bold">1</td><td>0.5%</td></tr>
+<tr><td><strong>Lee Philingham</strong></td><td>0</td><td>1</td><td>0</td><td style="font-weight:bold">1</td><td>0.5%</td></tr>
+<tr><td><strong>Sean Brady</strong></td><td>0</td><td>1</td><td>0</td><td style="font-weight:bold">1</td><td>0.5%</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 style="color:#2c3e50;text-align:center;margin:30px 0 18px;font-size:1.5em">⚔️ Opposition Kickouts — Who Wins Them For Us</h2>
+<div style="overflow-x:auto">
+<table class="ko-table">
+<thead><tr><th>Player</th><th>Won Clean</th><th>Break Won</th><th>Short Won</th><th>Total</th></tr></thead>
+<tbody><tr><td><strong>Alex Sweeney</strong></td><td>6</td><td>7</td><td>0</td><td style="font-weight:bold">13</td></tr>
+<tr><td><strong>Ruairi O Connell</strong></td><td>7</td><td>4</td><td>0</td><td style="font-weight:bold">11</td></tr>
+<tr><td><strong>Kevin McCabe</strong></td><td>2</td><td>8</td><td>0</td><td style="font-weight:bold">10</td></tr>
+<tr><td><strong>Cian McGovern</strong></td><td>1</td><td>8</td><td>0</td><td style="font-weight:bold">9</td></tr>
+<tr><td><strong>Conall Mooney</strong></td><td>1</td><td>7</td><td>0</td><td style="font-weight:bold">8</td></tr>
+<tr><td><strong>Philip Corrigan</strong></td><td>4</td><td>4</td><td>0</td><td style="font-weight:bold">8</td></tr>
+<tr><td><strong>Harry Banville</strong></td><td>3</td><td>5</td><td>0</td><td style="font-weight:bold">8</td></tr>
+<tr><td><strong>James Farrelly</strong></td><td>5</td><td>2</td><td>0</td><td style="font-weight:bold">7</td></tr>
+<tr><td><strong>Ben Philingham</strong></td><td>3</td><td>2</td><td>1</td><td style="font-weight:bold">6</td></tr>
+<tr><td><strong>Gearoid Traynor</strong></td><td>3</td><td>3</td><td>0</td><td style="font-weight:bold">6</td></tr>
+<tr><td><strong>Neill McCabe</strong></td><td>1</td><td>4</td><td>1</td><td style="font-weight:bold">6</td></tr>
+<tr><td><strong>Fintan O’Connell</strong></td><td>0</td><td>6</td><td>0</td><td style="font-weight:bold">6</td></tr>
+<tr><td><strong>Keiran Smith</strong></td><td>3</td><td>2</td><td>0</td><td style="font-weight:bold">5</td></tr>
+<tr><td><strong>Emmett Fitzsimons</strong></td><td>2</td><td>1</td><td>2</td><td style="font-weight:bold">5</td></tr>
+<tr><td><strong>Jason McMahon</strong></td><td>3</td><td>1</td><td>0</td><td style="font-weight:bold">4</td></tr>
+<tr><td><strong>Benny McConnell</strong></td><td>2</td><td>2</td><td>0</td><td style="font-weight:bold">4</td></tr>
+<tr><td><strong>Mark Farrelly (S)</strong></td><td>2</td><td>1</td><td>1</td><td style="font-weight:bold">4</td></tr>
+<tr><td><strong>Nathan McQuade</strong></td><td>1</td><td>2</td><td>0</td><td style="font-weight:bold">3</td></tr>
+<tr><td><strong>Fiachra Mooney</strong></td><td>1</td><td>2</td><td>0</td><td style="font-weight:bold">3</td></tr>
+<tr><td><strong>Phelim Cusack</strong></td><td>3</td><td>0</td><td>0</td><td style="font-weight:bold">3</td></tr>
+<tr><td><strong>Darren Smith</strong></td><td>0</td><td>2</td><td>0</td><td style="font-weight:bold">2</td></tr>
+<tr><td><strong>Sean Brady</strong></td><td>0</td><td>2</td><td>0</td><td style="font-weight:bold">2</td></tr>
+<tr><td><strong>Darrell Dolan</strong></td><td>0</td><td>2</td><td>0</td><td style="font-weight:bold">2</td></tr>
+<tr><td><strong>Cian Fitzsimons</strong></td><td>0</td><td>2</td><td>0</td><td style="font-weight:bold">2</td></tr>
+<tr><td><strong>Tom Cooney</strong></td><td>0</td><td>1</td><td>0</td><td style="font-weight:bold">1</td></tr>
+<tr><td><strong>Ryan Smith</strong></td><td>0</td><td>1</td><td>0</td><td style="font-weight:bold">1</td></tr>
+<tr><td><strong>David Ryan</strong></td><td>0</td><td>1</td><td>0</td><td style="font-weight:bold">1</td></tr>
+<tr><td><strong>Shaun Clarke</strong></td><td>1</td><td>0</td><td>0</td><td style="font-weight:bold">1</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="charts" class="tab-content">
+<div class="chart-box"><div class="chart-title">🏐 Own Kickout Retention % per Game</div><canvas id="ownChart"></canvas></div>
+<div class="chart-box"><div class="chart-title">⚔️ Opposition Kickout Win % per Game</div><canvas id="oppChart"></canvas></div>
+</div>
+
+<div id="table" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">📋 Game-by-Game Kickouts</h2>
+<div style="overflow-x:auto">
+<table class="ko-table" id="koTable">
+<thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Own Won</th><th>Own %</th><th>Opp Won</th><th>Opp %</th></tr></thead>
+<tbody><tr><td>8/2/2026</td><td>v Clones</td><td style="color:#2ecc71;font-weight:bold">W</td><td>12/19</td><td style="color:#f39c12;font-weight:bold">63%</td><td>5/17</td><td style="color:#e74c3c;font-weight:bold">29%</td></tr>
+<tr><td>15/2/2026</td><td>v Denn</td><td style="color:#2ecc71;font-weight:bold">W</td><td>17/23</td><td style="color:#2ecc71;font-weight:bold">74%</td><td>12/24</td><td style="color:#2ecc71;font-weight:bold">50%</td></tr>
+<tr><td>22/2/2026</td><td>v Pearse OG</td><td style="color:#2ecc71;font-weight:bold">W</td><td>14/17</td><td style="color:#2ecc71;font-weight:bold">82%</td><td>13/26</td><td style="color:#2ecc71;font-weight:bold">50%</td></tr>
+<tr><td>27/2/2026</td><td>v Aughadrumsee</td><td style="color:#2ecc71;font-weight:bold">W</td><td>17/20</td><td style="color:#2ecc71;font-weight:bold">85%</td><td>7/15</td><td style="color:#2ecc71;font-weight:bold">47%</td></tr>
+<tr><td>7/3/2026</td><td>v Ballymahon</td><td style="color:#2ecc71;font-weight:bold">W</td><td>6/11</td><td style="color:#f39c12;font-weight:bold">55%</td><td>13/28</td><td style="color:#2ecc71;font-weight:bold">46%</td></tr>
+<tr><td>15/3/2026</td><td>v Liatroim</td><td style="color:#2ecc71;font-weight:bold">W</td><td>8/12</td><td style="color:#f39c12;font-weight:bold">67%</td><td>13/22</td><td style="color:#2ecc71;font-weight:bold">59%</td></tr>
+<tr><td>17/3/2026</td><td>v Drung</td><td style="color:#2ecc71;font-weight:bold">W</td><td>11/18</td><td style="color:#f39c12;font-weight:bold">61%</td><td>5/17</td><td style="color:#e74c3c;font-weight:bold">29%</td></tr>
+<tr><td>21/3/2026</td><td>v Arva</td><td style="color:#f39c12;font-weight:bold">D</td><td>14/17</td><td style="color:#2ecc71;font-weight:bold">82%</td><td>5/17</td><td style="color:#e74c3c;font-weight:bold">29%</td></tr>
+<tr><td>22/3/2026</td><td>v Greenlough</td><td style="color:#e74c3c;font-weight:bold">L</td><td>14/18</td><td style="color:#2ecc71;font-weight:bold">78%</td><td>9/20</td><td style="color:#2ecc71;font-weight:bold">45%</td></tr>
+<tr><td>28/3/2026</td><td>v Denn</td><td style="color:#e74c3c;font-weight:bold">L</td><td>16/23</td><td style="color:#2ecc71;font-weight:bold">70%</td><td>7/14</td><td style="color:#2ecc71;font-weight:bold">50%</td></tr>
+<tr><td>29/3/2026</td><td>v Denn</td><td style="color:#2ecc71;font-weight:bold">W</td><td>8/12</td><td style="color:#f39c12;font-weight:bold">67%</td><td>13/23</td><td style="color:#2ecc71;font-weight:bold">57%</td></tr>
+<tr><td>5/4/2026</td><td>v Lavey</td><td style="color:#e74c3c;font-weight:bold">L</td><td>13/18</td><td style="color:#2ecc71;font-weight:bold">72%</td><td>6/18</td><td style="color:#e74c3c;font-weight:bold">33%</td></tr>
+<tr><td>11/4/2026</td><td>v Munterconnaught</td><td style="color:#2ecc71;font-weight:bold">W</td><td>8/12</td><td style="color:#f39c12;font-weight:bold">67%</td><td>11/19</td><td style="color:#2ecc71;font-weight:bold">58%</td></tr>
+<tr><td>12/4/2026</td><td>v Templeport</td><td style="color:#2ecc71;font-weight:bold">W</td><td>7/15</td><td style="color:#e74c3c;font-weight:bold">47%</td><td>13/22</td><td style="color:#2ecc71;font-weight:bold">59%</td></tr>
+<tr><td>22/4/2026</td><td>v Kill</td><td style="color:#2ecc71;font-weight:bold">W</td><td>10/19</td><td style="color:#e74c3c;font-weight:bold">53%</td><td>6/22</td><td style="color:#e74c3c;font-weight:bold">27%</td></tr>
+<tr><td>25/4/2026</td><td>v Ballymchugh</td><td style="color:#e74c3c;font-weight:bold">L</td><td>15/20</td><td style="color:#2ecc71;font-weight:bold">75%</td><td>8/14</td><td style="color:#2ecc71;font-weight:bold">57%</td></tr>
+<tr><td>26/4/2026</td><td>v Cuchulainns</td><td style="color:#e74c3c;font-weight:bold">L</td><td>11/31</td><td style="color:#e74c3c;font-weight:bold">35%</td><td>3/11</td><td style="color:#e74c3c;font-weight:bold">27%</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+<div class="footer">Killinkere GAA · Kickout Analysis · 2026</div>
+
+<script>
+function showTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
+const L=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns"];
+const green='rgba(46,204,113,0.8)',greenB='rgba(39,174,96,1)',purple='rgba(155,89,182,0.8)',purpleB='rgba(142,68,173,1)';
+new Chart(document.getElementById('ownChart'),{type:'bar',data:{labels:L,datasets:[{label:'Own KO Retention %',data:[63, 74, 82, 85, 55, 67, 61, 82, 78, 70, 67, 72, 67, 47, 53, 75, 35],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)"],borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},plugins:[{id:'t70',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(70);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(46,204,113,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(46,204,113,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('70% target',right,yp-4);ctx.restore()}}]});
+new Chart(document.getElementById('oppChart'),{type:'bar',data:{labels:L,datasets:[{label:'Opp KO Win %',data:[29, 50, 50, 47, 46, 59, 29, 29, 45, 50, 57, 33, 58, 59, 27, 57, 27],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)"],borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},plugins:[{id:'t40',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(40);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(155,89,182,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(155,89,182,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('40% target',right,yp-4);ctx.restore()}}]});
+document.querySelectorAll('.ko-table th').forEach((th,i)=>{let asc=true;th.addEventListener('click',()=>{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{let av=a.children[i].textContent.replace('%','').trim();let bv=b.children[i].textContent.replace('%','').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)});rows.forEach(r=>tbody.appendChild(r));asc=!asc});});
+</script>
+<script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
+</body></html>
