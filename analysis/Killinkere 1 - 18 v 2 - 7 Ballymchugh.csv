@@ -1,0 +1,132 @@
+Event,Time,Period,Team Name,Name,Outcome,Player
+1,00:00:00,1,Ballymchugh,Other,Throw Up Won,Player 6
+2,00:00:24,1,Ballymchugh,Shot from play,Wide,Player 15
+3,00:00:43,1,Killinkere,Kickout,Won clean,Fintan O’Connell
+4,00:01:40,1,Killinkere,Possession lost,Hand pass,Conall Mooney
+5,00:02:16,1,Killinkere,Shot from play,Point,Kevin McCabe
+6,00:02:59,1,Ballymchugh,Kickout,Lost clean,Fintan O’Connell
+7,00:03:16,1,Killinkere,Shot from play,Point,Ciaran Flynn
+8,00:03:43,1,Ballymchugh,Kickout,Won clean,Player 9
+9,00:06:12,1,Killinkere,Possession lost,Kick pass,Jason McMahon
+10,00:07:03,1,Ballymchugh,Shot from play,Short,Player 8
+11,00:07:38,1,Killinkere,Shot from play,Point,Kevin McCabe
+12,00:08:00,1,Ballymchugh,Kickout,Won clean,Player 9
+13,00:08:25,1,Ballymchugh,Shot from play,Wide,Player 11
+14,00:08:38,1,Killinkere,Kickout,Won clean,Liam McCabe
+15,00:09:00,1,Killinkere,Possession lost,In Contact,Jason McMahon
+16,00:09:15,1,Killinkere,Free conceded,Middle third,Conall Mooney
+17,00:09:38,1,Ballymchugh,Shot from play,Short,Player 9
+18,00:09:59,1,Killinkere,Possession lost,Kick pass,Alex Sweeney
+19,00:10:25,1,Ballymchugh,Shot from play,Goal,Player 13
+20,00:10:49,1,Killinkere,Kickout,Short lost,Player 15
+21,00:11:00,1,Ballymchugh,Shot from play,Point,Player 13
+22,00:11:23,1,Killinkere,Kickout,Lost clean,Player 11
+23,00:11:42,1,Ballymchugh,Shot from play,Wide,Player 15
+24,00:12:04,1,Killinkere,Kickout,Break won,James Farrelly
+25,00:13:23,1,Killinkere,Shot from play,Wide,Emmett Fitzsimons
+26,00:13:52,1,Ballymchugh,Kickout,Break won,Player 5
+27,00:14:50,1,Ballymchugh,Shot from play,Wide,Player 12
+28,00:15:09,1,Killinkere,Kickout,Short won,Fintan O’Connell
+29,00:15:53,1,Killinkere,Possession lost,Kick pass,Alex Sweeney
+30,00:16:33,1,Killinkere,Free conceded,Defensive third,Nathan McQuade
+31,00:17:15,1,Ballymchugh,Scoreable free,2 Points,Player 13
+32,00:17:29,1,Killinkere,Kickout,Won clean,Kevin McCabe
+33,00:18:14,1,Killinkere,Shot from play,Point,Emmett Fitzsimons
+34,00:18:34,1,Ballymchugh,Kickout,Won clean,Player 11
+35,00:18:58,1,Ballymchugh,Shot from play,Goal,Player 8
+36,00:19:27,1,Killinkere,Kickout,Short won,Shane Ryan
+37,00:20:11,1,Killinkere,Shot from play,Short,Darren Smith
+38,00:20:49,1,Ballymchugh,Shot from play,Short,Player 15
+39,00:21:14,1,Killinkere,Possession lost,Hand pass,Conall Mooney
+40,00:21:37,1,Killinkere,Shot from play,Wide,Alex Sweeney
+41,00:21:55,1,Ballymchugh,Kickout,Won clean,Player 11
+42,00:22:04,1,Killinkere,Ball Won,Interception,Fintan O’Connell
+43,00:22:16,1,Killinkere,Possession lost,Kick pass,Emmett Fitzsimons
+44,00:22:31,1,Ballymchugh,Shot from play,Wide,Player 13
+45,00:22:43,1,Killinkere,Kickout,Short won,Shane Ryan
+46,00:22:54,1,Killinkere,Possession lost,Hand pass,Shane Ryan
+47,00:23:04,1,Ballymchugh,Shot from play,Wide,Player 6
+48,00:23:20,1,Killinkere,Kickout,Won clean,Kevin McCabe
+49,00:23:56,1,Ballymchugh,Free conceded,Defensive third,Player 7
+50,00:24:14,1,Killinkere,Scoreable free,Point,Darren Smith
+51,00:24:36,1,Ballymchugh,Kickout,Won clean,Player 8
+52,00:25:18,1,Ballymchugh,Shot from play,Wide,Player 8
+53,00:25:32,1,Killinkere,Kickout,Break won,James Farrelly
+54,00:25:53,1,Killinkere,Shot from play,Wide,Jason McMahon
+55,00:26:22,1,Ballymchugh,Kickout,Break lost,Jason McMahon
+56,00:26:36,1,Ballymchugh,Free conceded,Defensive third,Player 3
+57,00:27:05,1,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+58,00:27:29,1,Ballymchugh,Kickout,Lost clean,Alex Sweeney
+59,00:27:45,1,Killinkere,Shot from play,Short,Alex Sweeney
+60,00:28:37,1,Killinkere,Free conceded,Defensive third,Nathan McQuade
+61,00:29:12,1,Ballymchugh,Scoreable free,Point,Player 13
+62,00:29:28,1,Killinkere,Kickout,Break lost,Player 14
+63,00:29:54,1,Ballymchugh,Shot from play,Point,Player 15
+64,00:30:18,1,Killinkere,Kickout,Break lost,Player 11
+65,00:30:36,1,Killinkere,Ball Won,In Contact,Shane Ryan
+66,00:30:45,1,Ballymchugh,Shot from play,Point,Player 11
+67,00:31:14,1,Killinkere,Kickout,Break won,Liam McCabe
+68,00:31:19,2,Killinkere,Ball Won,In Contact,Luke Crossan
+69,00:31:59,2,Ballymchugh,Shot from play,Wide,Player 5
+70,00:32:06,2,Killinkere,Kickout,Break lost,Player 7
+71,00:33:15,2,Ballymchugh,Shot from play,Wide,Player 2
+72,00:34:29,2,Killinkere,Bookings,Yellow,Nathan McQuade
+73,00:34:32,2,Ballymchugh,Bookings,Yellow,Player 14
+74,00:34:38,2,Killinkere,Kickout,Won clean,Jason McMahon
+75,00:34:49,2,Killinkere,Possession lost,In Contact,Jason McMahon
+76,00:35:00,2,Ballymchugh,Shot from play,Wide,Player 13
+77,00:35:16,2,Killinkere,Shot from play,Wide,Ciaran Flynn
+78,00:36:25,2,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+79,00:37:08,2,Ballymchugh,Kickout,Won clean,Player 11
+80,00:37:26,2,Ballymchugh,Shot from play,Point,Player 14
+81,00:37:43,2,Killinkere,Kickout,Won clean,Alex Sweeney
+82,00:38:21,2,Killinkere,Free conceded,Attacking third,Nathan McQuade
+83,00:39:45,2,Killinkere,Ball Won,In Contact,Luke Crossan
+84,00:39:59,2,Killinkere,Possession lost,Kick pass,Kevin McCabe
+85,00:40:24,2,Ballymchugh,Shot from play,Short,Player 11
+86,00:40:56,2,Killinkere,Shot from play,Goal,Emmett Fitzsimons
+87,00:41:17,2,Ballymchugh,Substitution,Substitution,Player 10
+88,00:41:34,2,Ballymchugh,Kickout,Won clean,Player 9
+89,00:41:54,2,Killinkere,Ball Won,Interception,Kevin McCabe
+90,00:42:21,2,Killinkere,Shot from play,Point,Mark Farrelly (J)
+91,00:42:48,2,Killinkere,Substitution,Substitution,Conall Mooney
+92,00:43:09,2,Ballymchugh,Kickout,Break lost,Peter McCabe
+93,00:43:56,2,Killinkere,Shot from play,Point,Alex Sweeney
+94,00:44:11,2,Ballymchugh,Kickout,Break won,Player 6
+95,00:44:35,2,Killinkere,Ball Won,In Contact,Luke Crossan
+96,00:44:40,2,Ballymchugh,Free conceded,Attacking third,Player 14
+97,00:46:18,2,Killinkere,Possession lost,Hand pass,Jason McMahon
+98,00:46:28,2,Ballymchugh,Free conceded,Attacking third,Player 6
+99,00:47:14,2,Ballymchugh,Substitution,Substitution,Player 5
+100,00:47:17,2,Killinkere,Scoreable free,Point,Darren Smith
+101,00:47:38,2,Ballymchugh,Kickout,Break lost,Kevin McCabe
+102,00:47:52,2,Killinkere,Free conceded,Attacking third,Fintan O’Connell
+103,00:48:32,2,Killinkere,Ball Won,In Contact,Jason McMahon
+104,00:48:49,2,Ballymchugh,Free conceded,Defensive third,Player 6
+105,00:49:22,2,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+106,00:50:01,2,Ballymchugh,Kickout,Break lost,Jason McMahon
+107,00:50:16,2,Killinkere,Shot from play,Point,Darren Smith
+108,00:50:29,2,Ballymchugh,Substitution,Substitution,Player 7
+109,00:50:50,2,Ballymchugh,Kickout,Lost clean,Mark Farrelly (J)
+110,00:51:54,2,Killinkere,Shot from play,Wide,Peter McCabe
+111,00:52:15,2,Ballymchugh,Bookings,Yellow,Player 1
+112,00:53:08,2,Ballymchugh,Shot from play,Wide,Player 13
+113,00:53:28,2,Killinkere,Kickout,Break won,Mark Farrelly (J)
+114,00:53:46,2,Killinkere,Shot from play,Point,Jason McMahon
+115,00:54:04,2,Killinkere,Substitution,Substitution,Ciaran Flynn
+116,00:54:20,2,Ballymchugh,Kickout,Break lost,Alex Sweeney
+117,00:54:48,2,Ballymchugh,Free conceded,Defensive third,Player 26
+118,00:55:14,2,Killinkere,Scoreable free,Point,Darren Smith
+119,00:55:36,2,Ballymchugh,Kickout,Break lost,James Farrelly
+120,00:56:28,2,Killinkere,Shot from play,Point,Darren Smith
+121,00:56:53,2,Ballymchugh,Kickout,Break lost,Kevin McCabe
+122,00:58:35,2,Killinkere,Shot from play,Short,Emmett Fitzsimons
+123,00:59:18,2,Ballymchugh,Free conceded,Defensive third,
+124,01:00:13,2,Killinkere,Scoreable free,Point,Emmett Fitzsimons
+125,01:00:29,2,Ballymchugh,Kickout,Lost clean,Jason McMahon
+126,01:01:53,2,Ballymchugh,Free conceded,Defensive third,Player 26
+127,01:02:25,2,Ballymchugh,Bookings,Yellow,Player 26
+128,01:02:50,2,Killinkere,Scoreable free,Wide,Emmett Fitzsimons
+129,01:03:07,2,Ballymchugh,Kickout,Lost clean,Emmett Fitzsimons
+130,01:03:28,2,Ballymchugh,Free conceded,Defensive third,Player 11
+131,01:03:46,2,Killinkere,Scoreable free,2 Points,Darren Smith

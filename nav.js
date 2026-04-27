@@ -35,11 +35,14 @@
       {label:'v Lavey Reserve — GPS (5 Apr)', file:'v_Lavey__ACFL_Div7_GPS_report.html'},
       {label:'v Munterconnaught — GPS (11 Apr)', file:'v_Munterconnaught_GPS_report.html'},
       {label:'v Templeport — GPS (12 Apr)', file:'v_Templeport_GPS_report.html'},
-      {label:'v Kill Shamrocks — GPS (22 Apr)', file:'v_Kill_Shamrocks__ACFL_Div3_GPS_report.html'}
+      {label:'v Kill Shamrocks — GPS (22 Apr)', file:'v_Kill_Shamrocks__ACFL_Div3_GPS_report.html'},
+      {label:'v Ballymachugh — GPS (25 Apr)', file:'v_Ballymachugh__ACFL_Div3_GPS_report.html'},
+      {label:'v Cuchulainns — GPS (26 Apr)', file:'v_Cuchulainns__ACFL_Div7_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
       {label:'Season Trends & Patterns', file:'season_trends.html'},
-      {label:'Defensive Trends', file:'defensive_trends.html'}
+      {label:'Defensive Trends', file:'defensive_trends.html'},
+      {label:'Discipline Tracker', file:'discipline.html'}
     ]}
   ];
 

@@ -229,20 +229,24 @@ def calc_all_stats(events, csv_filename):
         sorted_players = sorted(players.items(), key=lambda x: (x[1]['goals'] * 3 + x[1]['points'] + x[1]['two_pts'] * 2, x[1]['shots']), reverse=True)
         stats[f'{prefix}_players'] = [(name, data) for name, data in sorted_players if data['goals'] > 0 or data['points'] > 0 or data['two_pts'] > 0 or data['shots'] > 0][:10]
     
-    # Generate timeline data
+    # Generate timeline data — scores + bookings
     scoring_events = [e for e in events if e.get('Name') in ['Shot from play', 'Scoreable free'] and e.get('Outcome') in ['Goal', 'Point', '2 Points']]
-    scoring_events.sort(key=lambda x: (int(x.get('Period', '1')), x.get('Time', '00:00:00')))
+    booking_events = [e for e in events if e.get('Name') == 'Bookings']
+    timeline_events = scoring_events + booking_events
+    timeline_events.sort(key=lambda x: (int(x.get('Period', '1')), x.get('Time', '00:00:00')))
     
     timeline = []
     t1_score = 0
     t2_score = 0
     
-    for e in scoring_events:
-        pts = 3 if e['Outcome'] == 'Goal' else (2 if e['Outcome'] == '2 Points' else 1)
-        if e['Team Name'] == t1:
-            t1_score += pts
-        else:
-            t2_score += pts
+    for e in timeline_events:
+        is_booking = e.get('Name') == 'Bookings'
+        if not is_booking:
+            pts = 3 if e['Outcome'] == 'Goal' else (2 if e['Outcome'] == '2 Points' else 1)
+            if e['Team Name'] == t1:
+                t1_score += pts
+            else:
+                t2_score += pts
         
         timeline.append({
             'time': e.get('Time', ''),
@@ -252,13 +256,14 @@ def calc_all_stats(events, csv_filename):
             'player': e.get('Player', ''),
             'name': e.get('Name', ''),
             't1_score': t1_score,
-            't2_score': t2_score
+            't2_score': t2_score,
+            'is_booking': is_booking
         })
     
     stats['timeline'] = timeline
     
     # Check if team1 scored first after halftime
-    p2_scores = [e for e in timeline if e['period'] == '2']
+    p2_scores = [e for e in timeline if e['period'] == '2' and not e.get('is_booking')]
     stats['scored_first_after_ht'] = len(p2_scores) > 0 and p2_scores[0]['team'] == t1
     if stats['scored_first_after_ht']:
         stats['first_score_after_ht_idx'] = len([e for e in timeline if e['period'] == '1']) + 1  # +1 for 'Start'
@@ -297,6 +302,7 @@ def generate_html(csv_file):
     
     # Per-game accumulative tracking
     game_labels = []
+    game_competitions = []  # competition category per game
     acc_accuracy = []       # accumulative accuracy per game
     acc_goals = []          # accumulative goals
     acc_two_pts = []        # accumulative 2 pointers
@@ -342,6 +348,20 @@ def generate_html(csv_file):
             opponent = re.search(r'v\s+\d+\s*-\s*\d+\s+(.+)\.csv', csv_path)
             label = opponent.group(1).strip() if opponent else csv_path.replace('.csv', '')
             game_labels.append(label)
+            
+            # Competition category
+            game_meta = read_metadata(full_path)
+            comp = game_meta.get('competition', '').lower().strip()
+            if 'spring' in comp or 'ulster' in comp:
+                game_competitions.append('Spring League')
+            elif 'challenge' in comp:
+                game_competitions.append('Challenge')
+            elif 'div 3' in comp or 'div3' in comp:
+                game_competitions.append('ACFL Div 3')
+            elif 'div' in comp:
+                game_competitions.append('ACFL Div 7')
+            else:
+                game_competitions.append('Other')
             
             # Accumulative stats after this game
             acc_accuracy.append(round((successful_shots_2026 / total_shots_2026 * 100), 1) if total_shots_2026 > 0 else 0)
@@ -815,11 +835,12 @@ def generate_html(csv_file):
     html = re.sub(r"data: \[0, 12, 0, 12\]",
                   f"data: [{stats['t2_goals']}, {stats['t2_points']}, {stats['t2_two_pts']}, {stats['t2_total_score']}]", html, count=1)
     
-    # Generate timeline chart data
+    # Generate timeline chart data (scores only, exclude bookings)
     timeline = stats['timeline']
-    labels = ['Start'] + [e['time'] for e in timeline] + ['FT']
-    t1_data = [0] + [e['t1_score'] for e in timeline] + [timeline[-1]['t1_score'] if timeline else 0]
-    t2_data = [0] + [e['t2_score'] for e in timeline] + [timeline[-1]['t2_score'] if timeline else 0]
+    score_timeline = [e for e in timeline if not e.get('is_booking')]
+    labels = ['Start'] + [e['time'] for e in score_timeline] + ['FT']
+    t1_data = [0] + [e['t1_score'] for e in score_timeline] + [score_timeline[-1]['t1_score'] if score_timeline else 0]
+    t2_data = [0] + [e['t2_score'] for e in score_timeline] + [score_timeline[-1]['t2_score'] if score_timeline else 0]
     
     # Generate point styles and colors dynamically based on actual events
     t1_point_styles = ['circle']  # Start
@@ -827,7 +848,7 @@ def generate_html(csv_file):
     t2_point_styles = ['circle']
     t2_point_colors = ['']
     
-    for e in timeline:
+    for e in score_timeline:
         if e['team'] == stats['team1']:
             if e['outcome'] == 'Goal':
                 t1_point_styles.append('rectRot')
@@ -863,8 +884,8 @@ def generate_html(csv_file):
     
     # Generate point radius array (larger for first score after HT)
     t1_point_radius = [7]  # Start
-    for i, e in enumerate(timeline):
-        is_first_after_ht = (e['period'] == '2' and i == 0) or (i > 0 and timeline[i-1]['period'] == '1' and e['period'] == '2')
+    for i, e in enumerate(score_timeline):
+        is_first_after_ht = (e['period'] == '2' and i == 0) or (i > 0 and score_timeline[i-1]['period'] == '1' and e['period'] == '2')
         is_first_after_ht = is_first_after_ht and e['team'] == stats['team1']
         
         if e['team'] == stats['team1']:
@@ -875,7 +896,7 @@ def generate_html(csv_file):
     
     # Generate tooltip labels array
     t1_tooltip_labels = ['']
-    for e in timeline:
+    for e in score_timeline:
         if e['team'] == stats['team1']:
             if e['outcome'] == 'Goal':
                 t1_tooltip_labels.append('Goal')
@@ -926,7 +947,7 @@ def generate_html(csv_file):
     )
     
     # Find halftime position
-    ht_index = len([e for e in timeline if e['period'] == '1'])
+    ht_index = len([e for e in score_timeline if e['period'] == '1'])
     
     # Replace timeline chart data
     old_labels_pattern = r"labels: \['Start'[^\]]+\]"
@@ -953,6 +974,7 @@ def generate_html(csv_file):
     
     # Inject per-game accumulative data for targets charts
     html = html.replace('GAME_LABELS_JSON', str(game_labels))
+    html = html.replace('GAME_COMPETITIONS_JSON', str(game_competitions))
     html = html.replace('ACC_ACCURACY_JSON', str(acc_accuracy))
     html = html.replace('PER_GAME_ACCURACY_JSON', str(per_game_accuracy))
     html = html.replace('ACC_GOALS_JSON', str(acc_goals))
@@ -981,8 +1003,31 @@ def generate_html(csv_file):
     timeline_html = ''
     for i, e in enumerate(timeline):
         team_class = 'killinkere' if e['team'] == stats['team1'] else 'aughadrumsee'
-        icon = '🥅' if e['outcome'] == 'Goal' else ('🏐🏐' if e['outcome'] == '2 Points' else '🏐')
         player_name = f"<strong>{e['player']}</strong>" if e['player'] else stats['team1'] if e['team'] == stats['team1'] else stats['team2']
+        
+        # Handle bookings
+        if e.get('is_booking'):
+            card_type = e['outcome']
+            if card_type == 'Yellow':
+                icon = '🟨'
+                desc = f"{player_name} — Yellow Card"
+            elif card_type == 'Black':
+                icon = '⬛'
+                desc = f"{player_name} — Black Card (Sin Bin)"
+            else:
+                icon = '🟥'
+                desc = f"{player_name} — Red Card"
+            desc += f" ({e['team']})"
+            score_text = f"{e['t1_score']} vs {e['t2_score']}"
+            timeline_html += f'''                <div class="timeline-event {team_class}" style="border-left-color: #e74c3c;">
+                    <span class="timeline-time">{e['time']}</span>
+                    <span class="timeline-icon">{icon}</span>
+                    <span class="timeline-desc">{desc} <span style="color: #95a5a6; font-weight: normal;">({score_text})</span></span>
+                </div>
+'''
+            continue
+        
+        icon = '🥅' if e['outcome'] == 'Goal' else ('🏐🏐' if e['outcome'] == '2 Points' else '🏐')
         
         # Check if this is first score after halftime by team1
         is_first_after_ht = (e['period'] == '2' and i == 0) or (i > 0 and timeline[i-1]['period'] == '1' and e['period'] == '2')

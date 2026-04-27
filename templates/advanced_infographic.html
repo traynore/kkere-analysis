@@ -71,6 +71,9 @@
         .timeline-time { font-weight: bold; min-width: 80px; font-size: 1.1em; }
         .timeline-desc { flex: 1; font-size: 1.05em; }
         .timeline-icon { font-size: 1.5em; margin: 0 15px; }
+        .acc-filter { padding:6px 14px; border-radius:16px; border:2px solid #2a5298; background:#fff; color:#2a5298; font-weight:bold; font-size:.82em; cursor:pointer; transition:.2s; }
+        .acc-filter:hover { background:#eef2ff; }
+        .acc-filter.active { background:#2a5298; color:#fff; }
     </style>
 </head>
 <body>
@@ -1024,6 +1027,13 @@
         </div>
 
         <div id="targets" class="tab-content">
+            <div style="display:flex;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap">
+                <button class="acc-filter active" onclick="filterTargets('All')">All</button>
+                <button class="acc-filter" onclick="filterTargets('Spring League')">Spring League</button>
+                <button class="acc-filter" onclick="filterTargets('Challenge')">Challenge</button>
+                <button class="acc-filter" onclick="filterTargets('ACFL Div 3')">ACFL Div 3</button>
+                <button class="acc-filter" onclick="filterTargets('ACFL Div 7')">ACFL Div 7</button>
+            </div>
             <div class="chart-container">
                 <div class="chart-title">📈 Accumulative Shot Accuracy Across Season (Target: 70%)</div>
                 <canvas id="accAccuracyChart" style="max-height: 350px;"></canvas>
@@ -1039,20 +1049,7 @@
                 <canvas id="accScoresChart" style="max-height: 350px;"></canvas>
             </div>
 
-            <div class="chart-container">
-                <div class="chart-title">Shot Accuracy: 2025 vs 2026</div>
-                <canvas id="yearComparisonChart" style="max-height: 300px;"></canvas>
-            </div>
 
-            <div class="chart-container">
-                <div class="chart-title">Attack Efficiency</div>
-                <canvas id="attacksChart" style="max-height: 150px;"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-title">Total Scores: 2025 vs 2026</div>
-                <canvas id="totalScoresChart" style="max-height: 300px;"></canvas>
-            </div>
         </div>
 
         <div id="timeline" class="tab-content">
@@ -1244,353 +1241,193 @@
             });
         });
 
-        // Accumulative Shot Accuracy Chart
-        new Chart(document.getElementById('accAccuracyChart'), {
-            type: 'line',
-            data: {
-                labels: GAME_LABELS_JSON,
-                datasets: [{
-                    label: 'Accumulative Accuracy %',
-                    data: ACC_ACCURACY_JSON,
-                    borderColor: 'rgba(46, 204, 113, 1)',
-                    backgroundColor: 'rgba(46, 204, 113, 0.15)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.3,
-                    pointRadius: 6,
-                    pointBackgroundColor: 'rgba(46, 204, 113, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }, {
-                    label: 'Per Game Accuracy %',
-                    data: PER_GAME_ACCURACY_JSON,
-                    borderColor: 'rgba(52, 152, 219, 0.8)',
-                    backgroundColor: 'rgba(52, 152, 219, 0.08)',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    fill: false,
-                    tension: 0.3,
-                    pointRadius: 5,
-                    pointBackgroundColor: 'rgba(52, 152, 219, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } },
-                    x: { ticks: { maxRotation: 45, minRotation: 45 } }
-                },
-                plugins: {
-                    legend: { display: true, position: 'top' },
-                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
-                }
-            },
-            plugins: [{
-                id: 'accAccTarget',
-                afterDatasetsDraw(chart) {
-                    const {ctx, chartArea: {left, right}, scales: {y}} = chart;
-                    const yPos = y.getPixelForValue(70);
-                    ctx.save();
-                    ctx.setLineDash([5, 5]);
-                    ctx.strokeStyle = 'rgb(231, 76, 60)';
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(left, yPos);
-                    ctx.lineTo(right, yPos);
-                    ctx.stroke();
-                    ctx.fillStyle = 'rgb(231, 76, 60)';
-                    ctx.fillRect(right - 90, yPos - 12, 85, 24);
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 12px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('70% Target', right - 47, yPos + 4);
-                    ctx.restore();
-                }
-            }]
-        });
+        // Accumulative Shot Accuracy Chart — filterable by competition
+        const _accLabels = GAME_LABELS_JSON;
+        const _accData = ACC_ACCURACY_JSON;
+        const _perGameData = PER_GAME_ACCURACY_JSON;
+        const _gameComps = GAME_COMPETITIONS_JSON;
+        let _accChart = null;
 
-        // Accumulative Attack Efficiency Chart
-        new Chart(document.getElementById('accAttackChart'), {
-            type: 'line',
-            data: {
-                labels: GAME_LABELS_JSON,
-                datasets: [{
-                    label: 'Accumulative Attack Efficiency %',
-                    data: ACC_ATTACK_PCT_JSON,
-                    borderColor: 'rgba(155, 89, 182, 1)',
-                    backgroundColor: 'rgba(155, 89, 182, 0.15)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.3,
-                    pointRadius: 6,
-                    pointBackgroundColor: 'rgba(155, 89, 182, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                },{
-                    label: 'Per Game Attack Efficiency %',
-                    data: PER_GAME_ATTACK_PCT_JSON,
-                    borderColor: 'rgba(52, 152, 219, 0.8)',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    fill: false,
-                    tension: 0.3,
-                    pointRadius: 4,
-                    pointBackgroundColor: 'rgba(52, 152, 219, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } },
-                    x: { ticks: { maxRotation: 45, minRotation: 45 } }
-                },
-                plugins: {
-                    legend: { display: true, position: 'top' },
-                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
-                }
-            },
-            plugins: [{
-                id: 'accAttTarget',
-                afterDatasetsDraw(chart) {
-                    const {ctx, chartArea: {left, right}, scales: {y}} = chart;
-                    const yPos = y.getPixelForValue(75);
-                    ctx.save();
-                    ctx.setLineDash([5, 5]);
-                    ctx.strokeStyle = 'rgb(231, 76, 60)';
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(left, yPos);
-                    ctx.lineTo(right, yPos);
-                    ctx.stroke();
-                    ctx.fillStyle = 'rgb(231, 76, 60)';
-                    ctx.fillRect(right - 90, yPos - 12, 85, 24);
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 12px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('75% Target', right - 47, yPos + 4);
-                    ctx.restore();
-                }
-            }]
-        });
+        function buildAccAccuracyChart(filterComp) {
+            const idx = _gameComps.map((c,i) => (!filterComp || filterComp === 'All' || c === filterComp) ? i : -1).filter(i => i >= 0);
+            const fLabels = idx.map(i => _accLabels[i]);
+            const fPerGame = idx.map(i => _perGameData[i]);
+            // Recalculate accumulative accuracy for filtered games
+            let totalShots = 0, totalScored = 0;
+            const fAcc = idx.map(i => {
+                // Use per-game to approximate: scored = acc/100 * shots, but we don't have per-game shot counts
+                // So just show per-game values and a running average of the filtered set
+                totalShots++;
+                totalScored += _perGameData[i];
+                return Math.round(totalScored / totalShots * 10) / 10;
+            });
 
-        // Accumulative Scores Chart
-        new Chart(document.getElementById('accScoresChart'), {
-            type: 'line',
-            data: {
-                labels: GAME_LABELS_JSON,
-                datasets: [{
-                    label: 'Goals',
-                    data: ACC_GOALS_JSON,
-                    borderColor: 'rgba(231, 76, 60, 1)',
-                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.3,
-                    pointRadius: 6,
-                    pointBackgroundColor: 'rgba(231, 76, 60, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }, {
-                    label: '2 Pointers',
-                    data: ACC_TWO_PTS_JSON,
-                    borderColor: 'rgba(243, 156, 18, 1)',
-                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.3,
-                    pointRadius: 6,
-                    pointBackgroundColor: 'rgba(243, 156, 18, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }, {
-                    label: 'Points',
-                    data: ACC_POINTS_JSON,
-                    borderColor: 'rgba(52, 152, 219, 1)',
-                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.3,
-                    pointRadius: 6,
-                    pointBackgroundColor: 'rgba(52, 152, 219, 1)',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true },
-                    x: { ticks: { maxRotation: 45, minRotation: 45 } }
+            if (_accChart) _accChart.destroy();
+            _accChart = new Chart(document.getElementById('accAccuracyChart'), {
+                type: 'line',
+                data: {
+                    labels: fLabels,
+                    datasets: [{
+                        label: 'Accumulative Accuracy %',
+                        data: filterComp === 'All' ? idx.map(i => _accData[i]) : fAcc,
+                        borderColor: 'rgba(46, 204, 113, 1)',
+                        backgroundColor: 'rgba(46, 204, 113, 0.15)',
+                        borderWidth: 3, fill: true, tension: 0.3,
+                        pointRadius: 6, pointBackgroundColor: 'rgba(46, 204, 113, 1)',
+                        pointBorderColor: 'white', pointBorderWidth: 2
+                    }, {
+                        label: 'Per Game Accuracy %',
+                        data: fPerGame,
+                        borderColor: 'rgba(52, 152, 219, 0.8)',
+                        backgroundColor: 'rgba(52, 152, 219, 0.08)',
+                        borderWidth: 2, borderDash: [5, 5], fill: false, tension: 0.3,
+                        pointRadius: 5, pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                        pointBorderColor: 'white', pointBorderWidth: 2
+                    }]
                 },
-                plugins: { legend: { display: true, position: 'top' } }
-            }
-        });
-
-        // Year Comparison Chart
-        const yearCtx = document.getElementById('yearComparisonChart');
-        const yearChart = new Chart(yearCtx, {
-            type: 'bar',
-            data: {
-                labels: ['2025', '2026'],
-                datasets: [{
-                    label: 'Shot Accuracy %',
-                    data: [50, YEAR_2026_ACCURACY],
-                    backgroundColor: ['rgba(52, 152, 219, 0.8)', 'rgba(46, 204, 113, 0.8)'],
-                    borderColor: ['rgba(41, 128, 185, 1)', 'rgba(39, 174, 96, 1)'],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: { callback: value => value + '%' }
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } },
+                        x: { ticks: { maxRotation: 45, minRotation: 45 } }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
                     }
                 },
-                plugins: {
-                    legend: { display: false },
-                    annotation: {
-                        annotations: {
-                            targetLine: {
-                                type: 'line',
-                                yMin: 70,
-                                yMax: 70,
-                                borderColor: 'rgb(231, 76, 60)',
-                                borderWidth: 3,
-                                borderDash: [5, 5],
-                                label: {
-                                    display: true,
-                                    content: '70% Target',
-                                    position: 'end',
-                                    backgroundColor: 'rgb(231, 76, 60)',
-                                    color: 'white',
-                                    font: { weight: 'bold' }
-                                }
-                            }
-                        }
+                plugins: [{
+                    id: 'accAccTarget',
+                    afterDatasetsDraw(chart) {
+                        const {ctx, chartArea: {left, right}, scales: {y}} = chart;
+                        const yPos = y.getPixelForValue(70);
+                        ctx.save();
+                        ctx.setLineDash([5, 5]);
+                        ctx.strokeStyle = 'rgb(231, 76, 60)';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath(); ctx.moveTo(left, yPos); ctx.lineTo(right, yPos); ctx.stroke();
+                        ctx.fillStyle = 'rgb(231, 76, 60)';
+                        ctx.fillRect(right - 90, yPos - 12, 85, 24);
+                        ctx.fillStyle = 'white'; ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center';
+                        ctx.fillText('70% Target', right - 47, yPos + 4);
+                        ctx.restore();
                     }
-                }
-            },
-            plugins: [{
-                id: 'targetLine',
-                afterDatasetsDraw(chart) {
-                    const {ctx, chartArea: {left, right, top, bottom}, scales: {y}} = chart;
-                    const yPos = y.getPixelForValue(70);
-                    ctx.save();
-                    ctx.setLineDash([5, 5]);
-                    ctx.strokeStyle = 'rgb(231, 76, 60)';
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(left, yPos);
-                    ctx.lineTo(right, yPos);
-                    ctx.stroke();
-                    ctx.fillStyle = 'rgb(231, 76, 60)';
-                    ctx.fillRect(right - 90, yPos - 12, 85, 24);
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 12px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('70% Target', right - 47, yPos + 4);
-                    ctx.restore();
-                }
-            }]
-        });
-
-        // Attacks Chart
-        new Chart(document.getElementById('attacksChart'), {
-            type: 'bar',
-            data: {
-                labels: ['2026 Season'],
-                datasets: [{
-                    label: 'Attack Efficiency %',
-                    data: [ATTACKS_2026_PCT],
-                    backgroundColor: 'rgba(46, 204, 113, 0.8)',
-                    borderColor: 'rgba(39, 174, 96, 1)',
-                    borderWidth: 2
                 }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: { callback: value => value + '%' }
+            });
+        }
+        buildAccAccuracyChart('All');
+
+        function filterTargets(comp) {
+            document.querySelectorAll('.acc-filter').forEach(b => b.classList.toggle('active', b.textContent === comp));
+            buildAccAccuracyChart(comp);
+            buildAccAttackChart(comp);
+            buildAccScoresChart(comp);
+        }
+
+        // Accumulative Attack Efficiency Chart — filterable
+        const _attData = ACC_ATTACK_PCT_JSON;
+        const _perGameAttData = PER_GAME_ATTACK_PCT_JSON;
+        let _attChart = null;
+
+        function buildAccAttackChart(filterComp) {
+            const idx = _gameComps.map((c,i) => (!filterComp || filterComp === 'All' || c === filterComp) ? i : -1).filter(i => i >= 0);
+            const fLabels = idx.map(i => _accLabels[i]);
+            const fPerGame = idx.map(i => _perGameAttData[i]);
+            let total = 0, count = 0;
+            const fAcc = idx.map(i => { count++; total += _perGameAttData[i]; return Math.round(total / count * 10) / 10; });
+            if (_attChart) _attChart.destroy();
+            _attChart = new Chart(document.getElementById('accAttackChart'), {
+                type: 'line',
+                data: {
+                    labels: fLabels,
+                    datasets: [{
+                        label: 'Accumulative Attack Efficiency %',
+                        data: filterComp === 'All' ? idx.map(i => _attData[i]) : fAcc,
+                        borderColor: 'rgba(155, 89, 182, 1)',
+                        backgroundColor: 'rgba(155, 89, 182, 0.15)',
+                        borderWidth: 3, fill: true, tension: 0.3,
+                        pointRadius: 6, pointBackgroundColor: 'rgba(155, 89, 182, 1)',
+                        pointBorderColor: 'white', pointBorderWidth: 2
+                    },{
+                        label: 'Per Game Attack Efficiency %',
+                        data: fPerGame,
+                        borderColor: 'rgba(52, 152, 219, 0.8)',
+                        borderWidth: 2, borderDash: [5, 5], fill: false, tension: 0.3,
+                        pointRadius: 4, pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                        pointBorderColor: 'white', pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } },
+                        x: { ticks: { maxRotation: 45, minRotation: 45 } }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
                     }
                 },
-                plugins: {
-                    legend: { display: false }
-                }
-            },
-            plugins: [{
-                id: 'attacksTargetLine',
-                afterDatasetsDraw(chart) {
-                    const {ctx, chartArea: {top, bottom, left}, scales: {x}} = chart;
-                    const xPos = x.getPixelForValue(75);
-                    ctx.save();
-                    ctx.setLineDash([5, 5]);
-                    ctx.strokeStyle = 'rgb(231, 76, 60)';
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(xPos, top);
-                    ctx.lineTo(xPos, bottom);
-                    ctx.stroke();
-                    ctx.fillStyle = 'rgb(231, 76, 60)';
-                    ctx.fillRect(xPos - 42, top - 5, 85, 24);
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 12px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('75% Target', xPos, top + 9);
-                    ctx.restore();
-                },
-                afterDraw(chart) {
-                    const {ctx, chartArea: {top, bottom}} = chart;
-                    const meta = chart.getDatasetMeta(0);
-                    const bar = meta.data[0];
-                    ctx.save();
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 14px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText('ATTACKS_WITH_SHOT / TOTAL_ATTACKS', bar.x / 2, (top + bottom) / 2);
-                    ctx.restore();
-                }
-            }]
-        });
-
-        // Total Scores Chart
-        new Chart(document.getElementById('totalScoresChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Goals', '2 Pointers', 'Points'],
-                datasets: [{
-                    label: '2025',
-                    data: [24, 15, 169],
-                    backgroundColor: 'rgba(52, 152, 219, 0.8)',
-                    borderColor: 'rgba(41, 128, 185, 1)',
-                    borderWidth: 2
-                }, {
-                    label: '2026',
-                    data: [GOALS_2026, TWO_POINTERS_2026, POINTS_2026],
-                    backgroundColor: 'rgba(46, 204, 113, 0.8)',
-                    borderColor: 'rgba(39, 174, 96, 1)',
-                    borderWidth: 2
+                plugins: [{
+                    id: 'accAttTarget',
+                    afterDatasetsDraw(chart) {
+                        const {ctx, chartArea: {left, right}, scales: {y}} = chart;
+                        const yPos = y.getPixelForValue(75);
+                        ctx.save(); ctx.setLineDash([5, 5]); ctx.strokeStyle = 'rgb(231, 76, 60)'; ctx.lineWidth = 3;
+                        ctx.beginPath(); ctx.moveTo(left, yPos); ctx.lineTo(right, yPos); ctx.stroke();
+                        ctx.fillStyle = 'rgb(231, 76, 60)'; ctx.fillRect(right - 90, yPos - 12, 85, 24);
+                        ctx.fillStyle = 'white'; ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center';
+                        ctx.fillText('75% Target', right - 47, yPos + 4); ctx.restore();
+                    }
                 }]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: true } },
-                plugins: { legend: { display: true, position: 'top' } }
-            }
-        });
+            });
+        }
+        buildAccAttackChart('All');
+
+        // Accumulative Scores Chart — filterable
+        const _goalsData = ACC_GOALS_JSON;
+        const _twoPtsData = ACC_TWO_PTS_JSON;
+        const _pointsData = ACC_POINTS_JSON;
+        let _scoresChart = null;
+
+        function buildAccScoresChart(filterComp) {
+            const idx = _gameComps.map((c,i) => (!filterComp || filterComp === 'All' || c === filterComp) ? i : -1).filter(i => i >= 0);
+            const fLabels = idx.map(i => _accLabels[i]);
+            if (_scoresChart) _scoresChart.destroy();
+            _scoresChart = new Chart(document.getElementById('accScoresChart'), {
+                type: 'line',
+                data: {
+                    labels: fLabels,
+                    datasets: [{
+                        label: 'Goals', data: idx.map(i => _goalsData[i]),
+                        borderColor: 'rgba(231, 76, 60, 1)', backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                        borderWidth: 3, fill: false, tension: 0.3, pointRadius: 6,
+                        pointBackgroundColor: 'rgba(231, 76, 60, 1)', pointBorderColor: 'white', pointBorderWidth: 2
+                    }, {
+                        label: '2 Pointers', data: idx.map(i => _twoPtsData[i]),
+                        borderColor: 'rgba(243, 156, 18, 1)', backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                        borderWidth: 3, fill: false, tension: 0.3, pointRadius: 6,
+                        pointBackgroundColor: 'rgba(243, 156, 18, 1)', pointBorderColor: 'white', pointBorderWidth: 2
+                    }, {
+                        label: 'Points', data: idx.map(i => _pointsData[i]),
+                        borderColor: 'rgba(52, 152, 219, 1)', backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 3, fill: false, tension: 0.3, pointRadius: 6,
+                        pointBackgroundColor: 'rgba(52, 152, 219, 1)', pointBorderColor: 'white', pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { ticks: { maxRotation: 45, minRotation: 45 } }
+                    },
+                    plugins: { legend: { display: true, position: 'top' } }
+                }
+            });
+        }
+        buildAccScoresChart('All');
+
+
 
         // Scoring Chart
         new Chart(document.getElementById('scoringChart'), {

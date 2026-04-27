@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Discipline Tracker — Killinkere 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#2c3e50,#e74c3c);padding:20px}
+.container{max-width:1400px;margin:0 auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.header{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;padding:40px;text-align:center}
+.header h1{font-size:2.8em;margin-bottom:8px;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.header p{font-size:1.2em;opacity:.85}
+.summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:15px;padding:25px 35px}
+.summary-card{border-radius:14px;padding:18px;text-align:center}
+.summary-card .val{font-size:2em;font-weight:bold}.summary-card .lbl{font-size:.8em;opacity:.85;margin-top:3px}
+.sc-red{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff}
+.sc-yellow{background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff}
+.sc-black{background:linear-gradient(135deg,#2c3e50,#34495e);color:#fff}
+.sc-blue{background:linear-gradient(135deg,#2980b9,#3498db);color:#fff}
+.tabs{display:flex;background:#34495e}.tab{flex:1;padding:18px;text-align:center;color:#fff;cursor:pointer;transition:.3s;font-size:1.05em;font-weight:bold}
+.tab:hover{background:#2c3e50}.tab.active{background:#c0392b}
+.tab-content{display:none;padding:35px}.tab-content.active{display:block}
+.chart-box{background:#fff;border-radius:15px;padding:28px;margin:22px 0;box-shadow:0 4px 6px rgba(0,0,0,.1)}
+.chart-title{font-size:1.4em;color:#2c3e50;margin-bottom:18px;text-align:center;font-weight:bold}
+table.disc-table{width:100%;border-collapse:collapse;font-size:.85em}
+.disc-table th{background:#34495e;color:#fff;padding:10px 8px;text-align:center;white-space:nowrap;cursor:pointer}
+.disc-table th:hover{background:#2c3e50}.disc-table td{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}
+.disc-table tr:hover{background:#f0f4ff}
+.footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+</style></head><body>
+<div class="container">
+<div class="header">
+<h1>🟨 DISCIPLINE TRACKER</h1>
+<p>Killinkere GAA — 2026 Season · 15 Games Analyzed</p>
+</div>
+
+<div class="summary-row">
+<div class="summary-card sc-yellow"><div class="val">1</div><div class="lbl">Yellows</div></div>
+<div class="summary-card sc-black"><div class="val">1</div><div class="lbl">Blacks</div></div>
+<div class="summary-card sc-red"><div class="val">2</div><div class="lbl">Reds</div></div>
+<div class="summary-card sc-red"><div class="val">4/15</div><div class="lbl">Games with Cards</div></div>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="showTab('players')">👤 Players</div>
+<div class="tab" onclick="showTab('incidents')">🟨 Card Incidents</div>
+<div class="tab" onclick="showTab('charts')">📈 Charts</div>
+<div class="tab" onclick="showTab('table')">📋 Game-by-Game</div>
+</div>
+
+<div id="players" class="tab-content active">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">👤 Player Discipline Record</h2>
+<div style="overflow-x:auto">
+<table class="disc-table">
+<thead><tr><th>Player</th><th>🟨 Yellow</th><th>⬛ Black</th><th>🟥 Red</th><th>Total Cards</th></tr></thead>
+<tbody><tr style="background:rgba(231,76,60,.08)"><td><strong>Nathan McQuade</strong></td><td>0</td><td>0</td><td>1</td><td style="font-weight:bold">1</td></tr>
+<tr style="background:rgba(231,76,60,.08)"><td><strong>Keiran Smith</strong></td><td>0</td><td>0</td><td>1</td><td style="font-weight:bold">1</td></tr>
+<tr style="background:rgba(243,156,18,.08)"><td><strong>Harry McQuade</strong></td><td>0</td><td>1</td><td>0</td><td style="font-weight:bold">1</td></tr>
+<tr><td><strong>Philip Corrigan</strong></td><td>1</td><td>0</td><td>0</td><td style="font-weight:bold">1</td></tr>
+<tr><td><strong>Alex Sweeney</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Fintan O’Connell</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Benny McConnell</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Cian Fitzsimons</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Ben Philingham</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>James Farrelly</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Phelim Cusack</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Ruairi O Connell</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Jason McMahon</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Darren Smith</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Conall Mooney</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Kevin McCabe</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Darrell Dolan</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Shane Ryan</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Cian McGovern</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Liam McCabe</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Ryan Smith</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Emmett Fitzsimons</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Gearoid Traynor</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Fiachra Mooney</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Shaun Clarke</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Harry Banville</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Mark Farrelly (S)</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>David Ryan</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Neill McCabe</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Luke Crossan</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Philip Furlong</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Lee Philingham</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Sean Brady</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+<tr><td><strong>Jake Norris</strong></td><td>0</td><td>0</td><td>0</td><td style="font-weight:bold">0</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="incidents" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">🟨 All Card Incidents</h2>
+<div style="border:1px solid #ecf0f1;border-radius:12px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #ecf0f1">
+<span style="font-size:1.5em">🟨</span>
+<div style="flex:1"><strong>Philip Corrigan</strong> — Yellow Card<br><span style="color:#7f8c8d;font-size:.85em">v Denn · 15/2/2026 · 00:16:46</span></div>
+<span style="color:#2ecc71;font-weight:bold;font-size:.9em">W (20-16)</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #ecf0f1">
+<span style="font-size:1.5em">🟥</span>
+<div style="flex:1"><strong>Keiran Smith</strong> — Red Card<br><span style="color:#7f8c8d;font-size:.85em">v Arva · 21/3/2026 · 01:02:17</span></div>
+<span style="color:#f39c12;font-weight:bold;font-size:.9em">D (16-16)</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #ecf0f1">
+<span style="font-size:1.5em">🟥</span>
+<div style="flex:1"><strong>Nathan McQuade</strong> — Red Card<br><span style="color:#7f8c8d;font-size:.85em">v Munterconnaught · 11/4/2026 · 00:54:22</span></div>
+<span style="color:#2ecc71;font-weight:bold;font-size:.9em">W (11-9)</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #ecf0f1">
+<span style="font-size:1.5em">⬛</span>
+<div style="flex:1"><strong>Harry McQuade</strong> — Black Card<br><span style="color:#7f8c8d;font-size:.85em">v Templeport · 12/4/2026 · 00:43:54</span></div>
+<span style="color:#2ecc71;font-weight:bold;font-size:.9em">W (27-12)</span>
+</div>
+
+</div>
+</div>
+
+<div id="charts" class="tab-content">
+<div class="chart-box"><div class="chart-title">🟨 Cards per Game — Killinkere vs Opposition</div><canvas id="cardsChart"></canvas></div>
+</div>
+
+<div id="table" class="tab-content">
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">📋 Game-by-Game Discipline</h2>
+<div style="overflow-x:auto">
+<table class="disc-table" id="discTable">
+<thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Our Cards</th><th>Opp Cards</th><th>Details</th></tr></thead>
+<tbody><tr><td>8/2/2026</td><td>v Clones</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>15/2/2026</td><td>v Denn</td><td style="color:#2ecc71;font-weight:bold">W</td><td>🟨</td><td> —</td><td style="font-size:.8em">🟨 Philip Corrigan (00:16:46)</td></tr>
+<tr><td>22/2/2026</td><td>v Pearse OG</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>27/2/2026</td><td>v Aughadrumsee</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>7/3/2026</td><td>v Ballymahon</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>15/3/2026</td><td>v Liatroim</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>17/3/2026</td><td>v Drung</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>21/3/2026</td><td>v Arva</td><td style="color:#f39c12;font-weight:bold">D</td><td>🟥</td><td> —</td><td style="font-size:.8em">🟥 Keiran Smith (01:02:17)</td></tr>
+<tr><td>22/3/2026</td><td>v Greenlough</td><td style="color:#e74c3c;font-weight:bold">L</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>28/3/2026</td><td>v Denn</td><td style="color:#e74c3c;font-weight:bold">L</td><td> —</td><td>🟨</td><td style="font-size:.8em">—</td></tr>
+<tr><td>29/3/2026</td><td>v Denn</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>5/4/2026</td><td>v Lavey</td><td style="color:#e74c3c;font-weight:bold">L</td><td> —</td><td> —</td><td style="font-size:.8em">—</td></tr>
+<tr><td>11/4/2026</td><td>v Munterconnaught</td><td style="color:#2ecc71;font-weight:bold">W</td><td>🟥</td><td>🟨🟥</td><td style="font-size:.8em">🟥 Nathan McQuade (00:54:22)</td></tr>
+<tr><td>12/4/2026</td><td>v Templeport</td><td style="color:#2ecc71;font-weight:bold">W</td><td>⬛</td><td> —</td><td style="font-size:.8em">⬛ Harry McQuade (00:43:54)</td></tr>
+<tr><td>22/4/2026</td><td>v Kill</td><td style="color:#2ecc71;font-weight:bold">W</td><td> —</td><td>🟨</td><td style="font-size:.8em">—</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+<div class="footer">Killinkere GAA · Discipline Tracker · 2026</div>
+
+<script>
+function showTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
+const L=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill"];
+const orange='rgba(243,156,18,0.8)',orangeB='rgba(230,126,34,1)',red='rgba(231,76,60,0.8)',redB='rgba(192,57,43,1)',blue='rgba(52,152,219,0.8)',blueB='rgba(41,128,185,1)';
+new Chart(document.getElementById('cardsChart'),{type:'bar',data:{labels:L,datasets:[{label:'Killinkere Cards',data:[0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0],backgroundColor:orange,borderColor:orangeB,borderWidth:2},{label:'Opposition Cards',data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1],backgroundColor:red,borderColor:redB,borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,ticks:{stepSize:1}}},plugins:{legend:{display:true,position:'top'}}}});
+document.querySelectorAll('.disc-table th').forEach((th,i)=>{let asc=true;th.addEventListener('click',()=>{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{let av=a.children[i].textContent.replace(/[🟨⬛🟥—]/g,'').trim();let bv=b.children[i].textContent.replace(/[🟨⬛🟥—]/g,'').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)});rows.forEach(r=>tbody.appendChild(r));asc=!asc});});
+</script>
+<script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
+</body></html>
