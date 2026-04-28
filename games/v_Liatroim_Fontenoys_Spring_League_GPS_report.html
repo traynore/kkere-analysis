@@ -107,20 +107,19 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <span>ℹ️ How to read Half Balance</span><span style="font-size:.8em">▾ tap to expand</span>
 </div>
 <div class="info-body" style="display:none;padding:0 20px 18px;font-size:.88em;color:#444;line-height:1.7">
-<p style="margin-bottom:10px"><strong>Half Balance</strong> compares your <em>per-minute</em> intensity across both halves using three metrics:</p>
+<p style="margin-bottom:10px"><strong>Half Balance</strong> compares your <em>raw output</em> across both halves using two metrics:</p>
 <table style="width:100%;border-collapse:collapse;margin-bottom:12px;font-size:.95em">
-<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">HSR per min</td><td style="padding:8px 12px;text-align:center;font-weight:bold">40%</td><td style="padding:8px 12px">High-speed running rate — most sensitive to fatigue</td></tr>
-<tr><td style="padding:8px 12px;font-weight:bold">HID per min</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">High-intensity distance rate — sustained hard efforts</td></tr>
-<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">Sprint dist per min</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">Sprint output rate — explosive capacity</td></tr>
+<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">HSR (total metres)</td><td style="padding:8px 12px;text-align:center;font-weight:bold">60%</td><td style="padding:8px 12px">High-speed running — most sensitive to fatigue</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold">Sprint distance (total metres)</td><td style="padding:8px 12px;text-align:center;font-weight:bold">40%</td><td style="padding:8px 12px">Sprint output — explosive capacity</td></tr>
 </table>
-<p style="margin-bottom:8px">Using per-minute rates means subs and uneven playing time are handled fairly. The split (e.g. 55/45) shows the 1st-half share vs 2nd-half share of HSR output.</p>
+<p style="margin-bottom:8px">Using raw totals means the comparison is based directly on GPS data with no estimated half durations. The split (e.g. 55/45) shows the 1st-half share vs 2nd-half share of weighted output.</p>
 <p style="margin-bottom:8px"><strong>Categories:</strong></p>
-<p style="margin-bottom:4px"><span style="color:#2ecc71;font-weight:bold">✅ Consistent</span> — Per-min intensity within 15% across halves. Ideal output.</p>
-<p style="margin-bottom:4px"><span style="color:#f39c12;font-weight:bold">🔸 Moderate fade</span> — 10–15% per-min drop. Normal for most players.</p>
-<p style="margin-bottom:4px"><span style="color:#e74c3c;font-weight:bold">⚠️ Faded</span> — &gt;15% per-min drop. Genuine fatigue flag for management.</p>
-<p style="margin-bottom:4px"><span style="color:#3498db;font-weight:bold">🔵 Back-loaded</span> — Intensity <em>increased</em> &gt;15% in 2nd half. Not a concern — player was quieter early and ramped up.</p>
+<p style="margin-bottom:4px"><span style="color:#2ecc71;font-weight:bold">✅ Consistent</span> — Output within 10% across halves. Ideal.</p>
+<p style="margin-bottom:4px"><span style="color:#f39c12;font-weight:bold">🔸 Moderate fade</span> — 10–15% drop. Normal for most players.</p>
+<p style="margin-bottom:4px"><span style="color:#e74c3c;font-weight:bold">⚠️ Faded</span> — &gt;15% drop. Genuine fatigue flag for management.</p>
+<p style="margin-bottom:4px"><span style="color:#3498db;font-weight:bold">🔵 Back-loaded</span> — Output <em>increased</em> &gt;15% in 2nd half. Player was quieter early and ramped up.</p>
 <p style="margin-bottom:8px"><span style="color:#95a5a6;font-weight:bold">🔄 SUB</span> — Did not play both halves. Excluded from comparison.</p>
-<p style="color:#888;font-size:.9em">Hover over the value in the table for the per-minute breakdown.</p>
+<p style="color:#888;font-size:.9em">Hover over the value in the table for the raw half breakdown.</p>
 </div>
 </div>
 <div class="player-card">
@@ -135,7 +134,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">23</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">32</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">27</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR/min:7→9 | HID/min:27→26 | Sprint/min:1→7">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">45/55</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR: 195→262m | Sprint: 41→201m">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">36/64</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -164,7 +163,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">64</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">36</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">22</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR/min:6→10 | HID/min:21→24 | Sprint/min:3→8">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">41/59</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR: 165→311m | Sprint: 86→252m">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">32/68</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -193,7 +192,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">81</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">35</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">21</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR/min:8→10 | HID/min:19→21 | Sprint/min:6→8">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">46/54</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR: 228→311m | Sprint: 179→248m">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">42/58</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -222,7 +221,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">42</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">28</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">23</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#e74c3c" title="HSR/min:9→7 | HID/min:18→17 | Sprint/min:7→4">⚠️ Faded<br><span style="font-size:.7em;font-weight:normal">55/45</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c" title="HSR: 265→209m | Sprint: 217→119m">⚠️ Faded<br><span style="font-size:.7em;font-weight:normal">59/41</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -251,7 +250,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">0</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">31</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">24</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#2ecc71" title="HSR/min:4→5 | HID/min:13→12 | Sprint/min:3→3">✅ Consistent<br><span style="font-size:.7em;font-weight:normal">50/50</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#2ecc71" title="HSR: 129→137m | Sprint: 97→93m">✅ Consistent<br><span style="font-size:.7em;font-weight:normal">49/51</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -280,7 +279,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">58</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">34</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">34</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR/min:6→9 | HID/min:13→16 | Sprint/min:6→8">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">43/57</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#3498db" title="HSR: 189→267m | Sprint: 184→245m">🔵 Back-loaded<br><span style="font-size:.7em;font-weight:normal">42/58</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -309,7 +308,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <div class="metric"><div class="metric-value">31</div><div class="metric-label">Impacts</div></div>
 <div class="metric"><div class="metric-value">20</div><div class="metric-label">Accelerations</div></div>
 <div class="metric"><div class="metric-value">22</div><div class="metric-label">Decelerations</div></div>
-<div class="metric"><div class="metric-value" style="color:#95a5a6" title="Subbed in 2nd half (1H:3062m, 2H:1051m)">🔄 Subbed<br><span style="font-size:.7em;font-weight:normal">-</span></div><div class="metric-label">Half Balance</div></div>
+<div class="metric"><div class="metric-value" style="color:#e74c3c" title="HSR: 337→26m | Sprint: 258→14m">⚠️ Faded<br><span style="font-size:.7em;font-weight:normal">94/6</span></div><div class="metric-label">Half Balance</div></div>
 </div>
 <div class="half-compare">
 <div class="half-section-label">Distance</div>
@@ -554,7 +553,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>32</td>
 <td>27</td>
 <td>23</td>
-<td style="color:#3498db;font-weight:bold" title="HSR/min:7→9 | HID/min:27→26 | Sprint/min:1→7">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">45/55</span></td>
+<td style="color:#3498db;font-weight:bold" title="HSR: 195→262m | Sprint: 41→201m">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">36/64</span></td>
 </tr>
 <tr>
 <td><strong>Phelim Cusack</strong></td>
@@ -569,7 +568,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>36</td>
 <td>22</td>
 <td>64</td>
-<td style="color:#3498db;font-weight:bold" title="HSR/min:6→10 | HID/min:21→24 | Sprint/min:3→8">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">41/59</span></td>
+<td style="color:#3498db;font-weight:bold" title="HSR: 165→311m | Sprint: 86→252m">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">32/68</span></td>
 </tr>
 <tr>
 <td><strong>Fiachra Mooney</strong></td>
@@ -584,7 +583,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>35</td>
 <td>21</td>
 <td>81</td>
-<td style="color:#3498db;font-weight:bold" title="HSR/min:8→10 | HID/min:19→21 | Sprint/min:6→8">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">46/54</span></td>
+<td style="color:#3498db;font-weight:bold" title="HSR: 228→311m | Sprint: 179→248m">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">42/58</span></td>
 </tr>
 <tr>
 <td><strong>Luke Crossan</strong></td>
@@ -599,7 +598,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>28</td>
 <td>23</td>
 <td>42</td>
-<td style="color:#e74c3c;font-weight:bold" title="HSR/min:9→7 | HID/min:18→17 | Sprint/min:7→4">⚠️ Faded<br><span style="font-size:.75em;font-weight:normal">55/45</span></td>
+<td style="color:#e74c3c;font-weight:bold" title="HSR: 265→209m | Sprint: 217→119m">⚠️ Faded<br><span style="font-size:.75em;font-weight:normal">59/41</span></td>
 </tr>
 <tr>
 <td><strong>Shane Ryan</strong></td>
@@ -614,7 +613,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>31</td>
 <td>24</td>
 <td>0</td>
-<td style="color:#2ecc71;font-weight:bold" title="HSR/min:4→5 | HID/min:13→12 | Sprint/min:3→3">✅ Consistent<br><span style="font-size:.75em;font-weight:normal">50/50</span></td>
+<td style="color:#2ecc71;font-weight:bold" title="HSR: 129→137m | Sprint: 97→93m">✅ Consistent<br><span style="font-size:.75em;font-weight:normal">49/51</span></td>
 </tr>
 <tr>
 <td><strong>Nathan Mcquade</strong></td>
@@ -629,7 +628,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>34</td>
 <td>34</td>
 <td>58</td>
-<td style="color:#3498db;font-weight:bold" title="HSR/min:6→9 | HID/min:13→16 | Sprint/min:6→8">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">43/57</span></td>
+<td style="color:#3498db;font-weight:bold" title="HSR: 189→267m | Sprint: 184→245m">🔵 Back-loaded<br><span style="font-size:.75em;font-weight:normal">42/58</span></td>
 </tr>
 <tr>
 <td><strong>James Farrelly</strong></td>
@@ -644,7 +643,7 @@ table.gps-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92e
 <td>20</td>
 <td>22</td>
 <td>31</td>
-<td style="color:#95a5a6;font-weight:bold" title="Subbed in 2nd half (1H:3062m, 2H:1051m)">🔄 Subbed<br><span style="font-size:.75em;font-weight:normal">-</span></td>
+<td style="color:#e74c3c;font-weight:bold" title="HSR: 337→26m | Sprint: 258→14m">⚠️ Faded<br><span style="font-size:.75em;font-weight:normal">94/6</span></td>
 </tr>
 <tr>
 <td><strong>Fintan O’connell</strong></td>
