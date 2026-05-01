@@ -195,6 +195,13 @@ def calc_all_stats(events, csv_filename):
         sf_from_45 = [s for s in sf if int(s.get('Event', 0)) in sf_from_45_indices]
         stats[f'{prefix}_sf45_total'] = len(sf_from_45)
         stats[f'{prefix}_sf45_scored'] = len([s for s in sf_from_45 if s['Outcome'] in ['Goal', 'Point', '2 Points']])
+        
+        # Points value scored from frees (fouls) vs from 45s for score breakdown
+        sf_from_fouls = [s for s in sf if int(s.get('Event', 0)) not in sf_from_45_indices]
+        sf_foul_pts = sum(3 if s['Outcome']=='Goal' else 2 if s['Outcome']=='2 Points' else 1 for s in sf_from_fouls if s['Outcome'] in ['Goal','Point','2 Points'])
+        sf_45_pts = sum(3 if s['Outcome']=='Goal' else 2 if s['Outcome']=='2 Points' else 1 for s in sf_from_45 if s['Outcome'] in ['Goal','Point','2 Points'])
+        stats[f'{prefix}_pts_from_fouls'] = sf_foul_pts
+        stats[f'{prefix}_pts_from_45s'] = sf_45_pts
     
     # Player stats
     for team, prefix in [(t1, 't1'), (t2, 't2')]:
@@ -1025,6 +1032,12 @@ def generate_html(csv_file):
     html = html.replace('SF45_TOTAL_T1', str(stats['t1_sf45_total']))
     html = html.replace('SF45_SCORED_T2', str(stats['t2_sf45_scored']))
     html = html.replace('SF45_TOTAL_T2', str(stats['t2_sf45_total']))
+    
+    # Replace score breakdown - scored from frees and 45s
+    html = html.replace('PTS_FROM_FOULS_T1', str(stats['t1_pts_from_fouls']))
+    html = html.replace('PTS_FROM_FOULS_T2', str(stats['t2_pts_from_fouls']))
+    html = html.replace('PTS_FROM_45S_T1', str(stats['t1_pts_from_45s']))
+    html = html.replace('PTS_FROM_45S_T2', str(stats['t2_pts_from_45s']))
     
     # Generate timeline HTML
     timeline_html = ''
