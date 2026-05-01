@@ -82,6 +82,7 @@ def calc_all_stats(events, csv_filename):
         play_two_pts = len([s for s in shots_from_play if s['Outcome'] == '2 Points'])
         wides = len([s for s in shots_from_play if s['Outcome'] == 'Wide'])
         shorts = len([s for s in shots_from_play if s['Outcome'] == 'Short'])
+        fortyfives = len([s for s in shots_from_play if s['Outcome'] == '45'])
         
         stats[f'{prefix}_goals'] = total_goals
         stats[f'{prefix}_points'] = total_points
@@ -92,6 +93,7 @@ def calc_all_stats(events, csv_filename):
         stats[f'{prefix}_shots_scored'] = play_goals + play_points + play_two_pts
         stats[f'{prefix}_wides'] = wides
         stats[f'{prefix}_shorts'] = shorts
+        stats[f'{prefix}_45s'] = fortyfives
         # Accuracy = scored / total shots
         stats[f'{prefix}_acc'] = round((stats[f'{prefix}_shots_scored'] / len(shots_from_play) * 100), 1) if len(shots_from_play) > 0 else 0
         
@@ -178,6 +180,21 @@ def calc_all_stats(events, csv_filename):
         stats[f'{prefix}_sf_shorts'] = len([s for s in sf if s['Outcome'] == 'Short'])
         stats[f'{prefix}_sf_scored'] = stats[f'{prefix}_sf_goals'] + stats[f'{prefix}_sf_points'] + stats[f'{prefix}_sf_two_pts']
         stats[f'{prefix}_sf_acc'] = round((stats[f'{prefix}_sf_scored'] / stats[f'{prefix}_sf_total'] * 100)) if stats[f'{prefix}_sf_total'] > 0 else 0
+        
+        # Identify which scoreable frees came from 45s
+        sf_from_45_indices = set()
+        for i, e in enumerate(events):
+            if e['Team Name'] == team and e.get('Name') == 'Shot from play' and e.get('Outcome') == '45':
+                for j in range(i + 1, min(i + 5, len(events))):
+                    n = events[j]
+                    if n['Team Name'] == team and n.get('Name') == 'Scoreable free':
+                        sf_from_45_indices.add(int(n.get('Event', j)))
+                        break
+                    if n.get('Name') in ['Shot from play', 'Free conceded', 'Kickout']:
+                        break
+        sf_from_45 = [s for s in sf if int(s.get('Event', 0)) in sf_from_45_indices]
+        stats[f'{prefix}_sf45_total'] = len(sf_from_45)
+        stats[f'{prefix}_sf45_scored'] = len([s for s in sf_from_45 if s['Outcome'] in ['Goal', 'Point', '2 Points']])
     
     # Player stats
     for team, prefix in [(t1, 't1'), (t2, 't2')]:
@@ -998,6 +1015,16 @@ def generate_html(csv_file):
     html = html.replace('SF_SHORTS_T2', str(stats['t2_sf_shorts']))
     html = html.replace('SF_ACC_T1', str(stats['t1_sf_acc']))
     html = html.replace('SF_ACC_T2', str(stats['t2_sf_acc']))
+    
+    # Replace 45s
+    html = html.replace('FORTYFIVES_T1', str(stats['t1_45s']))
+    html = html.replace('FORTYFIVES_T2', str(stats['t2_45s']))
+    
+    # Replace scoreable frees from 45s
+    html = html.replace('SF45_SCORED_T1', str(stats['t1_sf45_scored']))
+    html = html.replace('SF45_TOTAL_T1', str(stats['t1_sf45_total']))
+    html = html.replace('SF45_SCORED_T2', str(stats['t2_sf45_scored']))
+    html = html.replace('SF45_TOTAL_T2', str(stats['t2_sf45_total']))
     
     # Generate timeline HTML
     timeline_html = ''
