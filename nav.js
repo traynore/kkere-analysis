@@ -18,7 +18,8 @@
       {label:'v Denn (L) 4-10 to 3-20', file:'Killinkere 4 - 10 v 3 - 20 Denn_FULL_infographic.html'},
       {label:'v Munterconnaught (W) 0-11 to 0-9', file:'Killinkere 0 - 11 v 0 - 9 Munterconnaught_FULL_infographic.html'},
       {label:'v Kill Shamrocks (W) 1-14 to 3-6', file:'Killinkere 1 - 14 v 3 - 6 Kill Shamrocks_FULL_infographic.html'},
-      {label:'v Ballymchugh (L) 1-11 to 2-17', file:'Killinkere 1 - 11 v 2 - 17 Ballymchugh_FULL_infographic.html'}
+      {label:'v Ballymchugh (L) 1-11 to 2-17', file:'Killinkere 1 - 11 v 2 - 17 Ballymchugh_FULL_infographic.html'},
+      {label:'v Redhills (W) 0-17 to 1-13', file:'Killinkere 0 - 17 v 1 - 13 Redhills_FULL_infographic.html'}
     ]},
     {heading:'📋 ACFL Division 7', games:[
       {label:'v Arva (D) 1-13 to 1-13', file:'Killinkere 1 - 13 v 1 - 13 Arva_FULL_infographic.html'},
