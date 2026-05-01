@@ -451,11 +451,11 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 50%">50%</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: {stats["t2_acc"]}%">{stats["t2_acc"]}%</div>', html, count=1)
     
-    # Replace total shots/scores
+    # Replace total shots/scores (use attacks_shot to match funnel)
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(19 \* 4%\)">19 / 11</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_shots_total"]} * 4%)">{stats["t1_shots_total"]} / {stats["t1_shots_scored"]}</div>', html)
+                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_attacks_shot"]} * 4%)">{stats["t1_attacks_shot"]} / {stats["t1_shots_scored"]}</div>', html)
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(18 \* 4%\)">18 / 9</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_shots_total"]} * 4%)">{stats["t2_shots_total"]} / {stats["t2_shots_scored"]}</div>', html)
+                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_attacks_shot"]} * 4%)">{stats["t2_attacks_shot"]} / {stats["t2_shots_scored"]}</div>', html)
     
     # Replace score breakdown - Goals
     # Score Breakdown shows FROM PLAY only (frees shown separately)
