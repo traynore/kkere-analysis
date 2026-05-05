@@ -95,7 +95,7 @@ def generate_html(csv_file):
     h2_sprints = json.dumps([players[n].get('Second Half', {}).get('sprints', 0) for n in names])
 
     # Half balance analysis helper — uses raw totals (HSR 60%, Sprint dist 40%)
-    def calc_half_balance(h1, h2):
+    def calc_half_balance(h1, h2, total=None):
         h1_hsr = h1.get('hsr', 0)
         h2_hsr = h2.get('hsr', 0)
         h1_sd = h1.get('sprint_distance', 0)
@@ -104,6 +104,9 @@ def generate_html(csv_file):
         h2d = h2.get('total_distance', 0)
         played_both = h1d > 0 and h2d > 0
         if not played_both:
+            # Detect sync issue: Total matches First Half exactly and Second Half is zero
+            if total and h1d > 0 and h2d == 0 and total.get('total_distance', 0) == h1d:
+                return {'label': '📡 Data incomplete', 'color': '#e67e22', 'icon': '📡', 'value': '-', 'tip': 'GPS sync issue — session ended at half-time. Player played full game.'}
             return {'label': 'SUB', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': 'Did not play both halves'}
         if h2d < h1d * 0.65:
             return {'label': '🔄 Subbed', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': f'Subbed in 2nd half (1H:{h1d}m, 2H:{h2d}m)'}
@@ -133,7 +136,7 @@ def generate_html(csv_file):
         h1 = players[name].get('First Half', {})
         h2 = players[name].get('Second Half', {})
         dist_pct = round(t['total_distance'] / max_dist * 100)
-        bal = calc_half_balance(h1, h2)
+        bal = calc_half_balance(h1, h2, t)
         table_rows += f'''<tr>
 <td><strong>{name}</strong></td>
 <td>{t['total_distance']}m</td>
@@ -169,7 +172,7 @@ def generate_html(csv_file):
         h2_hsr_val = h2.get('hsr', 0)
         h1_sprint_val = h1.get('sprint_distance', 0)
         h2_sprint_val = h2.get('sprint_distance', 0)
-        bal = calc_half_balance(h1, h2)
+        bal = calc_half_balance(h1, h2, t)
 
         badges = []
         if dist_rank[0] == name:
