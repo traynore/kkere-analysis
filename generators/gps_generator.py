@@ -94,14 +94,12 @@ def generate_html(csv_file):
     h1_sprints = json.dumps([players[n].get('First Half', {}).get('sprints', 0) for n in names])
     h2_sprints = json.dumps([players[n].get('Second Half', {}).get('sprints', 0) for n in names])
 
-    # Half balance analysis helper
+    # Half balance analysis helper — uses raw totals (HSR 60%, Sprint dist 40%)
     def calc_half_balance(h1, h2):
-        h1_hsr_pm = h1.get('hsr_per_min', 0)
-        h2_hsr_pm = h2.get('hsr_per_min', 0)
-        h1_hid_pm = h1.get('hid_per_min', 0)
-        h2_hid_pm = h2.get('hid_per_min', 0)
-        h1_sd_pm = h1.get('sprint_dist_per_min', 0)
-        h2_sd_pm = h2.get('sprint_dist_per_min', 0)
+        h1_hsr = h1.get('hsr', 0)
+        h2_hsr = h2.get('hsr', 0)
+        h1_sd = h1.get('sprint_distance', 0)
+        h2_sd = h2.get('sprint_distance', 0)
         h1d = h1.get('total_distance', 0)
         h2d = h2.get('total_distance', 0)
         played_both = h1d > 0 and h2d > 0
@@ -111,19 +109,20 @@ def generate_html(csv_file):
             return {'label': '🔄 Subbed', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': f'Subbed in 2nd half (1H:{h1d}m, 2H:{h2d}m)'}
         if h1d < h2d * 0.65:
             return {'label': '🔄 Sub on', 'color': '#95a5a6', 'icon': '🔄', 'value': '-', 'tip': f'Came on in 2nd half (1H:{h1d}m, 2H:{h2d}m)'}
-        total_pm = h1_hsr_pm + h2_hsr_pm
-        h1_pct = round(h1_hsr_pm / total_pm * 100) if total_pm > 0 else 50
-        hsr_change = round((h2_hsr_pm - h1_hsr_pm) / h1_hsr_pm * 100) if h1_hsr_pm > 0 else 0
-        hid_change = round((h2_hid_pm - h1_hid_pm) / h1_hid_pm * 100) if h1_hid_pm > 0 else 0
-        sd_change = round((h2_sd_pm - h1_sd_pm) / h1_sd_pm * 100) if h1_sd_pm > 0 else 0
-        composite = round(hsr_change * 0.4 + hid_change * 0.3 + sd_change * 0.3)
-        tip = f'HSR/min:{h1_hsr_pm}→{h2_hsr_pm} | HID/min:{h1_hid_pm}→{h2_hid_pm} | Sprint/min:{h1_sd_pm}→{h2_sd_pm}'
+        # Weighted composite: HSR 60%, Sprint distance 40%
+        h1_weighted = h1_hsr * 0.6 + h1_sd * 0.4
+        h2_weighted = h2_hsr * 0.6 + h2_sd * 0.4
+        total_weighted = h1_weighted + h2_weighted
+        h1_pct = round(h1_weighted / total_weighted * 100) if total_weighted > 0 else 50
+        # Change percentage based on raw drop
+        composite = round((h2_weighted - h1_weighted) / h1_weighted * 100) if h1_weighted > 0 else 0
+        tip = f'HSR: {h1_hsr}→{h2_hsr}m | Sprint: {h1_sd}→{h2_sd}m'
         if composite <= -15:
             return {'label': '⚠️ Faded', 'color': '#e74c3c', 'icon': '🔻', 'value': f'{h1_pct}/{100-h1_pct}', 'tip': tip, 'composite': composite}
         elif composite <= -10:
             return {'label': 'Moderate fade', 'color': '#f39c12', 'icon': '🔸', 'value': f'{h1_pct}/{100-h1_pct}', 'tip': tip, 'composite': composite}
         elif composite >= 15:
-            return {'label': 'Back-loaded', 'color': '#3498db', 'icon': '🔵', 'value': f'{h1_pct}/{100-h1_pct}', 'tip': tip, 'composite': composite}
+            return {'label': '🔵 Back-loaded', 'color': '#3498db', 'icon': '🔵', 'value': f'{h1_pct}/{100-h1_pct}', 'tip': tip, 'composite': composite}
         else:
             return {'label': '✅ Consistent', 'color': '#2ecc71', 'icon': '✅', 'value': f'{h1_pct}/{100-h1_pct}', 'tip': tip, 'composite': composite}
 
@@ -334,20 +333,19 @@ table.gps-table{{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92
 <span>ℹ️ How to read Half Balance</span><span style="font-size:.8em">▾ tap to expand</span>
 </div>
 <div class="info-body" style="display:none;padding:0 20px 18px;font-size:.88em;color:#444;line-height:1.7">
-<p style="margin-bottom:10px"><strong>Half Balance</strong> compares your <em>per-minute</em> intensity across both halves using three metrics:</p>
+<p style="margin-bottom:10px"><strong>Half Balance</strong> compares your <em>raw output</em> across both halves using two metrics:</p>
 <table style="width:100%;border-collapse:collapse;margin-bottom:12px;font-size:.95em">
-<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">HSR per min</td><td style="padding:8px 12px;text-align:center;font-weight:bold">40%</td><td style="padding:8px 12px">High-speed running rate — most sensitive to fatigue</td></tr>
-<tr><td style="padding:8px 12px;font-weight:bold">HID per min</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">High-intensity distance rate — sustained hard efforts</td></tr>
-<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">Sprint dist per min</td><td style="padding:8px 12px;text-align:center;font-weight:bold">30%</td><td style="padding:8px 12px">Sprint output rate — explosive capacity</td></tr>
+<tr style="background:#e8eef8"><td style="padding:8px 12px;font-weight:bold">HSR (total metres)</td><td style="padding:8px 12px;text-align:center;font-weight:bold">60%</td><td style="padding:8px 12px">High-speed running — most sensitive to fatigue</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold">Sprint distance (total metres)</td><td style="padding:8px 12px;text-align:center;font-weight:bold">40%</td><td style="padding:8px 12px">Sprint output — explosive capacity</td></tr>
 </table>
-<p style="margin-bottom:8px">Using per-minute rates means subs and uneven playing time are handled fairly. The split (e.g. 55/45) shows the 1st-half share vs 2nd-half share of HSR output.</p>
+<p style="margin-bottom:8px">Using raw totals means the comparison is based directly on GPS data with no estimated half durations. The split (e.g. 55/45) shows the 1st-half share vs 2nd-half share of weighted output.</p>
 <p style="margin-bottom:8px"><strong>Categories:</strong></p>
-<p style="margin-bottom:4px"><span style="color:#2ecc71;font-weight:bold">✅ Consistent</span> — Per-min intensity within 15% across halves. Ideal output.</p>
-<p style="margin-bottom:4px"><span style="color:#f39c12;font-weight:bold">🔸 Moderate fade</span> — 10–15% per-min drop. Normal for most players.</p>
-<p style="margin-bottom:4px"><span style="color:#e74c3c;font-weight:bold">⚠️ Faded</span> — &gt;15% per-min drop. Genuine fatigue flag for management.</p>
-<p style="margin-bottom:4px"><span style="color:#3498db;font-weight:bold">🔵 Back-loaded</span> — Intensity <em>increased</em> &gt;15% in 2nd half. Not a concern — player was quieter early and ramped up.</p>
+<p style="margin-bottom:4px"><span style="color:#2ecc71;font-weight:bold">✅ Consistent</span> — Output within 10% across halves. Ideal.</p>
+<p style="margin-bottom:4px"><span style="color:#f39c12;font-weight:bold">🔸 Moderate fade</span> — 10–15% drop. Normal for most players.</p>
+<p style="margin-bottom:4px"><span style="color:#e74c3c;font-weight:bold">⚠️ Faded</span> — &gt;15% drop. Genuine fatigue flag for management.</p>
+<p style="margin-bottom:4px"><span style="color:#3498db;font-weight:bold">🔵 Back-loaded</span> — Output <em>increased</em> &gt;15% in 2nd half. Player was quieter early and ramped up.</p>
 <p style="margin-bottom:8px"><span style="color:#95a5a6;font-weight:bold">🔄 SUB</span> — Did not play both halves. Excluded from comparison.</p>
-<p style="color:#888;font-size:.9em">Hover over the value in the table for the per-minute breakdown.</p>
+<p style="color:#888;font-size:.9em">Hover over the value in the table for the raw half breakdown.</p>
 </div>
 </div>
 {player_cards}

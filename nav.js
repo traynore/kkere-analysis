@@ -40,7 +40,8 @@
       {label:'v Templeport — GPS (12 Apr)', file:'v_Templeport_GPS_report.html'},
       {label:'v Kill Shamrocks — GPS (22 Apr)', file:'v_Kill_Shamrocks__ACFL_Div3_GPS_report.html'},
       {label:'v Ballymachugh — GPS (25 Apr)', file:'v_Ballymachugh__ACFL_Div3_GPS_report.html'},
-      {label:'v Cuchulainns — GPS (26 Apr)', file:'v_Cuchulainns__ACFL_Div7_GPS_report.html'}
+      {label:'v Cuchulainns — GPS (26 Apr)', file:'v_Cuchulainns__ACFL_Div7_GPS_report.html'},
+      {label:'v Redhills — GPS (1 May)', file:'v_Redhills__ACFL_Div3_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
       {label:'Season Trends & Patterns', file:'season_trends.html'},
