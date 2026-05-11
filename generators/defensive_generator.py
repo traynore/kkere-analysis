@@ -188,44 +188,10 @@ table.def-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 <div class="summary-card"><div class="val">{sum(g['pts_from_frees'] for g in games)}</div><div class="lbl">Total Pts from Frees</div></div>
 </div>
 
-<h2 style="color:#2c3e50;text-align:center;margin:20px 0;font-size:1.7em">🔍 Defensive Patterns</h2>
-<div class="pattern-grid">
-
-<div class="pattern-card pattern-green">
-<h3>🎯 Force Poor Shooting (&lt;40% Opp Accuracy)</h3>
-<div class="insight">The strongest defensive predictor. When opposition accuracy is held below 40%: {rec(opp_acc_low)}. When they shoot 40%+: {rec(opp_acc_high)}. Making them take difficult shots from distance is the best defence.</div>
-<div><span class="rec rec-good">&lt;40%: {rec(opp_acc_low)}</span><span class="rec rec-bad">≥40%: {rec(opp_acc_high)}</span></div>
-</div>
-
-<div class="pattern-card pattern-red">
-<h3>🟨 Points Conceded from Frees</h3>
-<div class="insight">When opposition score ≤3pts from frees: {rec(pff_low)}. When they score 4+: {rec(pff_high)}. The Arva draw (10pts from frees) and Denn Div 3 loss (10pts from frees) are the standout examples of fouling costing results.</div>
-<div><span class="rec rec-good">≤3pts: {rec(pff_low)}</span><span class="rec rec-bad">&gt;3pts: {rec(pff_high)}</span></div>
-</div>
-
-<div class="pattern-card pattern-blue">
-<h3>🔒 Keep It Tight (≤12pts Conceded)</h3>
-<div class="insight">Unbeaten when holding opposition to 12 points or fewer: {rec(conc_low)}. When conceding 13+: {rec(conc_high)}. The 12-point mark is the defensive threshold.</div>
-<div><span class="rec rec-good">≤12pts: {rec(conc_low)}</span><span class="rec rec-bad">&gt;12pts: {rec(conc_high)}</span></div>
-</div>
-
-<div class="pattern-card pattern-gold">
-<h3>🥅 Goals Conceded</h3>
-<div class="insight">0 goals conceded: {rec(goals_0)}. 1 goal: {rec(goals_1)}. 2+ goals: {rec(goals_2p)}. Goals conceded doesn't cleanly predict results — Killinkere have won games conceding 3 goals (v Drung, v Kill Shamrocks). But the Denn Div 3 loss (3 goals) shows it can be fatal against quality opposition.</div>
-<div><span class="rec rec-good">0 goals: {rec(goals_0)}</span><span class="rec rec-good">1 goal: {rec(goals_1)}</span><span class="rec rec-bad">2+ goals: {rec(goals_2p)}</span></div>
-</div>
-
-<div class="pattern-card pattern-green">
-<h3>🤐 Discipline (≤10 Frees Conceded)</h3>
-<div class="insight">Unbeaten when conceding 10 or fewer frees: {rec(fc_low)}. When conceding 11+: {rec(fc_high)}. Fewer fouls = fewer scoring chances for the opposition and less pressure on the defence.</div>
-<div><span class="rec rec-good">≤10: {rec(fc_low)}</span><span class="rec rec-bad">&gt;10: {rec(fc_high)}</span></div>
-</div>
-
-<div class="pattern-card pattern-blue">
-<h3>📊 Where Conceded Scores Come From</h3>
-<div class="insight">Across {total} games: {round(sum(g['o_scored_play'] for g in games)*100/max(1,sum(g['o_scored_play']+g['o_scored_free'] for g in games)))}% of opposition scores come from play, {round(sum(g['o_scored_free'] for g in games)*100/max(1,sum(g['o_scored_play']+g['o_scored_free'] for g in games)))}% from frees. {sum(g['pts_from_frees'] for g in games)} points conceded from dead balls across the season — that's {round(sum(g['pts_from_frees'] for g in games)/sum(g['o_total'] for g in games)*100)}% of all points conceded.</div>
-</div>
-
+<div style="text-align:center;padding:40px 20px;color:#7f8c8d">
+<div style="font-size:3em;margin-bottom:15px">🔍</div>
+<h2 style="color:#2c3e50;margin-bottom:10px">Coming Soon</h2>
+<p style="font-size:1.1em">Defensive insights and patterns will be added here.</p>
 </div>
 </div>
 

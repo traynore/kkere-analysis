@@ -238,6 +238,17 @@ def generate():
     chart_att_colors = json.dumps(['rgba(46,204,113,0.8)' if g['result'] == 'W' else ('rgba(231,76,60,0.8)' if g['result'] == 'L' else 'rgba(243,156,18,0.8)') for g in games_with_attacks])
     chart_att_borders = json.dumps(['rgba(39,174,96,1)' if g['result'] == 'W' else ('rgba(192,57,43,1)' if g['result'] == 'L' else 'rgba(230,126,34,1)') for g in games_with_attacks])
     chart_wides = json.dumps([g['wides'] for g in games])
+
+    # Competition categories for filtering
+    def comp_category(comp):
+        c = comp.lower()
+        if 'spring' in c or 'ulster' in c: return 'Spring League'
+        elif 'challenge' in c: return 'Challenge'
+        elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
+        else: return 'ACFL Div 7'
+    chart_comps = json.dumps([comp_category(g['competition']) for g in games])
+    chart_att_comps = json.dumps([comp_category(g['competition']) for g in games_with_attacks])
+
     # Scatter data: accuracy vs attack efficiency
     scatter_data = json.dumps([{'x': g['attack_eff'], 'y': g['shot_acc'], 'label': f"v {g['opponent']}"} for g in games_with_attacks])
     scatter_colors = json.dumps(['rgba(46,204,113,0.9)' if g['result'] == 'W' else ('rgba(231,76,60,0.9)' if g['result'] == 'L' else 'rgba(243,156,18,0.9)') for g in games_with_attacks])
@@ -299,6 +310,9 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 .formula-box .formula{{font-size:1.2em;opacity:.9;line-height:1.8}}
 .formula-box .formula-result{{font-size:2em;font-weight:bold;margin-top:15px;color:#2ecc71}}
 .footer{{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}}
+.comp-filter{{padding:8px 16px;border:2px solid #2a5298;border-radius:20px;background:#fff;color:#2a5298;font-weight:bold;font-size:.9em;cursor:pointer;margin:4px;transition:.2s}}
+.comp-filter:hover{{background:#eef2ff}}
+.comp-filter.active{{background:#2a5298;color:#fff}}
 </style>
 </head>
 <body>
@@ -321,88 +335,11 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 </div>
 
 <div id="patterns" class="tab-content active">
-
-<div class="formula-box">
-<h2>🏆 The Winning Formula</h2>
-<div class="formula">Score first after half time + Limit opposition to 3 or fewer unanswered scores</div>
-<div class="formula-result">= {record(combo_yes)} ({len(combo_yes)} games)</div>
-<div style="margin-top:10px;opacity:.8;font-size:.95em">When either condition is broken: {record(combo_no)} ({len(combo_no)} games)</div>
+<div style="text-align:center;padding:60px 20px;color:#7f8c8d">
+<div style="font-size:3em;margin-bottom:15px">🔍</div>
+<h2 style="color:#2c3e50;margin-bottom:10px">Coming Soon</h2>
+<p style="font-size:1.1em">Key patterns and insights will be added here.</p>
 </div>
-
-<h2 style="color:#2c3e50;text-align:center;margin:30px 0 20px;font-size:1.7em">🔍 Pattern Breakdown</h2>
-
-<div class="pattern-grid">
-
-<div class="pattern-card pattern-green">
-<h3>🎯 Score First After Half Time</h3>
-<div class="insight">The single strongest predictor. When Killinkere score first after the break: {record(first_ht_yes)}. When they don't: {record(first_ht_no)}. All {sum(1 for g in first_ht_no if g['result']=='L')} defeats came when the opposition scored first after half time.</div>
-<div class="record-row">
-<div class="rec rec-good">✅ Yes: {record(first_ht_yes)}</div>
-<div class="rec rec-bad">❌ No: {record(first_ht_no)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-red">
-<h3>🛑 Opposition Scoring Runs (4+)</h3>
-<div class="insight">When the opposition strings together 4+ unanswered scores, Killinkere struggle ({record(opp_run_high)}). Limiting runs to 3 or fewer: {record(opp_run_low)}. The Lavey loss is the exception — opp only managed a 3-score run but the HT deficit was too deep.</div>
-<div class="record-row">
-<div class="rec rec-good">≤3 run: {record(opp_run_low)}</div>
-<div class="rec rec-bad">4+ run: {record(opp_run_high)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-blue">
-<h3>⏱️ Scoring Drought</h3>
-<div class="insight">When the longest gap between Killinkere scores stays under 12 minutes: {record(drought_short)} — unbeaten. When droughts stretch beyond 12 minutes: {record(drought_long)}. Keeping the scoreboard ticking is critical.</div>
-<div class="record-row">
-<div class="rec rec-good">≤12min: {record(drought_short)}</div>
-<div class="rec rec-bad">&gt;12min: {record(drought_long)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-gold">
-<h3>📊 Half Time Position</h3>
-<div class="insight">Leading at half time: {record(ahead_ht)} — near-perfect. Behind at HT: {record(behind_ht)} — the two wins from behind (v Pearse OG down 5-7, v Drung down 10-11) both required scoring first after the break. Behind at HT AND opp scores first after HT: {record(behind_no_faht)} — guaranteed defeat.</div>
-<div class="record-row">
-<div class="rec rec-good">Ahead: {record(ahead_ht)}</div>
-<div class="rec rec-neutral">Level: {record(level_ht)}</div>
-<div class="rec rec-bad">Behind: {record(behind_ht)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-blue">
-<h3>⏱️ Win the Second Half</h3>
-<div class="insight">Winning the 2nd half: {record(won_2h)}. Losing it: {record(lost_2h)}. The Lavey loss came despite winning the 2nd half 10-8 — the 5-point HT deficit was too deep. v Kill Shamrocks won despite losing the 2nd half 7-8, protected by a 3-point HT lead.</div>
-<div class="record-row">
-<div class="rec rec-good">Won 2H: {record(won_2h)}</div>
-<div class="rec rec-neutral">Drew 2H: {record(drew_2h)}</div>
-<div class="rec rec-bad">Lost 2H: {record(lost_2h)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-green">
-<h3>🏐 Score Last</h3>
-<div class="insight">Killinkere scored last in {sum(1 for g in games if g['scored_last'])} of {total} games — a strong finishing mentality. {record([g for g in games if g['scored_last']])} when scoring last vs {record([g for g in games if not g['scored_last']])} when not.</div>
-<div class="record-row">
-<div class="rec rec-good">✅ Yes: {record([g for g in games if g['scored_last']])}</div>
-<div class="rec rec-bad">❌ No: {record([g for g in games if not g['scored_last']])}</div>
-</div>
-</div>
-
-</div>
-
-<h2 style="color:#2c3e50;text-align:center;margin:30px 0 20px;font-size:1.7em">⚠️ Danger Signs</h2>
-<div class="pattern-grid">
-<div class="pattern-card pattern-red">
-<h3>🚨 The Loss Profile</h3>
-<div class="insight">Common thread across all {losses} defeats: opposition scored first after the break. The Greenlough and Denn (Div 3) losses also featured 5+ unanswered opposition scoring runs. The Lavey loss was different — only a 3-score opp run and Killinkere won the 2nd half, but the 5-point HT deficit was too deep to recover from.</div>
-</div>
-<div class="pattern-card pattern-red">
-<h3>📉 Behind at HT + Opp Scores First After HT</h3>
-<div class="insight">This is the deadliest combination: {record(behind_no_faht)}. When behind at HT but Killinkere score first after the break, the record flips to {record(behind_yes_faht)} — both comebacks (v Pearse OG, v Drung) followed this pattern. The restart after half time is the key moment when chasing a game.</div>
-</div>
-</div>
-
 </div>
 
 <div id="charts" class="tab-content">
@@ -426,40 +363,13 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div id="shooting" class="tab-content">
 
-<div class="formula-box">
-<h2>🎯 The Shooting Formula</h2>
-<div class="formula">Shot accuracy ≥ 50% + Attack efficiency ≥ 80%</div>
-<div class="formula-result">= {record(shooting_combo_yes)} ({len(shooting_combo_yes)} games)</div>
-<div style="margin-top:10px;opacity:.8;font-size:.95em">When either drops below: {record(shooting_combo_no)} ({len(shooting_combo_no)} games)</div>
-</div>
-
-<h2 style="color:#2c3e50;text-align:center;margin:30px 0 20px;font-size:1.7em">🔍 Shooting Patterns</h2>
-
-<div class="pattern-grid">
-
-<div class="pattern-card pattern-green">
-<h3>🎯 Shot Accuracy (Target: 70%)</h3>
-<div class="insight">Above 50% accuracy: {record(acc_above_50)}. Below 50%: {record(acc_below_50)}. The Munterconnaught win (30.4%) shows frees can compensate, but the heaviest defeats (Greenlough 23.8%, Lavey 37.5%) both came with poor accuracy.</div>
-<div class="record-row">
-<div class="rec rec-good">≥50%: {record(acc_above_50)}</div>
-<div class="rec rec-bad">&lt;50%: {record(acc_below_50)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-blue">
-<h3>⚡ Attack Efficiency (Target: 75%)</h3>
-<div class="insight">When 80%+ of attacks end with a shot: {record(att_above_80)} — unbeaten. Below 80%: {record(att_below_80)}. The Denn Div 3 loss (45.2%) is the worst example of attacks breaking down. v Kill Shamrocks (78.6%) shows high accuracy can compensate for slightly lower creation.</div>
-<div class="record-row">
-<div class="rec rec-good">≥80%: {record(att_above_80)}</div>
-<div class="rec rec-bad">&lt;80%: {record(att_below_80)}</div>
-</div>
-</div>
-
-<div class="pattern-card pattern-red">
-<h3>🚨 Two Ways to Lose</h3>
-<div class="insight"><strong>Can't convert:</strong> Get the shots but accuracy is poor (Greenlough 23.8%, Lavey 37.5%).<br><strong>Can't create:</strong> Decent accuracy but can't get the shot away (Denn Div 3: 57.1% accuracy but only 45.2% attack efficiency).<br><strong>Exceptions:</strong> v Munterconnaught won despite 30.4% accuracy — frees compensated. v Kill Shamrocks won with 78.6% attack efficiency (just below 80%) because accuracy was strong at 63.6%.</div>
-</div>
-
+<div style="text-align:center;margin-bottom:25px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterComp('All')">All</button>
+<button class="comp-filter" onclick="filterComp('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterComp('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterComp('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterComp('ACFL Div 7')">ACFL Div 7</button>
 </div>
 
 <div class="chart-box">
@@ -618,6 +528,40 @@ ctx.fillText(t.label,right,yPos-4);ctx.restore();
 }}
 }}]
 }});
+
+// Competition filter
+const allComps={chart_comps};
+const attComps={chart_att_comps};
+const allLabels={chart_labels};
+const allAcc={chart_acc};
+const allBarColors={chart_bar_colors};
+const allBarBorders={chart_bar_borders};
+const allAttLabels={chart_att_labels};
+const allAttEff={chart_att_eff};
+const allAttColors={chart_att_colors};
+const allAttBorders={chart_att_borders};
+const allScatterData={scatter_data};
+const allScatterColors={scatter_colors};
+
+function filterComp(comp){{
+  document.querySelectorAll('.comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  const accChart=Chart.getChart('accChart');
+  const attChart=Chart.getChart('attEffChart');
+  const scChart=Chart.getChart('scatterChart');
+  if(comp==='All'){{
+    accChart.data.labels=allLabels;accChart.data.datasets[0].data=allAcc;accChart.data.datasets[0].backgroundColor=allBarColors;accChart.data.datasets[0].borderColor=allBarBorders;
+    attChart.data.labels=allAttLabels;attChart.data.datasets[0].data=allAttEff;attChart.data.datasets[0].backgroundColor=allAttColors;attChart.data.datasets[0].borderColor=allAttBorders;
+    scChart.data.datasets[0].data=allScatterData;scChart.data.datasets[0].backgroundColor=allScatterColors;
+  }}else{{
+    const fi=allComps.map((c,i)=>c===comp?i:-1).filter(i=>i>=0);
+    accChart.data.labels=fi.map(i=>allLabels[i]);accChart.data.datasets[0].data=fi.map(i=>allAcc[i]);accChart.data.datasets[0].backgroundColor=fi.map(i=>allBarColors[i]);accChart.data.datasets[0].borderColor=fi.map(i=>allBarBorders[i]);
+    const ai=attComps.map((c,i)=>c===comp?i:-1).filter(i=>i>=0);
+    attChart.data.labels=ai.map(i=>allAttLabels[i]);attChart.data.datasets[0].data=ai.map(i=>allAttEff[i]);attChart.data.datasets[0].backgroundColor=ai.map(i=>allAttColors[i]);attChart.data.datasets[0].borderColor=ai.map(i=>allAttBorders[i]);
+    scChart.data.datasets[0].data=ai.map(i=>allScatterData[i]);scChart.data.datasets[0].backgroundColor=ai.map(i=>allScatterColors[i]);
+  }}
+  accChart.update();attChart.update();scChart.update();
+}}
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body>
