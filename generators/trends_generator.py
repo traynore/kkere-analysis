@@ -79,19 +79,24 @@ def analyze_game(csv_file):
         else:
             o_run += 1; k_run = 0; o_best = max(o_best, o_run)
 
-    # Scoring droughts - longest gap between Killinkere scores
-    k_score_times = []
+    # Scoring droughts - longest gap between Killinkere scores (per half)
+    k_score_times_h1 = []
+    k_score_times_h2 = []
     for e in all_scores:
         if e['Team Name'] == 'Killinkere' and e.get('Time'):
             t = e['Time']
             parts = t.split(':')
             if len(parts) == 3:
                 secs = int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
-                k_score_times.append(secs)
+                if e.get('Period') == '1':
+                    k_score_times_h1.append(secs)
+                else:
+                    k_score_times_h2.append(secs)
     longest_drought = 0
-    for i in range(1, len(k_score_times)):
-        gap = k_score_times[i] - k_score_times[i - 1]
-        longest_drought = max(longest_drought, gap)
+    for times in [k_score_times_h1, k_score_times_h2]:
+        for i in range(1, len(times)):
+            gap = times[i] - times[i - 1]
+            longest_drought = max(longest_drought, gap)
 
     date_str = meta.get('date', '')
     try:
@@ -344,6 +349,15 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div id="charts" class="tab-content">
 
+<div style="text-align:center;margin-bottom:25px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterCharts('All')">All</button>
+<button class="comp-filter" onclick="filterCharts('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterCharts('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterCharts('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterCharts('ACFL Div 7')">ACFL Div 7</button>
+</div>
+
 <div class="chart-box">
 <div class="chart-title">📊 Winning Margin by Game</div>
 <canvas id="marginChart"></canvas>
@@ -392,6 +406,15 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📋 Game-by-Game Breakdown</h2>
+
+<div style="text-align:center;margin-bottom:25px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterTable('All')">All</button>
+<button class="comp-filter" onclick="filterTable('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterTable('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterTable('ACFL Div 7')">ACFL Div 7</button>
+</div>
 <div style="overflow-x:auto">
 <table class="trends-table" id="trendsTable">
 <thead><tr>
@@ -543,8 +566,48 @@ const allAttBorders={chart_att_borders};
 const allScatterData={scatter_data};
 const allScatterColors={scatter_colors};
 
+// Charts tab filter data
+const allMargins={chart_margins};
+const allMarginColors={chart_bar_colors};
+const allMarginBorders={chart_bar_borders};
+const allResults={chart_results};
+const allKill2H={chart_k_2h};
+const allOpp2H={chart_o_2h};
+const allOurRuns={chart_k_runs};
+const allOppRuns={chart_opp_runs};
+
+function filterCharts(comp){{
+  const btns=document.querySelectorAll('#charts .comp-filter');
+  btns.forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  const marginChart=Chart.getChart('marginChart');
+  const secChart=Chart.getChart('secondHalfChart');
+  const runsChartObj=Chart.getChart('runsChart');
+  if(comp==='All'){{
+    marginChart.data.labels=allLabels;marginChart.data.datasets[0].data=allMargins;marginChart.data.datasets[0].backgroundColor=allMarginColors;marginChart.data.datasets[0].borderColor=allMarginBorders;
+    secChart.data.labels=allLabels;secChart.data.datasets[0].data=allKill2H;secChart.data.datasets[1].data=allOpp2H;
+    runsChartObj.data.labels=allLabels;runsChartObj.data.datasets[0].data=allOurRuns;runsChartObj.data.datasets[1].data=allOppRuns;
+  }}else{{
+    const fi=allComps.map((c,i)=>c===comp?i:-1).filter(i=>i>=0);
+    marginChart.data.labels=fi.map(i=>allLabels[i]);marginChart.data.datasets[0].data=fi.map(i=>allMargins[i]);marginChart.data.datasets[0].backgroundColor=fi.map(i=>allMarginColors[i]);marginChart.data.datasets[0].borderColor=fi.map(i=>allMarginBorders[i]);
+    secChart.data.labels=fi.map(i=>allLabels[i]);secChart.data.datasets[0].data=fi.map(i=>allKill2H[i]);secChart.data.datasets[1].data=fi.map(i=>allOpp2H[i]);
+    runsChartObj.data.labels=fi.map(i=>allLabels[i]);runsChartObj.data.datasets[0].data=fi.map(i=>allOurRuns[i]);runsChartObj.data.datasets[1].data=fi.map(i=>allOppRuns[i]);
+  }}
+  marginChart.update();secChart.update();runsChartObj.update();
+}}
+
+function filterTable(comp){{
+  const btns=document.querySelectorAll('#table .comp-filter');
+  btns.forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  const rows=document.querySelectorAll('#trendsTable tbody tr');
+  rows.forEach((row,i)=>{{
+    if(comp==='All'){{row.style.display='';}}else{{row.style.display=allComps[i]===comp?'':'none';}}
+  }});
+}}
+
 function filterComp(comp){{
-  document.querySelectorAll('.comp-filter').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#shooting .comp-filter').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
   const accChart=Chart.getChart('accChart');
   const attChart=Chart.getChart('attEffChart');
