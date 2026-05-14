@@ -148,6 +148,171 @@ def analyze_game(csv_file):
     }
 
 
+def analyze_scoring(data_dir):
+    """Analyze all scoring across the season for player and source breakdowns, per competition."""
+    from collections import defaultdict
+
+    # Per-game scoring records with competition tag
+    game_records = []  # list of {comp, player, goals, points, 2pts, frees, play}
+
+    for f in sorted(data_dir.glob('Killinkere*.csv')):
+        meta = read_meta(f)
+        comp = meta.get('competition', '')
+        events = read_csv(f)
+        game_scorers = set()
+
+        for e in events:
+            team = e.get('Team Name', '')
+            name = e.get('Name', '')
+            outcome = e.get('Outcome', '')
+            player = (e.get('Player') or '').strip() or 'Unknown'
+
+            if team == 'Killinkere' and name in ['Shot from play', 'Scoreable free'] and outcome in ['Goal', 'Point', '2 Points']:
+                is_free = name == 'Scoreable free'
+                game_records.append({
+                    'comp': comp,
+                    'file': str(f),
+                    'player': player,
+                    'outcome': outcome,
+                    'is_free': is_free,
+                })
+                game_scorers.add(player)
+
+    def summarize(records):
+        player_stats = defaultdict(lambda: {'points': 0, 'goals': 0, '2pts': 0, 'frees': 0, 'play': 0, 'games': set(), 'total_pts': 0})
+        total_goals = 0
+        total_points = 0
+        total_2pts = 0
+        total_from_play = 0
+        total_from_frees = 0
+        games_seen = defaultdict(set)  # player -> set of files
+        all_games = set()
+
+        for r in records:
+            player = r['player']
+            outcome = r['outcome']
+            pts_val = 3 if outcome == 'Goal' else (2 if outcome == '2 Points' else 1)
+            player_stats[player]['total_pts'] += pts_val
+            player_stats[player]['games'].add(r['file'])
+            all_games.add(r['file'])
+
+            if outcome == 'Goal':
+                player_stats[player]['goals'] += 1
+                total_goals += 1
+            elif outcome == '2 Points':
+                player_stats[player]['2pts'] += 1
+                total_2pts += 1
+            else:
+                player_stats[player]['points'] += 1
+                total_points += 1
+
+            if r['is_free']:
+                player_stats[player]['frees'] += 1
+                total_from_frees += 1
+            else:
+                player_stats[player]['play'] += 1
+                total_from_play += 1
+
+        total_value = total_goals * 3 + total_points + total_2pts * 2
+        total_scores = total_goals + total_points + total_2pts
+
+        # Avg scorers per game
+        game_scorer_counts = defaultdict(set)
+        for r in records:
+            game_scorer_counts[r['file']].add(r['player'])
+        avg_scorers = round(sum(len(v) for v in game_scorer_counts.values()) / len(game_scorer_counts), 1) if game_scorer_counts else 0
+
+        sorted_players = sorted(player_stats.items(), key=lambda x: x[1]['total_pts'], reverse=True)
+        return {
+            'players': sorted_players,
+            'total_goals': total_goals,
+            'total_points': total_points,
+            'total_2pts': total_2pts,
+            'total_from_play': total_from_play,
+            'total_from_frees': total_from_frees,
+            'total_value': total_value,
+            'total_scores': total_scores,
+            'avg_scorers_per_game': avg_scorers,
+            'num_games': len(all_games),
+        }
+
+    # Build JSON-friendly per-competition data
+    def comp_category(comp):
+        c = comp.lower()
+        if 'spring' in c or 'ulster' in c: return 'Spring League'
+        elif 'challenge' in c: return 'Challenge'
+        elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
+        else: return 'ACFL Div 7'
+
+    all_summary = summarize(game_records)
+
+    # Per-comp JSON data for JS filtering
+    comp_data = {}
+    comps_used = set(comp_category(r['comp']) for r in game_records)
+    for comp in sorted(comps_used):
+        comp_records = [r for r in game_records if comp_category(r['comp']) == comp]
+        s = summarize(comp_records)
+        players_json = []
+        for player, stats in s['players']:
+            if player == 'Unknown':
+                continue
+            players_json.append({
+                'player': player,
+                'games': len(stats['games']),
+                'total': stats['total_pts'],
+                'avg': round(stats['total_pts'] / len(stats['games']), 1),
+                'goals': stats['goals'],
+                'points': stats['points'],
+                '2pts': stats['2pts'],
+                'play': stats['play'],
+                'frees': stats['frees'],
+            })
+        comp_data[comp] = {
+            'players': players_json,
+            'total_goals': s['total_goals'],
+            'total_points': s['total_points'],
+            'total_2pts': s['total_2pts'],
+            'total_from_play': s['total_from_play'],
+            'total_from_frees': s['total_from_frees'],
+            'total_value': s['total_value'],
+            'total_scores': s['total_scores'],
+            'avg_scorers_per_game': s['avg_scorers_per_game'],
+            'num_scorers': len([p for p in s['players'] if p[0] != 'Unknown']),
+        }
+
+    # Also build 'All' entry
+    all_players_json = []
+    for player, stats in all_summary['players']:
+        if player == 'Unknown':
+            continue
+        all_players_json.append({
+            'player': player,
+            'games': len(stats['games']),
+            'total': stats['total_pts'],
+            'avg': round(stats['total_pts'] / len(stats['games']), 1),
+            'goals': stats['goals'],
+            'points': stats['points'],
+            '2pts': stats['2pts'],
+            'play': stats['play'],
+            'frees': stats['frees'],
+        })
+    comp_data['All'] = {
+        'players': all_players_json,
+        'total_goals': all_summary['total_goals'],
+        'total_points': all_summary['total_points'],
+        'total_2pts': all_summary['total_2pts'],
+        'total_from_play': all_summary['total_from_play'],
+        'total_from_frees': all_summary['total_from_frees'],
+        'total_value': all_summary['total_value'],
+        'total_scores': all_summary['total_scores'],
+        'avg_scorers_per_game': all_summary['avg_scorers_per_game'],
+        'num_scorers': len(all_players_json),
+    }
+
+    all_summary['comp_data_json'] = json.dumps(comp_data)
+    return all_summary
+
+
 def generate():
     data_dir = Path(__file__).parent.parent / 'data'
     games = []
@@ -157,6 +322,9 @@ def generate():
             games.append(g)
 
     games.sort(key=lambda g: g['date_obj'])
+
+    # Scoring analysis
+    scoring = analyze_scoring(data_dir)
 
     total = len(games)
     wins = sum(1 for g in games if g['result'] == 'W')
@@ -235,6 +403,32 @@ def generate():
     att_below_80 = [g for g in games_with_attacks if g['attack_eff'] < 80]
     shooting_combo_yes = [g for g in games_with_attacks if g['shot_acc'] >= 50 and g['attack_eff'] >= 80]
     shooting_combo_no = [g for g in games_with_attacks if g['shot_acc'] < 50 or g['attack_eff'] < 80]
+
+    # Scoring breakdown HTML
+    play_pct = round(scoring['total_from_play'] / scoring['total_scores'] * 100) if scoring['total_scores'] else 0
+    free_pct = 100 - play_pct
+    goal_pts_pct = round(scoring['total_goals'] * 3 / scoring['total_value'] * 100) if scoring['total_value'] else 0
+    point_pts_pct = round(scoring['total_points'] / scoring['total_value'] * 100) if scoring['total_value'] else 0
+    two_pts_pct = round(scoring['total_2pts'] * 2 / scoring['total_value'] * 100) if scoring['total_value'] else 0
+
+    scorer_rows = ''
+    for player, stats in scoring['players']:
+        if player == 'Unknown':
+            continue
+        games_played = len(stats['games'])
+        avg = round(stats['total_pts'] / games_played, 1)
+        scorer_rows += f'''<tr>
+<td style="text-align:left;font-weight:bold">{player}</td>
+<td>{games_played}</td>
+<td style="font-weight:bold;color:#2a5298">{stats['total_pts']}</td>
+<td>{avg}</td>
+<td>{stats['goals']}</td>
+<td>{stats['points']}</td>
+<td>{stats['2pts']}</td>
+<td>{stats['play']}</td>
+<td>{stats['frees']}</td>
+</tr>
+'''
 
     # Chart data for shooting
     chart_acc = json.dumps([g['shot_acc'] for g in games])
@@ -379,12 +573,53 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 
 <div style="text-align:center;margin-bottom:25px">
 <span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
-<button class="comp-filter active" onclick="filterComp('All')">All</button>
-<button class="comp-filter" onclick="filterComp('Spring League')">Spring League</button>
-<button class="comp-filter" onclick="filterComp('Challenge')">Challenge</button>
-<button class="comp-filter" onclick="filterComp('ACFL Div 3')">ACFL Div 3</button>
-<button class="comp-filter" onclick="filterComp('ACFL Div 7')">ACFL Div 7</button>
+<button class="comp-filter active" onclick="filterAll('All')">All</button>
+<button class="comp-filter" onclick="filterAll('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterAll('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterAll('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterAll('ACFL Div 7')">ACFL Div 7</button>
 </div>
+
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">🏆 Season Scoring Breakdown</h2>
+
+<div class="summary-row" id="scoringSummary">
+<div class="summary-card"><div class="val" id="scTotalVal">{scoring['total_value']}</div><div class="lbl">Total Points Scored</div></div>
+<div class="summary-card"><div class="val" id="scGoalsPts">{scoring['total_goals']}-{scoring['total_points']}</div><div class="lbl">Goals & Points</div></div>
+<div class="summary-card"><div class="val" id="sc2Pts">{scoring['total_2pts']}</div><div class="lbl">2-Pointers</div></div>
+<div class="summary-card"><div class="val" id="scPlayPct">{play_pct}%</div><div class="lbl">From Play</div></div>
+<div class="summary-card"><div class="val" id="scFreePct">{free_pct}%</div><div class="lbl">From Frees</div></div>
+<div class="summary-card"><div class="val" id="scAvgScorers">{scoring['avg_scorers_per_game']}</div><div class="lbl">Avg Scorers/Game</div></div>
+</div>
+
+<div class="pattern-grid" id="scoringInsights">
+<div class="pattern-card pattern-blue">
+<h3>⚽ Score Sources (by pts value)</h3>
+<div class="insight" id="scSources">Goals: {scoring['total_goals']} ({scoring['total_goals']*3} pts — {goal_pts_pct}%)<br>
+Points: {scoring['total_points']} ({scoring['total_points']} pts — {point_pts_pct}%)<br>
+2-Pointers: {scoring['total_2pts']} ({scoring['total_2pts']*2} pts — {two_pts_pct}%)</div>
+</div>
+<div class="pattern-card pattern-green">
+<h3>🎯 From Play vs Frees</h3>
+<div class="insight" id="scPlayFrees">From play: {scoring['total_from_play']} scores ({play_pct}%)<br>
+From frees: {scoring['total_from_frees']} scores ({free_pct}%)<br>
+{len(scoring['players'])} different scorers used this season</div>
+</div>
+</div>
+
+<div style="overflow-x:auto;margin-bottom:30px">
+<table class="trends-table" id="scorersTable">
+<thead><tr>
+<th style="text-align:left">Player</th><th>Games</th><th>Total</th><th>Avg</th><th>Goals</th><th>Pts</th><th>2Pts</th><th>Play</th><th>Frees</th>
+</tr></thead>
+<tbody id="scorersBody">
+{scorer_rows}
+</tbody>
+</table>
+</div>
+
+<hr style="border:none;border-top:2px solid #ecf0f1;margin:30px 0">
+
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📊 Shooting Efficiency</h2>
 
 <div class="chart-box">
 <div class="chart-title">🎯 Shot Accuracy vs Attack Efficiency</div>
@@ -606,9 +841,40 @@ function filterTable(comp){{
   }});
 }}
 
-function filterComp(comp){{
+// Scoring filter data
+const scoringCompData={scoring['comp_data_json']};
+
+function filterAll(comp){{
   document.querySelectorAll('#shooting .comp-filter').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
+  filterScoring(comp);
+  filterComp(comp);
+}}
+
+function filterScoring(comp){{
+  const d=scoringCompData[comp];
+  if(!d)return;
+  const playPct=d.total_scores?Math.round(d.total_from_play/d.total_scores*100):0;
+  const freePct=100-playPct;
+  const goalPct=d.total_value?Math.round(d.total_goals*3/d.total_value*100):0;
+  const pointPct=d.total_value?Math.round(d.total_points/d.total_value*100):0;
+  const twoPct=d.total_value?Math.round(d.total_2pts*2/d.total_value*100):0;
+  document.getElementById('scTotalVal').textContent=d.total_value;
+  document.getElementById('scGoalsPts').textContent=d.total_goals+'-'+d.total_points;
+  document.getElementById('sc2Pts').textContent=d.total_2pts;
+  document.getElementById('scPlayPct').textContent=playPct+'%';
+  document.getElementById('scFreePct').textContent=freePct+'%';
+  document.getElementById('scAvgScorers').textContent=d.avg_scorers_per_game;
+  document.getElementById('scSources').innerHTML='Goals: '+d.total_goals+' ('+(d.total_goals*3)+' pts \u2014 '+goalPct+'%)<br>Points: '+d.total_points+' ('+d.total_points+' pts \u2014 '+pointPct+'%)<br>2-Pointers: '+d.total_2pts+' ('+(d.total_2pts*2)+' pts \u2014 '+twoPct+'%)';
+  document.getElementById('scPlayFrees').innerHTML='From play: '+d.total_from_play+' scores ('+playPct+'%)<br>From frees: '+d.total_from_frees+' scores ('+freePct+'%)<br>'+d.num_scorers+' different scorers'+(comp==='All'?' used this season':'');
+  const tbody=document.getElementById('scorersBody');
+  tbody.innerHTML='';
+  d.players.forEach(p=>{{
+    tbody.innerHTML+='<tr><td style="text-align:left;font-weight:bold">'+p.player+'</td><td>'+p.games+'</td><td style="font-weight:bold;color:#2a5298">'+p.total+'</td><td>'+p.avg+'</td><td>'+p.goals+'</td><td>'+p.points+'</td><td>'+p['2pts']+'</td><td>'+p.play+'</td><td>'+p.frees+'</td></tr>';
+  }});
+}}
+
+function filterComp(comp){{
   const accChart=Chart.getChart('accChart');
   const attChart=Chart.getChart('attEffChart');
   const scChart=Chart.getChart('scatterChart');
