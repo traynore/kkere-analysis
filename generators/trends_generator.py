@@ -54,7 +54,7 @@ def analyze_game(csv_file):
                   and e.get('Outcome') in ['Goal', 'Point', '2 Points']]
 
     def pts(outcome):
-        return 3 if outcome == 'Goal' else (2 if outcome == '2 Points' else 1)
+        return 3 if outcome == 'Goal' else (2 if outcome == '2 Points' else 1)  # '45' and 'Point' both = 1
 
     k_total = sum(pts(e['Outcome']) for e in all_scores if e['Team Name'] == 'Killinkere')
     o_total = sum(pts(e['Outcome']) for e in all_scores if e['Team Name'] != 'Killinkere')
@@ -161,30 +161,43 @@ def analyze_scoring(data_dir):
         events = read_csv(f)
         game_scorers = set()
 
-        for e in events:
+        # Identify which Scoreable free events are actually 45 kicks
+        # Pattern: Shot from play -> 45, then next Killinkere Scoreable free is the 45 kick
+        forty_five_indices = set()
+        for i, e in enumerate(events):
+            if e.get('Team Name') == 'Killinkere' and e.get('Outcome') == '45':
+                for j in range(i + 1, min(len(events), i + 4)):
+                    if events[j].get('Team Name') == 'Killinkere' and events[j].get('Name') == 'Scoreable free':
+                        forty_five_indices.add(j)
+                        break
+
+        for i, e in enumerate(events):
             team = e.get('Team Name', '')
             name = e.get('Name', '')
             outcome = e.get('Outcome', '')
             player = (e.get('Player') or '').strip() or 'Unknown'
 
             if team == 'Killinkere' and name in ['Shot from play', 'Scoreable free'] and outcome in ['Goal', 'Point', '2 Points']:
-                is_free = name == 'Scoreable free'
+                is_free = name == 'Scoreable free' and i not in forty_five_indices
+                is_45 = i in forty_five_indices
                 game_records.append({
                     'comp': comp,
                     'file': str(f),
                     'player': player,
                     'outcome': outcome,
                     'is_free': is_free,
+                    'is_45': is_45,
                 })
                 game_scorers.add(player)
 
     def summarize(records):
-        player_stats = defaultdict(lambda: {'points': 0, 'goals': 0, '2pts': 0, 'frees': 0, 'play': 0, 'games': set(), 'total_pts': 0})
+        player_stats = defaultdict(lambda: {'points': 0, 'goals': 0, '2pts': 0, 'frees': 0, '45s': 0, 'play': 0, 'games': set(), 'total_pts': 0})
         total_goals = 0
         total_points = 0
         total_2pts = 0
         total_from_play = 0
         total_from_frees = 0
+        total_from_45s = 0
         games_seen = defaultdict(set)  # player -> set of files
         all_games = set()
 
@@ -206,7 +219,10 @@ def analyze_scoring(data_dir):
                 player_stats[player]['points'] += 1
                 total_points += 1
 
-            if r['is_free']:
+            if r.get('is_45'):
+                player_stats[player]['45s'] += 1
+                total_from_45s += 1
+            elif r['is_free']:
                 player_stats[player]['frees'] += 1
                 total_from_frees += 1
             else:
@@ -230,6 +246,7 @@ def analyze_scoring(data_dir):
             'total_2pts': total_2pts,
             'total_from_play': total_from_play,
             'total_from_frees': total_from_frees,
+            'total_from_45s': total_from_45s,
             'total_value': total_value,
             'total_scores': total_scores,
             'avg_scorers_per_game': avg_scorers,
@@ -266,6 +283,7 @@ def analyze_scoring(data_dir):
                 '2pts': stats['2pts'],
                 'play': stats['play'],
                 'frees': stats['frees'],
+                '45s': stats['45s'],
             })
         comp_data[comp] = {
             'players': players_json,
@@ -274,6 +292,7 @@ def analyze_scoring(data_dir):
             'total_2pts': s['total_2pts'],
             'total_from_play': s['total_from_play'],
             'total_from_frees': s['total_from_frees'],
+            'total_from_45s': s['total_from_45s'],
             'total_value': s['total_value'],
             'total_scores': s['total_scores'],
             'avg_scorers_per_game': s['avg_scorers_per_game'],
@@ -295,6 +314,7 @@ def analyze_scoring(data_dir):
             '2pts': stats['2pts'],
             'play': stats['play'],
             'frees': stats['frees'],
+            '45s': stats['45s'],
         })
     comp_data['All'] = {
         'players': all_players_json,
@@ -303,6 +323,7 @@ def analyze_scoring(data_dir):
         'total_2pts': all_summary['total_2pts'],
         'total_from_play': all_summary['total_from_play'],
         'total_from_frees': all_summary['total_from_frees'],
+        'total_from_45s': all_summary['total_from_45s'],
         'total_value': all_summary['total_value'],
         'total_scores': all_summary['total_scores'],
         'avg_scorers_per_game': all_summary['avg_scorers_per_game'],
@@ -427,6 +448,7 @@ def generate():
 <td>{stats['2pts']}</td>
 <td>{stats['play']}</td>
 <td>{stats['frees']}</td>
+<td>{stats['45s']}</td>
 </tr>
 '''
 
@@ -609,7 +631,7 @@ From frees: {scoring['total_from_frees']} scores ({free_pct}%)<br>
 <div style="overflow-x:auto;margin-bottom:30px">
 <table class="trends-table" id="scorersTable">
 <thead><tr>
-<th style="text-align:left">Player</th><th>Games</th><th>Total</th><th>Avg</th><th>Goals</th><th>Pts</th><th>2Pts</th><th>Play</th><th>Frees</th>
+<th style="text-align:left">Player</th><th>Games</th><th>Total</th><th>Avg</th><th>Goals</th><th>Pts</th><th>2Pts</th><th>Play</th><th>Frees</th><th>45s</th>
 </tr></thead>
 <tbody id="scorersBody">
 {scorer_rows}
@@ -870,7 +892,7 @@ function filterScoring(comp){{
   const tbody=document.getElementById('scorersBody');
   tbody.innerHTML='';
   d.players.forEach(p=>{{
-    tbody.innerHTML+='<tr><td style="text-align:left;font-weight:bold">'+p.player+'</td><td>'+p.games+'</td><td style="font-weight:bold;color:#2a5298">'+p.total+'</td><td>'+p.avg+'</td><td>'+p.goals+'</td><td>'+p.points+'</td><td>'+p['2pts']+'</td><td>'+p.play+'</td><td>'+p.frees+'</td></tr>';
+    tbody.innerHTML+='<tr><td style="text-align:left;font-weight:bold">'+p.player+'</td><td>'+p.games+'</td><td style="font-weight:bold;color:#2a5298">'+p.total+'</td><td>'+p.avg+'</td><td>'+p.goals+'</td><td>'+p.points+'</td><td>'+p['2pts']+'</td><td>'+p.play+'</td><td>'+p.frees+'</td><td>'+p['45s']+'</td></tr>';
   }});
 }}
 
