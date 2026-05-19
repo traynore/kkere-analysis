@@ -11,6 +11,10 @@
         .header { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 30px; border-radius: 16px; text-align: center; margin-bottom: 24px; }
         .header h1 { font-size: 2em; margin-bottom: 4px; }
         .header p { opacity: 0.8; font-size: 1em; }
+        .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tab { padding: 10px 18px; border-radius: 8px; border: 2px solid #dee2e6; background: white; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.2s; }
+        .tab:hover { border-color: #1e3c72; color: #1e3c72; }
+        .tab.active { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; border-color: #1e3c72; }
         .card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; overflow-x: auto; }
         .card h2 { color: #1e3c72; margin-bottom: 16px; font-size: 1.3em; }
         table { border-collapse: collapse; width: 100%; font-size: 0.82em; }
@@ -41,274 +45,19 @@
             <p>Killinkere GAA — 2026 Season · All Scorers Game-by-Game</p>
         </div>
 
-        <div class="summary">
-            <div class="summary-card">
-                <div class="value">29</div>
-                <div class="label">Different Scorers</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">395</div>
-                <div class="label">Total Points Scored</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">43-266</div>
-                <div class="label">Season Total (G-P)</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">18.8</div>
-                <div class="label">Avg Points/Game</div>
-            </div>
+        <div class="tabs" id="comp-tabs">
+            <div class="tab active" data-cat="All">All</div>
+            <div class="tab" data-cat="Spring League">🏆 Spring League</div>
+            <div class="tab" data-cat="Challenge">⚔️ Challenge</div>
+            <div class="tab" data-cat="ACFL Div 3">📋 ACFL Div 3</div>
+            <div class="tab" data-cat="ACFL Div 7">📋 ACFL Div 7</div>
         </div>
+
+        <div class="summary" id="summary"></div>
 
         <div class="card">
             <h2>📊 Scorer Breakdown — Per Game</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="text-align:left;padding-left:10px">Player</th>
-                        <th>G-P</th>
-                        <th>Pts</th>
-                        <th>Games</th>
-                        <th>Avg</th>
-                        <th class="game-col" title="8/2/2026 - Ulster Spring League">Clones</th><th class="game-col" title="15/2/2026 - Ulster Spring League">Denn</th><th class="game-col" title="22/2/2026 - Ulster Spring League">Pearse O</th><th class="game-col" title="27/2/2026 - Challenge">Aughadru</th><th class="game-col" title="7/3/2026 - Challenge">Ballymah</th><th class="game-col" title="15/3/2026 - Ulster Intermediate Spring League Q-Final">Liatroim</th><th class="game-col" title="17/3/2026 - Challenge">Drung</th><th class="game-col" title="21/3/2026 - ACFL Reserve League Div 5">Arva</th><th class="game-col" title="22/3/2026 - Ulster Spring League Semi-Final">Greenlou</th><th class="game-col" title="28/3/2026 - ACFL Rnd 1 - Div 3">Denn</th><th class="game-col" title="29/3/2026 - ACFL Div 5">Denn</th><th class="game-col" title="5/4/2026 - ACFL Div 7">Lavey</th><th class="game-col" title="11/4/2026 - ACFL League Div 3">Munterco</th><th class="game-col" title="12/4/2026 - ACFL Div 7">Templepo</th><th class="game-col" title="22/4/2026 - ACFL Div 3">Kill Sha</th><th class="game-col" title="25/4/2026 - ACFL Rnd 4 - Div 3">Ballymch</th><th class="game-col" title="26/4/2026 - ACFL Rnd 5 - Div 7">Cuchulai</th><th class="game-col" title="01/5/2026 - ACFL Div 3">Redhills</th><th class="game-col" title="9/5/2026 - ACFL Div 3">Belturbe</th><th class="game-col" title="10/5/2026 - ACFL Div 7">Lacken</th><th class="game-col" title="16/5/2026 - ACFL Div 3">Drumgoon</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-            <td class="player-name">Neill McCabe</td>
-            <td class="total-col">2-37</td>
-            <td class="total-col"><strong>43</strong></td>
-            <td class="total-col">10</td>
-            <td class="total-col">2.0</td>
-            <td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (1 play, 1 frees)">3f</td><td class="game-col hot" title="1-2 (1 play, 2 frees)">5f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (2 play, 1 frees)">3f</td><td class="game-col empty">-</td><td class="game-col hot" title="0-5 (2 play, 2 frees)">5f</td><td class="game-col hot" title="0-7 (1 play, 5 frees)">7f</td><td class="game-col warm" title="0-4 (3 play, 1 frees)">4f</td><td class="game-col cool" title="0-2 (0 play, 2 frees)">2f</td><td class="game-col empty">-</td><td class="game-col hot" title="0-9 (1 play, 5 frees)">9f</td>
-        </tr>
-<tr>
-            <td class="player-name">Fiachra Mooney</td>
-            <td class="total-col">5-22</td>
-            <td class="total-col"><strong>37</strong></td>
-            <td class="total-col">12</td>
-            <td class="total-col">1.8</td>
-            <td class="game-col empty">-</td><td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col hot" title="1-2 (3 play, 0 frees)">5</td><td class="game-col hot" title="1-6 (5 play, 1 frees)">9f</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col hot" title="2-4 (6 play, 0 frees)">10</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td>
-        </tr>
-<tr>
-            <td class="player-name">Darren Smith</td>
-            <td class="total-col">1-25</td>
-            <td class="total-col"><strong>28</strong></td>
-            <td class="total-col">12</td>
-            <td class="total-col">1.3</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="1-3 (3 play, 1 frees)">6f</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (1 play, 1 frees)">2f</td><td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (2 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (2 play, 1 frees)">3f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-4 (2 play, 1 frees)">4f</td><td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col cool" title="0-2 (1 play, 1 frees)">2f</td>
-        </tr>
-<tr>
-            <td class="player-name">Alex Sweeney</td>
-            <td class="total-col">6-9</td>
-            <td class="total-col"><strong>27</strong></td>
-            <td class="total-col">9</td>
-            <td class="total-col">1.3</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col hot" title="3-0 (3 play, 0 frees)">9</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td>
-        </tr>
-<tr>
-            <td class="player-name">Kevin McCabe</td>
-            <td class="total-col">4-13</td>
-            <td class="total-col"><strong>25</strong></td>
-            <td class="total-col">8</td>
-            <td class="total-col">1.2</td>
-            <td class="game-col warm" title="0-3 (3 play, 0 frees)">3</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col hot" title="1-3 (4 play, 0 frees)">6</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (3 play, 0 frees)">3</td><td class="game-col hot" title="2-1 (3 play, 0 frees)">7</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Conall Mooney</td>
-            <td class="total-col">1-22</td>
-            <td class="total-col"><strong>25</strong></td>
-            <td class="total-col">9</td>
-            <td class="total-col">1.2</td>
-            <td class="game-col warm" title="0-4 (3 play, 0 frees)">4</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-4 (1 play, 1 frees)">4f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="0-5 (3 play, 1 frees)">5f</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-4 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Ryan Smith</td>
-            <td class="total-col">5-9</td>
-            <td class="total-col"><strong>24</strong></td>
-            <td class="total-col">10</td>
-            <td class="total-col">1.1</td>
-            <td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col hot" title="1-2 (2 play, 1 frees)">5f</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Philip Corrigan</td>
-            <td class="total-col">1-17</td>
-            <td class="total-col"><strong>20</strong></td>
-            <td class="total-col">9</td>
-            <td class="total-col">1.0</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (2 play, 0 frees)">3</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col warm" title="0-4 (3 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (2 play, 1 frees)">3f</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Jason McMahon</td>
-            <td class="total-col">2-12</td>
-            <td class="total-col"><strong>18</strong></td>
-            <td class="total-col">5</td>
-            <td class="total-col">0.9</td>
-            <td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col hot" title="1-3 (4 play, 0 frees)">6</td><td class="game-col empty">-</td><td class="game-col hot" title="1-2 (2 play, 1 frees)">5f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="0-5 (3 play, 0 frees)">5</td>
-        </tr>
-<tr>
-            <td class="player-name">Ben Philingham</td>
-            <td class="total-col">1-15</td>
-            <td class="total-col"><strong>18</strong></td>
-            <td class="total-col">6</td>
-            <td class="total-col">0.9</td>
-            <td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="1-2 (3 play, 0 frees)">5</td><td class="game-col warm" title="0-4 (4 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="0-5 (5 play, 0 frees)">5</td><td class="game-col cool" title="0-2 (1 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Cian McGovern</td>
-            <td class="total-col">1-14</td>
-            <td class="total-col"><strong>17</strong></td>
-            <td class="total-col">5</td>
-            <td class="total-col">0.8</td>
-            <td class="game-col hot" title="0-5 (3 play, 1 frees)">5f</td><td class="game-col hot" title="0-5 (0 play, 4 frees)">5f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (0 play, 2 frees)">2f</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col cool" title="0-2 (1 play, 1 frees)">2f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Fintan O’Connell</td>
-            <td class="total-col">3-6</td>
-            <td class="total-col"><strong>15</strong></td>
-            <td class="total-col">6</td>
-            <td class="total-col">0.7</td>
-            <td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Phelim Cusack</td>
-            <td class="total-col">2-8</td>
-            <td class="total-col"><strong>14</strong></td>
-            <td class="total-col">8</td>
-            <td class="total-col">0.7</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Keiran Smith</td>
-            <td class="total-col">2-8</td>
-            <td class="total-col"><strong>14</strong></td>
-            <td class="total-col">5</td>
-            <td class="total-col">0.7</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (3 play, 0 frees)">3</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="2-0 (2 play, 0 frees)">6</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Emmett Fitzsimons</td>
-            <td class="total-col">0-13</td>
-            <td class="total-col"><strong>13</strong></td>
-            <td class="total-col">6</td>
-            <td class="total-col">0.6</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col warm" title="0-3 (1 play, 2 frees)">3f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (1 play, 1 frees)">2f</td><td class="game-col cool" title="0-2 (0 play, 2 frees)">2f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (3 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Ruairi O Connell</td>
-            <td class="total-col">1-7</td>
-            <td class="total-col"><strong>10</strong></td>
-            <td class="total-col">5</td>
-            <td class="total-col">0.5</td>
-            <td class="game-col cool" title="0-1 (0 play, 1 frees)">1f</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="0-3 (2 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (1 play, 1 frees)">2f</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Ciaran Flynn</td>
-            <td class="total-col">1-6</td>
-            <td class="total-col"><strong>9</strong></td>
-            <td class="total-col">3</td>
-            <td class="total-col">0.4</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="1-3 (4 play, 0 frees)">6</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Dara Sharkey</td>
-            <td class="total-col">1-3</td>
-            <td class="total-col"><strong>6</strong></td>
-            <td class="total-col">3</td>
-            <td class="total-col">0.3</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">David Ryan</td>
-            <td class="total-col">1-3</td>
-            <td class="total-col"><strong>6</strong></td>
-            <td class="total-col">2</td>
-            <td class="total-col">0.3</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col hot" title="1-2 (3 play, 0 frees)">5</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Cian Fitzsimons</td>
-            <td class="total-col">1-2</td>
-            <td class="total-col"><strong>5</strong></td>
-            <td class="total-col">3</td>
-            <td class="total-col">0.2</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">James Farrelly</td>
-            <td class="total-col">0-5</td>
-            <td class="total-col"><strong>5</strong></td>
-            <td class="total-col">4</td>
-            <td class="total-col">0.2</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Evan Markey</td>
-            <td class="total-col">1-1</td>
-            <td class="total-col"><strong>4</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.2</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-1 (2 play, 0 frees)">4</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Benny McConnell</td>
-            <td class="total-col">1-0</td>
-            <td class="total-col"><strong>3</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.1</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col warm" title="1-0 (1 play, 0 frees)">3</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Darrell Dolan</td>
-            <td class="total-col">0-2</td>
-            <td class="total-col"><strong>2</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.1</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Liam McCabe</td>
-            <td class="total-col">0-2</td>
-            <td class="total-col"><strong>2</strong></td>
-            <td class="total-col">2</td>
-            <td class="total-col">0.1</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Harry McQuade</td>
-            <td class="total-col">0-2</td>
-            <td class="total-col"><strong>2</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.1</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-2 (2 play, 0 frees)">2</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Shaun Clarke</td>
-            <td class="total-col">0-1</td>
-            <td class="total-col"><strong>1</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.0</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Harry Banville</td>
-            <td class="total-col">0-1</td>
-            <td class="total-col"><strong>1</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.0</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-<tr>
-            <td class="player-name">Mark Farrelly (S)</td>
-            <td class="total-col">0-1</td>
-            <td class="total-col"><strong>1</strong></td>
-            <td class="total-col">1</td>
-            <td class="total-col">0.0</td>
-            <td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col cool" title="0-1 (1 play, 0 frees)">1</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td><td class="game-col empty">-</td>
-        </tr>
-
-                </tbody>
-            </table>
+            <div id="table-container"></div>
             <div class="legend">
                 <span><div class="legend-box" style="background:#d4edda"></div> 5+ pts</span>
                 <span><div class="legend-box" style="background:#fff3cd"></div> 3-4 pts</span>
@@ -318,5 +67,88 @@
             </div>
         </div>
     </div>
+
+<script>
+var games = [{"opponent": "Clones", "date": "8/2/2026", "competition": "Ulster Spring League", "category": "Spring League"}, {"opponent": "Denn", "date": "15/2/2026", "competition": "Ulster Spring League", "category": "Spring League"}, {"opponent": "Pearse OG", "date": "22/2/2026", "competition": "Ulster Spring League", "category": "Spring League"}, {"opponent": "Aughadrumsee", "date": "27/2/2026", "competition": "Challenge", "category": "Challenge"}, {"opponent": "Ballymahon", "date": "7/3/2026", "competition": "Challenge", "category": "Challenge"}, {"opponent": "Liatroim", "date": "15/3/2026", "competition": "Ulster Intermediate Spring League Q-Final", "category": "Spring League"}, {"opponent": "Drung", "date": "17/3/2026", "competition": "Challenge", "category": "Challenge"}, {"opponent": "Arva", "date": "21/3/2026", "competition": "ACFL Reserve League Div 5", "category": "ACFL Div 7"}, {"opponent": "Greenlough", "date": "22/3/2026", "competition": "Ulster Spring League Semi-Final", "category": "Spring League"}, {"opponent": "Denn", "date": "28/3/2026", "competition": "ACFL Rnd 1 - Div 3", "category": "ACFL Div 3"}, {"opponent": "Denn", "date": "29/3/2026", "competition": "ACFL Div 5", "category": "ACFL Div 7"}, {"opponent": "Lavey", "date": "5/4/2026", "competition": "ACFL Div 7", "category": "ACFL Div 7"}, {"opponent": "Munterconnaught", "date": "11/4/2026", "competition": "ACFL League Div 3", "category": "ACFL Div 3"}, {"opponent": "Templeport", "date": "12/4/2026", "competition": "ACFL Div 7", "category": "ACFL Div 7"}, {"opponent": "Kill Shamrocks", "date": "22/4/2026", "competition": "ACFL Div 3", "category": "ACFL Div 3"}, {"opponent": "Ballymchugh", "date": "25/4/2026", "competition": "ACFL Rnd 4 - Div 3", "category": "ACFL Div 3"}, {"opponent": "Cuchulainns", "date": "26/4/2026", "competition": "ACFL Rnd 5 - Div 7", "category": "ACFL Div 7"}, {"opponent": "Redhills", "date": "01/5/2026", "competition": "ACFL Div 3", "category": "ACFL Div 3"}, {"opponent": "Belturbet", "date": "9/5/2026", "competition": "ACFL Div 3", "category": "ACFL Div 3"}, {"opponent": "Lacken", "date": "10/5/2026", "competition": "ACFL Div 7", "category": "ACFL Div 7"}, {"opponent": "Drumgoon", "date": "16/5/2026", "competition": "ACFL Div 3", "category": "ACFL Div 3"}];
+var players = [{"name": "Jason McMahon", "games": {"0": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "2": {"goals": 1, "points": 3, "two_pts": 0, "from_play": 4, "from_frees": 0}, "4": {"goals": 1, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 1}, "12": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "20": {"goals": 0, "points": 1, "two_pts": 2, "from_play": 3, "from_frees": 0}}}, {"name": "Ruairi O Connell", "games": {"0": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "7": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "9": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "13": {"goals": 0, "points": 1, "two_pts": 1, "from_play": 2, "from_frees": 0}, "19": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 1, "from_frees": 1}}}, {"name": "Kevin McCabe", "games": {"0": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 3, "from_frees": 0}, "1": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "2": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 1, "points": 3, "two_pts": 0, "from_play": 4, "from_frees": 0}, "9": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "15": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "17": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 3, "from_frees": 0}, "18": {"goals": 2, "points": 1, "two_pts": 0, "from_play": 3, "from_frees": 0}}}, {"name": "Conall Mooney", "games": {"0": {"goals": 0, "points": 2, "two_pts": 1, "from_play": 3, "from_frees": 0}, "1": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "2": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "5": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "9": {"goals": 0, "points": 0, "two_pts": 2, "from_play": 1, "from_frees": 1}, "12": {"goals": 0, "points": 3, "two_pts": 1, "from_play": 3, "from_frees": 1}, "14": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "18": {"goals": 0, "points": 0, "two_pts": 2, "from_play": 2, "from_frees": 0}}}, {"name": "Cian McGovern", "games": {"0": {"goals": 0, "points": 3, "two_pts": 1, "from_play": 3, "from_frees": 1}, "1": {"goals": 0, "points": 3, "two_pts": 1, "from_play": 0, "from_frees": 4}, "12": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 0, "from_frees": 2}, "14": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "15": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 1, "from_frees": 1}}}, {"name": "Ryan Smith", "games": {"0": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "1": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "2": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "3": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "9": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "11": {"goals": 1, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 1}, "13": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "16": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "17": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Neill McCabe", "games": {"1": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "4": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "6": {"goals": 0, "points": 1, "two_pts": 1, "from_play": 1, "from_frees": 1}, "7": {"goals": 1, "points": 2, "two_pts": 0, "from_play": 1, "from_frees": 2}, "13": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 2, "from_frees": 1}, "15": {"goals": 0, "points": 3, "two_pts": 1, "from_play": 2, "from_frees": 2}, "16": {"goals": 0, "points": 5, "two_pts": 1, "from_play": 1, "from_frees": 5}, "17": {"goals": 0, "points": 4, "two_pts": 0, "from_play": 3, "from_frees": 1}, "18": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 0, "from_frees": 2}, "20": {"goals": 0, "points": 3, "two_pts": 3, "from_play": 1, "from_frees": 5}}}, {"name": "Ben Philingham", "games": {"1": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "6": {"goals": 1, "points": 2, "two_pts": 0, "from_play": 3, "from_frees": 0}, "7": {"goals": 0, "points": 4, "two_pts": 0, "from_play": 4, "from_frees": 0}, "10": {"goals": 0, "points": 5, "two_pts": 0, "from_play": 5, "from_frees": 0}, "11": {"goals": 0, "points": 0, "two_pts": 1, "from_play": 1, "from_frees": 0}, "14": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Fintan O\u2019Connell", "games": {"1": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "5": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "8": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "9": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "13": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "15": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Fiachra Mooney", "games": {"1": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "2": {"goals": 1, "points": 2, "two_pts": 0, "from_play": 3, "from_frees": 0}, "3": {"goals": 1, "points": 4, "two_pts": 1, "from_play": 5, "from_frees": 1}, "4": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "5": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "8": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "9": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "12": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "14": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "17": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "18": {"goals": 2, "points": 4, "two_pts": 0, "from_play": 6, "from_frees": 0}, "20": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Darren Smith", "games": {"2": {"goals": 1, "points": 3, "two_pts": 0, "from_play": 3, "from_frees": 1}, "4": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "5": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "6": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "8": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 1, "from_frees": 1}, "9": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "11": {"goals": 0, "points": 1, "two_pts": 1, "from_play": 2, "from_frees": 0}, "14": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 2, "from_frees": 1}, "17": {"goals": 0, "points": 2, "two_pts": 1, "from_play": 2, "from_frees": 1}, "18": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "19": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 0, "from_frees": 1}, "20": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 1, "from_frees": 1}}}, {"name": "Alex Sweeney", "games": {"2": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "3": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "5": {"goals": 3, "points": 0, "two_pts": 0, "from_play": 3, "from_frees": 0}, "9": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "15": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "17": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "18": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "20": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Emmett Fitzsimons", "games": {"2": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "5": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 1, "from_frees": 2}, "8": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 1, "from_frees": 1}, "9": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 0, "from_frees": 2}, "14": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 3, "from_frees": 0}}}, {"name": "Phelim Cusack", "games": {"2": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "5": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "6": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "8": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "10": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "14": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "18": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Evan Markey", "games": {"3": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Dara Sharkey", "games": {"3": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "6": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "13": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Philip Corrigan", "games": {"3": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "4": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "7": {"goals": 0, "points": 1, "two_pts": 1, "from_play": 2, "from_frees": 0}, "8": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "10": {"goals": 1, "points": 1, "two_pts": 0, "from_play": 2, "from_frees": 0}, "11": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "13": {"goals": 0, "points": 2, "two_pts": 1, "from_play": 3, "from_frees": 0}, "16": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "19": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 2, "from_frees": 1}}}, {"name": "James Farrelly", "games": {"4": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "6": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "12": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "19": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Keiran Smith", "games": {"6": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "7": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "10": {"goals": 0, "points": 3, "two_pts": 0, "from_play": 3, "from_frees": 0}, "11": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}, "19": {"goals": 2, "points": 0, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "David Ryan", "games": {"6": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "10": {"goals": 1, "points": 2, "two_pts": 0, "from_play": 3, "from_frees": 0}}}, {"name": "Shaun Clarke", "games": {"7": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Cian Fitzsimons", "games": {"7": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "13": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}, "19": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Darrell Dolan", "games": {"10": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Liam McCabe", "games": {"12": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "14": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Harry Banville", "games": {"13": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Ciaran Flynn", "games": {"13": {"goals": 1, "points": 3, "two_pts": 0, "from_play": 4, "from_frees": 0}, "14": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}, "17": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Mark Farrelly (S)", "games": {"16": {"goals": 0, "points": 1, "two_pts": 0, "from_play": 1, "from_frees": 0}}}, {"name": "Harry McQuade", "games": {"16": {"goals": 0, "points": 2, "two_pts": 0, "from_play": 2, "from_frees": 0}}}, {"name": "Benny McConnell", "games": {"19": {"goals": 1, "points": 0, "two_pts": 0, "from_play": 1, "from_frees": 0}}}];
+
+function render(cat) {
+    var indices = [];
+    for (var i = 0; i < games.length; i++) {
+        if (cat === 'All' || games[i].category === cat) indices.push(i);
+    }
+
+    // Calculate per-player totals for this filter
+    var playerTotals = players.map(function(p) {
+        var goals = 0, pts = 0, two = 0, fromPlay = 0, fromFrees = 0, gamesScored = 0;
+        indices.forEach(function(gi) {
+            var g = p.games[gi];
+            if (g) {
+                goals += g.goals;
+                pts += g.points;
+                two += g.two_pts;
+                fromPlay += g.from_play;
+                fromFrees += g.from_frees;
+                gamesScored++;
+            }
+        });
+        var total = goals * 3 + pts + two * 2;
+        return {name: p.name, goals: goals, pts: pts, two: two, total: total, gamesScored: gamesScored, games: p.games};
+    }).filter(function(p) { return p.total > 0; });
+
+    playerTotals.sort(function(a, b) { return b.total - a.total || b.goals - a.goals; });
+
+    // Summary
+    var totalScorers = playerTotals.length;
+    var totalPts = playerTotals.reduce(function(s, p) { return s + p.total; }, 0);
+    var totalGoals = playerTotals.reduce(function(s, p) { return s + p.goals; }, 0);
+    var totalPoints = playerTotals.reduce(function(s, p) { return s + p.pts + p.two * 2; }, 0);
+    var avgPerGame = indices.length > 0 ? (totalPts / indices.length).toFixed(1) : 0;
+
+    document.getElementById('summary').innerHTML =
+        '<div class="summary-card"><div class="value">' + totalScorers + '</div><div class="label">Different Scorers</div></div>' +
+        '<div class="summary-card"><div class="value">' + totalPts + '</div><div class="label">Total Points Scored</div></div>' +
+        '<div class="summary-card"><div class="value">' + totalGoals + '-' + totalPoints + '</div><div class="label">Total (G-P)</div></div>' +
+        '<div class="summary-card"><div class="value">' + avgPerGame + '</div><div class="label">Avg Points/Game</div></div>';
+
+    // Table
+    var headers = '<th style="text-align:left;padding-left:10px">Player</th><th>G-P</th><th>Pts</th><th>Games</th><th>Avg</th>';
+    indices.forEach(function(gi) {
+        headers += '<th class="game-col" title="' + games[gi].date + ' - ' + games[gi].competition + '">' + games[gi].opponent.substring(0, 8) + '</th>';
+    });
+
+    var rows = '';
+    playerTotals.forEach(function(p) {
+        var avg = indices.length > 0 ? (p.total / indices.length).toFixed(1) : 0;
+        var cells = '';
+        indices.forEach(function(gi) {
+            var g = p.games[gi];
+            if (g) {
+                var score = g.goals * 3 + g.points + g.two_pts * 2;
+                var notation = g.goals + '-' + (g.points + g.two_pts * 2);
+                var fm = g.from_frees > 0 ? 'f' : '';
+                var cls = score >= 5 ? 'hot' : score >= 3 ? 'warm' : 'cool';
+                cells += '<td class="game-col ' + cls + '" title="' + notation + ' (' + g.from_play + ' play, ' + g.from_frees + ' frees)">' + score + fm + '</td>';
+            } else {
+                cells += '<td class="game-col empty">-</td>';
+            }
+        });
+        rows += '<tr><td class="player-name">' + p.name + '</td><td class="total-col">' + p.goals + '-' + (p.pts + p.two * 2) + '</td><td class="total-col"><strong>' + p.total + '</strong></td><td class="total-col">' + p.gamesScored + '</td><td class="total-col">' + avg + '</td>' + cells + '</tr>';
+    });
+
+    document.getElementById('table-container').innerHTML = '<table><thead><tr>' + headers + '</tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+// Tab click handlers
+document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        render(tab.getAttribute('data-cat'));
+    });
+});
+
+render('All');
+</script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script></body>
 </html>

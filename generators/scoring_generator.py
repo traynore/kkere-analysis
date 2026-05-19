@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Scoring Report Generator — Season-wide scorer breakdown per game"""
+"""Scoring Report Generator — Season-wide scorer breakdown per game, filterable by competition"""
 import csv, json, re
 from pathlib import Path
 from datetime import datetime
@@ -35,6 +35,20 @@ def read_meta(f):
     return meta
 
 
+def categorise(comp):
+    c = comp.lower()
+    if 'spring' in c or 'ulster' in c:
+        return 'Spring League'
+    elif 'challenge' in c:
+        return 'Challenge'
+    elif 'div 3' in c or 'div3' in c or 'rnd' in c and '3' in c:
+        return 'ACFL Div 3'
+    elif 'div 5' in c or 'div5' in c or 'div 7' in c or 'div7' in c or 'reserve' in c:
+        return 'ACFL Div 7'
+    else:
+        return 'Other'
+
+
 def generate():
     data_dir = Path(__file__).resolve().parent.parent / 'data'
     all_csvs = sorted(data_dir.glob('Killinkere*.csv'),
@@ -52,8 +66,9 @@ def generate():
         opponent = match.group(1).strip() if match else csv_path.stem
         date = meta.get('date', '')
         comp = meta.get('competition', '')
+        category = categorise(comp)
         game_idx = len(games)
-        games.append({'date': date, 'opponent': opponent, 'competition': comp})
+        games.append({'date': date, 'opponent': opponent, 'competition': comp, 'category': category})
 
         scoring = [e for e in events if e['Team Name'] == 'Killinkere'
                    and e.get('Player')
@@ -74,54 +89,19 @@ def generate():
             else:
                 s['from_frees'] += 1
 
-    def total_score(player):
-        return sum(g['goals'] * 3 + g['points'] + g['two_pts'] * 2 for g in player_stats[player].values())
+    # Categories for tabs
+    categories = ['All', 'Spring League', 'Challenge', 'ACFL Div 3', 'ACFL Div 7']
 
-    def total_goals(player):
-        return sum(g['goals'] for g in player_stats[player].values())
+    # JSON data for JS filtering
+    games_json = json.dumps([{'opponent': g['opponent'], 'date': g['date'], 'competition': g['competition'], 'category': g['category']} for g in games])
 
-    sorted_players = sorted(player_stats.keys(), key=lambda p: (total_score(p), total_goals(p)), reverse=True)
-
-    # Build HTML
-    game_headers = ''.join(
-        f'<th class="game-col" title="{g["date"]} - {g["competition"]}">{g["opponent"][:8]}</th>'
-        for g in games
-    )
-
-    rows_html = ''
-    for player in sorted_players:
-        ts = total_score(player)
-        tg = sum(g['goals'] for g in player_stats[player].values())
-        tp = sum(g['points'] for g in player_stats[player].values())
-        t2 = sum(g['two_pts'] for g in player_stats[player].values())
-        games_scored = len(player_stats[player])
-        avg = round(ts / len(games), 1)
-
-        cells = ''
-        for gi in range(len(games)):
-            if gi in player_stats[player]:
-                g = player_stats[player][gi]
-                score = g['goals'] * 3 + g['points'] + g['two_pts'] * 2
-                notation = f"{g['goals']}-{g['points'] + g['two_pts'] * 2}"
-                free_marker = 'f' if g['from_frees'] > 0 else ''
-                if score >= 5:
-                    cell_class = 'hot'
-                elif score >= 3:
-                    cell_class = 'warm'
-                else:
-                    cell_class = 'cool'
-                cells += f'<td class="game-col {cell_class}" title="{notation} ({g["from_play"]} play, {g["from_frees"]} frees)">{score}{free_marker}</td>'
-            else:
-                cells += '<td class="game-col empty">-</td>'
-
-        rows_html += f'''<tr>
-            <td class="player-name">{player}</td>
-            <td class="total-col">{tg}-{tp + t2*2}</td>
-            <td class="total-col"><strong>{ts}</strong></td>
-            <td class="total-col">{games_scored}</td>
-            <td class="total-col">{avg}</td>
-            {cells}
-        </tr>\n'''
+    players_json_data = []
+    for player in player_stats:
+        p_data = {'name': player, 'games': {}}
+        for gi, g in player_stats[player].items():
+            p_data['games'][str(gi)] = g
+        players_json_data.append(p_data)
+    players_json = json.dumps(players_json_data)
 
     html = f'''<!DOCTYPE html>
 <html lang="en">
@@ -136,6 +116,10 @@ def generate():
         .header {{ background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 30px; border-radius: 16px; text-align: center; margin-bottom: 24px; }}
         .header h1 {{ font-size: 2em; margin-bottom: 4px; }}
         .header p {{ opacity: 0.8; font-size: 1em; }}
+        .tabs {{ display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }}
+        .tab {{ padding: 10px 18px; border-radius: 8px; border: 2px solid #dee2e6; background: white; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.2s; }}
+        .tab:hover {{ border-color: #1e3c72; color: #1e3c72; }}
+        .tab.active {{ background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; border-color: #1e3c72; }}
         .card {{ background: white; border-radius: 14px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; overflow-x: auto; }}
         .card h2 {{ color: #1e3c72; margin-bottom: 16px; font-size: 1.3em; }}
         table {{ border-collapse: collapse; width: 100%; font-size: 0.82em; }}
@@ -166,42 +150,19 @@ def generate():
             <p>Killinkere GAA — 2026 Season · All Scorers Game-by-Game</p>
         </div>
 
-        <div class="summary">
-            <div class="summary-card">
-                <div class="value">{len(sorted_players)}</div>
-                <div class="label">Different Scorers</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">{sum(total_score(p) for p in sorted_players)}</div>
-                <div class="label">Total Points Scored</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">{sum(total_goals(p) for p in sorted_players)}-{sum(sum(g["points"] + g["two_pts"]*2 for g in player_stats[p].values()) for p in sorted_players)}</div>
-                <div class="label">Season Total (G-P)</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">{round(sum(total_score(p) for p in sorted_players) / len(games), 1)}</div>
-                <div class="label">Avg Points/Game</div>
-            </div>
+        <div class="tabs" id="comp-tabs">
+            <div class="tab active" data-cat="All">All</div>
+            <div class="tab" data-cat="Spring League">🏆 Spring League</div>
+            <div class="tab" data-cat="Challenge">⚔️ Challenge</div>
+            <div class="tab" data-cat="ACFL Div 3">📋 ACFL Div 3</div>
+            <div class="tab" data-cat="ACFL Div 7">📋 ACFL Div 7</div>
         </div>
+
+        <div class="summary" id="summary"></div>
 
         <div class="card">
             <h2>📊 Scorer Breakdown — Per Game</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="text-align:left;padding-left:10px">Player</th>
-                        <th>G-P</th>
-                        <th>Pts</th>
-                        <th>Games</th>
-                        <th>Avg</th>
-                        {game_headers}
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows_html}
-                </tbody>
-            </table>
+            <div id="table-container"></div>
             <div class="legend">
                 <span><div class="legend-box" style="background:#d4edda"></div> 5+ pts</span>
                 <span><div class="legend-box" style="background:#fff3cd"></div> 3-4 pts</span>
@@ -211,6 +172,89 @@ def generate():
             </div>
         </div>
     </div>
+
+<script>
+var games = {games_json};
+var players = {players_json};
+
+function render(cat) {{
+    var indices = [];
+    for (var i = 0; i < games.length; i++) {{
+        if (cat === 'All' || games[i].category === cat) indices.push(i);
+    }}
+
+    // Calculate per-player totals for this filter
+    var playerTotals = players.map(function(p) {{
+        var goals = 0, pts = 0, two = 0, fromPlay = 0, fromFrees = 0, gamesScored = 0;
+        indices.forEach(function(gi) {{
+            var g = p.games[gi];
+            if (g) {{
+                goals += g.goals;
+                pts += g.points;
+                two += g.two_pts;
+                fromPlay += g.from_play;
+                fromFrees += g.from_frees;
+                gamesScored++;
+            }}
+        }});
+        var total = goals * 3 + pts + two * 2;
+        return {{name: p.name, goals: goals, pts: pts, two: two, total: total, gamesScored: gamesScored, games: p.games}};
+    }}).filter(function(p) {{ return p.total > 0; }});
+
+    playerTotals.sort(function(a, b) {{ return b.total - a.total || b.goals - a.goals; }});
+
+    // Summary
+    var totalScorers = playerTotals.length;
+    var totalPts = playerTotals.reduce(function(s, p) {{ return s + p.total; }}, 0);
+    var totalGoals = playerTotals.reduce(function(s, p) {{ return s + p.goals; }}, 0);
+    var totalPoints = playerTotals.reduce(function(s, p) {{ return s + p.pts + p.two * 2; }}, 0);
+    var avgPerGame = indices.length > 0 ? (totalPts / indices.length).toFixed(1) : 0;
+
+    document.getElementById('summary').innerHTML =
+        '<div class="summary-card"><div class="value">' + totalScorers + '</div><div class="label">Different Scorers</div></div>' +
+        '<div class="summary-card"><div class="value">' + totalPts + '</div><div class="label">Total Points Scored</div></div>' +
+        '<div class="summary-card"><div class="value">' + totalGoals + '-' + totalPoints + '</div><div class="label">Total (G-P)</div></div>' +
+        '<div class="summary-card"><div class="value">' + avgPerGame + '</div><div class="label">Avg Points/Game</div></div>';
+
+    // Table
+    var headers = '<th style="text-align:left;padding-left:10px">Player</th><th>G-P</th><th>Pts</th><th>Games</th><th>Avg</th>';
+    indices.forEach(function(gi) {{
+        headers += '<th class="game-col" title="' + games[gi].date + ' - ' + games[gi].competition + '">' + games[gi].opponent.substring(0, 8) + '</th>';
+    }});
+
+    var rows = '';
+    playerTotals.forEach(function(p) {{
+        var avg = indices.length > 0 ? (p.total / indices.length).toFixed(1) : 0;
+        var cells = '';
+        indices.forEach(function(gi) {{
+            var g = p.games[gi];
+            if (g) {{
+                var score = g.goals * 3 + g.points + g.two_pts * 2;
+                var notation = g.goals + '-' + (g.points + g.two_pts * 2);
+                var fm = g.from_frees > 0 ? 'f' : '';
+                var cls = score >= 5 ? 'hot' : score >= 3 ? 'warm' : 'cool';
+                cells += '<td class="game-col ' + cls + '" title="' + notation + ' (' + g.from_play + ' play, ' + g.from_frees + ' frees)">' + score + fm + '</td>';
+            }} else {{
+                cells += '<td class="game-col empty">-</td>';
+            }}
+        }});
+        rows += '<tr><td class="player-name">' + p.name + '</td><td class="total-col">' + p.goals + '-' + (p.pts + p.two * 2) + '</td><td class="total-col"><strong>' + p.total + '</strong></td><td class="total-col">' + p.gamesScored + '</td><td class="total-col">' + avg + '</td>' + cells + '</tr>';
+    }});
+
+    document.getElementById('table-container').innerHTML = '<table><thead><tr>' + headers + '</tr></thead><tbody>' + rows + '</tbody></table>';
+}}
+
+// Tab click handlers
+document.querySelectorAll('.tab').forEach(function(tab) {{
+    tab.addEventListener('click', function() {{
+        document.querySelectorAll('.tab').forEach(function(t) {{ t.classList.remove('active'); }});
+        tab.classList.add('active');
+        render(tab.getAttribute('data-cat'));
+    }});
+}});
+
+render('All');
+</script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script></body>
 </html>'''
 
