@@ -82,6 +82,7 @@ def calc_all_stats(events, csv_filename):
         play_two_pts = len([s for s in shots_from_play if s['Outcome'] == '2 Points'])
         wides = len([s for s in shots_from_play if s['Outcome'] == 'Wide'])
         shorts = len([s for s in shots_from_play if s['Outcome'] == 'Short'])
+        saves = len([s for s in shots_from_play if s['Outcome'] == 'Save'])
         fortyfives = len([s for s in shots_from_play if s['Outcome'] == '45'])
         
         stats[f'{prefix}_goals'] = total_goals
@@ -93,6 +94,7 @@ def calc_all_stats(events, csv_filename):
         stats[f'{prefix}_shots_scored'] = play_goals + play_points + play_two_pts
         stats[f'{prefix}_wides'] = wides
         stats[f'{prefix}_shorts'] = shorts
+        stats[f'{prefix}_saves'] = saves
         stats[f'{prefix}_45s'] = fortyfives
         # Accuracy = scored / total shots
         stats[f'{prefix}_acc'] = round((stats[f'{prefix}_shots_scored'] / len(shots_from_play) * 100), 1) if len(shots_from_play) > 0 else 0
@@ -169,6 +171,9 @@ def calc_all_stats(events, csv_filename):
         stats[f'{prefix}_points_from_frees'] = points_from_frees
         stats[f'{prefix}_attacks'] = len([e for e in team_events if e.get('Name') == 'Attacks'])
         stats[f'{prefix}_attacks_shot'] = len([e for e in team_events if e.get('Name') == 'Attacks' and e.get('Outcome') == 'Shot taken'])
+        stats[f'{prefix}_attacks_poss_lost'] = len([e for e in team_events if e.get('Name') == 'Attacks' and e.get('Outcome') == 'Possession lost'])
+        stats[f'{prefix}_attacks_mark'] = len([e for e in team_events if e.get('Name') == 'Attacks' and e.get('Outcome') == 'Mark taken'])
+        stats[f'{prefix}_attacks_kick_lost'] = len([e for e in team_events if e.get('Name') == 'Attacks' and e.get('Outcome') == 'Kick lost'])
         
         # Scoreable frees
         sf = [e for e in team_events if e.get('Name') == 'Scoreable free']
@@ -475,11 +480,11 @@ def generate_html(csv_file):
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: 50%">50%</div>',
                   f'<div class="bar bar-aughadrumsee" style="width: {stats["t2_acc"]}%">{stats["t2_acc"]}%</div>', html, count=1)
     
-    # Replace total shots/scores (use attacks_shot to match funnel)
+    # Replace total shots/scores (from play only)
     html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(19 \* 4%\)">19 / 11</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_attacks_shot"]} * 4%)">{stats["t1_attacks_shot"]} / {stats["t1_shots_scored"]}</div>', html)
+                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_shots_total"]} * 4%)">{stats["t1_shots_total"]} / {stats["t1_shots_scored"]}</div>', html)
     html = re.sub(r'<div class="bar bar-aughadrumsee" style="width: calc\(18 \* 4%\)">18 / 9</div>',
-                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_attacks_shot"]} * 4%)">{stats["t2_attacks_shot"]} / {stats["t2_shots_scored"]}</div>', html)
+                  f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_shots_total"]} * 4%)">{stats["t2_shots_total"]} / {stats["t2_shots_scored"]}</div>', html)
     
     # Replace score breakdown - Goals
     # Score Breakdown shows FROM PLAY only (frees shown separately)
@@ -601,14 +606,15 @@ def generate_html(csv_file):
                   f'<div class="bar bar-aughadrumsee" style="width: calc({stats["t2_points_from_frees"]} * 20%)">{stats["t2_points_from_frees"]} {t2_pts_suffix}</div>', html, count=1)
     
     # Replace funnel
-    attacks_pct = round((stats['t1_attacks_shot'] / stats['t1_attacks'] * 100)) if stats['t1_attacks'] > 0 else 0
-    funnel_missed = stats['t1_attacks_shot'] - stats['t1_shots_scored']
-    funnel_no_shot = stats['t1_attacks'] - stats['t1_attacks_shot']
+    attacks_pct = round((stats['t1_shots_total'] / stats['t1_attacks'] * 100)) if stats['t1_attacks'] > 0 else 0
+    funnel_missed = stats['t1_shots_total'] - stats['t1_shots_scored']
+    funnel_no_shot = stats['t1_attacks'] - stats['t1_shots_total']
     funnel_score_pct = round(stats['t1_shots_scored'] / stats['t1_attacks'] * 100) if stats['t1_attacks'] > 0 else 0
     funnel_missed_pct = round(funnel_missed / stats['t1_attacks'] * 100) if stats['t1_attacks'] > 0 else 0
     funnel_no_shot_pct = 100 - funnel_score_pct - funnel_missed_pct
+    html = html.replace('FUNNEL_ATTACKS_LABEL', str(stats['t1_attacks']))
     html = html.replace('FUNNEL_ATTACKS', str(stats['t1_attacks']))
-    html = html.replace('FUNNEL_SHOTS', str(stats['t1_attacks_shot']))
+    html = html.replace('FUNNEL_SHOTS', str(stats['t1_shots_total']))
     html = html.replace('FUNNEL_SHOT_PCT', str(attacks_pct))
     html = html.replace('FUNNEL_SCORES', str(stats['t1_shots_scored']))
     html = html.replace('FUNNEL_ACC_PCT', str(stats['t1_acc']))
@@ -617,6 +623,7 @@ def generate_html(csv_file):
     html = html.replace('FUNNEL_MISSED', str(funnel_missed))
     html = html.replace('FUNNEL_NO_SHOT_PCT', str(funnel_no_shot_pct))
     html = html.replace('FUNNEL_NO_SHOT', str(funnel_no_shot))
+    funnel_frees = stats['t1_attacks_shot'] - stats['t1_shots_total']
 
     # Shot map disabled for now — WIP
     html = html.replace('<!-- SHOT_MAP_PLACEHOLDER -->', '')
@@ -820,9 +827,24 @@ def generate_html(csv_file):
 
     # Replace attacks stats
     html = html.replace('ATTACKS_WITH_SHOT / TOTAL_ATTACKS', f'{attacks_with_shot_2026} / {total_attacks_2026}')
-    html = html.replace('TOTAL_ATTACKS', str(stats['t1_attacks']))
-    html = re.sub(r'<div class="bar bar-killinkere" style="width: calc\(29 \* 3%\)">29 / 18 \(62%\)</div>',
-                  f'<div class="bar bar-killinkere" style="width: calc({stats["t1_attacks"]} * 3%)">{stats["t1_attacks"]} / {stats["t1_attacks_shot"]} ({attacks_pct}%)</div>', html)
+    
+    # Attack Statistics section
+    t2_attacks_pct = round((stats['t2_shots_total'] / stats['t2_attacks'] * 100)) if stats['t2_attacks'] > 0 else 0
+    t2_frees = stats['t2_attacks_shot'] - stats['t2_shots_total']
+    html = html.replace('ATTACK_TOTAL_T1', str(stats['t1_attacks']))
+    html = html.replace('ATTACK_SHOTS_T1', str(stats['t1_shots_total']))
+    html = html.replace('ATTACK_SHOT_PCT_T1', str(attacks_pct))
+    html = html.replace('ATTACK_TOTAL_T2', str(stats['t2_attacks']))
+    html = html.replace('ATTACK_SHOTS_T2', str(stats['t2_shots_total']))
+    html = html.replace('ATTACK_SHOT_PCT_T2', str(t2_attacks_pct))
+    html = html.replace('ATTACK_FREES_T1', str(funnel_frees))
+    html = html.replace('ATTACK_FREES_T2', str(t2_frees))
+    html = html.replace('ATTACK_POSS_LOST_T1', str(stats['t1_attacks_poss_lost']))
+    html = html.replace('ATTACK_POSS_LOST_T2', str(stats['t2_attacks_poss_lost']))
+    html = html.replace('ATTACK_MARK_T1', str(stats['t1_attacks_mark']))
+    html = html.replace('ATTACK_MARK_T2', str(stats['t2_attacks_mark']))
+    html = html.replace('ATTACK_KICK_LOST_T1', str(stats['t1_attacks_kick_lost']))
+    html = html.replace('ATTACK_KICK_LOST_T2', str(stats['t2_attacks_kick_lost']))
     
     # Replace frees conceded by zone
     html = html.replace('TEAM_NAME_PLACEHOLDER', stats['team1'])
@@ -1026,6 +1048,10 @@ def generate_html(csv_file):
     # Replace 45s
     html = html.replace('FORTYFIVES_T1', str(stats['t1_45s']))
     html = html.replace('FORTYFIVES_T2', str(stats['t2_45s']))
+    
+    # Replace saves
+    html = html.replace('SAVES_T1', str(stats['t1_saves']))
+    html = html.replace('SAVES_T2', str(stats['t2_saves']))
     
     # Replace scoreable frees from 45s
     html = html.replace('SF45_SCORED_T1', str(stats['t1_sf45_scored']))
