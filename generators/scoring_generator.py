@@ -57,6 +57,7 @@ def generate():
 
     games = []
     player_stats = defaultdict(lambda: defaultdict(lambda: {'goals': 0, 'points': 0, 'two_pts': 0, 'from_play': 0, 'from_frees': 0}))
+    player_appearances = defaultdict(set)
 
     for csv_path in all_csvs:
         events = read_csv(str(csv_path))
@@ -69,6 +70,12 @@ def generate():
         category = categorise(comp)
         game_idx = len(games)
         games.append({'date': date, 'opponent': opponent, 'competition': comp, 'category': category})
+
+        # Track all players who had any event in this game
+        for e in events:
+            if e['Team Name'] == 'Killinkere' and e.get('Player'):
+                if game_idx not in player_appearances[e['Player']]:
+                    player_appearances[e['Player']].add(game_idx)
 
         scoring = [e for e in events if e['Team Name'] == 'Killinkere'
                    and e.get('Player')
@@ -97,7 +104,7 @@ def generate():
 
     players_json_data = []
     for player in player_stats:
-        p_data = {'name': player, 'games': {}}
+        p_data = {'name': player, 'games': {}, 'appearances': sorted(player_appearances[player])}
         for gi, g in player_stats[player].items():
             p_data['games'][str(gi)] = g
         players_json_data.append(p_data)
@@ -186,7 +193,9 @@ function render(cat) {{
     // Calculate per-player totals for this filter
     var playerTotals = players.map(function(p) {{
         var goals = 0, pts = 0, two = 0, fromPlay = 0, fromFrees = 0, gamesScored = 0;
+        var gamesPlayed = 0;
         indices.forEach(function(gi) {{
+            if (p.appearances.indexOf(gi) !== -1) gamesPlayed++;
             var g = p.games[gi];
             if (g) {{
                 goals += g.goals;
@@ -198,7 +207,7 @@ function render(cat) {{
             }}
         }});
         var total = goals * 3 + pts + two * 2;
-        return {{name: p.name, goals: goals, pts: pts, two: two, total: total, gamesScored: gamesScored, games: p.games}};
+        return {{name: p.name, goals: goals, pts: pts, two: two, total: total, gamesScored: gamesScored, gamesPlayed: gamesPlayed, games: p.games}};
     }}).filter(function(p) {{ return p.total > 0; }});
 
     playerTotals.sort(function(a, b) {{ return b.total - a.total || b.goals - a.goals; }});
@@ -217,14 +226,14 @@ function render(cat) {{
         '<div class="summary-card"><div class="value">' + avgPerGame + '</div><div class="label">Avg Points/Game</div></div>';
 
     // Table
-    var headers = '<th style="text-align:left;padding-left:10px">Player</th><th>G-P</th><th>Pts</th><th>Games</th><th>Avg</th>';
+    var headers = '<th style="text-align:left;padding-left:10px">Player</th><th>G-P</th><th>Pts</th><th>Played</th><th>Avg</th>';
     indices.forEach(function(gi) {{
         headers += '<th class="game-col" title="' + games[gi].date + ' - ' + games[gi].competition + '">' + games[gi].opponent.substring(0, 8) + '</th>';
     }});
 
     var rows = '';
     playerTotals.forEach(function(p) {{
-        var avg = indices.length > 0 ? (p.total / indices.length).toFixed(1) : 0;
+        var avg = p.gamesPlayed > 0 ? (p.total / p.gamesPlayed).toFixed(1) : 0;
         var cells = '';
         indices.forEach(function(gi) {{
             var g = p.games[gi];
@@ -238,7 +247,7 @@ function render(cat) {{
                 cells += '<td class="game-col empty">-</td>';
             }}
         }});
-        rows += '<tr><td class="player-name">' + p.name + '</td><td class="total-col">' + p.goals + '-' + (p.pts + p.two * 2) + '</td><td class="total-col"><strong>' + p.total + '</strong></td><td class="total-col">' + p.gamesScored + '</td><td class="total-col">' + avg + '</td>' + cells + '</tr>';
+        rows += '<tr><td class="player-name">' + p.name + '</td><td class="total-col">' + p.goals + '-' + (p.pts + p.two * 2) + '</td><td class="total-col"><strong>' + p.total + '</strong></td><td class="total-col">' + p.gamesPlayed + '</td><td class="total-col">' + avg + '</td>' + cells + '</tr>';
     }});
 
     document.getElementById('table-container').innerHTML = '<table><thead><tr>' + headers + '</tr></thead><tbody>' + rows + '</tbody></table>';
