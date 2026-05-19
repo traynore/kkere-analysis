@@ -53,7 +53,8 @@
       {label:'Season Trends & Patterns', file:'season_trends.html'},
       {label:'Defensive Trends', file:'defensive_trends.html'},
       {label:'Discipline Tracker', file:'discipline.html'},
-      {label:'Kickout Analysis', file:'kickouts.html'}
+      {label:'Kickout Analysis', file:'kickouts.html'},
+      {label:'Scoring Report', file:'scoring.html'}
     ]}
   ];
 
