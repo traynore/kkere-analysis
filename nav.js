@@ -21,7 +21,8 @@
       {label:'v Ballymchugh (L) 1-11 to 2-17', file:'Killinkere 1 - 11 v 2 - 17 Ballymchugh_FULL_infographic.html'},
       {label:'v Redhills (W) 0-17 to 1-13', file:'Killinkere 0 - 17 v 1 - 13 Redhills_FULL_infographic.html'},
       {label:'v Belturbet (W) 5-14 to 0-14', file:'Killinkere 5 - 14 v 0 - 14 Belturbet_FULL_infographic.html'},
-      {label:'v Drumgoon (W) 0-19 to 0-10', file:'Killinkere 0 - 19 v 0- 10 Drumgoon_FULL_infographic.html'}
+      {label:'v Drumgoon (W) 0-19 to 0-10', file:'Killinkere 0 - 19 v 0- 10 Drumgoon_FULL_infographic.html'},
+      {label:'v Drumlane (L) 2-10 to 3-11', file:'Killinkere 2 - 10 v 3 - 11 Drumlane_FULL_infographic.html'}
     ]},
     {heading:'📋 ACFL Division 7', games:[
       {label:'v Arva (D) 1-13 to 1-13', file:'Killinkere 1 - 13 v 1 - 13 Arva_FULL_infographic.html'},

@@ -623,7 +623,7 @@ def generate_html(csv_file):
     html = html.replace('FUNNEL_MISSED', str(funnel_missed))
     html = html.replace('FUNNEL_NO_SHOT_PCT', str(funnel_no_shot_pct))
     html = html.replace('FUNNEL_NO_SHOT', str(funnel_no_shot))
-    funnel_frees = stats['t1_attacks_shot'] - stats['t1_shots_total']
+    funnel_frees = max(0, stats['t1_attacks_shot'] - stats['t1_shots_total'])
 
     # Shot map disabled for now — WIP
     html = html.replace('<!-- SHOT_MAP_PLACEHOLDER -->', '')
@@ -830,7 +830,7 @@ def generate_html(csv_file):
     
     # Attack Statistics section
     t2_attacks_pct = round((stats['t2_shots_total'] / stats['t2_attacks'] * 100)) if stats['t2_attacks'] > 0 else 0
-    t2_frees = stats['t2_attacks_shot'] - stats['t2_shots_total']
+    t2_frees = max(0, stats['t2_attacks_shot'] - stats['t2_shots_total'])
     html = html.replace('ATTACK_TOTAL_T1', str(stats['t1_attacks']))
     html = html.replace('ATTACK_SHOTS_T1', str(stats['t1_shots_total']))
     html = html.replace('ATTACK_SHOT_PCT_T1', str(attacks_pct))
