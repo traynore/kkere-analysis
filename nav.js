@@ -30,7 +30,8 @@
       {label:'v Lavey (L) 1-11 to 1-14', file:'Killinkere 1 - 11 v 1 - 14 Lavey_FULL_infographic.html'},
       {label:'v Templeport (W) 3-17 to 0-12', file:'Killinkere 3 - 17 v 0 - 12 Templeport_FULL_infographic.html'},
       {label:'v Cuchulainns (L) 0-12 to 4-15', file:'Killinkere 0 - 12 v 4 - 15 Cuchulainns_FULL_infographic.html'},
-      {label:'v Lacken (W) 3-8 to 0-14', file:'Killinkere 3 - 8 v 0 - 14 Lacken_FULL_infographic.html'}
+      {label:'v Lacken (W) 3-8 to 0-14', file:'Killinkere 3 - 8 v 0 - 14 Lacken_FULL_infographic.html'},
+      {label:'v Lavey (W) 3-15 to 2-16 — Semi-Final', file:'Killinkere 3 - 15 v 2 - 16 Lavey_FULL_infographic.html'}
     ]},
     {heading:'📡 GPS Reports', games:[
       {label:'v Denn — GPS (15 Feb)', file:'v_Denn_Spring League_GPS_report.html'},
@@ -48,7 +49,9 @@
       {label:'v Redhills — GPS (1 May)', file:'v_Redhills__ACFL_Div3_GPS_report.html'},
       {label:'v Belturbet — GPS (9 May)', file:'v_Belturbet__ACFL_Div3_GPS_report.html'},
       {label:'v Lacken — GPS (10 May)', file:'v_Lacken__ACFL_Div7_GPS_report.html'},
-      {label:'v Drumgoon — GPS (16 May)', file:'v_Drumgoon__ACFL_Div3_GPS_report.html'}
+      {label:'v Drumgoon — GPS (16 May)', file:'v_Drumgoon__ACFL_Div3_GPS_report.html'},
+      {label:'v Drumlane — GPS (23 May)', file:'v_Drumlane__ACFL_Div3_GPS_report.html'},
+      {label:'v Lavey Semi-Final — GPS (24 May)', file:'v_Lavey__ACFL_Div7_SemiFinal_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
       {label:'Season Trends & Patterns', file:'season_trends.html'},

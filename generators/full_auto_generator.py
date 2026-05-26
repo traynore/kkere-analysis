@@ -1141,7 +1141,7 @@ def generate_html(csv_file):
         timeline_html = '</div>\n'.join(timeline_parts[:last_p1_idx+1]) + '</div>\n' + ht_divider + '</div>\n'.join(timeline_parts[last_p1_idx+1:])
     
     # Replace timeline section
-    timeline_pattern = r'(<div class="timeline">).*?(</div>\s*</div>\s*</div>\s*<script>)'
+    timeline_pattern = r'(<div class="timeline">).*?(</div>\s*</div>\s*</div>\s*</div>\s*<script>)'
     timeline_replacement = f"\\1\n{timeline_html}            \\2"
     html = re.sub(timeline_pattern, timeline_replacement, html, flags=re.DOTALL)
     
