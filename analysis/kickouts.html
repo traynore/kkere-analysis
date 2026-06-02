@@ -36,6 +36,10 @@ table.ko-table{width:100%;border-collapse:collapse;font-size:.85em}
 .ko-table th:hover{background:#2c3e50}.ko-table td{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}
 .ko-table tr:hover{background:#f0f4ff}
 .footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+.acc-filter{padding:6px 14px;border-radius:16px;border:2px solid #2a5298;background:#fff;color:#2a5298;font-weight:bold;font-size:.82em;cursor:pointer;transition:.2s}
+.acc-filter:hover{background:#eef2ff}
+.acc-filter.active{background:#2a5298;color:#fff}
+.filter-bar{display:flex;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap}
 </style></head><body>
 <div class="container">
 <div class="header">
@@ -139,12 +143,26 @@ table.ko-table{width:100%;border-collapse:collapse;font-size:.85em}
 </div>
 
 <div id="charts" class="tab-content">
+<div class="filter-bar" id="chartFilters">
+<button class="acc-filter active" onclick="filterCharts('All')">All</button>
+<button class="acc-filter" onclick="filterCharts('Spring League')">Spring League</button>
+<button class="acc-filter" onclick="filterCharts('Challenge')">Challenge</button>
+<button class="acc-filter" onclick="filterCharts('ACFL Div 3')">ACFL Div 3</button>
+<button class="acc-filter" onclick="filterCharts('ACFL Div 7')">ACFL Div 7</button>
+</div>
 <div class="chart-box"><div class="chart-title">🏐 Own Kickout Retention % per Game</div><canvas id="ownChart"></canvas></div>
 <div class="chart-box"><div class="chart-title">⚔️ Opposition Kickout Win % per Game</div><canvas id="oppChart"></canvas></div>
 </div>
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">📋 Game-by-Game Kickouts</h2>
+<div class="filter-bar" id="tableFilters">
+<button class="acc-filter active" onclick="filterTable('All')">All</button>
+<button class="acc-filter" onclick="filterTable('Spring League')">Spring League</button>
+<button class="acc-filter" onclick="filterTable('Challenge')">Challenge</button>
+<button class="acc-filter" onclick="filterTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="acc-filter" onclick="filterTable('ACFL Div 7')">ACFL Div 7</button>
+</div>
 <div style="overflow-x:auto">
 <table class="ko-table" id="koTable">
 <thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Own Won</th><th>Own %</th><th>Opp Won</th><th>Opp %</th></tr></thead>
@@ -181,10 +199,68 @@ table.ko-table{width:100%;border-collapse:collapse;font-size:.85em}
 
 <script>
 function showTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
+
 const L=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey"];
-const green='rgba(46,204,113,0.8)',greenB='rgba(39,174,96,1)',purple='rgba(155,89,182,0.8)',purpleB='rgba(142,68,173,1)';
-new Chart(document.getElementById('ownChart'),{type:'bar',data:{labels:L,datasets:[{label:'Own KO Retention %',data:[63, 74, 82, 85, 55, 67, 61, 82, 78, 70, 67, 72, 67, 47, 53, 75, 35, 74, 71, 89, 77, 67, 95],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"],borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},plugins:[{id:'t70',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(70);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(46,204,113,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(46,204,113,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('70% target',right,yp-4);ctx.restore()}}]});
-new Chart(document.getElementById('oppChart'),{type:'bar',data:{labels:L,datasets:[{label:'Opp KO Win %',data:[29, 50, 50, 47, 46, 59, 29, 29, 45, 50, 57, 33, 58, 59, 27, 57, 27, 40, 50, 35, 41, 50, 56],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"],borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},plugins:[{id:'t40',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(40);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(155,89,182,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(155,89,182,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('40% target',right,yp-4);ctx.restore()}}]});
+const ownPct=[63, 74, 82, 85, 55, 67, 61, 82, 78, 70, 67, 72, 67, 47, 53, 75, 35, 74, 71, 89, 77, 67, 95];
+const oppPct=[29, 50, 50, 47, 46, 59, 29, 29, 45, 50, 57, 33, 58, 59, 27, 57, 27, 40, 50, 35, 41, 50, 56];
+const gameComps=['Spring League','Spring League','Spring League','Challenge','Challenge','Spring League','Challenge','ACFL Div 7','Spring League','ACFL Div 3','ACFL Div 7','ACFL Div 7','ACFL Div 3','ACFL Div 7','ACFL Div 3','ACFL Div 3','ACFL Div 7','ACFL Div 3','ACFL Div 3','ACFL Div 7','ACFL Div 3','ACFL Div 3','ACFL Div 7'];
+const results=['W','W','W','W','W','W','W','D','L','L','W','L','W','W','W','L','L','W','W','W','W','L','W'];
+
+function getBarColor(val, threshold) {
+    if (val >= threshold) return {bg:'rgba(46,204,113,0.8)',border:'rgba(39,174,96,1)'};
+    if (val >= threshold - 10) return {bg:'rgba(243,156,18,0.8)',border:'rgba(230,126,34,1)'};
+    return {bg:'rgba(231,76,60,0.8)',border:'rgba(192,57,43,1)'};
+}
+
+let ownChart = null, oppChart = null;
+
+function buildCharts(filter) {
+    const idx = gameComps.map((c,i) => (!filter || filter === 'All' || c === filter) ? i : -1).filter(i => i >= 0);
+    const fLabels = idx.map(i => L[i]);
+    const fOwn = idx.map(i => ownPct[i]);
+    const fOpp = idx.map(i => oppPct[i]);
+
+    if (ownChart) ownChart.destroy();
+    if (oppChart) oppChart.destroy();
+
+    ownChart = new Chart(document.getElementById('ownChart'), {
+        type:'bar',
+        data:{labels:fLabels, datasets:[{label:'Own KO Retention %', data:fOwn,
+            backgroundColor:fOwn.map(v => getBarColor(v,70).bg),
+            borderColor:fOwn.map(v => getBarColor(v,70).border), borderWidth:2}]},
+        options:{responsive:true, scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}, plugins:{legend:{display:false}}},
+        plugins:[{id:'t70',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(70);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(46,204,113,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(46,204,113,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('70% target',right,yp-4);ctx.restore()}}]
+    });
+
+    oppChart = new Chart(document.getElementById('oppChart'), {
+        type:'bar',
+        data:{labels:fLabels, datasets:[{label:'Opp KO Win %', data:fOpp,
+            backgroundColor:fOpp.map(v => getBarColor(v,40).bg),
+            borderColor:fOpp.map(v => getBarColor(v,40).border), borderWidth:2}]},
+        options:{responsive:true, scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}, plugins:{legend:{display:false}}},
+        plugins:[{id:'t40',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(40);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(155,89,182,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(155,89,182,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('40% target',right,yp-4);ctx.restore()}}]
+    });
+}
+
+function filterCharts(comp) {
+    document.querySelectorAll('#chartFilters .acc-filter').forEach(b => b.classList.toggle('active', b.textContent === comp));
+    buildCharts(comp);
+}
+
+function filterTable(comp) {
+    document.querySelectorAll('#tableFilters .acc-filter').forEach(b => b.classList.toggle('active', b.textContent === comp));
+    const rows = document.querySelectorAll('#koTable tbody tr');
+    rows.forEach((row, i) => {
+        if (!comp || comp === 'All' || gameComps[i] === comp) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+buildCharts('All');
+
 document.querySelectorAll('.ko-table th').forEach((th,i)=>{let asc=true;th.addEventListener('click',()=>{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{let av=a.children[i].textContent.replace('%','').trim();let bv=b.children[i].textContent.replace('%','').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)});rows.forEach(r=>tbody.appendChild(r));asc=!asc});});
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
