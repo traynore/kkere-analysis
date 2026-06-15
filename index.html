@@ -12,8 +12,13 @@
         .header h1 { font-size: 2.5em; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .header p { font-size: 1.2em; opacity: 0.85; }
         .content { background: white; padding: 30px 40px 40px; border-radius: 0 0 20px 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .section-title { font-size: 1.4em; color: #1e3c72; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #667eea; display: flex; align-items: center; gap: 10px; }
+        .section-title { font-size: 1.4em; color: #1e3c72; margin: 25px 0 0; padding: 12px 0 8px; border-bottom: 2px solid #667eea; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; transition: color 0.2s; }
         .section-title:first-child { margin-top: 0; }
+        .section-title:hover { color: #2a5298; }
+        .section-title::after { content: '▾'; margin-left: auto; font-size: 0.8em; transition: transform 0.3s; }
+        .section-title.collapsed::after { transform: rotate(-90deg); }
+        .section-body { overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; max-height: 3000px; opacity: 1; }
+        .section-body.hidden { max-height: 0; opacity: 0; margin: 0; padding: 0; }
         .all-games-link { display: block; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; text-decoration: none; padding: 18px 25px; border-radius: 12px; margin-bottom: 20px; font-size: 1.15em; font-weight: bold; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
         .all-games-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30,60,114,0.4); }
         .game-card { display: block; text-decoration: none; color: #2c3e50; background: #f8f9fa; border-left: 4px solid #2a5298; padding: 15px 20px; border-radius: 0 10px 10px 0; margin-bottom: 10px; transition: all 0.2s; }
@@ -50,7 +55,8 @@
         <div class="content">
 
 
-            <div class="section-title">🏆 Ulster Spring League 2026</div>
+            <div class="section-title collapsed" onclick="toggleSection(this)">🏆 Ulster Spring League 2026</div>
+            <div class="section-body hidden">
 
             <a class="game-card result-win" href="games/Killinkere 1 - 14 v 1 - 12 Clones_FULL_infographic.html">
                 <div class="match">Killinkere 1-14 v 1-12 Clones <span class="badge badge-win">W</span></div>
@@ -77,7 +83,10 @@
                 <div class="details">📅 22 Mar 2026 · 📍 Killinkere Main Pitch · Semi-Final</div>
             </a>
 
-            <div class="section-title">⚔️ Challenge Matches 2026</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">⚔️ Challenge Matches 2026</div>
+            <div class="section-body hidden">
 
             <a class="game-card result-win" href="games/Killinkere 4 - 9 v 0 - 12 Aughadrumsee_FULL_infographic.html">
                 <div class="match">Killinkere 4-9 v 0-12 Aughadrumsee <span class="badge badge-win">W</span></div>
@@ -94,7 +103,10 @@
                 <div class="details">📅 17 Mar 2026 · 📍 Drung GFC, Bunnoe</div>
             </a>
 
-            <div class="section-title">📋 ACFL Division 3 2026</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">📋 ACFL Division 3 2026</div>
+            <div class="section-body hidden">
 
             <a class="game-card result-loss" href="games/Killinkere 4 - 10 v 3 - 20 Denn_FULL_infographic.html">
                 <div class="match">Killinkere 4-10 v 3-20 Denn <span class="badge badge-loss">L</span></div>
@@ -141,7 +153,10 @@
                 <div class="details">📅 13 Jun 2026 · 📍 Killinkere Main Pitch · Rnd 9</div>
             </a>
 
-            <div class="section-title">📋 ACFL Division 7 2026</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">📋 ACFL Division 7 2026</div>
+            <div class="section-body hidden">
 
             <a class="game-card result-draw" href="games/Killinkere 1 - 13 v 1 - 13 Arva_FULL_infographic.html">
                 <div class="match">Killinkere 1-13 v 1-13 Arva <span class="badge badge-draw">D</span></div>
@@ -178,7 +193,10 @@
                 <div class="details">📅 24 May 2026 · 📍 Dolan Park, Ramor United GFC · Semi-Final</div>
             </a>
 
-            <div class="section-title">📡 GPS Performance Reports</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">📡 GPS Performance Reports</div>
+            <div class="section-body hidden">
 
             <a class="game-card" href="games/v_Denn_Spring League_GPS_report.html" style="border-left-color: #9b59b6;">
                 <div class="match">v Denn — GPS Report</div>
@@ -275,7 +293,10 @@
                 <div class="details">📅 13 Jun 2026 · 📡 11 Players Tracked · ACFL Division 3</div>
             </a>
 
-            <div class="section-title">🏆 League Tables</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">🏆 League Tables</div>
+            <div class="section-body hidden">
 
             <div style="margin-bottom:20px;background:#f8f9fa;border-radius:12px;padding:20px;border-left:4px solid #2a5298">
                 <h3 style="color:#2c3e50;margin-bottom:4px">📋 ACFL Division 3 — Final Standings</h3>
@@ -319,7 +340,10 @@
                 </div>
             </div>
 
-            <div class="section-title">📊 Season Analysis</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">📊 Season Analysis</div>
+            <div class="section-body hidden">
 
             <a class="analysis-card" href="analysis/season_trends.html">
                 <div class="match">Season Trends & Patterns</div>
@@ -346,7 +370,10 @@
                 <div class="details">🎯 All scorers game-by-game breakdown, totals, averages</div>
             </a>
 
-            <div class="section-title">🔍 Opposition Analysis</div>
+            </div>
+
+            <div class="section-title collapsed" onclick="toggleSection(this)">🔍 Opposition Analysis</div>
+            <div class="section-body hidden">
 
             <a class="analysis-card" href="analysis/denn_opposition_analysis.html">
                 <div class="match">Denn — Opposition Analysis</div>
@@ -360,8 +387,16 @@
 
 
 
+            </div>
+
         </div>
         <div class="footer">Killinkere GAA Match Analysis · 2026 Season</div>
     </div>
+<script>
+function toggleSection(el) {
+    el.classList.toggle('collapsed');
+    el.nextElementSibling.classList.toggle('hidden');
+}
+</script>
 <script src="nav.js"></script><script src="auth.js"></script><script src="analytics.js"></script></body>
 </html>
