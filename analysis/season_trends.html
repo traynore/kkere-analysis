@@ -80,11 +80,45 @@ table.trends-table{width:100%;border-collapse:collapse;font-size:.88em}
 </div>
 
 <div id="patterns" class="tab-content active">
-<div style="text-align:center;padding:60px 20px;color:#7f8c8d">
-<div style="font-size:3em;margin-bottom:15px">🔍</div>
-<h2 style="color:#2c3e50;margin-bottom:10px">Coming Soon</h2>
-<p style="font-size:1.1em">Key patterns and insights will be added here.</p>
+
+<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">🎯 Shooting Efficiency — 1st Half vs 2nd Half</h2>
+
+<div style="text-align:center;margin-bottom:25px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterHalves('All')">All</button>
+<button class="comp-filter" onclick="filterHalves('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterHalves('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterHalves('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterHalves('ACFL Div 7')">ACFL Div 7</button>
 </div>
+
+<div class="summary-row" id="halvesSummary">
+<div class="summary-card"><div class="val" id="h1AccVal">--</div><div class="lbl">1st Half Accuracy</div></div>
+<div class="summary-card"><div class="val" id="h2AccVal">--</div><div class="lbl">2nd Half Accuracy</div></div>
+<div class="summary-card" id="halveDiffCard" style="background:linear-gradient(135deg,#27ae60,#2ecc71)"><div class="val" id="halveDiffVal">--</div><div class="lbl">2nd Half Δ</div></div>
+</div>
+
+<div class="pattern-grid">
+<div class="pattern-card pattern-green">
+<h3>📈 Key Insight</h3>
+<div class="insight" id="halvesInsight"></div>
+</div>
+<div class="pattern-card pattern-blue">
+<h3>📊 Volume</h3>
+<div class="insight" id="halvesVolume"></div>
+</div>
+</div>
+
+<div style="overflow-x:auto;margin-top:20px">
+<table class="trends-table" id="halvesTable">
+<thead><tr>
+<th>Game</th><th>1H Scored</th><th>1H Shots</th><th>1H Acc</th><th>2H Scored</th><th>2H Shots</th><th>2H Acc</th><th>Δ</th>
+</tr></thead>
+<tbody id="halvesBody">
+</tbody>
+</table>
+</div>
+
 </div>
 
 <div id="charts" class="tab-content">
@@ -1145,6 +1179,40 @@ function filterComp(comp){
   }
   accChart.update();attChart.update();scChart.update();
 }
+// Halves efficiency data and filter
+const halvesData=[{"opponent": "Clones", "comp": "Spring League", "date": "8/2/2026", "h1_scored": 8, "h1_total": 10, "h1_acc": 80.0, "h2_scored": 3, "h2_total": 10, "h2_acc": 30.0}, {"opponent": "Denn", "comp": "Spring League", "date": "15/2/2026", "h1_scored": 7, "h1_total": 11, "h1_acc": 63.6, "h2_scored": 1, "h2_total": 11, "h2_acc": 9.1}, {"opponent": "Pearse OG", "comp": "Spring League", "date": "22/2/2026", "h1_scored": 5, "h1_total": 12, "h1_acc": 41.7, "h2_scored": 11, "h2_total": 13, "h2_acc": 84.6}, {"opponent": "Aughadrumsee", "comp": "Challenge", "date": "27/2/2026", "h1_scored": 5, "h1_total": 8, "h1_acc": 62.5, "h2_scored": 6, "h2_total": 11, "h2_acc": 54.5}, {"opponent": "Ballymahon", "comp": "Challenge", "date": "7/3/2026", "h1_scored": 11, "h1_total": 15, "h1_acc": 73.3, "h2_scored": 8, "h2_total": 14, "h2_acc": 57.1}, {"opponent": "Liatroim", "comp": "Spring League", "date": "15/3/2026", "h1_scored": 7, "h1_total": 12, "h1_acc": 58.3, "h2_scored": 5, "h2_total": 12, "h2_acc": 41.7}, {"opponent": "Drung", "comp": "Challenge", "date": "17/3/2026", "h1_scored": 6, "h1_total": 9, "h1_acc": 66.7, "h2_scored": 7, "h2_total": 14, "h2_acc": 50.0}, {"opponent": "Arva", "comp": "ACFL Div 7", "date": "21/3/2026", "h1_scored": 5, "h1_total": 10, "h1_acc": 50.0, "h2_scored": 6, "h2_total": 10, "h2_acc": 60.0}, {"opponent": "Greenlough", "comp": "Spring League", "date": "22/3/2026", "h1_scored": 3, "h1_total": 11, "h1_acc": 27.3, "h2_scored": 2, "h2_total": 10, "h2_acc": 20.0}, {"opponent": "Denn", "comp": "ACFL Div 3", "date": "28/3/2026", "h1_scored": 4, "h1_total": 6, "h1_acc": 66.7, "h2_scored": 4, "h2_total": 8, "h2_acc": 50.0}, {"opponent": "Denn", "comp": "ACFL Div 7", "date": "29/3/2026", "h1_scored": 6, "h1_total": 13, "h1_acc": 46.2, "h2_scored": 11, "h2_total": 17, "h2_acc": 64.7}, {"opponent": "Lavey", "comp": "ACFL Div 7", "date": "5/4/2026", "h1_scored": 3, "h1_total": 11, "h1_acc": 27.3, "h2_scored": 6, "h2_total": 13, "h2_acc": 46.2}, {"opponent": "Munterconnaught", "comp": "ACFL Div 3", "date": "11/4/2026", "h1_scored": 3, "h1_total": 11, "h1_acc": 27.3, "h2_scored": 4, "h2_total": 12, "h2_acc": 33.3}, {"opponent": "Templeport", "comp": "ACFL Div 7", "date": "12/4/2026", "h1_scored": 9, "h1_total": 16, "h1_acc": 56.2, "h2_scored": 8, "h2_total": 11, "h2_acc": 72.7}, {"opponent": "Kill Shamrocks", "comp": "ACFL Div 3", "date": "22/4/2026", "h1_scored": 8, "h1_total": 13, "h1_acc": 61.5, "h2_scored": 6, "h2_total": 9, "h2_acc": 66.7}, {"opponent": "Ballymchugh", "comp": "ACFL Div 3", "date": "25/4/2026", "h1_scored": 3, "h1_total": 6, "h1_acc": 50.0, "h2_scored": 5, "h2_total": 8, "h2_acc": 62.5}, {"opponent": "Cuchulainns", "comp": "ACFL Div 7", "date": "26/4/2026", "h1_scored": 3, "h1_total": 6, "h1_acc": 50.0, "h2_scored": 3, "h2_total": 8, "h2_acc": 37.5}, {"opponent": "Redhills", "comp": "ACFL Div 3", "date": "01/5/2026", "h1_scored": 5, "h1_total": 14, "h1_acc": 35.7, "h2_scored": 9, "h2_total": 12, "h2_acc": 75.0}, {"opponent": "Belturbet", "comp": "ACFL Div 3", "date": "9/5/2026", "h1_scored": 7, "h1_total": 12, "h1_acc": 58.3, "h2_scored": 7, "h2_total": 8, "h2_acc": 87.5}, {"opponent": "Lacken", "comp": "ACFL Div 7", "date": "10/5/2026", "h1_scored": 5, "h1_total": 11, "h1_acc": 45.5, "h2_scored": 3, "h2_total": 10, "h2_acc": 30.0}, {"opponent": "Drumgoon", "comp": "ACFL Div 3", "date": "16/5/2026", "h1_scored": 0, "h1_total": 2, "h1_acc": 0.0, "h2_scored": 8, "h2_total": 14, "h2_acc": 57.1}, {"opponent": "Drumlane", "comp": "ACFL Div 3", "date": "23/5/2026", "h1_scored": 7, "h1_total": 10, "h1_acc": 70.0, "h2_scored": 2, "h2_total": 7, "h2_acc": 28.6}, {"opponent": "Lavey", "comp": "ACFL Div 7", "date": "24/5/2026", "h1_scored": 8, "h1_total": 13, "h1_acc": 61.5, "h2_scored": 4, "h2_total": 10, "h2_acc": 40.0}, {"opponent": "Cornafean", "comp": "ACFL Div 3", "date": "13/6/2026", "h1_scored": 2, "h1_total": 8, "h1_acc": 25.0, "h2_scored": 6, "h2_total": 6, "h2_acc": 100.0}];
+
+function filterHalves(comp){
+  document.querySelectorAll('#patterns .comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  const filtered=comp==='All'?halvesData:halvesData.filter(g=>g.comp===comp);
+  const h1Scored=filtered.reduce((s,g)=>s+g.h1_scored,0);
+  const h1Total=filtered.reduce((s,g)=>s+g.h1_total,0);
+  const h2Scored=filtered.reduce((s,g)=>s+g.h2_scored,0);
+  const h2Total=filtered.reduce((s,g)=>s+g.h2_total,0);
+  const h1Acc=h1Total?Math.round(h1Scored/h1Total*1000)/10:0;
+  const h2Acc=h2Total?Math.round(h2Scored/h2Total*1000)/10:0;
+  const diff=Math.round((h2Acc-h1Acc)*10)/10;
+  document.getElementById('h1AccVal').textContent=h1Acc+'%';
+  document.getElementById('h2AccVal').textContent=h2Acc+'%';
+  document.getElementById('halveDiffVal').textContent=(diff>0?'+':'')+diff+'%';
+  const card=document.getElementById('halveDiffCard');
+  card.style.background=diff>=0?'linear-gradient(135deg,#27ae60,#2ecc71)':'linear-gradient(135deg,#e74c3c,#c0392b)';
+  const improved=filtered.filter(g=>g.h2_acc>g.h1_acc).length;
+  const total=filtered.length;
+  const label=comp==='All'?'across all competitions':'in '+comp;
+  document.getElementById('halvesInsight').innerHTML='<strong>'+improved+' out of '+total+' games</strong> saw better 2nd half accuracy '+label+'. Overall improvement of <strong>'+(diff>0?'+':'')+diff+'%</strong> after the break.';
+  document.getElementById('halvesVolume').innerHTML='1st Half: '+h1Scored+' scored from '+h1Total+' shots<br>2nd Half: '+h2Scored+' scored from '+h2Total+' shots<br><br>'+(Math.abs(h1Total-h2Total)<=5?'Near-identical':'Different')+' shot volume '+(diff>0?'but significantly better conversion after the break.':'with a drop in conversion after the break.');
+  const tbody=document.getElementById('halvesBody');
+  tbody.innerHTML='';
+  filtered.forEach(g=>{
+    const d=Math.round((g.h2_acc-g.h1_acc)*10)/10;
+    const dColor=d>=0?'#2ecc71':'#e74c3c';
+    tbody.innerHTML+='<tr><td>v '+g.opponent+'</td><td>'+g.h1_scored+'</td><td>'+g.h1_total+'</td><td>'+g.h1_acc+'%</td><td>'+g.h2_scored+'</td><td>'+g.h2_total+'</td><td>'+g.h2_acc+'%</td><td style="color:'+dColor+';font-weight:bold">'+(d>0?'+':'')+d+'%</td></tr>';
+  });
+  tbody.innerHTML+='<tr style="background:#f0f4ff;font-weight:bold"><td>TOTAL</td><td>'+h1Scored+'</td><td>'+h1Total+'</td><td>'+h1Acc+'%</td><td>'+h2Scored+'</td><td>'+h2Total+'</td><td>'+h2Acc+'%</td><td style="color:'+(diff>=0?'#2ecc71':'#e74c3c')+'">'+(diff>0?'+':'')+diff+'%</td></tr>';
+}
+filterHalves('All');
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body>
