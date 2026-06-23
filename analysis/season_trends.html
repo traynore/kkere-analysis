@@ -64,9 +64,9 @@ table.trends-table{width:100%;border-collapse:collapse;font-size:.88em}
 <div class="container">
 <div class="header">
 <h1>📊 SEASON TRENDS & PATTERNS</h1>
-<p>Killinkere GAA — 2026 Season · 24 Games Analyzed</p>
+<p>Killinkere GAA — 2026 Season · 25 Games Analyzed</p>
 <div class="record">
-<span class="w">✅ 16 Wins</span>
+<span class="w">✅ 17 Wins</span>
 <span class="d">➖ 1 Draw</span>
 <span class="l">❌ 7 Losses</span>
 </div>
@@ -80,45 +80,11 @@ table.trends-table{width:100%;border-collapse:collapse;font-size:.88em}
 </div>
 
 <div id="patterns" class="tab-content active">
-
-<h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">🎯 Shooting Efficiency — 1st Half vs 2nd Half</h2>
-
-<div style="text-align:center;margin-bottom:25px">
-<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
-<button class="comp-filter active" onclick="filterHalves('All')">All</button>
-<button class="comp-filter" onclick="filterHalves('Spring League')">Spring League</button>
-<button class="comp-filter" onclick="filterHalves('Challenge')">Challenge</button>
-<button class="comp-filter" onclick="filterHalves('ACFL Div 3')">ACFL Div 3</button>
-<button class="comp-filter" onclick="filterHalves('ACFL Div 7')">ACFL Div 7</button>
+<div style="text-align:center;padding:60px 20px;color:#7f8c8d">
+<div style="font-size:3em;margin-bottom:15px">🔍</div>
+<h2 style="color:#2c3e50;margin-bottom:10px">Coming Soon</h2>
+<p style="font-size:1.1em">Key patterns and insights will be added here.</p>
 </div>
-
-<div class="summary-row" id="halvesSummary">
-<div class="summary-card"><div class="val" id="h1AccVal">--</div><div class="lbl">1st Half Accuracy</div></div>
-<div class="summary-card"><div class="val" id="h2AccVal">--</div><div class="lbl">2nd Half Accuracy</div></div>
-<div class="summary-card" id="halveDiffCard" style="background:linear-gradient(135deg,#27ae60,#2ecc71)"><div class="val" id="halveDiffVal">--</div><div class="lbl">2nd Half Δ</div></div>
-</div>
-
-<div class="pattern-grid">
-<div class="pattern-card pattern-green">
-<h3>📈 Key Insight</h3>
-<div class="insight" id="halvesInsight"></div>
-</div>
-<div class="pattern-card pattern-blue">
-<h3>📊 Volume</h3>
-<div class="insight" id="halvesVolume"></div>
-</div>
-</div>
-
-<div style="overflow-x:auto;margin-top:20px">
-<table class="trends-table" id="halvesTable">
-<thead><tr>
-<th>Game</th><th>1H Scored</th><th>1H Shots</th><th>1H Acc</th><th>2H Scored</th><th>2H Shots</th><th>2H Acc</th><th>Δ</th>
-</tr></thead>
-<tbody id="halvesBody">
-</tbody>
-</table>
-</div>
-
 </div>
 
 <div id="charts" class="tab-content">
@@ -163,26 +129,26 @@ table.trends-table{width:100%;border-collapse:collapse;font-size:.88em}
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">🏆 Season Scoring Breakdown</h2>
 
 <div class="summary-row" id="scoringSummary">
-<div class="summary-card"><div class="val" id="scTotalVal">448</div><div class="lbl">Total Points Scored</div></div>
-<div class="summary-card"><div class="val" id="scGoalsPts">49-255</div><div class="lbl">Goals & Points</div></div>
+<div class="summary-card"><div class="val" id="scTotalVal">462</div><div class="lbl">Total Points Scored</div></div>
+<div class="summary-card"><div class="val" id="scGoalsPts">51-263</div><div class="lbl">Goals & Points</div></div>
 <div class="summary-card"><div class="val" id="sc2Pts">23</div><div class="lbl">2-Pointers</div></div>
 <div class="summary-card"><div class="val" id="scPlayPct">81%</div><div class="lbl">From Play</div></div>
 <div class="summary-card"><div class="val" id="scFreePct">19%</div><div class="lbl">From Frees</div></div>
-<div class="summary-card"><div class="val" id="scAvgScorers">7.0</div><div class="lbl">Avg Scorers/Game</div></div>
+<div class="summary-card"><div class="val" id="scAvgScorers">6.9</div><div class="lbl">Avg Scorers/Game</div></div>
 </div>
 
 <div class="pattern-grid" id="scoringInsights">
 <div class="pattern-card pattern-blue">
 <h3>⚽ Score Sources (by pts value)</h3>
-<div class="insight" id="scSources">Goals: 49 (147 pts — 33%)<br>
-Points: 255 (255 pts — 57%)<br>
+<div class="insight" id="scSources">Goals: 51 (153 pts — 33%)<br>
+Points: 263 (263 pts — 57%)<br>
 2-Pointers: 23 (46 pts — 10%)</div>
 </div>
 <div class="pattern-card pattern-green">
 <h3>🎯 From Play vs Frees</h3>
-<div class="insight" id="scPlayFrees">From play: 265 scores (81%)<br>
-From frees: 62 scores (19%)<br>
-32 different scorers used this season</div>
+<div class="insight" id="scPlayFrees">From play: 272 scores (81%)<br>
+From frees: 65 scores (19%)<br>
+33 different scorers used this season</div>
 </div>
 </div>
 
@@ -194,13 +160,13 @@ From frees: 62 scores (19%)<br>
 <tbody id="scorersBody">
 <tr>
 <td style="text-align:left;font-weight:bold">Fiachra Mooney</td>
-<td>14</td>
-<td style="font-weight:bold;color:#2a5298">54</td>
+<td>15</td>
+<td style="font-weight:bold;color:#2a5298">58</td>
 <td>3.9</td>
-<td>8</td>
-<td>28</td>
+<td>9</td>
+<td>29</td>
 <td>1</td>
-<td>32</td>
+<td>34</td>
 <td>5</td>
 <td>0</td>
 </tr>
@@ -217,6 +183,18 @@ From frees: 62 scores (19%)<br>
 <td>0</td>
 </tr>
 <tr>
+<td style="text-align:left;font-weight:bold">Darren Smith</td>
+<td>16</td>
+<td style="font-weight:bold;color:#2a5298">38</td>
+<td>2.4</td>
+<td>1</td>
+<td>31</td>
+<td>2</td>
+<td>21</td>
+<td>13</td>
+<td>0</td>
+</tr>
+<tr>
 <td style="text-align:left;font-weight:bold">Alex Sweeney</td>
 <td>11</td>
 <td style="font-weight:bold;color:#2a5298">34</td>
@@ -226,18 +204,6 @@ From frees: 62 scores (19%)<br>
 <td>0</td>
 <td>18</td>
 <td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight:bold">Darren Smith</td>
-<td>15</td>
-<td style="font-weight:bold;color:#2a5298">33</td>
-<td>2.2</td>
-<td>1</td>
-<td>26</td>
-<td>2</td>
-<td>19</td>
-<td>10</td>
 <td>0</td>
 </tr>
 <tr>
@@ -314,13 +280,13 @@ From frees: 62 scores (19%)<br>
 </tr>
 <tr>
 <td style="text-align:left;font-weight:bold">Ben Philingham</td>
-<td>6</td>
-<td style="font-weight:bold;color:#2a5298">18</td>
-<td>3.0</td>
+<td>7</td>
+<td style="font-weight:bold;color:#2a5298">19</td>
+<td>2.7</td>
 <td>1</td>
-<td>13</td>
+<td>14</td>
 <td>1</td>
-<td>15</td>
+<td>16</td>
 <td>0</td>
 <td>0</td>
 </tr>
@@ -337,6 +303,18 @@ From frees: 62 scores (19%)<br>
 <td>0</td>
 </tr>
 <tr>
+<td style="text-align:left;font-weight:bold">Phelim Cusack</td>
+<td>9</td>
+<td style="font-weight:bold;color:#2a5298">15</td>
+<td>1.7</td>
+<td>2</td>
+<td>9</td>
+<td>0</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
 <td style="text-align:left;font-weight:bold">Fintan O’Connell</td>
 <td>6</td>
 <td style="font-weight:bold;color:#2a5298">15</td>
@@ -346,18 +324,6 @@ From frees: 62 scores (19%)<br>
 <td>0</td>
 <td>7</td>
 <td>2</td>
-<td>0</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight:bold">Phelim Cusack</td>
-<td>8</td>
-<td style="font-weight:bold;color:#2a5298">14</td>
-<td>1.8</td>
-<td>2</td>
-<td>8</td>
-<td>0</td>
-<td>10</td>
-<td>0</td>
 <td>0</td>
 </tr>
 <tr>
@@ -453,6 +419,18 @@ From frees: 62 scores (19%)<br>
 <td>1</td>
 <td>0</td>
 <td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight:bold">Philip Furlong</td>
+<td>1</td>
+<td style="font-weight:bold;color:#2a5298">3</td>
+<td>3.0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>0</td>
 </tr>
@@ -944,6 +922,20 @@ From frees: 62 scores (19%)<br>
 <td>✅</td>
 <td>11.0m</td>
 </tr>
+<tr>
+<td>21/6/2026</td>
+<td>v Cuchulainns</td>
+<td style="color:#2ecc71;font-weight:bold">W</td>
+<td>14-13</td>
+<td>3-8</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅ (11-5)</td>
+<td style="color:#2ecc71;font-weight:bold">3</td>
+<td>3</td>
+<td>❌</td>
+<td>8.7m</td>
+</tr>
 
 </tbody>
 </table>
@@ -956,22 +948,22 @@ From frees: 62 scores (19%)<br>
 <script>
 function showTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');event.target.classList.add('active')}
 
-const labels=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean"];
+const labels=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean", "v Cuchulainns"];
 const green='rgba(46,204,113,0.8)',greenB='rgba(39,174,96,1)';
 const red='rgba(231,76,60,0.8)',redB='rgba(192,57,43,1)';
 const blue='rgba(52,152,219,0.8)',blueB='rgba(41,128,185,1)';
 
 new Chart(document.getElementById('marginChart'),{
 type:'bar',
-data:{labels:labels,datasets:[{label:'Margin',data:[2, 4, 10, 9, 16, 8, 3, 0, -5, -7, 15, -3, 2, 15, 2, -9, -15, 1, 15, 3, 9, -4, 2, -16],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)"],borderWidth:2}]},
-options:{responsive:true,scales:{y:{title:{display:true,text:'Points'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const r=["W", "W", "W", "W", "W", "W", "W", "D", "L", "L", "W", "L", "W", "W", "W", "L", "L", "W", "W", "W", "W", "L", "W", "L"][ctx.dataIndex];return(ctx.parsed.y>0?'+':'')+ctx.parsed.y+' ('+r+')'}}}}}
+data:{labels:labels,datasets:[{label:'Margin',data:[2, 4, 10, 9, 16, 8, 3, 0, -5, -7, 15, -3, 2, 15, 2, -9, -15, 1, 15, 3, 9, -4, 2, -16, 1],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"],borderWidth:2}]},
+options:{responsive:true,scales:{y:{title:{display:true,text:'Points'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const r=["W", "W", "W", "W", "W", "W", "W", "D", "L", "L", "W", "L", "W", "W", "W", "L", "L", "W", "W", "W", "W", "L", "W", "L", "W"][ctx.dataIndex];return(ctx.parsed.y>0?'+':'')+ctx.parsed.y+' ('+r+')'}}}}}
 });
 
 new Chart(document.getElementById('secondHalfChart'),{
 type:'bar',
 data:{labels:labels,datasets:[
-{label:'Killinkere 2H',data:[5, 6, 18, 10, 12, 10, 9, 9, 4, 13, 15, 10, 6, 15, 7, 8, 6, 11, 13, 6, 14, 7, 6, 10],backgroundColor:green,borderColor:greenB,borderWidth:2},
-{label:'Opposition 2H',data:[5, 2, 6, 5, 7, 10, 5, 12, 7, 14, 6, 8, 6, 2, 8, 12, 17, 7, 10, 5, 3, 11, 14, 15],backgroundColor:red,borderColor:redB,borderWidth:2}
+{label:'Killinkere 2H',data:[5, 6, 18, 10, 12, 10, 9, 9, 4, 13, 15, 10, 6, 15, 7, 8, 6, 11, 13, 6, 14, 7, 6, 10, 11],backgroundColor:green,borderColor:greenB,borderWidth:2},
+{label:'Opposition 2H',data:[5, 2, 6, 5, 7, 10, 5, 12, 7, 14, 6, 8, 6, 2, 8, 12, 17, 7, 10, 5, 3, 11, 14, 15, 5],backgroundColor:red,borderColor:redB,borderWidth:2}
 ]},
 options:{responsive:true,scales:{y:{beginAtZero:true,title:{display:true,text:'Points'}}},plugins:{legend:{display:true,position:'top'}}}
 });
@@ -979,8 +971,8 @@ options:{responsive:true,scales:{y:{beginAtZero:true,title:{display:true,text:'P
 new Chart(document.getElementById('runsChart'),{
 type:'bar',
 data:{labels:labels,datasets:[
-{label:'Our Best Run',data:[3, 4, 5, 2, 5, 6, 6, 3, 2, 2, 9, 3, 3, 5, 5, 2, 2, 3, 4, 2, 7, 4, 3, 4],backgroundColor:green,borderColor:greenB,borderWidth:2},
-{label:'Opp Best Run',data:[3, 3, 2, 2, 2, 3, 4, 4, 5, 5, 3, 3, 3, 1, 2, 5, 5, 2, 3, 5, 4, 7, 5, 10],backgroundColor:red,borderColor:redB,borderWidth:2}
+{label:'Our Best Run',data:[3, 4, 5, 2, 5, 6, 6, 3, 2, 2, 9, 3, 3, 5, 5, 2, 2, 3, 4, 2, 7, 4, 3, 4, 3],backgroundColor:green,borderColor:greenB,borderWidth:2},
+{label:'Opp Best Run',data:[3, 3, 2, 2, 2, 3, 4, 4, 5, 5, 3, 3, 3, 1, 2, 5, 5, 2, 3, 5, 4, 7, 5, 10, 3],backgroundColor:red,borderColor:redB,borderWidth:2}
 ]},
 options:{responsive:true,scales:{y:{beginAtZero:true,title:{display:true,text:'Unanswered Scores'}}},plugins:{legend:{display:true,position:'top'}}},
 plugins:[{
@@ -1015,7 +1007,7 @@ asc=!asc;
 
 new Chart(document.getElementById('scatterChart'),{
 type:'scatter',
-data:{datasets:[{data:[{"x": 62.1, "y": 57.9, "label": "v Aughadrumsee"}, {"x": 84.4, "y": 65.5, "label": "v Ballymahon"}, {"x": 80.6, "y": 50.0, "label": "v Liatroim"}, {"x": 85.2, "y": 56.5, "label": "v Drung"}, {"x": 81.0, "y": 55.0, "label": "v Arva"}, {"x": 70.0, "y": 23.8, "label": "v Greenlough"}, {"x": 45.2, "y": 57.1, "label": "v Denn"}, {"x": 81.1, "y": 56.7, "label": "v Denn"}, {"x": 77.8, "y": 37.5, "label": "v Lavey"}, {"x": 71.9, "y": 30.4, "label": "v Munterconnaught"}, {"x": 85.2, "y": 63.0, "label": "v Templeport"}, {"x": 78.6, "y": 63.6, "label": "v Kill"}, {"x": 60.0, "y": 57.1, "label": "v Ballymchugh"}, {"x": 61.5, "y": 42.9, "label": "v Cuchulainns"}, {"x": 84.4, "y": 53.8, "label": "v Redhills"}, {"x": 75.9, "y": 70.0, "label": "v Belturbet"}, {"x": 83.9, "y": 38.1, "label": "v Lacken"}, {"x": 71.0, "y": 50.0, "label": "v Drumgoon"}, {"x": 53.3, "y": 52.9, "label": "v Drumlane"}, {"x": 71.9, "y": 52.2, "label": "v Lavey"}, {"x": 69.6, "y": 57.1, "label": "v Cornafean"}],backgroundColor:["rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(243,156,18,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)"],pointRadius:10,pointHoverRadius:13}]},
+data:{datasets:[{data:[{"x": 62.1, "y": 57.9, "label": "v Aughadrumsee"}, {"x": 84.4, "y": 65.5, "label": "v Ballymahon"}, {"x": 80.6, "y": 50.0, "label": "v Liatroim"}, {"x": 85.2, "y": 56.5, "label": "v Drung"}, {"x": 81.0, "y": 55.0, "label": "v Arva"}, {"x": 70.0, "y": 23.8, "label": "v Greenlough"}, {"x": 45.2, "y": 57.1, "label": "v Denn"}, {"x": 81.1, "y": 56.7, "label": "v Denn"}, {"x": 77.8, "y": 37.5, "label": "v Lavey"}, {"x": 71.9, "y": 30.4, "label": "v Munterconnaught"}, {"x": 85.2, "y": 63.0, "label": "v Templeport"}, {"x": 78.6, "y": 63.6, "label": "v Kill"}, {"x": 60.0, "y": 57.1, "label": "v Ballymchugh"}, {"x": 61.5, "y": 42.9, "label": "v Cuchulainns"}, {"x": 84.4, "y": 53.8, "label": "v Redhills"}, {"x": 75.9, "y": 70.0, "label": "v Belturbet"}, {"x": 83.9, "y": 38.1, "label": "v Lacken"}, {"x": 71.0, "y": 50.0, "label": "v Drumgoon"}, {"x": 53.3, "y": 52.9, "label": "v Drumlane"}, {"x": 71.9, "y": 52.2, "label": "v Lavey"}, {"x": 69.6, "y": 57.1, "label": "v Cornafean"}, {"x": 76.2, "y": 41.2, "label": "v Cuchulainns"}],backgroundColor:["rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(243,156,18,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)"],pointRadius:10,pointHoverRadius:13}]},
 options:{responsive:true,scales:{x:{title:{display:true,text:'Attack Efficiency %'},min:30,max:100},y:{title:{display:true,text:'Shot Accuracy %'},min:15,max:75}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.label+' (Acc:'+ctx.raw.y+'%, Att:'+ctx.raw.x+'%)'}}}},
 plugins:[{
 id:'quadrants',
@@ -1039,7 +1031,7 @@ ctx.restore();
 
 new Chart(document.getElementById('accChart'),{
 type:'bar',
-data:{labels:labels,datasets:[{label:'Accuracy %',data:[55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6, 57.1, 42.9, 53.8, 70.0, 38.1, 50.0, 52.9, 52.2, 57.1],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)"],borderWidth:2}]},
+data:{labels:labels,datasets:[{label:'Accuracy %',data:[55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6, 57.1, 42.9, 53.8, 70.0, 38.1, 50.0, 52.9, 52.2, 57.1, 41.2],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"],borderWidth:2}]},
 options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},
 plugins:[{
 id:'accTargets',
@@ -1058,7 +1050,7 @@ ctx.fillText(t.label,right,yPos-4);ctx.restore();
 
 new Chart(document.getElementById('attEffChart'),{
 type:'bar',
-data:{labels:["v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean"],datasets:[{label:'Attack Efficiency %',data:[62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6, 60.0, 61.5, 84.4, 75.9, 83.9, 71.0, 53.3, 71.9, 69.6],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)"],borderWidth:2}]},
+data:{labels:["v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean", "v Cuchulainns"],datasets:[{label:'Attack Efficiency %',data:[62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6, 60.0, 61.5, 84.4, 75.9, 83.9, 71.0, 53.3, 71.9, 69.6, 76.2],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"],borderWidth:2}]},
 options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},
 plugins:[{
 id:'attTargets',
@@ -1076,28 +1068,28 @@ ctx.fillText(t.label,right,yPos-4);ctx.restore();
 });
 
 // Competition filter
-const allComps=["Spring League", "Spring League", "Spring League", "Challenge", "Challenge", "Spring League", "Challenge", "ACFL Div 7", "Spring League", "ACFL Div 3", "ACFL Div 7", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3"];
-const attComps=["Challenge", "Challenge", "Spring League", "Challenge", "ACFL Div 7", "Spring League", "ACFL Div 3", "ACFL Div 7", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3"];
-const allLabels=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean"];
-const allAcc=[55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6, 57.1, 42.9, 53.8, 70.0, 38.1, 50.0, 52.9, 52.2, 57.1];
-const allBarColors=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)"];
-const allBarBorders=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)"];
-const allAttLabels=["v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean"];
-const allAttEff=[62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6, 60.0, 61.5, 84.4, 75.9, 83.9, 71.0, 53.3, 71.9, 69.6];
-const allAttColors=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)"];
-const allAttBorders=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)"];
-const allScatterData=[{"x": 62.1, "y": 57.9, "label": "v Aughadrumsee"}, {"x": 84.4, "y": 65.5, "label": "v Ballymahon"}, {"x": 80.6, "y": 50.0, "label": "v Liatroim"}, {"x": 85.2, "y": 56.5, "label": "v Drung"}, {"x": 81.0, "y": 55.0, "label": "v Arva"}, {"x": 70.0, "y": 23.8, "label": "v Greenlough"}, {"x": 45.2, "y": 57.1, "label": "v Denn"}, {"x": 81.1, "y": 56.7, "label": "v Denn"}, {"x": 77.8, "y": 37.5, "label": "v Lavey"}, {"x": 71.9, "y": 30.4, "label": "v Munterconnaught"}, {"x": 85.2, "y": 63.0, "label": "v Templeport"}, {"x": 78.6, "y": 63.6, "label": "v Kill"}, {"x": 60.0, "y": 57.1, "label": "v Ballymchugh"}, {"x": 61.5, "y": 42.9, "label": "v Cuchulainns"}, {"x": 84.4, "y": 53.8, "label": "v Redhills"}, {"x": 75.9, "y": 70.0, "label": "v Belturbet"}, {"x": 83.9, "y": 38.1, "label": "v Lacken"}, {"x": 71.0, "y": 50.0, "label": "v Drumgoon"}, {"x": 53.3, "y": 52.9, "label": "v Drumlane"}, {"x": 71.9, "y": 52.2, "label": "v Lavey"}, {"x": 69.6, "y": 57.1, "label": "v Cornafean"}];
-const allScatterColors=["rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(243,156,18,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)"];
+const allComps=["Spring League", "Spring League", "Spring League", "Challenge", "Challenge", "Spring League", "Challenge", "ACFL Div 7", "Spring League", "ACFL Div 3", "ACFL Div 7", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7"];
+const attComps=["Challenge", "Challenge", "Spring League", "Challenge", "ACFL Div 7", "Spring League", "ACFL Div 3", "ACFL Div 7", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7"];
+const allLabels=["v Clones", "v Denn", "v Pearse OG", "v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean", "v Cuchulainns"];
+const allAcc=[55.0, 36.4, 64.0, 57.9, 65.5, 50.0, 56.5, 55.0, 23.8, 57.1, 56.7, 37.5, 30.4, 63.0, 63.6, 57.1, 42.9, 53.8, 70.0, 38.1, 50.0, 52.9, 52.2, 57.1, 41.2];
+const allBarColors=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"];
+const allBarBorders=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"];
+const allAttLabels=["v Aughadrumsee", "v Ballymahon", "v Liatroim", "v Drung", "v Arva", "v Greenlough", "v Denn", "v Denn", "v Lavey", "v Munterconnaught", "v Templeport", "v Kill", "v Ballymchugh", "v Cuchulainns", "v Redhills", "v Belturbet", "v Lacken", "v Drumgoon", "v Drumlane", "v Lavey", "v Cornafean", "v Cuchulainns"];
+const allAttEff=[62.1, 84.4, 80.6, 85.2, 81.0, 70.0, 45.2, 81.1, 77.8, 71.9, 85.2, 78.6, 60.0, 61.5, 84.4, 75.9, 83.9, 71.0, 53.3, 71.9, 69.6, 76.2];
+const allAttColors=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"];
+const allAttBorders=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"];
+const allScatterData=[{"x": 62.1, "y": 57.9, "label": "v Aughadrumsee"}, {"x": 84.4, "y": 65.5, "label": "v Ballymahon"}, {"x": 80.6, "y": 50.0, "label": "v Liatroim"}, {"x": 85.2, "y": 56.5, "label": "v Drung"}, {"x": 81.0, "y": 55.0, "label": "v Arva"}, {"x": 70.0, "y": 23.8, "label": "v Greenlough"}, {"x": 45.2, "y": 57.1, "label": "v Denn"}, {"x": 81.1, "y": 56.7, "label": "v Denn"}, {"x": 77.8, "y": 37.5, "label": "v Lavey"}, {"x": 71.9, "y": 30.4, "label": "v Munterconnaught"}, {"x": 85.2, "y": 63.0, "label": "v Templeport"}, {"x": 78.6, "y": 63.6, "label": "v Kill"}, {"x": 60.0, "y": 57.1, "label": "v Ballymchugh"}, {"x": 61.5, "y": 42.9, "label": "v Cuchulainns"}, {"x": 84.4, "y": 53.8, "label": "v Redhills"}, {"x": 75.9, "y": 70.0, "label": "v Belturbet"}, {"x": 83.9, "y": 38.1, "label": "v Lacken"}, {"x": 71.0, "y": 50.0, "label": "v Drumgoon"}, {"x": 53.3, "y": 52.9, "label": "v Drumlane"}, {"x": 71.9, "y": 52.2, "label": "v Lavey"}, {"x": 69.6, "y": 57.1, "label": "v Cornafean"}, {"x": 76.2, "y": 41.2, "label": "v Cuchulainns"}];
+const allScatterColors=["rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(243,156,18,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)", "rgba(231,76,60,0.9)", "rgba(46,204,113,0.9)"];
 
 // Charts tab filter data
-const allMargins=[2, 4, 10, 9, 16, 8, 3, 0, -5, -7, 15, -3, 2, 15, 2, -9, -15, 1, 15, 3, 9, -4, 2, -16];
-const allMarginColors=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)"];
-const allMarginBorders=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)"];
-const allResults=["W", "W", "W", "W", "W", "W", "W", "D", "L", "L", "W", "L", "W", "W", "W", "L", "L", "W", "W", "W", "W", "L", "W", "L"];
-const allKill2H=[5, 6, 18, 10, 12, 10, 9, 9, 4, 13, 15, 10, 6, 15, 7, 8, 6, 11, 13, 6, 14, 7, 6, 10];
-const allOpp2H=[5, 2, 6, 5, 7, 10, 5, 12, 7, 14, 6, 8, 6, 2, 8, 12, 17, 7, 10, 5, 3, 11, 14, 15];
-const allOurRuns=[3, 4, 5, 2, 5, 6, 6, 3, 2, 2, 9, 3, 3, 5, 5, 2, 2, 3, 4, 2, 7, 4, 3, 4];
-const allOppRuns=[3, 3, 2, 2, 2, 3, 4, 4, 5, 5, 3, 3, 3, 1, 2, 5, 5, 2, 3, 5, 4, 7, 5, 10];
+const allMargins=[2, 4, 10, 9, 16, 8, 3, 0, -5, -7, 15, -3, 2, 15, 2, -9, -15, 1, 15, 3, 9, -4, 2, -16, 1];
+const allMarginColors=["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)"];
+const allMarginBorders=["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)"];
+const allResults=["W", "W", "W", "W", "W", "W", "W", "D", "L", "L", "W", "L", "W", "W", "W", "L", "L", "W", "W", "W", "W", "L", "W", "L", "W"];
+const allKill2H=[5, 6, 18, 10, 12, 10, 9, 9, 4, 13, 15, 10, 6, 15, 7, 8, 6, 11, 13, 6, 14, 7, 6, 10, 11];
+const allOpp2H=[5, 2, 6, 5, 7, 10, 5, 12, 7, 14, 6, 8, 6, 2, 8, 12, 17, 7, 10, 5, 3, 11, 14, 15, 5];
+const allOurRuns=[3, 4, 5, 2, 5, 6, 6, 3, 2, 2, 9, 3, 3, 5, 5, 2, 2, 3, 4, 2, 7, 4, 3, 4, 3];
+const allOppRuns=[3, 3, 2, 2, 2, 3, 4, 4, 5, 5, 3, 3, 3, 1, 2, 5, 5, 2, 3, 5, 4, 7, 5, 10, 3];
 
 function filterCharts(comp){
   const btns=document.querySelectorAll('#charts .comp-filter');
@@ -1130,7 +1122,7 @@ function filterTable(comp){
 }
 
 // Scoring filter data
-const scoringCompData={"ACFL Div 3": {"players": [{"player": "Neill McCabe", "games": 5, "total": 23, "avg": 4.6, "goals": 0, "points": 15, "2pts": 4, "play": 6, "frees": 13, "45s": 0}, {"player": "Alex Sweeney", "games": 7, "total": 20, "avg": 2.9, "goals": 4, "points": 8, "2pts": 0, "play": 12, "frees": 0, "45s": 0}, {"player": "Fiachra Mooney", "games": 7, "total": 19, "avg": 2.7, "goals": 2, "points": 13, "2pts": 0, "play": 15, "frees": 0, "45s": 0}, {"player": "Conall Mooney", "games": 5, "total": 16, "avg": 3.2, "goals": 0, "points": 6, "2pts": 5, "play": 9, "frees": 2, "45s": 0}, {"player": "Kevin McCabe", "games": 4, "total": 14, "avg": 3.5, "goals": 3, "points": 5, "2pts": 0, "play": 8, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 7, "total": 14, "avg": 2.0, "goals": 0, "points": 12, "2pts": 1, "play": 7, "frees": 6, "45s": 0}, {"player": "Cian McGovern", "games": 5, "total": 11, "avg": 2.2, "goals": 1, "points": 8, "2pts": 0, "play": 5, "frees": 4, "45s": 0}, {"player": "Jason McMahon", "games": 3, "total": 10, "avg": 3.3, "goals": 1, "points": 3, "2pts": 2, "play": 6, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 3, "total": 8, "avg": 2.7, "goals": 0, "points": 8, "2pts": 0, "play": 6, "frees": 2, "45s": 0}, {"player": "Ryan Smith", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ciaran Flynn", "games": 2, "total": 3, "avg": 1.5, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ruairi O Connell", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Liam McCabe", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "James Farrelly", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Ben Philingham", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 14, "total_points": 91, "total_2pts": 12, "total_from_play": 90, "total_from_frees": 27, "total_from_45s": 0, "total_value": 157, "total_scores": 117, "avg_scorers_per_game": 6.6, "num_scorers": 17}, "ACFL Div 7": {"players": [{"player": "Philip Corrigan", "games": 7, "total": 19, "avg": 2.7, "goals": 1, "points": 12, "2pts": 2, "play": 14, "frees": 1, "45s": 0}, {"player": "Neill McCabe", "games": 3, "total": 15, "avg": 5.0, "goals": 1, "points": 10, "2pts": 1, "play": 4, "frees": 8, "45s": 0}, {"player": "Fiachra Mooney", "games": 1, "total": 14, "avg": 14.0, "goals": 3, "points": 5, "2pts": 0, "play": 5, "frees": 3, "45s": 0}, {"player": "Ryan Smith", "games": 4, "total": 13, "avg": 3.2, "goals": 2, "points": 7, "2pts": 0, "play": 7, "frees": 2, "45s": 0}, {"player": "Keiran Smith", "games": 4, "total": 12, "avg": 3.0, "goals": 2, "points": 6, "2pts": 0, "play": 8, "frees": 0, "45s": 0}, {"player": "Ben Philingham", "games": 3, "total": 11, "avg": 3.7, "goals": 0, "points": 9, "2pts": 1, "play": 10, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 3, "total": 6, "avg": 2.0, "goals": 0, "points": 4, "2pts": 1, "play": 3, "frees": 2, "45s": 0}, {"player": "Ruairi O Connell", "games": 3, "total": 6, "avg": 2.0, "goals": 0, "points": 4, "2pts": 1, "play": 4, "frees": 1, "45s": 0}, {"player": "Ciaran Flynn", "games": 1, "total": 6, "avg": 6.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "Cian Fitzsimons", "games": 3, "total": 5, "avg": 1.7, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "David Ryan", "games": 1, "total": 5, "avg": 5.0, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Benny McConnell", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Harry McQuade", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Darrell Dolan", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Dara Sharkey", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Mark Farrelly (S)", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Shaun Clarke", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Jake Norris", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "Tom Cooney", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Harry Banville", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "James Farrelly", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 14, "total_points": 79, "total_2pts": 6, "total_from_play": 80, "total_from_frees": 19, "total_from_45s": 0, "total_value": 133, "total_scores": 99, "avg_scorers_per_game": 6.6, "num_scorers": 23}, "Challenge": {"players": [{"player": "Fiachra Mooney", "games": 2, "total": 12, "avg": 6.0, "goals": 2, "points": 4, "2pts": 1, "play": 6, "frees": 1, "45s": 0}, {"player": "Kevin McCabe", "games": 1, "total": 6, "avg": 6.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ben Philingham", "games": 1, "total": 5, "avg": 5.0, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ryan Smith", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Jason McMahon", "games": 1, "total": 5, "avg": 5.0, "goals": 1, "points": 2, "2pts": 0, "play": 2, "frees": 1, "45s": 0}, {"player": "Neill McCabe", "games": 2, "total": 4, "avg": 2.0, "goals": 0, "points": 2, "2pts": 1, "play": 2, "frees": 1, "45s": 0}, {"player": "Dara Sharkey", "games": 2, "total": 4, "avg": 2.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Alex Sweeney", "games": 2, "total": 4, "avg": 2.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Evan Markey", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "James Farrelly", "games": 2, "total": 3, "avg": 1.5, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 2, "total": 3, "avg": 1.5, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Keiran Smith", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Philip Corrigan", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "David Ryan", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Conall Mooney", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 10, "total_points": 34, "total_2pts": 2, "total_from_play": 43, "total_from_frees": 3, "total_from_45s": 0, "total_value": 68, "total_scores": 46, "avg_scorers_per_game": 8.7, "num_scorers": 17}, "Spring League": {"players": [{"player": "Darren Smith", "games": 3, "total": 10, "avg": 3.3, "goals": 1, "points": 7, "2pts": 0, "play": 6, "frees": 2, "45s": 0}, {"player": "Cian McGovern", "games": 2, "total": 10, "avg": 5.0, "goals": 0, "points": 6, "2pts": 2, "play": 3, "frees": 5, "45s": 0}, {"player": "Alex Sweeney", "games": 2, "total": 10, "avg": 5.0, "goals": 3, "points": 1, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 3, "total": 9, "avg": 3.0, "goals": 2, "points": 3, "2pts": 0, "play": 4, "frees": 1, "45s": 0}, {"player": "Fiachra Mooney", "games": 4, "total": 9, "avg": 2.2, "goals": 1, "points": 6, "2pts": 0, "play": 6, "frees": 1, "45s": 0}, {"player": "Conall Mooney", "games": 4, "total": 9, "avg": 2.2, "goals": 1, "points": 4, "2pts": 1, "play": 6, "frees": 0, "45s": 0}, {"player": "Jason McMahon", "games": 2, "total": 7, "avg": 3.5, "goals": 1, "points": 4, "2pts": 0, "play": 5, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 3, "total": 6, "avg": 2.0, "goals": 0, "points": 6, "2pts": 0, "play": 3, "frees": 3, "45s": 0}, {"player": "Kevin McCabe", "games": 3, "total": 5, "avg": 1.7, "goals": 0, "points": 5, "2pts": 0, "play": 5, "frees": 0, "45s": 0}, {"player": "Ryan Smith", "games": 3, "total": 5, "avg": 1.7, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Neill McCabe", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 3, "total": 3, "avg": 1.0, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Philip Corrigan", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Ruairi O Connell", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "Ben Philingham", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 11, "total_points": 51, "total_2pts": 3, "total_from_play": 52, "total_from_frees": 13, "total_from_45s": 0, "total_value": 90, "total_scores": 65, "avg_scorers_per_game": 7.2, "num_scorers": 15}, "All": {"players": [{"player": "Fiachra Mooney", "games": 14, "total": 54, "avg": 3.9, "goals": 8, "points": 28, "2pts": 1, "play": 32, "frees": 5, "45s": 0}, {"player": "Neill McCabe", "games": 11, "total": 46, "avg": 4.2, "goals": 2, "points": 28, "2pts": 6, "play": 14, "frees": 22, "45s": 0}, {"player": "Alex Sweeney", "games": 11, "total": 34, "avg": 3.1, "goals": 8, "points": 10, "2pts": 0, "play": 18, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 15, "total": 33, "avg": 2.2, "goals": 1, "points": 26, "2pts": 2, "play": 19, "frees": 10, "45s": 0}, {"player": "Ryan Smith", "games": 11, "total": 28, "avg": 2.5, "goals": 5, "points": 13, "2pts": 0, "play": 16, "frees": 2, "45s": 0}, {"player": "Conall Mooney", "games": 10, "total": 26, "avg": 2.6, "goals": 1, "points": 11, "2pts": 6, "play": 16, "frees": 2, "45s": 0}, {"player": "Kevin McCabe", "games": 8, "total": 25, "avg": 3.1, "goals": 4, "points": 13, "2pts": 0, "play": 17, "frees": 0, "45s": 0}, {"player": "Jason McMahon", "games": 6, "total": 22, "avg": 3.7, "goals": 3, "points": 9, "2pts": 2, "play": 13, "frees": 1, "45s": 0}, {"player": "Philip Corrigan", "games": 10, "total": 22, "avg": 2.2, "goals": 1, "points": 15, "2pts": 2, "play": 17, "frees": 1, "45s": 0}, {"player": "Cian McGovern", "games": 7, "total": 21, "avg": 3.0, "goals": 1, "points": 14, "2pts": 2, "play": 8, "frees": 9, "45s": 0}, {"player": "Ben Philingham", "games": 6, "total": 18, "avg": 3.0, "goals": 1, "points": 13, "2pts": 1, "play": 15, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 7, "total": 16, "avg": 2.3, "goals": 0, "points": 16, "2pts": 0, "play": 11, "frees": 5, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 6, "total": 15, "avg": 2.5, "goals": 3, "points": 6, "2pts": 0, "play": 7, "frees": 2, "45s": 0}, {"player": "Phelim Cusack", "games": 8, "total": 14, "avg": 1.8, "goals": 2, "points": 8, "2pts": 0, "play": 10, "frees": 0, "45s": 0}, {"player": "Keiran Smith", "games": 5, "total": 14, "avg": 2.8, "goals": 2, "points": 8, "2pts": 0, "play": 10, "frees": 0, "45s": 0}, {"player": "Ruairi O Connell", "games": 5, "total": 10, "avg": 2.0, "goals": 1, "points": 5, "2pts": 1, "play": 5, "frees": 2, "45s": 0}, {"player": "Ciaran Flynn", "games": 3, "total": 9, "avg": 3.0, "goals": 1, "points": 6, "2pts": 0, "play": 7, "frees": 0, "45s": 0}, {"player": "Dara Sharkey", "games": 3, "total": 6, "avg": 2.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "David Ryan", "games": 2, "total": 6, "avg": 3.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "James Farrelly", "games": 4, "total": 5, "avg": 1.2, "goals": 0, "points": 5, "2pts": 0, "play": 5, "frees": 0, "45s": 0}, {"player": "Cian Fitzsimons", "games": 3, "total": 5, "avg": 1.7, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Evan Markey", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Benny McConnell", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Liam McCabe", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Harry McQuade", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Darrell Dolan", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Mark Farrelly (S)", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Shaun Clarke", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Jake Norris", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "Tom Cooney", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Harry Banville", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 49, "total_points": 255, "total_2pts": 23, "total_from_play": 265, "total_from_frees": 62, "total_from_45s": 0, "total_value": 448, "total_scores": 327, "avg_scorers_per_game": 7.0, "num_scorers": 31}};
+const scoringCompData={"ACFL Div 3": {"players": [{"player": "Neill McCabe", "games": 5, "total": 23, "avg": 4.6, "goals": 0, "points": 15, "2pts": 4, "play": 6, "frees": 13, "45s": 0}, {"player": "Alex Sweeney", "games": 7, "total": 20, "avg": 2.9, "goals": 4, "points": 8, "2pts": 0, "play": 12, "frees": 0, "45s": 0}, {"player": "Fiachra Mooney", "games": 7, "total": 19, "avg": 2.7, "goals": 2, "points": 13, "2pts": 0, "play": 15, "frees": 0, "45s": 0}, {"player": "Conall Mooney", "games": 5, "total": 16, "avg": 3.2, "goals": 0, "points": 6, "2pts": 5, "play": 9, "frees": 2, "45s": 0}, {"player": "Kevin McCabe", "games": 4, "total": 14, "avg": 3.5, "goals": 3, "points": 5, "2pts": 0, "play": 8, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 7, "total": 14, "avg": 2.0, "goals": 0, "points": 12, "2pts": 1, "play": 7, "frees": 6, "45s": 0}, {"player": "Cian McGovern", "games": 5, "total": 11, "avg": 2.2, "goals": 1, "points": 8, "2pts": 0, "play": 5, "frees": 4, "45s": 0}, {"player": "Jason McMahon", "games": 3, "total": 10, "avg": 3.3, "goals": 1, "points": 3, "2pts": 2, "play": 6, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 3, "total": 8, "avg": 2.7, "goals": 0, "points": 8, "2pts": 0, "play": 6, "frees": 2, "45s": 0}, {"player": "Ryan Smith", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ciaran Flynn", "games": 2, "total": 3, "avg": 1.5, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ruairi O Connell", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Liam McCabe", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "James Farrelly", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Ben Philingham", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 14, "total_points": 91, "total_2pts": 12, "total_from_play": 90, "total_from_frees": 27, "total_from_45s": 0, "total_value": 157, "total_scores": 117, "avg_scorers_per_game": 6.6, "num_scorers": 17}, "ACFL Div 7": {"players": [{"player": "Philip Corrigan", "games": 7, "total": 19, "avg": 2.7, "goals": 1, "points": 12, "2pts": 2, "play": 14, "frees": 1, "45s": 0}, {"player": "Fiachra Mooney", "games": 2, "total": 18, "avg": 9.0, "goals": 4, "points": 6, "2pts": 0, "play": 7, "frees": 3, "45s": 0}, {"player": "Neill McCabe", "games": 3, "total": 15, "avg": 5.0, "goals": 1, "points": 10, "2pts": 1, "play": 4, "frees": 8, "45s": 0}, {"player": "Ryan Smith", "games": 4, "total": 13, "avg": 3.2, "goals": 2, "points": 7, "2pts": 0, "play": 7, "frees": 2, "45s": 0}, {"player": "Keiran Smith", "games": 4, "total": 12, "avg": 3.0, "goals": 2, "points": 6, "2pts": 0, "play": 8, "frees": 0, "45s": 0}, {"player": "Ben Philingham", "games": 4, "total": 12, "avg": 3.0, "goals": 0, "points": 10, "2pts": 1, "play": 11, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 4, "total": 11, "avg": 2.8, "goals": 0, "points": 9, "2pts": 1, "play": 5, "frees": 5, "45s": 0}, {"player": "Ruairi O Connell", "games": 3, "total": 6, "avg": 2.0, "goals": 0, "points": 4, "2pts": 1, "play": 4, "frees": 1, "45s": 0}, {"player": "Ciaran Flynn", "games": 1, "total": 6, "avg": 6.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "Cian Fitzsimons", "games": 3, "total": 5, "avg": 1.7, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "David Ryan", "games": 1, "total": 5, "avg": 5.0, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Philip Furlong", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Benny McConnell", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Harry McQuade", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Darrell Dolan", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Dara Sharkey", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Mark Farrelly (S)", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Shaun Clarke", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Jake Norris", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "Tom Cooney", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Harry Banville", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "James Farrelly", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 16, "total_points": 87, "total_2pts": 6, "total_from_play": 87, "total_from_frees": 22, "total_from_45s": 0, "total_value": 147, "total_scores": 109, "avg_scorers_per_game": 6.4, "num_scorers": 24}, "Challenge": {"players": [{"player": "Fiachra Mooney", "games": 2, "total": 12, "avg": 6.0, "goals": 2, "points": 4, "2pts": 1, "play": 6, "frees": 1, "45s": 0}, {"player": "Kevin McCabe", "games": 1, "total": 6, "avg": 6.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ben Philingham", "games": 1, "total": 5, "avg": 5.0, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Ryan Smith", "games": 2, "total": 5, "avg": 2.5, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Jason McMahon", "games": 1, "total": 5, "avg": 5.0, "goals": 1, "points": 2, "2pts": 0, "play": 2, "frees": 1, "45s": 0}, {"player": "Neill McCabe", "games": 2, "total": 4, "avg": 2.0, "goals": 0, "points": 2, "2pts": 1, "play": 2, "frees": 1, "45s": 0}, {"player": "Dara Sharkey", "games": 2, "total": 4, "avg": 2.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Alex Sweeney", "games": 2, "total": 4, "avg": 2.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Evan Markey", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "James Farrelly", "games": 2, "total": 3, "avg": 1.5, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Darren Smith", "games": 2, "total": 3, "avg": 1.5, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Keiran Smith", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Philip Corrigan", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "David Ryan", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Conall Mooney", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 10, "total_points": 34, "total_2pts": 2, "total_from_play": 43, "total_from_frees": 3, "total_from_45s": 0, "total_value": 68, "total_scores": 46, "avg_scorers_per_game": 8.7, "num_scorers": 17}, "Spring League": {"players": [{"player": "Darren Smith", "games": 3, "total": 10, "avg": 3.3, "goals": 1, "points": 7, "2pts": 0, "play": 6, "frees": 2, "45s": 0}, {"player": "Cian McGovern", "games": 2, "total": 10, "avg": 5.0, "goals": 0, "points": 6, "2pts": 2, "play": 3, "frees": 5, "45s": 0}, {"player": "Alex Sweeney", "games": 2, "total": 10, "avg": 5.0, "goals": 3, "points": 1, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 3, "total": 9, "avg": 3.0, "goals": 2, "points": 3, "2pts": 0, "play": 4, "frees": 1, "45s": 0}, {"player": "Fiachra Mooney", "games": 4, "total": 9, "avg": 2.2, "goals": 1, "points": 6, "2pts": 0, "play": 6, "frees": 1, "45s": 0}, {"player": "Conall Mooney", "games": 4, "total": 9, "avg": 2.2, "goals": 1, "points": 4, "2pts": 1, "play": 6, "frees": 0, "45s": 0}, {"player": "Jason McMahon", "games": 2, "total": 7, "avg": 3.5, "goals": 1, "points": 4, "2pts": 0, "play": 5, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 3, "total": 6, "avg": 2.0, "goals": 0, "points": 6, "2pts": 0, "play": 3, "frees": 3, "45s": 0}, {"player": "Kevin McCabe", "games": 3, "total": 5, "avg": 1.7, "goals": 0, "points": 5, "2pts": 0, "play": 5, "frees": 0, "45s": 0}, {"player": "Ryan Smith", "games": 3, "total": 5, "avg": 1.7, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Neill McCabe", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Phelim Cusack", "games": 3, "total": 3, "avg": 1.0, "goals": 0, "points": 3, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Philip Corrigan", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Ruairi O Connell", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "Ben Philingham", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 11, "total_points": 51, "total_2pts": 3, "total_from_play": 52, "total_from_frees": 13, "total_from_45s": 0, "total_value": 90, "total_scores": 65, "avg_scorers_per_game": 7.2, "num_scorers": 15}, "All": {"players": [{"player": "Fiachra Mooney", "games": 15, "total": 58, "avg": 3.9, "goals": 9, "points": 29, "2pts": 1, "play": 34, "frees": 5, "45s": 0}, {"player": "Neill McCabe", "games": 11, "total": 46, "avg": 4.2, "goals": 2, "points": 28, "2pts": 6, "play": 14, "frees": 22, "45s": 0}, {"player": "Darren Smith", "games": 16, "total": 38, "avg": 2.4, "goals": 1, "points": 31, "2pts": 2, "play": 21, "frees": 13, "45s": 0}, {"player": "Alex Sweeney", "games": 11, "total": 34, "avg": 3.1, "goals": 8, "points": 10, "2pts": 0, "play": 18, "frees": 0, "45s": 0}, {"player": "Ryan Smith", "games": 11, "total": 28, "avg": 2.5, "goals": 5, "points": 13, "2pts": 0, "play": 16, "frees": 2, "45s": 0}, {"player": "Conall Mooney", "games": 10, "total": 26, "avg": 2.6, "goals": 1, "points": 11, "2pts": 6, "play": 16, "frees": 2, "45s": 0}, {"player": "Kevin McCabe", "games": 8, "total": 25, "avg": 3.1, "goals": 4, "points": 13, "2pts": 0, "play": 17, "frees": 0, "45s": 0}, {"player": "Jason McMahon", "games": 6, "total": 22, "avg": 3.7, "goals": 3, "points": 9, "2pts": 2, "play": 13, "frees": 1, "45s": 0}, {"player": "Philip Corrigan", "games": 10, "total": 22, "avg": 2.2, "goals": 1, "points": 15, "2pts": 2, "play": 17, "frees": 1, "45s": 0}, {"player": "Cian McGovern", "games": 7, "total": 21, "avg": 3.0, "goals": 1, "points": 14, "2pts": 2, "play": 8, "frees": 9, "45s": 0}, {"player": "Ben Philingham", "games": 7, "total": 19, "avg": 2.7, "goals": 1, "points": 14, "2pts": 1, "play": 16, "frees": 0, "45s": 0}, {"player": "Emmett Fitzsimons", "games": 7, "total": 16, "avg": 2.3, "goals": 0, "points": 16, "2pts": 0, "play": 11, "frees": 5, "45s": 0}, {"player": "Phelim Cusack", "games": 9, "total": 15, "avg": 1.7, "goals": 2, "points": 9, "2pts": 0, "play": 11, "frees": 0, "45s": 0}, {"player": "Fintan O\u2019Connell", "games": 6, "total": 15, "avg": 2.5, "goals": 3, "points": 6, "2pts": 0, "play": 7, "frees": 2, "45s": 0}, {"player": "Keiran Smith", "games": 5, "total": 14, "avg": 2.8, "goals": 2, "points": 8, "2pts": 0, "play": 10, "frees": 0, "45s": 0}, {"player": "Ruairi O Connell", "games": 5, "total": 10, "avg": 2.0, "goals": 1, "points": 5, "2pts": 1, "play": 5, "frees": 2, "45s": 0}, {"player": "Ciaran Flynn", "games": 3, "total": 9, "avg": 3.0, "goals": 1, "points": 6, "2pts": 0, "play": 7, "frees": 0, "45s": 0}, {"player": "Dara Sharkey", "games": 3, "total": 6, "avg": 2.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "David Ryan", "games": 2, "total": 6, "avg": 3.0, "goals": 1, "points": 3, "2pts": 0, "play": 4, "frees": 0, "45s": 0}, {"player": "James Farrelly", "games": 4, "total": 5, "avg": 1.2, "goals": 0, "points": 5, "2pts": 0, "play": 5, "frees": 0, "45s": 0}, {"player": "Cian Fitzsimons", "games": 3, "total": 5, "avg": 1.7, "goals": 1, "points": 2, "2pts": 0, "play": 3, "frees": 0, "45s": 0}, {"player": "Evan Markey", "games": 1, "total": 4, "avg": 4.0, "goals": 1, "points": 1, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Philip Furlong", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Benny McConnell", "games": 1, "total": 3, "avg": 3.0, "goals": 1, "points": 0, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Liam McCabe", "games": 2, "total": 2, "avg": 1.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Harry McQuade", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Darrell Dolan", "games": 1, "total": 2, "avg": 2.0, "goals": 0, "points": 2, "2pts": 0, "play": 2, "frees": 0, "45s": 0}, {"player": "Mark Farrelly (S)", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Shaun Clarke", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Jake Norris", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 0, "frees": 1, "45s": 0}, {"player": "Tom Cooney", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}, {"player": "Harry Banville", "games": 1, "total": 1, "avg": 1.0, "goals": 0, "points": 1, "2pts": 0, "play": 1, "frees": 0, "45s": 0}], "total_goals": 51, "total_points": 263, "total_2pts": 23, "total_from_play": 272, "total_from_frees": 65, "total_from_45s": 0, "total_value": 462, "total_scores": 337, "avg_scorers_per_game": 6.9, "num_scorers": 32}};
 
 function filterAll(comp){
   document.querySelectorAll('#shooting .comp-filter').forEach(b=>b.classList.remove('active'));
@@ -1179,40 +1171,6 @@ function filterComp(comp){
   }
   accChart.update();attChart.update();scChart.update();
 }
-// Halves efficiency data and filter
-const halvesData=[{"opponent": "Clones", "comp": "Spring League", "date": "8/2/2026", "h1_scored": 8, "h1_total": 10, "h1_acc": 80.0, "h2_scored": 3, "h2_total": 10, "h2_acc": 30.0}, {"opponent": "Denn", "comp": "Spring League", "date": "15/2/2026", "h1_scored": 7, "h1_total": 11, "h1_acc": 63.6, "h2_scored": 1, "h2_total": 11, "h2_acc": 9.1}, {"opponent": "Pearse OG", "comp": "Spring League", "date": "22/2/2026", "h1_scored": 5, "h1_total": 12, "h1_acc": 41.7, "h2_scored": 11, "h2_total": 13, "h2_acc": 84.6}, {"opponent": "Aughadrumsee", "comp": "Challenge", "date": "27/2/2026", "h1_scored": 5, "h1_total": 8, "h1_acc": 62.5, "h2_scored": 6, "h2_total": 11, "h2_acc": 54.5}, {"opponent": "Ballymahon", "comp": "Challenge", "date": "7/3/2026", "h1_scored": 11, "h1_total": 15, "h1_acc": 73.3, "h2_scored": 8, "h2_total": 14, "h2_acc": 57.1}, {"opponent": "Liatroim", "comp": "Spring League", "date": "15/3/2026", "h1_scored": 7, "h1_total": 12, "h1_acc": 58.3, "h2_scored": 5, "h2_total": 12, "h2_acc": 41.7}, {"opponent": "Drung", "comp": "Challenge", "date": "17/3/2026", "h1_scored": 6, "h1_total": 9, "h1_acc": 66.7, "h2_scored": 7, "h2_total": 14, "h2_acc": 50.0}, {"opponent": "Arva", "comp": "ACFL Div 7", "date": "21/3/2026", "h1_scored": 5, "h1_total": 10, "h1_acc": 50.0, "h2_scored": 6, "h2_total": 10, "h2_acc": 60.0}, {"opponent": "Greenlough", "comp": "Spring League", "date": "22/3/2026", "h1_scored": 3, "h1_total": 11, "h1_acc": 27.3, "h2_scored": 2, "h2_total": 10, "h2_acc": 20.0}, {"opponent": "Denn", "comp": "ACFL Div 3", "date": "28/3/2026", "h1_scored": 4, "h1_total": 6, "h1_acc": 66.7, "h2_scored": 4, "h2_total": 8, "h2_acc": 50.0}, {"opponent": "Denn", "comp": "ACFL Div 7", "date": "29/3/2026", "h1_scored": 6, "h1_total": 13, "h1_acc": 46.2, "h2_scored": 11, "h2_total": 17, "h2_acc": 64.7}, {"opponent": "Lavey", "comp": "ACFL Div 7", "date": "5/4/2026", "h1_scored": 3, "h1_total": 11, "h1_acc": 27.3, "h2_scored": 6, "h2_total": 13, "h2_acc": 46.2}, {"opponent": "Munterconnaught", "comp": "ACFL Div 3", "date": "11/4/2026", "h1_scored": 3, "h1_total": 11, "h1_acc": 27.3, "h2_scored": 4, "h2_total": 12, "h2_acc": 33.3}, {"opponent": "Templeport", "comp": "ACFL Div 7", "date": "12/4/2026", "h1_scored": 9, "h1_total": 16, "h1_acc": 56.2, "h2_scored": 8, "h2_total": 11, "h2_acc": 72.7}, {"opponent": "Kill Shamrocks", "comp": "ACFL Div 3", "date": "22/4/2026", "h1_scored": 8, "h1_total": 13, "h1_acc": 61.5, "h2_scored": 6, "h2_total": 9, "h2_acc": 66.7}, {"opponent": "Ballymchugh", "comp": "ACFL Div 3", "date": "25/4/2026", "h1_scored": 3, "h1_total": 6, "h1_acc": 50.0, "h2_scored": 5, "h2_total": 8, "h2_acc": 62.5}, {"opponent": "Cuchulainns", "comp": "ACFL Div 7", "date": "26/4/2026", "h1_scored": 3, "h1_total": 6, "h1_acc": 50.0, "h2_scored": 3, "h2_total": 8, "h2_acc": 37.5}, {"opponent": "Redhills", "comp": "ACFL Div 3", "date": "01/5/2026", "h1_scored": 5, "h1_total": 14, "h1_acc": 35.7, "h2_scored": 9, "h2_total": 12, "h2_acc": 75.0}, {"opponent": "Belturbet", "comp": "ACFL Div 3", "date": "9/5/2026", "h1_scored": 7, "h1_total": 12, "h1_acc": 58.3, "h2_scored": 7, "h2_total": 8, "h2_acc": 87.5}, {"opponent": "Lacken", "comp": "ACFL Div 7", "date": "10/5/2026", "h1_scored": 5, "h1_total": 11, "h1_acc": 45.5, "h2_scored": 3, "h2_total": 10, "h2_acc": 30.0}, {"opponent": "Drumgoon", "comp": "ACFL Div 3", "date": "16/5/2026", "h1_scored": 0, "h1_total": 2, "h1_acc": 0.0, "h2_scored": 8, "h2_total": 14, "h2_acc": 57.1}, {"opponent": "Drumlane", "comp": "ACFL Div 3", "date": "23/5/2026", "h1_scored": 7, "h1_total": 10, "h1_acc": 70.0, "h2_scored": 2, "h2_total": 7, "h2_acc": 28.6}, {"opponent": "Lavey", "comp": "ACFL Div 7", "date": "24/5/2026", "h1_scored": 8, "h1_total": 13, "h1_acc": 61.5, "h2_scored": 4, "h2_total": 10, "h2_acc": 40.0}, {"opponent": "Cornafean", "comp": "ACFL Div 3", "date": "13/6/2026", "h1_scored": 2, "h1_total": 8, "h1_acc": 25.0, "h2_scored": 6, "h2_total": 6, "h2_acc": 100.0}];
-
-function filterHalves(comp){
-  document.querySelectorAll('#patterns .comp-filter').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  const filtered=comp==='All'?halvesData:halvesData.filter(g=>g.comp===comp);
-  const h1Scored=filtered.reduce((s,g)=>s+g.h1_scored,0);
-  const h1Total=filtered.reduce((s,g)=>s+g.h1_total,0);
-  const h2Scored=filtered.reduce((s,g)=>s+g.h2_scored,0);
-  const h2Total=filtered.reduce((s,g)=>s+g.h2_total,0);
-  const h1Acc=h1Total?Math.round(h1Scored/h1Total*1000)/10:0;
-  const h2Acc=h2Total?Math.round(h2Scored/h2Total*1000)/10:0;
-  const diff=Math.round((h2Acc-h1Acc)*10)/10;
-  document.getElementById('h1AccVal').textContent=h1Acc+'%';
-  document.getElementById('h2AccVal').textContent=h2Acc+'%';
-  document.getElementById('halveDiffVal').textContent=(diff>0?'+':'')+diff+'%';
-  const card=document.getElementById('halveDiffCard');
-  card.style.background=diff>=0?'linear-gradient(135deg,#27ae60,#2ecc71)':'linear-gradient(135deg,#e74c3c,#c0392b)';
-  const improved=filtered.filter(g=>g.h2_acc>g.h1_acc).length;
-  const total=filtered.length;
-  const label=comp==='All'?'across all competitions':'in '+comp;
-  document.getElementById('halvesInsight').innerHTML='<strong>'+improved+' out of '+total+' games</strong> saw better 2nd half accuracy '+label+'. Overall improvement of <strong>'+(diff>0?'+':'')+diff+'%</strong> after the break.';
-  document.getElementById('halvesVolume').innerHTML='1st Half: '+h1Scored+' scored from '+h1Total+' shots<br>2nd Half: '+h2Scored+' scored from '+h2Total+' shots<br><br>'+(Math.abs(h1Total-h2Total)<=5?'Near-identical':'Different')+' shot volume '+(diff>0?'but significantly better conversion after the break.':'with a drop in conversion after the break.');
-  const tbody=document.getElementById('halvesBody');
-  tbody.innerHTML='';
-  filtered.forEach(g=>{
-    const d=Math.round((g.h2_acc-g.h1_acc)*10)/10;
-    const dColor=d>=0?'#2ecc71':'#e74c3c';
-    tbody.innerHTML+='<tr><td>v '+g.opponent+'</td><td>'+g.h1_scored+'</td><td>'+g.h1_total+'</td><td>'+g.h1_acc+'%</td><td>'+g.h2_scored+'</td><td>'+g.h2_total+'</td><td>'+g.h2_acc+'%</td><td style="color:'+dColor+';font-weight:bold">'+(d>0?'+':'')+d+'%</td></tr>';
-  });
-  tbody.innerHTML+='<tr style="background:#f0f4ff;font-weight:bold"><td>TOTAL</td><td>'+h1Scored+'</td><td>'+h1Total+'</td><td>'+h1Acc+'%</td><td>'+h2Scored+'</td><td>'+h2Total+'</td><td>'+h2Acc+'%</td><td style="color:'+(diff>=0?'#2ecc71':'#e74c3c')+'">'+(diff>0?'+':'')+diff+'%</td></tr>';
-}
-filterHalves('All');
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body>
