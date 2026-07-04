@@ -45,6 +45,8 @@ def categorise(comp):
         return 'ACFL Div 3'
     elif 'div 5' in c or 'div5' in c or 'div 7' in c or 'div7' in c or 'reserve' in c:
         return 'ACFL Div 7'
+    elif 'breffni' in c:
+        return 'Breffni Cup'
     else:
         return 'Other'
 
@@ -97,7 +99,7 @@ def generate():
                 s['from_frees'] += 1
 
     # Categories for tabs
-    categories = ['All', 'Spring League', 'Challenge', 'ACFL Div 3', 'ACFL Div 7']
+    categories = ['All', 'Spring League', 'Challenge', 'ACFL Div 3', 'ACFL Div 7', 'Breffni Cup']
 
     # JSON data for JS filtering
     games_json = json.dumps([{'opponent': g['opponent'], 'date': g['date'], 'competition': g['competition'], 'category': g['category']} for g in games])
@@ -163,6 +165,7 @@ def generate():
             <div class="tab" data-cat="Challenge">⚔️ Challenge</div>
             <div class="tab" data-cat="ACFL Div 3">📋 ACFL Div 3</div>
             <div class="tab" data-cat="ACFL Div 7">📋 ACFL Div 7</div>
+            <div class="tab" data-cat="Breffni Cup">🏆 Breffni Cup</div>
         </div>
 
         <div class="summary" id="summary"></div>
