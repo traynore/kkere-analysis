@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Killinkere Tactical Analysis</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);padding:20px}
+.ctr{max-width:1400px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.hdr{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;padding:30px;text-align:center;border-radius:20px 20px 0 0}
+.hdr h1{font-size:2.2em;margin-bottom:6px}
+.hdr .sub{opacity:.8;margin-top:8px}
+.flt{display:flex;justify-content:center;gap:8px;padding:16px;background:#34495e;flex-wrap:wrap}
+.fb{padding:9px 18px;border-radius:20px;border:2px solid #fff;background:transparent;color:#fff;font-weight:bold;font-size:.85em;cursor:pointer;transition:.3s}
+.fb:hover{background:rgba(255,255,255,.15)}.fb.active{background:#2a5298;border-color:#4ecdc4;color:#4ecdc4}
+.cnt{padding:25px 35px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:20px 0}
+.cd{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border-radius:12px;padding:16px;text-align:center}
+.cd .v{font-size:1.8em;font-weight:bold}.cd .l{font-size:.75em;opacity:.85;margin-top:3px}
+.pnl{background:#fff;border-radius:14px;padding:22px;margin:20px 0;box-shadow:0 3px 6px rgba(0,0,0,.08);border:1px solid #ecf0f1}
+.pnl h3{font-size:1.2em;color:#2c3e50;margin-bottom:10px;text-align:center}
+.pnl .sub{font-size:.82em;color:#7f8c8d;text-align:center;margin-bottom:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:900px){.g2{grid-template-columns:1fr}}
+.bar-row{display:flex;align-items:center;margin:8px 0;gap:10px}
+.bar-label{min-width:110px;font-size:.85em;color:#2c3e50;font-weight:600}
+.bar-track{flex:1;height:26px;background:#ecf0f1;border-radius:13px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:13px;display:flex;align-items:center;padding:0 10px;color:#fff;font-size:.8em;font-weight:bold;transition:width .5s}
+.bar-val{min-width:50px;font-size:.85em;color:#555;text-align:right}
+.ins{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;border-radius:12px;padding:22px;margin:20px 0}
+.ins h3{margin-bottom:14px;font-size:1.2em}
+.ins-i{display:flex;gap:10px;margin:10px 0;padding:10px;background:rgba(255,255,255,.08);border-radius:8px;font-size:.9em;line-height:1.4}
+.phase-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin:10px 0}
+.phase-cell{padding:10px 4px;border-radius:8px;font-size:.75em}
+.phase-cell .pv{font-size:1.4em;font-weight:bold;margin-bottom:2px}
+</style>
+</head>
+<body>
+<div class="ctr">
+<div class="hdr">
+<h1>TACTICAL ANALYSIS</h1>
+<div style="font-size:1.1em">Killinkere — 2026 Season</div>
+<div class="sub" id="hdr-sub"></div>
+</div>
+<div class="flt">
+<button class="fb active" onclick="pick('All')">All (23)</button>
+<button class="fb" onclick="pick('ACFL Div 3')">Div 3 (8)</button>
+<button class="fb" onclick="pick('ACFL Div 7')">Div 7 (7)</button>
+<button class="fb" onclick="pick('Spring League')">Spring League (5)</button>
+<button class="fb" onclick="pick('Challenge')">Challenge (3)</button>
+</div>
+<div class="cnt">
+<div class="cards" id="cards"></div>
+
+<div class="g2">
+<div class="pnl"><h3>Where Do Scores Come From?</h3><div class="sub">Source of possession before each score</div><canvas id="c1" height="130"></canvas></div>
+<div class="pnl"><h3>Shot Accuracy by Source</h3><div class="sub">Shooting accuracy % from each source (independent rates, not a total)</div><canvas id="c2" height="130"></canvas></div>
+</div>
+
+<div class="pnl"><h3>Response Time After Conceding</h3><div class="sub">How quickly Killinkere score after the opposition scores</div>
+<div class="g2">
+<canvas id="c3" height="120"></canvas>
+<div id="resp-info" style="display:flex;flex-direction:column;justify-content:center;padding:10px;"></div>
+</div></div>
+
+<div class="pnl"><h3>How Possession is Lost</h3><div class="sub">The fixable errors — where the ball is being given away</div><div id="poss-bars"></div></div>
+
+<div class="pnl"><h3>Shot Accuracy by Game Phase</h3><div class="sub">Accuracy % and wide rate across 10-minute windows</div><div id="phase-grid"></div></div>
+
+<div class="g2">
+<div class="pnl"><h3>Own Kickout Win Rate</h3><canvas id="c4" height="120"></canvas></div>
+<div class="pnl"><h3>Conceding in Clusters</h3><div class="sub">Opposition scoring 2+ unanswered</div><div id="cluster-info" style="text-align:center;padding:20px;"></div></div>
+</div>
+
+<div class="ins" id="insights"></div>
+</div>
+</div>
+<script>
+const D={"All": {"n": 23, "total_scores": 317, "avg_response": "04:16", "resp_quick_pct": 53, "resp_slow_pct": 29, "resp_dist": [42, 57, 42, 47, 51, 25], "clusters_pg": 4.8, "score_sources": {"built": 147, "turnover": 45, "own_kickout": 42, "opp_kickout": 32, "opp_foul": 51}, "shots_by_source": {"turnover_s": 36, "turnover_t": 62, "kickout_s": 36, "kickout_t": 61, "built_s": 245, "built_t": 468}, "poss_lost": [{"type": "Kick pass", "count": 113, "pct": 32}, {"type": "Handling", "count": 77, "pct": 22}, {"type": "Hand pass", "count": 77, "pct": 22}, {"type": "In Contact", "count": 71, "pct": 20}, {"type": "Sideline", "count": 3, "pct": 1}, {"type": "Foul", "count": 3, "pct": 1}], "poss_lost_total": 348, "poss_lost_pg": 15.1, "phase_acc": [{"shots": 92, "scores": 57, "wides": 32, "acc": 62, "wide_rate": 35}, {"shots": 92, "scores": 48, "wides": 40, "acc": 52, "wide_rate": 43}, {"shots": 95, "scores": 48, "wides": 41, "acc": 51, "wide_rate": 43}, {"shots": 108, "scores": 57, "wides": 44, "acc": 53, "wide_rate": 41}, {"shots": 76, "scores": 42, "wides": 32, "acc": 55, "wide_rate": 42}, {"shots": 104, "scores": 57, "wides": 42, "acc": 55, "wide_rate": 40}, {"shots": 24, "scores": 8, "wides": 15, "acc": 33, "wide_rate": 62}], "ko_won": 286, "ko_lost": 147, "ko_pct": 66, "frees_after_score": 91, "frees_after_score_pg": 4.0}, "ACFL Div 3": {"n": 8, "total_scores": 107, "avg_response": "04:43", "resp_quick_pct": 52, "resp_slow_pct": 33, "resp_dist": [14, 22, 13, 14, 19, 12], "clusters_pg": 4.9, "score_sources": {"built": 51, "turnover": 13, "own_kickout": 13, "opp_kickout": 11, "opp_foul": 19}, "shots_by_source": {"turnover_s": 9, "turnover_t": 21, "kickout_s": 13, "kickout_t": 20, "built_s": 85, "built_t": 149}, "poss_lost": [{"type": "Hand pass", "count": 36, "pct": 29}, {"type": "Kick pass", "count": 33, "pct": 26}, {"type": "Handling", "count": 31, "pct": 25}, {"type": "In Contact", "count": 22, "pct": 18}, {"type": "Sideline", "count": 1, "pct": 1}, {"type": "Shot Short", "count": 1, "pct": 1}], "poss_lost_total": 125, "poss_lost_pg": 15.6, "phase_acc": [{"shots": 27, "scores": 16, "wides": 9, "acc": 59, "wide_rate": 33}, {"shots": 29, "scores": 11, "wides": 17, "acc": 38, "wide_rate": 59}, {"shots": 32, "scores": 18, "wides": 14, "acc": 56, "wide_rate": 44}, {"shots": 37, "scores": 18, "wides": 16, "acc": 49, "wide_rate": 43}, {"shots": 27, "scores": 17, "wides": 10, "acc": 63, "wide_rate": 37}, {"shots": 32, "scores": 24, "wides": 8, "acc": 75, "wide_rate": 25}, {"shots": 6, "scores": 3, "wides": 3, "acc": 50, "wide_rate": 50}], "ko_won": 97, "ko_lost": 51, "ko_pct": 66, "frees_after_score": 32, "frees_after_score_pg": 4.0}, "ACFL Div 7": {"n": 7, "total_scores": 99, "avg_response": "03:59", "resp_quick_pct": 54, "resp_slow_pct": 26, "resp_dist": [16, 19, 13, 18, 17, 6], "clusters_pg": 5.7, "score_sources": {"built": 37, "turnover": 19, "own_kickout": 18, "opp_kickout": 4, "opp_foul": 21}, "shots_by_source": {"turnover_s": 16, "turnover_t": 24, "kickout_s": 16, "kickout_t": 25, "built_s": 67, "built_t": 141}, "poss_lost": [{"type": "Kick pass", "count": 51, "pct": 53}, {"type": "In Contact", "count": 19, "pct": 20}, {"type": "Handling", "count": 15, "pct": 15}, {"type": "Hand pass", "count": 10, "pct": 10}, {"type": "Foul", "count": 1, "pct": 1}, {"type": "Sideline", "count": 1, "pct": 1}], "poss_lost_total": 97, "poss_lost_pg": 13.9, "phase_acc": [{"shots": 29, "scores": 20, "wides": 8, "acc": 69, "wide_rate": 28}, {"shots": 28, "scores": 16, "wides": 10, "acc": 57, "wide_rate": 36}, {"shots": 34, "scores": 13, "wides": 15, "acc": 38, "wide_rate": 44}, {"shots": 34, "scores": 21, "wides": 11, "acc": 62, "wide_rate": 32}, {"shots": 22, "scores": 10, "wides": 12, "acc": 45, "wide_rate": 55}, {"shots": 32, "scores": 15, "wides": 13, "acc": 47, "wide_rate": 41}, {"shots": 11, "scores": 4, "wides": 7, "acc": 36, "wide_rate": 64}], "ko_won": 90, "ko_lost": 49, "ko_pct": 65, "frees_after_score": 29, "frees_after_score_pg": 4.1}, "Spring League": {"n": 5, "total_scores": 65, "avg_response": "04:13", "resp_quick_pct": 54, "resp_slow_pct": 29, "resp_dist": [5, 15, 8, 9, 9, 6], "clusters_pg": 4.6, "score_sources": {"built": 41, "turnover": 1, "own_kickout": 5, "opp_kickout": 9, "opp_foul": 9}, "shots_by_source": {"turnover_s": 1, "turnover_t": 2, "kickout_s": 2, "kickout_t": 8, "built_s": 62, "built_t": 125}, "poss_lost": [{"type": "Handling", "count": 20, "pct": 29}, {"type": "Hand pass", "count": 17, "pct": 25}, {"type": "In Contact", "count": 15, "pct": 22}, {"type": "Kick pass", "count": 14, "pct": 20}, {"type": "Interception", "count": 1, "pct": 1}, {"type": "Sideline", "count": 1, "pct": 1}], "poss_lost_total": 69, "poss_lost_pg": 13.8, "phase_acc": [{"shots": 26, "scores": 12, "wides": 14, "acc": 46, "wide_rate": 54}, {"shots": 20, "scores": 11, "wides": 8, "acc": 55, "wide_rate": 40}, {"shots": 19, "scores": 11, "wides": 8, "acc": 58, "wide_rate": 42}, {"shots": 23, "scores": 13, "wides": 8, "acc": 57, "wide_rate": 35}, {"shots": 18, "scores": 7, "wides": 9, "acc": 39, "wide_rate": 50}, {"shots": 26, "scores": 11, "wides": 14, "acc": 42, "wide_rate": 54}, {"shots": 3, "scores": 0, "wides": 3, "acc": 0, "wide_rate": 100}], "ko_won": 65, "ko_lost": 28, "ko_pct": 70, "frees_after_score": 22, "frees_after_score_pg": 4.4}, "Challenge": {"n": 3, "total_scores": 46, "avg_response": "03:43", "resp_quick_pct": 55, "resp_slow_pct": 24, "resp_dist": [7, 1, 8, 6, 6, 1], "clusters_pg": 3.0, "score_sources": {"built": 18, "turnover": 12, "own_kickout": 6, "opp_kickout": 8, "opp_foul": 2}, "shots_by_source": {"turnover_s": 10, "turnover_t": 15, "kickout_s": 5, "kickout_t": 8, "built_s": 31, "built_t": 53}, "poss_lost": [{"type": "Kick pass", "count": 15, "pct": 26}, {"type": "In Contact", "count": 15, "pct": 26}, {"type": "Hand pass", "count": 14, "pct": 25}, {"type": "Handling", "count": 11, "pct": 19}, {"type": "Foul", "count": 2, "pct": 4}], "poss_lost_total": 57, "poss_lost_pg": 19.0, "phase_acc": [{"shots": 10, "scores": 9, "wides": 1, "acc": 90, "wide_rate": 10}, {"shots": 15, "scores": 10, "wides": 5, "acc": 67, "wide_rate": 33}, {"shots": 10, "scores": 6, "wides": 4, "acc": 60, "wide_rate": 40}, {"shots": 14, "scores": 5, "wides": 9, "acc": 36, "wide_rate": 64}, {"shots": 9, "scores": 8, "wides": 1, "acc": 89, "wide_rate": 11}, {"shots": 14, "scores": 7, "wides": 7, "acc": 50, "wide_rate": 50}, {"shots": 4, "scores": 1, "wides": 2, "acc": 25, "wide_rate": 50}], "ko_won": 34, "ko_lost": 19, "ko_pct": 64, "frees_after_score": 8, "frees_after_score_pg": 2.7}};
+let C={};
+function pick(f){
+document.querySelectorAll('.fb').forEach(b=>b.classList.toggle('active',b.textContent.includes(f==='All'?'All':f)));
+render(f);
+}
+function render(f){
+const d=D[f];
+document.getElementById('hdr-sub').textContent=d.n+' games | '+d.total_scores+' scores analysed';
+
+document.getElementById('cards').innerHTML=`
+<div class="cd"><div class="v">${d.avg_response}</div><div class="l">Avg Response Time</div></div>
+<div class="cd"><div class="v">${d.clusters_pg}</div><div class="l">Clusters Conceded/Game</div></div>
+<div class="cd"><div class="v">${d.poss_lost_pg}</div><div class="l">Poss. Lost/Game</div></div>
+<div class="cd"><div class="v">${d.ko_pct}%</div><div class="l">Own Kickout Win%</div></div>
+<div class="cd"><div class="v">${d.frees_after_score_pg}</div><div class="l">Frees After Scoring/Game</div></div>`;
+
+Object.values(C).forEach(c=>c.destroy());C={};
+
+// Score sources
+const ss=d.score_sources;
+C.c1=new Chart(document.getElementById('c1'),{type:'doughnut',data:{
+labels:['Built Play','Turnover','Own Kickout','Opp Kickout','Opp Foul'],
+datasets:[{data:[ss.built,ss.turnover,ss.own_kickout,ss.opp_kickout,ss.opp_foul],
+backgroundColor:['rgba(52,152,219,.8)','rgba(46,204,113,.8)','rgba(155,89,182,.8)','rgba(243,156,18,.8)','rgba(231,76,60,.8)'],borderWidth:2,borderColor:'#fff'}]
+},options:{responsive:true,animation:false,plugins:{legend:{position:'right',labels:{font:{size:11}}}}}});
+
+// Accuracy by source
+const sb=d.shots_by_source;
+const accT=sb.turnover_t?Math.round(sb.turnover_s*100/sb.turnover_t):0;
+const accK=sb.kickout_t?Math.round(sb.kickout_s*100/sb.kickout_t):0;
+const accB=sb.built_t?Math.round(sb.built_s*100/sb.built_t):0;
+C.c2=new Chart(document.getElementById('c2'),{type:'bar',data:{
+labels:['After Turnover ('+sb.turnover_s+'/'+sb.turnover_t+')','After Kickout Won ('+sb.kickout_s+'/'+sb.kickout_t+')','Built Play ('+sb.built_s+'/'+sb.built_t+')'],
+datasets:[{data:[accT,accK,accB],backgroundColor:['rgba(46,204,113,.8)','rgba(155,89,182,.8)','rgba(52,152,219,.8)'],borderWidth:0}]
+},options:{responsive:true,animation:false,indexAxis:'y',scales:{x:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}}});
+
+// Response time
+const rd=d.resp_dist;
+C.c3=new Chart(document.getElementById('c3'),{type:'bar',data:{
+labels:['<1m','1-2m','2-3m','3-5m','5-10m','10+m'],
+datasets:[{data:rd,backgroundColor:['rgba(46,204,113,.8)','rgba(46,204,113,.6)','rgba(243,156,18,.6)','rgba(243,156,18,.8)','rgba(231,76,60,.7)','rgba(231,76,60,.9)'],borderWidth:0}]
+},options:{responsive:true,animation:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+
+document.getElementById('resp-info').innerHTML=`
+<div style="text-align:center">
+<div style="font-size:2.5em;font-weight:bold;color:#2c3e50">${d.avg_response}</div>
+<div style="color:#7f8c8d;margin:5px 0">Average Response</div>
+<div style="margin-top:15px;display:flex;gap:15px;justify-content:center">
+<div style="text-align:center"><div style="font-size:1.5em;font-weight:bold;color:#27ae60">${d.resp_quick_pct}%</div><div style="font-size:.75em;color:#555">Within 3 min</div></div>
+<div style="text-align:center"><div style="font-size:1.5em;font-weight:bold;color:#e74c3c">${d.resp_slow_pct}%</div><div style="font-size:.75em;color:#555">5+ min</div></div>
+</div></div>`;
+
+// Possession lost bars
+let pb='';
+d.poss_lost.forEach(p=>{
+const col=p.pct>=30?'rgba(231,76,60,.85)':p.pct>=20?'rgba(243,156,18,.8)':'rgba(52,152,219,.7)';
+pb+=`<div class="bar-row"><div class="bar-label">${p.type}</div><div class="bar-track"><div class="bar-fill" style="width:${p.pct}%;background:${col}">${p.count}</div></div><div class="bar-val">${p.pct}%</div></div>`;
+});
+pb+=`<div style="text-align:center;margin-top:10px;font-size:.85em;color:#7f8c8d">${d.poss_lost_total} total (${d.poss_lost_pg}/game)</div>`;
+document.getElementById('poss-bars').innerHTML=pb;
+
+// Phase accuracy grid
+const phases=['0-10','10-20','20-30','30-40','40-50','50-60','60+'];
+let pg='<div class="phase-grid">';
+d.phase_acc.forEach((p,i)=>{
+const col=p.acc>=60?'#d4edda':p.acc>=50?'#fff3cd':'#ffe0e0';
+const tc=p.acc>=60?'#155724':p.acc>=50?'#856404':'#c0392b';
+pg+=`<div class="phase-cell" style="background:${col}"><div class="pv" style="color:${tc}">${p.acc}%</div><div style="color:${tc}">${phases[i]}</div><div style="font-size:.7em;color:#555;margin-top:3px">${p.scores}/${p.shots} shots</div><div style="font-size:.7em;color:#c0392b">${p.wides} wides (${p.wide_rate}%)</div></div>`;
+});
+pg+='</div>';
+document.getElementById('phase-grid').innerHTML=pg;
+
+// Kickout donut
+C.c4=new Chart(document.getElementById('c4'),{type:'doughnut',data:{
+labels:['Won','Lost'],
+datasets:[{data:[d.ko_won,d.ko_lost],backgroundColor:['rgba(46,204,113,.8)','rgba(231,76,60,.7)'],borderWidth:2,borderColor:'#fff'}]
+},options:{responsive:true,animation:false,plugins:{legend:{position:'bottom'}}}});
+
+// Clusters
+document.getElementById('cluster-info').innerHTML=`
+<div style="font-size:3em;font-weight:bold;color:#e74c3c">${d.clusters_pg}</div>
+<div style="color:#555;margin:8px 0">unanswered runs per game</div>
+<div style="font-size:.85em;color:#7f8c8d;margin-top:10px">Opposition scoring 2+ times without<br>a Killinkere score in between</div>`;
+
+// Insights
+const topPL=d.poss_lost[0];
+const bestSrc=Object.entries(d.score_sources).sort((a,b)=>b[1]-a[1]);
+const turnAcc=sb.turnover_t?Math.round(sb.turnover_s*100/sb.turnover_t):0;
+const builtAcc=sb.built_t?Math.round(sb.built_s*100/sb.built_t):0;
+const accDiff=turnAcc-builtAcc;
+var turnInsight='';
+if(accDiff>0){turnInsight='<strong>Turnovers</strong> produce '+accDiff+'% better accuracy ('+turnAcc+'% vs '+builtAcc+'% from built play). High press is the best attacking strategy.';}
+else{turnInsight='<strong>Built play</strong> is more accurate ('+builtAcc+'%) than after turnovers ('+turnAcc+'%). Patience in possession pays off - work the ball rather than rushing shots on the counter.';}
+
+var insHtml='<h3>Key Recommendations - '+f+'</h3>';
+insHtml+='<div class="ins-i"><span>⚠️</span><span><strong>'+topPL.type+'</strong> is the #1 possession problem ('+topPL.count+' losses, '+topPL.pct+'%). Reduce speculative ball and work shorter options.</span></div>';
+insHtml+='<div class="ins-i"><span>✅</span><span>'+turnInsight+'</span></div>';
+insHtml+='<div class="ins-i"><span>⏱️</span><span><strong>Response time:</strong> '+d.resp_slow_pct+'% of the time it takes 5+ min to respond after conceding. Need faster reset - composure on kickout.</span></div>';
+insHtml+='<div class="ins-i"><span>⚠️</span><span><strong>Clusters:</strong> '+d.clusters_pg+' times/game the opposition scores 2+ unanswered. Ball retention after conceding needs focus.</span></div>';
+insHtml+='<div class="ins-i"><span>⚠️</span><span><strong>Discipline:</strong> '+d.frees_after_score_pg+' frees/game conceded within 2 min of scoring. Mental reset needed after putting up a score.</span></div>';
+document.getElementById('insights').innerHTML=insHtml;
+}
+render('All');
+</script>
+<script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
+</body></html>

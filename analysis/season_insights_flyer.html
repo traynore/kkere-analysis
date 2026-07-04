@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Killinkere GAA — 2026 Season Insights</title>
+<style>
+@media print {
+  body { padding: 0; background: #fff; }
+  .container { box-shadow: none; border-radius: 0; }
+  .no-print { display: none; }
+  .page-break { page-break-before: always; }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 20px; color: #2c3e50; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.15); }
+.header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; padding: 40px 35px; text-align: center; }
+.header h1 { font-size: 2.2em; margin-bottom: 6px; }
+.header p { font-size: 1.1em; opacity: .85; }
+.section { padding: 30px 35px; border-bottom: 1px solid #ecf0f1; }
+.section:last-child { border-bottom: none; }
+.section h2 { font-size: 1.4em; margin-bottom: 14px; color: #1e3c72; display: flex; align-items: center; gap: 10px; }
+.section h3 { font-size: 1.1em; margin: 16px 0 8px; color: #2a5298; }
+.stat-highlight { display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 3px 12px; border-radius: 20px; font-weight: bold; font-size: .9em; margin: 2px 4px; }
+.stat-bad { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+.stat-good { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+.stat-warn { background: linear-gradient(135deg, #e67e22, #f39c12); }
+.insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+.insight-card { background: #f8f9fa; border-radius: 12px; padding: 16px; border-left: 4px solid #2a5298; }
+.insight-card.red { border-left-color: #e74c3c; }
+.insight-card.green { border-left-color: #27ae60; }
+.insight-card.orange { border-left-color: #f39c12; }
+.insight-card h4 { font-size: .95em; margin-bottom: 6px; color: #2c3e50; }
+.insight-card p { font-size: .85em; color: #555; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .85em; }
+th { background: #34495e; color: #fff; padding: 10px 12px; text-align: left; }
+td { padding: 9px 12px; border-bottom: 1px solid #ecf0f1; }
+tr:nth-child(even) { background: #f8f9fa; }
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+.kpi { text-align: center; padding: 18px 10px; border-radius: 12px; color: #fff; }
+.kpi .val { font-size: 2em; font-weight: bold; }
+.kpi .lbl { font-size: .75em; opacity: .9; margin-top: 4px; }
+.kpi-red { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.kpi-orange { background: linear-gradient(135deg, #e67e22, #f39c12); }
+.kpi-green { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+.kpi-blue { background: linear-gradient(135deg, #2980b9, #3498db); }
+.rec-list { list-style: none; padding: 0; }
+.rec-list li { padding: 10px 14px; margin: 8px 0; border-radius: 10px; font-size: .92em; display: flex; align-items: flex-start; gap: 10px; }
+.rec-list li::before { content: ''; min-width: 8px; min-height: 8px; border-radius: 50%; margin-top: 6px; }
+.rec-critical li::before { background: #e74c3c; }
+.rec-important li::before { background: #f39c12; }
+.rec-list li { background: #f8f9fa; }
+.win-formula { background: linear-gradient(135deg, rgba(46,204,113,.08), rgba(46,204,113,.15)); border: 2px solid rgba(46,204,113,.3); border-radius: 12px; padding: 20px; margin: 14px 0; }
+.win-formula li { margin: 6px 0; font-size: .92em; }
+.footer { text-align: center; padding: 20px; color: #95a5a6; font-size: .8em; }
+.print-btn { display: block; margin: 20px auto; padding: 12px 30px; background: #2a5298; color: #fff; border: none; border-radius: 8px; font-size: 1em; font-weight: bold; cursor: pointer; }
+.print-btn:hover { background: #1e3c72; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<h1>🏐 KILLINKERE GAA — SEASON INSIGHTS</h1>
+<p>2026 Season · 23 Games Analyzed · Mid-Season Report</p>
+</div>
+
+<div class="section">
+<h2>📊 Season at a Glance</h2>
+<div class="kpi-row">
+<div class="kpi kpi-red"><div class="val">52%</div><div class="lbl">Shot Accuracy<br>(Target: 70%)</div></div>
+<div class="kpi kpi-orange"><div class="val">73%</div><div class="lbl">Attack Efficiency<br>(Target: 75%)</div></div>
+<div class="kpi kpi-green"><div class="val">69%</div><div class="lbl">Own KO Retention<br>(Target: 70%)</div></div>
+<div class="kpi kpi-blue"><div class="val">45%</div><div class="lbl">Opp KO Win %<br>(Target: 40%)</div></div>
+</div>
+<p style="text-align:center;color:#7f8c8d;font-size:.85em;margin-top:8px">Record: W15 · D1 · L7 across Spring League, Challenge, ACFL Div 3 &amp; Div 7</p>
+</div>
+
+<div class="section">
+<h2>🎯 #1 Issue: Shooting Accuracy</h2>
+<p>At <span class="stat-highlight stat-bad">52%</span> the team is <strong>18 percentage points below the 70% target</strong>. This is the single biggest factor separating wins from losses.</p>
+<div class="insight-grid">
+<div class="insight-card red">
+<h4>In Losses — Accuracy Collapses</h4>
+<p>Greenlough: 23.8% · Lavey: 37.5% · Cuchulainns: 42.9% · Drumlane: 52.9%</p>
+</div>
+<div class="insight-card green">
+<h4>In Wins — Accuracy Holds</h4>
+<p>Ballymahon: 65.5% · Pearse OG: 64.0% · Templeport: 63.0% · Belturbet: 70.0%</p>
+</div>
+</div>
+<p style="margin-top:12px"><strong>Key point:</strong> When accuracy drops below 45%, the team has not won a single game this season.</p>
+</div>
+
+<div class="section">
+<h2>🔄 #2 Issue: Possession Retention</h2>
+<p>Averaging <span class="stat-highlight stat-bad">~16 possessions lost per game</span> — spread across hand pass, kick pass, handling errors, and in-contact turnovers.</p>
+<div class="insight-grid">
+<div class="insight-card orange">
+<h4>Kick Pass Turnovers Spike Under Pressure</h4>
+<p>Lavey: 12 · Aughadrumsee: 9 · Denn (ACFL3): 7 — these are high-pressure games where decision-making breaks down</p>
+</div>
+<div class="insight-card red">
+<h4>Drumlane Example</h4>
+<p>21 possessions lost vs opponent's 1. Cannot win games at this rate regardless of other metrics.</p>
+</div>
+</div>
+</div>
+
+<div class="section page-break">
+<h2>⏱️ #3 Pattern: The Scoreless Spell</h2>
+<p>In several losses, there's a recurring pattern of <strong>building a lead, then going 10-20 minutes without scoring</strong> while conceding runs of scores.</p>
+<div class="insight-card red" style="margin:14px 0">
+<h4>Drumlane Case Study</h4>
+<p><strong>0-6 up after 7 minutes</strong> → then 0 scores for 22 consecutive minutes while conceding 1-6 (9 points). Entered half-time level at 1-6 to 1-6.</p>
+</div>
+<p>This pattern also appeared vs Greenlough (scored first, then collapsed) and vs Denn in the league (strong start, faded). The team needs a plan to <strong>maintain intensity and composure after building leads</strong>.</p>
+</div>
+
+<div class="section">
+<h2>⚽ #4 Goal Timing Patterns</h2>
+<div class="insight-grid">
+<div class="insight-card green">
+<h4>Goals Scored — Timing</h4>
+<p>0-15 min: 4 · 15-30 min: 9 · <strong>30-45 min: 12</strong> · 45-60 min: 6<br><br>Most goals come early in 2nd halves — the team responds well after half-time team talks.</p>
+</div>
+<div class="insight-card red">
+<h4>Goals Conceded — Timing</h4>
+<p>0-15 min: 1 · <strong>15-30 min: 5</strong> · <strong>30-45 min: 5</strong> · 45-60 min: 4<br><br>Vulnerable in 15-30 min window and immediately after half-time. Concentration dips after early intensity.</p>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>👤 Player Efficiency (min 10 shots from play)</h2>
+<table>
+<thead><tr><th>Player</th><th>Scored</th><th>Shots</th><th>Accuracy</th><th>Goals</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td><strong>Kevin McCabe</strong></td><td>10</td><td>12</td><td><span class="stat-highlight stat-good">83%</span></td><td>2</td><td>Most efficient + top KO winner</td></tr>
+<tr><td><strong>Keiran Smith</strong></td><td>8</td><td>11</td><td><span class="stat-highlight stat-good">73%</span></td><td>0</td><td>Reliable, above target</td></tr>
+<tr><td><strong>Ryan Smith</strong></td><td>11</td><td>19</td><td><span class="stat-highlight stat-warn">58%</span></td><td>5</td><td>Top goal threat</td></tr>
+<tr><td><strong>Alex Sweeney</strong></td><td>7</td><td>12</td><td><span class="stat-highlight stat-warn">58%</span></td><td>4</td><td>Key forward + KO winner</td></tr>
+<tr><td><strong>Ben Philingham</strong></td><td>14</td><td>28</td><td><span class="stat-highlight stat-bad">46%</span></td><td>1</td><td>Top scorer but shot selection</td></tr>
+<tr><td><strong>Conall Mooney</strong></td><td>6</td><td>20</td><td><span class="stat-highlight stat-bad">30%</span></td><td>0</td><td>Needs shot selection work</td></tr>
+<tr><td><strong>Neill McCabe</strong></td><td>6</td><td>16</td><td><span class="stat-highlight stat-bad">38%</span></td><td>0</td><td>From play only; strong from frees</td></tr>
+<tr><td><strong>Emmett Fitzsimons</strong></td><td>5</td><td>14</td><td><span class="stat-highlight stat-bad">36%</span></td><td>0</td><td>Low conversion</td></tr>
+</tbody>
+</table>
+<p style="font-size:.82em;color:#7f8c8d;margin-top:6px">* From play only — excludes frees/45s. Based on 14 fully tracked games.</p>
+</div>
+
+<div class="section">
+<h2>🏐 Kickout Insights</h2>
+<div class="insight-grid">
+<div class="insight-card green">
+<h4>Own Kickout Strength</h4>
+<p>69% retention — just under target. Kevin McCabe (32 won), Alex Sweeney (20), James Farrelly (16) are the go-to targets.</p>
+</div>
+<div class="insight-card green">
+<h4>Opposition Kickout</h4>
+<p>45% win rate (above 40% target). Alex Sweeney (20), Kevin McCabe (15), Benny McConnell (12) best at winning opposition restarts.</p>
+</div>
+<div class="insight-card red">
+<h4>Danger Game: Cuchulainns</h4>
+<p>Own KO retention dropped to 35% — when kickout strategy fails, the game is lost. Only game where both KO metrics collapsed simultaneously.</p>
+</div>
+<div class="insight-card orange">
+<h4>Pattern in Losses</h4>
+<p>Own KO retention still averaged 64% in losses — kickouts aren't the primary cause of defeats (accuracy and possession are).</p>
+</div>
+</div>
+</div>
+
+<div class="section page-break">
+<h2>✅ The Win Formula</h2>
+<div class="win-formula">
+<p style="font-weight:bold;margin-bottom:10px">When Killinkere win, these four conditions are consistently met:</p>
+<ul style="list-style:none;padding:0">
+<li style="margin:8px 0;font-size:.95em">✅ Own kickout retention <strong>&gt; 65%</strong></li>
+<li style="margin:8px 0;font-size:.95em">✅ Shooting accuracy <strong>&gt; 50%</strong></li>
+<li style="margin:8px 0;font-size:.95em">✅ Possession lost <strong>&lt; 16 per game</strong></li>
+<li style="margin:8px 0;font-size:.95em">✅ No scoreless spells <strong>&gt; 10 minutes</strong></li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2>🔑 Recommendations</h2>
+<h3 style="color:#e74c3c">Critical — Address Immediately</h3>
+<ul class="rec-list rec-critical">
+<li><strong>Shot selection:</strong> Too many low-percentage shots. Players with &lt;45% accuracy need to work the ball to a better-placed teammate or take on a better angle. One extra pass before shooting could lift accuracy 10%+.</li>
+<li><strong>Ball retention under pressure:</strong> Kick pass turnovers spike in high-pressure games. Practice short recycling options when the primary kick pass is blocked.</li>
+</ul>
+
+<h3 style="color:#f39c12;margin-top:18px">Important — Tactical Focus</h3>
+<ul class="rec-list rec-important">
+<li><strong>Protecting leads:</strong> Implement a game management plan when 4+ points up — slow the tempo, recycle possession, don't force shots. The team has lost leads of 6 points (Drumlane) and 5 points (Greenlough).</li>
+<li><strong>Second-half starts:</strong> Conceding goals in the first 5 minutes of 2nd halves is a recurring problem. Extra focus needed on defensive shape from throw-in.</li>
+<li><strong>Conall Mooney &amp; Emmett Fitzsimons:</strong> Both taking high volumes of shots at very low conversion. Either work on finishing in training or reduce shot volume in favour of creating for others.</li>
+</ul>
+</div>
+
+<div class="footer">
+<p>Killinkere GAA · 2026 Season Analysis · Data from 23 games</p>
+<p style="margin-top:6px">Generated from match tracking data · For internal team use only</p>
+</div>
+
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+<p class="no-print" style="text-align:center;color:#95a5a6;font-size:.8em;margin-top:10px">Click the button above or use Ctrl+P / Cmd+P to save as PDF</p>
+
+<script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
+</body>
+</html>

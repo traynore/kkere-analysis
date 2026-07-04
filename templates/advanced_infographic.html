@@ -1117,6 +1117,7 @@
                 <button class="acc-filter" onclick="filterTargets('Challenge')">Challenge</button>
                 <button class="acc-filter" onclick="filterTargets('ACFL Div 3')">ACFL Div 3</button>
                 <button class="acc-filter" onclick="filterTargets('ACFL Div 7')">ACFL Div 7</button>
+                <button class="acc-filter" onclick="filterTargets('Breffni Cup')">Breffni Cup</button>
             </div>
             <div class="chart-container">
                 <div class="chart-title">📈 Accumulative Shot Accuracy Across Season (Target: 70%)</div>
@@ -1477,23 +1478,26 @@
         function buildAccScoresChart(filterComp) {
             const idx = _gameComps.map((c,i) => (!filterComp || filterComp === 'All' || c === filterComp) ? i : -1).filter(i => i >= 0);
             const fLabels = idx.map(i => _accLabels[i]);
+            const goalsBase  = idx.length && idx[0] > 0 ? _goalsData[idx[0]-1]  : 0;
+            const twoPtsBase = idx.length && idx[0] > 0 ? _twoPtsData[idx[0]-1] : 0;
+            const pointsBase = idx.length && idx[0] > 0 ? _pointsData[idx[0]-1] : 0;
             if (_scoresChart) _scoresChart.destroy();
             _scoresChart = new Chart(document.getElementById('accScoresChart'), {
                 type: 'line',
                 data: {
                     labels: fLabels,
                     datasets: [{
-                        label: 'Goals', data: idx.map(i => _goalsData[i]),
+                        label: 'Goals', data: idx.map(i => _goalsData[i] - goalsBase),
                         borderColor: 'rgba(231, 76, 60, 1)', backgroundColor: 'rgba(231, 76, 60, 0.1)',
                         borderWidth: 3, fill: false, tension: 0.3, pointRadius: 6,
                         pointBackgroundColor: 'rgba(231, 76, 60, 1)', pointBorderColor: 'white', pointBorderWidth: 2
                     }, {
-                        label: '2 Pointers', data: idx.map(i => _twoPtsData[i]),
+                        label: '2 Pointers', data: idx.map(i => _twoPtsData[i] - twoPtsBase),
                         borderColor: 'rgba(243, 156, 18, 1)', backgroundColor: 'rgba(243, 156, 18, 0.1)',
                         borderWidth: 3, fill: false, tension: 0.3, pointRadius: 6,
                         pointBackgroundColor: 'rgba(243, 156, 18, 1)', pointBorderColor: 'white', pointBorderWidth: 2
                     }, {
-                        label: 'Points', data: idx.map(i => _pointsData[i]),
+                        label: 'Points', data: idx.map(i => _pointsData[i] - pointsBase),
                         borderColor: 'rgba(52, 152, 219, 1)', backgroundColor: 'rgba(52, 152, 219, 0.1)',
                         borderWidth: 3, fill: false, tension: 0.3, pointRadius: 6,
                         pointBackgroundColor: 'rgba(52, 152, 219, 1)', pointBorderColor: 'white', pointBorderWidth: 2

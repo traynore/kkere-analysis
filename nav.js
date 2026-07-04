@@ -12,7 +12,11 @@
     {heading:'⚔️ Challenge Matches', games:[
       {label:'v Aughadrumsee (W) 4-9 to 0-12', file:'Killinkere 4 - 9 v 0 - 12 Aughadrumsee_FULL_infographic.html'},
       {label:'v Ballymahon (W) 4-16 to 2-6', file:'Killinkere 4 - 16 v 2 - 6 Ballymahon_FULL_infographic.html'},
-      {label:'v Drung (W) 2-13 to 3-7', file:'Killinkere 2 - 13 v 3 - 7 Drung_FULL_infographic.html'}
+      {label:'v Drung (W) 2-13 to 3-7', file:'Killinkere 2 - 13 v 3 - 7 Drung_FULL_infographic.html'},
+      {label:'v Laragh (W) 5-17 to 1-11', file:'Killinkere 5 - 17 v 1 - 11 Laragh_FULL_infographic.html'}
+    ]},
+    {heading:'🏆 Breffni Cup', games:[
+      {label:'v Ballyhaise (W) 7-20 to 2-10', file:'Killinkere 7 - 20 v 2 - 10 Ballyhaise_FULL_infographic.html'}
     ]},
     {heading:'📋 ACFL Division 3', games:[
       {label:'v Denn (L) 4-10 to 3-20', file:'Killinkere 4 - 10 v 3 - 20 Denn_FULL_infographic.html'},
