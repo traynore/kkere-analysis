@@ -16,7 +16,8 @@
       {label:'v Laragh (W) 5-17 to 1-11', file:'Killinkere 5 - 17 v 1 - 11 Laragh_FULL_infographic.html'}
     ]},
     {heading:'🏆 Breffni Cup', games:[
-      {label:'v Ballyhaise (W) 7-20 to 2-10', file:'Killinkere 7 - 20 v 2 - 10 Ballyhaise_FULL_infographic.html'}
+      {label:'v Ballyhaise (W) 7-20 to 2-10', file:'Killinkere 7 - 20 v 2 - 10 Ballyhaise_FULL_infographic.html'},
+      {label:'v Shercock (L) 0-5 to 2-11', file:'Killinkere 0 - 5 v 2 - 11 Shercock_FULL_infographic.html'}
     ]},
     {heading:'📋 ACFL Division 3', games:[
       {label:'v Denn (L) 4-10 to 3-20', file:'Killinkere 4 - 10 v 3 - 20 Denn_FULL_infographic.html'},
@@ -59,7 +60,9 @@
       {label:'v Drumlane — GPS (23 May)', file:'v_Drumlane__ACFL_Div3_GPS_report.html'},
       {label:'v Lavey Semi-Final — GPS (24 May)', file:'v_Lavey__ACFL_Div7_SemiFinal_GPS_report.html'},
       {label:'v Cornafean — GPS (13 Jun)', file:'v_Cornafean__ACFL_Div3_GPS_report.html'},
-      {label:'v Cuchulainns Final — GPS (21 Jun)', file:'v_Cuchulainns__ACFL_Div7_Final_GPS_report.html'}
+      {label:'v Cuchulainns Final — GPS (21 Jun)', file:'v_Cuchulainns__ACFL_Div7_Final_GPS_report.html'},
+      {label:'v Ballyhaise — GPS (28 Jun)', file:'v_Ballyhaise_Breffni_Cup_GPS_report.html'},
+      {label:'v Shercock — GPS (10 Jul)', file:'v_Shercock__Breffni_Cup_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
       {label:'Season Trends & Patterns', file:'season_trends.html'},
