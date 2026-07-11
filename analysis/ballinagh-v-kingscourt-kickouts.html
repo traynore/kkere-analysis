@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ballinagh Kickout Analysis v Kingscourt | Killinkere Match Hub</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+  .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #16213e, #0f3460); border-radius: 16px; margin-bottom: 24px; }
+  .header h1 { font-size: 1.8rem; color: #fff; margin-bottom: 6px; }
+  .header .subtitle { color: #a0c4ff; font-size: 0.95rem; }
+  .header .match-info { color: #7b8794; font-size: 0.85rem; margin-top: 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .card { background: #16213e; border-radius: 14px; padding: 24px; border: 1px solid #1f4068; }
+  .card-full { grid-column: 1 / -1; }
+  .card h2 { font-size: 1.1rem; color: #a0c4ff; margin-bottom: 16px; border-bottom: 1px solid #1f4068; padding-bottom: 10px; }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1f406833; }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-size: 0.9rem; color: #ccc; }
+  .stat-value { font-size: 1.1rem; font-weight: 700; }
+  .stat-value.good { color: #4ade80; }
+  .stat-value.bad { color: #f87171; }
+  .stat-value.neutral { color: #fbbf24; }
+  .big-number { text-align: center; padding: 20px; }
+  .big-number .number { font-size: 3.5rem; font-weight: 800; }
+  .big-number .label { font-size: 0.85rem; color: #7b8794; margin-top: 4px; }
+  .pitch { position: relative; width: 100%; padding-bottom: 52%; background: url('Ballinagh/gaa-pitch-template.jpeg') center/100% 100% no-repeat; border-radius: 10px; border: 2px solid #fff3; overflow: hidden; }
+  .pitch .kickout-dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid #fff; cursor: pointer; transition: transform 0.2s; }
+  .pitch .kickout-dot:hover { transform: translate(-50%, -50%) scale(1.5); z-index: 10; }
+  .pitch .kickout-dot:hover::after { content: attr(title); position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); background: #000c; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; white-space: nowrap; }
+  .pitch .kickout-dot.won { background: #4ade80; }
+  .pitch .kickout-dot.lost { background: #f87171; }
+  .pitch .kickout-dot.break-lost { background: #fbbf24; }
+  .pitch-filters { display: flex; gap: 10px; margin-bottom: 12px; justify-content: center; }
+  .pitch-filters button { padding: 8px 18px; border-radius: 6px; border: 1px solid #1f4068; background: #0f3460; color: #ccc; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .pitch-filters button.active { background: #a0c4ff; color: #1a1a2e; border-color: #a0c4ff; }
+  .pitch-filters button:hover { border-color: #a0c4ff; }
+  .legend { display: flex; gap: 16px; margin-top: 12px; justify-content: center; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #ccc; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #fff; }
+  .bar-chart { margin-top: 10px; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 10px; }
+  .bar-label { width: 100px; font-size: 0.8rem; color: #ccc; text-align: right; padding-right: 10px; }
+  .bar-track { flex: 1; height: 24px; background: #0f3460; border-radius: 4px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 600; color: #fff; }
+  .half-comparison { display: flex; gap: 20px; justify-content: center; margin-top: 10px; }
+  .half-box { text-align: center; flex: 1; padding: 16px; background: #0f3460; border-radius: 10px; }
+  .half-box .half-title { font-size: 0.8rem; color: #7b8794; margin-bottom: 6px; }
+  .half-box .half-value { font-size: 2rem; font-weight: 800; }
+  .recommendations { list-style: none; }
+  .recommendations li { padding: 12px 16px; margin-bottom: 8px; background: #0f3460; border-radius: 8px; border-left: 4px solid #a0c4ff; font-size: 0.9rem; line-height: 1.5; }
+  .recommendations li strong { color: #a0c4ff; }
+  .aftermath-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .aftermath-table th { text-align: left; padding: 8px; color: #a0c4ff; border-bottom: 1px solid #1f4068; }
+  .aftermath-table td { padding: 8px; border-bottom: 1px solid #1f406833; }
+  .aftermath-table .score-result { color: #f87171; font-weight: 600; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+  .badge-danger { background: #f8717133; color: #f87171; }
+  .badge-warning { background: #fbbf2433; color: #fbbf24; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #4ade80; color: #1a1a2e; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .half-comparison { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎯 Opposition Analysis: Ballinagh Kickouts v Kingscourt</h1>
+  <div class="subtitle">Killinkere v Ballinagh — Cavan IFC Rd 1 Prep</div>
+  <div class="match-info">Ballinagh 1-8 v 1-16 Kingscourt | ACFL Div 1 | 01/05/2025 &nbsp;·&nbsp; <span style="color:#f87171;font-weight:700;">LOSS</span></div>
+</div>
+
+<div style="max-width:1200px;margin:0 auto 20px;padding:14px 20px;background:#fbbf2422;border:2px solid #fbbf24;border-radius:10px;text-align:center;">
+  <span style="font-size:1.1rem;font-weight:700;color:#fbbf24;">🧤 Goalkeeper: Adam Gaynor</span>
+  <span style="font-size:0.85rem;color:#ccc;margin-left:12px;">— NOT expected starter v Killinkere (Fionn Keating likely)</span>
+</div>
+
+<div class="grid">
+
+  <!-- Big Numbers -->
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#f87171">50%</div>
+      <div class="label">1st Half Retention (8/16)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#fbbf24">67%</div>
+      <div class="label">2nd Half Retention (8/12)</div>
+    </div>
+  </div>
+
+  <!-- Bar Chart -->
+  <div class="card">
+    <h2>📊 Kickout Outcomes (28 total)</h2>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Won clean</div>
+        <div class="bar-track"><div class="bar-fill" style="width:14%;background:#4ade80;">4</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Short won</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4%;background:#4ade80;">1</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Break won</div>
+        <div class="bar-track"><div class="bar-fill" style="width:39%;background:#86efac;">11</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Break lost</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#fbbf24;">7</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Lost clean</div>
+        <div class="bar-track"><div class="bar-fill" style="width:18%;background:#f87171;">5</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Half Comparison -->
+  <div class="card">
+    <h2>⏱️ Half-by-Half</h2>
+    <div class="half-comparison">
+      <div class="half-box">
+        <div class="half-title">1st Half (16 KOs)</div>
+        <div class="half-value" style="color:#f87171">50%</div>
+        <div style="font-size:0.8rem;color:#7b8794;margin-top:4px">8 retained</div>
+        <div style="font-size:0.75rem;color:#f87171;margin-top:2px">6 break lost + 2 lost clean</div>
+      </div>
+      <div class="half-box">
+        <div class="half-title">2nd Half (12 KOs)</div>
+        <div class="half-value" style="color:#fbbf24">67%</div>
+        <div style="font-size:0.8rem;color:#7b8794;margin-top:4px">8 retained</div>
+        <div style="font-size:0.75rem;color:#4ade80;margin-top:2px">3 won clean + 1 short</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pitch Map -->
+  <div class="card card-full">
+    <h2>🗺️ Kickout Landing Zones (click dot → opens Veo)</h2>
+    <div class="pitch-filters">
+      <button class="active" data-filter="all">Full Game</button>
+      <button data-filter="1">1st Half →</button>
+      <button data-filter="2">← 2nd Half</button>
+    </div>
+    <div class="pitch">
+      <!-- 1H Won (green) -->
+      <div class="kickout-dot won" style="left:54.5%;top:7.5%" title="Break won (05:03)" data-half="1" data-time="303"></div>
+      <div class="kickout-dot won" style="left:46.7%;top:62%" title="Won clean (07:11)" data-half="1" data-time="431"></div>
+      <div class="kickout-dot won" style="left:44.1%;top:59.4%" title="Break won (12:07)" data-half="1" data-time="727"></div>
+      <div class="kickout-dot won" style="left:36.7%;top:44.8%" title="Break won (13:34)" data-half="1" data-time="814"></div>
+      <div class="kickout-dot won" style="left:45.1%;top:49.4%" title="Break won (15:40)" data-half="1" data-time="940"></div>
+      <div class="kickout-dot won" style="left:38.2%;top:41.3%" title="Break won (17:50)" data-half="1" data-time="1070"></div>
+      <div class="kickout-dot won" style="left:35.6%;top:8.4%" title="Break won (28:18)" data-half="1" data-time="1698"></div>
+      <div class="kickout-dot won" style="left:35.1%;top:57.5%" title="Break won (30:35)" data-half="1" data-time="1835"></div>
+      <!-- 2H Won (green) -->
+      <div class="kickout-dot won" style="left:61.7%;top:16.5%" title="Won clean (35:05)" data-half="2" data-time="2105"></div>
+      <div class="kickout-dot won" style="left:63.7%;top:55%" title="Break won (37:07)" data-half="2" data-time="2227"></div>
+      <div class="kickout-dot won" style="left:69%;top:35.7%" title="Short won (40:06)" data-half="2" data-time="2406"></div>
+      <div class="kickout-dot won" style="left:59.3%;top:55.3%" title="Break won (42:10)" data-half="2" data-time="2530"></div>
+      <div class="kickout-dot won" style="left:36.3%;top:47.5%" title="Break won (47:12)" data-half="2" data-time="2832"></div>
+      <div class="kickout-dot won" style="left:64.6%;top:61.2%" title="Won clean (49:08)" data-half="2" data-time="2948"></div>
+      <div class="kickout-dot won" style="left:67.2%;top:51%" title="Break won (51:54)" data-half="2" data-time="3114"></div>
+      <div class="kickout-dot won" style="left:65.7%;top:77.3%" title="Won clean (54:13)" data-half="2" data-time="3253"></div>
+      <!-- 1H Break lost (yellow) -->
+      <div class="kickout-dot break-lost" style="left:44.7%;top:26.3%" title="Break lost (01:26)" data-half="1" data-time="86"></div>
+      <div class="kickout-dot break-lost" style="left:45.5%;top:41%" title="Break lost (02:02)" data-half="1" data-time="122"></div>
+      <div class="kickout-dot break-lost" style="left:36.6%;top:59.3%" title="Break lost (06:34)" data-half="1" data-time="394"></div>
+      <div class="kickout-dot break-lost" style="left:62.9%;top:62.2%" title="Break lost (07:53)" data-half="1" data-time="473"></div>
+      <div class="kickout-dot break-lost" style="left:50.4%;top:16.9%" title="Break lost (09:46)" data-half="1" data-time="586"></div>
+      <div class="kickout-dot break-lost" style="left:36.4%;top:26.6%" title="Break lost (18:27)" data-half="1" data-time="1107"></div>
+      <!-- 2H Break lost (yellow) -->
+      <div class="kickout-dot break-lost" style="left:63.7%;top:59.8%" title="Break lost (32:25)" data-half="2" data-time="1945"></div>
+      <!-- 1H Lost clean (red) -->
+      <div class="kickout-dot lost" style="left:49.4%;top:13.7%" title="Lost clean (19:41)" data-half="1" data-time="1181"></div>
+      <div class="kickout-dot lost" style="left:35.6%;top:74.1%" title="Lost clean (25:58)" data-half="1" data-time="1558"></div>
+      <!-- 2H Lost clean (red) -->
+      <div class="kickout-dot lost" style="left:61.9%;top:64.9%" title="Lost clean (31:40)" data-half="2" data-time="1900"></div>
+      <div class="kickout-dot lost" style="left:60.3%;top:34.6%" title="Lost clean (46:34)" data-half="2" data-time="2794"></div>
+      <div class="kickout-dot lost" style="left:68.3%;top:48.8%" title="Lost clean (59:20)" data-half="2" data-time="3560"></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div> Won (clean/break/short)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div> Break lost</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div> Lost clean</div>
+    </div>
+  </div>
+
+
+
+  <!-- Shooting Stats -->
+  <div class="card">
+    <h2>🏹 Ballinagh Shooting (From Play)</h2>
+    <div class="stat-row">
+      <span class="stat-label">Total shots from play</span>
+      <span class="stat-value neutral">13</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Scored (4pts + 1 goal)</span>
+      <span class="stat-value neutral">5 (38%)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Wides</span>
+      <span class="stat-value bad">5</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Short (possession lost)</span>
+      <span class="stat-value neutral">2</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Saved</span>
+      <span class="stat-value neutral">1</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">1H conversion</span>
+      <span class="stat-value bad">1/4 (25%) — 1x 2-ptr</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">2H conversion</span>
+      <span class="stat-value neutral">4/9 (44%) — incl goal</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Frees &amp; Scorers</h2>
+    <div class="stat-row">
+      <span class="stat-label">Frees: scored / taken</span>
+      <span class="stat-value neutral">2 / 5 (40%)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Free takers</span>
+      <span class="stat-value neutral">Kevin Smith (1/1), Tom Smith (0/2), David McEvoy (0/1)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Goal scorer</span>
+      <span class="stat-value good">Blake Carthy (47:51)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">2-pointers</span>
+      <span class="stat-value good">David McEvoy (10:54), Evan Finnegan (52:44)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Scoring drought</span>
+      <span class="stat-value bad">20 mins (10:54 → 31:10)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">1H total score</span>
+      <span class="stat-value bad">0-2 (1 from play, 1 free) in 30 mins</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">2H scoring burst</span>
+      <span class="stat-value good">1-6 (42:29 → 56:24) — 14 mins</span>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Key Patterns -->
+  <div class="card">
+    <h2>🔍 Key Patterns</h2>
+    <div class="stat-row">
+      <span class="stat-label">Short kickouts attempted</span>
+      <span class="stat-value neutral">1 / 28 (4%)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Go long almost exclusively</span>
+      <span class="stat-value bad">96%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">1H opening 10 mins</span>
+      <span class="stat-value bad">2/5 retained (40%)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Half-time fix applied?</span>
+      <span class="stat-value good">Yes — 67% in 2H</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Scores from KO turnovers</span>
+      <span class="stat-value bad">1-4 conceded</span>
+    </div>
+  </div>
+
+  <!-- Key Clips -->
+  <div class="card card-full">
+    <h2>🎬 Key Clips</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div onclick="openVeoClip(1120)" style="cursor:pointer;">
+        <div style="position:relative;border-radius:8px;overflow:hidden;background:#0f3460;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
+          <div style="color:#a0c4ff;font-size:3rem;">&#9654;</div>
+          <div style="position:absolute;bottom:6px;right:8px;background:#000b;color:#fff;font-size:0.7rem;font-weight:700;padding:2px 6px;border-radius:4px;">18:40</div>
+        </div>
+        <div style="padding:8px 4px;color:#fbbf24;font-size:0.85rem;font-weight:600;">🟡 Kickout sequence — seek ID 1120</div>
+      </div>
+      <div onclick="openVeoClip(483)" style="cursor:pointer;">
+        <div style="position:relative;border-radius:8px;overflow:hidden;background:#0f3460;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
+          <div style="color:#a0c4ff;font-size:3rem;">&#9654;</div>
+          <div style="position:absolute;bottom:6px;right:8px;background:#000b;color:#fff;font-size:0.7rem;font-weight:700;padding:2px 6px;border-radius:4px;">08:03</div>
+        </div>
+        <div style="padding:8px 4px;color:#fbbf24;font-size:0.85rem;font-weight:600;">🟡 Kickout sequence — seek ID 483</div>
+      </div>
+      <div onclick="openVeoClip(3995)" style="cursor:pointer;">
+        <div style="position:relative;border-radius:8px;overflow:hidden;background:#0f3460;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
+          <div style="color:#4ade80;font-size:3rem;">&#9654;</div>
+          <div style="position:absolute;bottom:6px;right:8px;background:#000b;color:#fff;font-size:0.7rem;font-weight:700;padding:2px 6px;border-radius:4px;">66:35</div>
+        </div>
+        <div style="padding:8px 4px;color:#4ade80;font-size:0.85rem;font-weight:600;">⚽ Kickout → Blake Carthy goal (47:51) — seek ID 3995</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Period Analysis -->
+  <div class="card card-full">
+    <h2>⏱️ Period Analysis</h2>
+    <div style="text-align:center;margin-bottom:20px;padding:16px;background:#0f3460;border-radius:10px;">
+      <div style="font-size:0.85rem;color:#7b8794;margin-bottom:8px;">Overall Shot Accuracy</div>
+      <div style="display:flex;justify-content:center;gap:40px;">
+        <div><span style="color:#fbbf24;font-weight:700;font-size:1.2rem;">39%</span><span style="color:#7b8794;font-size:0.8rem;"> Ballinagh (7/18)</span></div>
+        <div><span style="color:#4ade80;font-weight:700;font-size:1.2rem;">65%</span><span style="color:#7b8794;font-size:0.8rem;"> Kingscourt (17/26)</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div style="padding:16px;background:#0f3460;border-radius:10px;text-align:center;">
+        <div style="color:#a0c4ff;font-weight:700;margin-bottom:10px;">1st Half</div>
+        <div class="stat-row"><span class="stat-label">Ballinagh</span><span class="stat-value bad">0-3 (6 shots, 33%)</span></div>
+        <div class="stat-row"><span class="stat-label">Kingscourt</span><span class="stat-value good">1-8 (15 shots, 60%)</span></div>
+      </div>
+      <div style="padding:16px;background:#0f3460;border-radius:10px;text-align:center;">
+        <div style="color:#a0c4ff;font-weight:700;margin-bottom:10px;">2nd Half</div>
+        <div class="stat-row"><span class="stat-label">Ballinagh</span><span class="stat-value neutral">1-5 (12 shots, 42%)</span></div>
+        <div class="stat-row"><span class="stat-label">Kingscourt</span><span class="stat-value good">0-8 (11 shots, 73%)</span></div>
+      </div>
+    </div>
+    <canvas id="momentumChart" style="max-height:350px;"></canvas>
+  </div>
+
+
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div style="text-align:center;padding:30px;color:#7b8794;font-size:0.75rem;">
+  Killinkere GAA | Opposition Analysis | Ballinagh v Kingscourt ACFL Div 1 01/05/2025
+</div>
+
+<script>
+const VEO_BASE = 'https://app.veo.co/matches/20260501-match-1-may-2026-va37316b/';
+
+function openVeoClip(seekId) {
+  navigator.clipboard.writeText(String(seekId)).then(() => {
+    showToast('⏱️ ' + seekId + 's copied — paste into Veo Seek bookmarklet');
+  });
+  window.open(VEO_BASE, '_blank');
+}
+const H1_VIDEO_START = 180;
+const H2_VIDEO_START = 2100;
+
+const toast = document.getElementById('toast');
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+function openClip(half, gameSeconds) {
+  const videoSeconds = half === 1
+    ? H1_VIDEO_START + gameSeconds
+    : H2_VIDEO_START + (gameSeconds - 1800);
+  navigator.clipboard.writeText(String(videoSeconds)).then(() => {
+    showToast('⏱️ ' + videoSeconds + 's copied — click Veo Seek bookmarklet & paste');
+  });
+  window.open(VEO_BASE, '_blank');
+}
+
+document.querySelectorAll('.kickout-dot').forEach(dot => {
+  dot.addEventListener('click', () => {
+    const half = parseInt(dot.dataset.half);
+    const gameSeconds = parseInt(dot.dataset.time);
+    openClip(half, gameSeconds);
+  });
+});
+
+// Momentum Chart
+new Chart(document.getElementById('momentumChart'), {
+  type: 'line',
+  data: {
+    labels: ['0','1:46','4:38','6:20','6:58','10:54','11:58','13:08','15:26','19:27','25:50','31:10','HT','31:17','32:14','36:36','39:57','42:06','42:29','46:07','46:51','47:51','52:44','54:05','55:19','56:24'],
+    datasets: [{
+      label: 'Ballinagh',
+      data: [0,0,0,0,0,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,7,9,9,10,11],
+      borderColor: '#4ade80',
+      backgroundColor: 'rgba(74,222,128,0.08)',
+      stepped: true,
+      fill: true,
+      borderWidth: 3,
+      pointRadius: function(ctx) {
+        return ctx.dataIndex === 21 ? 10 : 5;
+      },
+      pointBackgroundColor: function(ctx) {
+        return ctx.dataIndex === 21 ? '#4ade80' : '#4ade8088';
+      },
+      pointBorderColor: '#4ade80',
+      pointBorderWidth: 1
+    },{
+      label: 'Kingscourt',
+      data: [0,1,2,3,6,6,7,8,9,10,11,11,11,12,13,14,15,16,16,17,18,18,18,19,19,19],
+      borderColor: '#f87171',
+      backgroundColor: 'rgba(248,113,113,0.08)',
+      stepped: true,
+      fill: true,
+      borderWidth: 3,
+      pointRadius: function(ctx) {
+        return ctx.dataIndex === 4 ? 10 : 5;
+      },
+      pointBackgroundColor: function(ctx) {
+        return ctx.dataIndex === 4 ? '#f87171' : '#f8717188';
+      },
+      pointBorderColor: '#f87171',
+      pointBorderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: true, position: 'top', labels: { color: '#ccc' } }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Cumulative Points', color: '#7b8794' }, ticks: { color: '#7b8794', stepSize: 3 }, grid: { color: '#1f406844' } },
+      x: { title: { display: true, text: 'Match Time', color: '#7b8794' }, ticks: { color: '#7b8794', maxRotation: 45 }, grid: { color: '#1f406822' } }
+    }
+  }
+});
+
+document.querySelectorAll('.pitch-filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    btn.closest('.card').querySelectorAll('.kickout-dot').forEach(dot => {
+      dot.style.display = (filter === 'all' || dot.dataset.half === filter) ? '' : 'none';
+    });
+  });
+});
+</script>
+<script src="../nav.js"></script><script src="../auth.js"></script>
+</body>
+</html>

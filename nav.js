@@ -69,7 +69,11 @@
       {label:'Defensive Trends', file:'defensive_trends.html'},
       {label:'Discipline Tracker', file:'discipline.html'},
       {label:'Kickout Analysis', file:'kickouts.html'},
-      {label:'Scoring Report', file:'scoring.html'}
+      {label:'Scoring Report', file:'scoring.html'},
+      {label:'Ballinagh Kickouts — v Crosserlough', file:'ballinagh-v-crosserlough-kickouts.html'},
+      {label:'Ballinagh Kickouts — v Gowna', file:'ballinagh-v-gowna-kickouts.html'},
+      {label:'Ballinagh Kickouts — v Cuchulainns', file:'ballinagh-v-cuchulainns-kickouts.html'},
+      {label:'Ballinagh Kickouts — v Kingscourt', file:'ballinagh-v-kingscourt-kickouts.html'}
     ]}
   ];
 
