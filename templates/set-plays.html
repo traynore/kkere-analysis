@@ -1130,13 +1130,36 @@ function drawArrow(ctx,from,to,progress,color) {
       } else drawPlayer(ctx, hf.pos.x, hf.pos.y, GREEN, hf.n);
     }
 
-    // Full-forwards — 13 & 15 spread wide, 14 stays central
+    // Full-forwards — 13 & 15 spread wide, 14 makes runs up and down the 20m line
+    const t = (ts - startTime) / 1000;
     for(const ff of fullFwds) {
       if(ff.start) {
         const pos = lerpPos(ff.start, ff.end, spreadP);
         const col = spreadP > 0.5 ? CYAN : GREEN;
         drawPlayer(ctx, pos.x, pos.y, col, ff.n);
-      } else drawPlayer(ctx, ff.pos.x, ff.pos.y, GREEN, ff.n);
+      } else {
+        // Player 14 — oscillates up and down the 20m line making runs
+        let p14Y = ff.pos.y;
+        if(phase==='spread' || phase==='hold') {
+          const runAmplitude = 120;
+          p14Y = ff.pos.y + Math.sin(t * 1.4) * runAmplitude;
+        }
+        const col14 = (phase==='spread' || phase==='hold') ? CYAN : GREEN;
+        drawPlayer(ctx, ff.pos.x, p14Y, col14, ff.n);
+        // Draw movement trail during spread/hold
+        if(phase==='spread' || phase==='hold') {
+          ctx.beginPath();
+          ctx.moveTo(ff.pos.x, ff.pos.y - 120);
+          ctx.lineTo(ff.pos.x, ff.pos.y + 120);
+          ctx.strokeStyle='rgba(78,205,196,0.3)'; ctx.lineWidth=2; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+          // Arrow heads at both ends to show the run direction
+          ctx.font='bold 10px -apple-system,sans-serif'; ctx.fillStyle='rgba(78,205,196,0.7)';
+          ctx.textAlign='center';
+          ctx.fillText('▲', ff.pos.x, ff.pos.y - 128);
+          ctx.fillText('▼', ff.pos.x, ff.pos.y + 132);
+          ctx.fillText('TARGET', ff.pos.x, ff.pos.y - 140);
+        }
+      }
     }
 
     // Central gap indicator during hold
@@ -1152,7 +1175,7 @@ function drawArrow(ctx,from,to,progress,color) {
     const label = document.getElementById('phase-label-5');
     if(phase==='setup') label.textContent='\u261e SETUP \u2014 Defence clustered centrally (blanket). Our forwards start narrow';
     else if(phase==='spread') label.textContent='\u261e CHALK ON BOOTS \u2014 Wing forwards & corner forwards push to sidelines. Defenders MUST follow or leave men free';
-    else if(phase==='hold') label.textContent='\u261e RESULT \u2014 Blanket broken. Central gap exposed. Wing men in 1v1 space. Multiple attacking options';
+    else if(phase==='hold') label.textContent='\u261e RESULT \u2014 Blanket broken. 14 makes runs on the 20m line as target for long kick pass. Wing men in 1v1 space';
     else label.textContent='';
 
     requestAnimationFrame(animate);
