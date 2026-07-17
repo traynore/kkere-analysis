@@ -8,17 +8,29 @@
   body { background: #1a1a2e; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; font-family: -apple-system, sans-serif; gap: 60px; }
   .play-section { display: flex; flex-direction: column; align-items: center; }
   h1 { color: #f0f0f0; margin-bottom: 8px; font-size: 1.4rem; }
-  .subtitle { color: #aaa; margin-bottom: 16px; font-size: 0.9rem; }
+  .subtitle { color: #aaa; margin-bottom: 16px; font-size: 0.9rem; text-align: center; line-height: 1.7; }
   canvas { border-radius: 4px; box-shadow: 0 4px 24px rgba(0,0,0,0.5); }
   .legend { display: flex; gap: 20px; margin-top: 12px; color: #ccc; font-size: 0.8rem; align-items: center; }
   .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 4px; }
   .phase-label { height: 28px; margin-bottom: 8px; font: bold 15px -apple-system, sans-serif; color: #d4a017; text-align: center; }
+  nav.play-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 20px; background: rgba(255,255,255,0.04); border-radius: 8px; width: 100%; max-width: 1000px; }
+  nav.play-nav a { color: #d4a017; text-decoration: none; font-size: 0.85rem; padding: 6px 14px; border: 1px solid rgba(212,160,23,0.3); border-radius: 20px; transition: background 0.2s; white-space: nowrap; }
+  nav.play-nav a:hover { background: rgba(212,160,23,0.15); }
 </style>
 </head>
 <body>
 
+<nav class="play-nav">
+  <a href="#play1">1: Bunch &amp; Break</a>
+  <a href="#play2">2: The Overload</a>
+  <a href="#play3">3: Zonal Press</a>
+  <a href="#play4">4: Over the Top</a>
+  <a href="#play5">5: Chalk on the Boots</a>
+  <a href="#play6">6: Kickout Setup (v Ballinagh)</a>
+</nav>
+
 <!-- ===== PLAY 1: BUNCH & BREAK ===== -->
-<div class="play-section">
+<div id="play1" class="play-section">
 <h1>Kickout Strategy 1: Bunch & Break</h1>
 <p class="subtitle">Players bunch at centre then break into space — support players sweep in behind</p>
 <div id="phase-label-1" class="phase-label"></div>
@@ -31,7 +43,7 @@
 </div>
 
 <!-- ===== PLAY 2: THE OVERLOAD ===== -->
-<div class="play-section">
+<div id="play2" class="play-section">
 <h1>Kickout Strategy 2: The Overload (Left or Right)</h1>
 <p class="subtitle">Pack one wing to create a numbers advantage — receiver holds then dashes into space. Alternates sides each loop.</p>
 <div id="phase-label-2" class="phase-label"></div>
@@ -44,7 +56,7 @@
 </div>
 
 <!-- ===== PLAY 3: THE ZONAL PRESS ===== -->
-<div class="play-section">
+<div id="play3" class="play-section">
 <h1>Opposition Kickout Strategy 3: The Zonal Press</h1>
 <p class="subtitle">Mark the spaces, not the men — shuffle across zones with hands up, deny short options, force a long contestable kick</p>
 <div id="phase-label-3" class="phase-label"></div>
@@ -58,7 +70,7 @@
 </div>
 
 <!-- ===== PLAY 4: OVER-THE-TOP KICKING ===== -->
-<div class="play-section">
+<div id="play4" class="play-section">
 <h1>Kickout Strategy 4: Over-the-Top Kicking</h1>
 <p class="subtitle">GK kicks deep over the retreating defence — fast half-forwards sprint behind the landing spot to win breaks</p>
 <div id="phase-label-4" class="phase-label"></div>
@@ -71,7 +83,7 @@
 </div>
 
 <!-- ===== PLAY 5: CHALK ON THE BOOTS ===== -->
-<div class="play-section">
+<div id="play5" class="play-section">
 <h1>Attacking Strategy 5: Chalk on the Boots</h1>
 <p class="subtitle">Wing forwards and corner forwards hug the sidelines — forces defenders to track them, stretches the blanket, creates central gaps and 1v1 isolations</p>
 <div id="phase-label-5" class="phase-label"></div>
@@ -80,6 +92,24 @@
   <span><span class="legend-dot" style="background:#2e8b2e;"></span> Our players</span>
   <span><span class="legend-dot" style="background:#4ecdc4;"></span> Wide runners (chalk on boots)</span>
   <span><span class="legend-dot" style="background:#666;"></span> Opposition (stretched)</span>
+</div>
+</div>
+
+<!-- ===== PLAY 6: OPPOSITION KICKOUT SETUP ===== -->
+<div id="play6" class="play-section">
+<h1>Opposition Kickout Strategy 6: Kickout Setup (v Ballinagh)</h1>
+<p class="subtitle">
+  Press up on opposition kickouts with three lines of pressure:<br>
+  <strong style="color:#f0f0f0;">Line 1:</strong> 13 &amp; 15 push up to their 45 to cut off short options<br>
+  <strong style="color:#f0f0f0;">Line 2:</strong> 12, 14, 11, 10 hold between midfield and their 45<br>
+  <strong style="color:#f0f0f0;">Line 3:</strong> 5, 8, 6, 9, 7 sit at midfield — if the kick goes long left or right, <strong style="color:#4ecdc4;">6 drops in behind</strong> to cover the channel. If it goes long down the middle, <strong style="color:#4ecdc4;">5 &amp; 7 drop in behind</strong> to cut it out.
+</p>
+<div id="phase-label-6" class="phase-label"></div>
+<canvas id="pitch6" width="1000" height="600"></canvas>
+<div class="legend">
+  <span><span class="legend-dot" style="background:#2e8b2e;"></span> Our players</span>
+  <span><span class="legend-dot" style="background:#4ecdc4;"></span> Dropping cover players</span>
+  <span><span class="legend-dot" style="background:#666;"></span> Opposition</span>
 </div>
 </div>
 
@@ -1176,6 +1206,184 @@ function drawArrow(ctx,from,to,progress,color) {
     if(phase==='setup') label.textContent='\u261e SETUP \u2014 Defence clustered centrally (blanket). Our forwards start narrow';
     else if(phase==='spread') label.textContent='\u261e CHALK ON BOOTS \u2014 Wing forwards & corner forwards push to sidelines. Defenders MUST follow or leave men free';
     else if(phase==='hold') label.textContent='\u261e RESULT \u2014 Blanket broken. 14 makes runs on the 20m line as target for long kick pass. Wing men in 1v1 space';
+    else label.textContent='';
+
+    requestAnimationFrame(animate);
+  }
+
+  function tryStart() { requestAnimationFrame(animate); }
+  if(pitchImg.complete) tryStart();
+  else { pitchImg.addEventListener('load',tryStart); pitchImg.addEventListener('error',tryStart); }
+})();
+
+// === PLAY 6: OPPOSITION KICKOUT SETUP ===
+(function() {
+  const canvas = document.getElementById('pitch6');
+  const ctx = canvas.getContext('2d');
+  const P = makePitch(canvas);
+  const H = P.H, W = P.W;
+  const GREEN='#2e8b2e', DARK_GREEN='#1a5c1a', CYAN='#4ecdc4', OPP='#666';
+
+  const oppGK = {x:P.right-30, y:H/2};
+  const oppArcCX = P.right - (P.right-P.left)*0.09;
+  const oppArcR = P.arcRadius;
+  const GK = {x:P.goalX+20, y:H/2};
+  const def2 = {x:P.line21+30, y:P.top+55};
+  const def3 = {x:P.arcCentreX+P.arcRadius+15, y:H/2};
+  const def4 = {x:P.line21+30, y:P.bottom-55};
+
+  const their45 = P.right - (P.right-P.left)*0.30;
+  const midLine = P.midX;
+
+  const p13 = {x:their45+20, y:P.top+60};
+  const p15 = {x:their45+20, y:P.bottom-60};
+
+  const line2X = midLine + (their45-midLine)*0.55;
+  const p12 = {x:line2X, y:P.top+50};
+  const p14 = {x:line2X+20, y:H/2-70};
+  const p11 = {x:line2X+20, y:H/2+70};
+  const p10 = {x:line2X, y:P.bottom-50};
+
+  const line3X = midLine - 30;
+  const p5 = {x:line3X, y:P.top+55};
+  const p8 = {x:line3X+20, y:H/2-80};
+  const p6 = {x:line3X+20, y:H/2};
+  const p9 = {x:line3X+20, y:H/2+80};
+  const p7 = {x:line3X, y:P.bottom-55};
+
+  const p6DropLeft  = {x:line3X-60, y:P.top+100};
+  const p6DropRight = {x:line3X-60, y:P.bottom-100};
+  const p5DropMid = {x:line3X-60, y:H/2-80};
+  const p7DropMid = {x:line3X-60, y:H/2+80};
+
+  const PHASE = {setup:3000, hold:2500, kick:4000, reset:1500};
+  const TOTAL = PHASE.setup + PHASE.hold + PHASE.kick + PHASE.reset;
+  let startTime=null, loopCount=0, lastElapsed=0;
+
+  const opp21X = P.right - (P.line21 - P.left);
+  const opp45X = P.right - (their45 - P.left);
+  const oppMidX = P.right - (P.midX - P.left);
+  const oppPlayers = [
+    {n:2, x:opp21X-30, y:P.top+55},
+    {n:3, x:oppArcCX-oppArcR-15, y:H/2},
+    {n:4, x:opp21X-30, y:P.bottom-55},
+    {n:5, x:opp45X+20, y:P.top+70},
+    {n:6, x:opp45X+30, y:H/2},
+    {n:7, x:opp45X+20, y:P.bottom-70},
+    {n:8, x:oppMidX+20, y:H/2-50},
+    {n:9, x:oppMidX+20, y:H/2+50},
+    {n:10, x:P.midX-60, y:P.top+70},
+    {n:11, x:P.midX-40, y:H/2},
+    {n:12, x:P.midX-60, y:P.bottom-70},
+    {n:13, x:P.line45-20, y:P.top+55},
+    {n:14, x:P.line45-10, y:H/2},
+    {n:15, x:P.line45-20, y:P.bottom-55},
+  ];
+
+  function animate(ts) {
+    if(!startTime) startTime=ts;
+    const elapsed = (ts-startTime) % TOTAL;
+    if(elapsed < lastElapsed) loopCount++;
+    lastElapsed = elapsed;
+
+    let phase, pp;
+    if(elapsed < PHASE.setup) { phase='setup'; pp=elapsed/PHASE.setup; }
+    else if(elapsed < PHASE.setup+PHASE.hold) { phase='hold'; pp=(elapsed-PHASE.setup)/PHASE.hold; }
+    else if(elapsed < PHASE.setup+PHASE.hold+PHASE.kick) { phase='kick'; pp=(elapsed-PHASE.setup-PHASE.hold)/PHASE.kick; }
+    else { phase='reset'; pp=(elapsed-PHASE.setup-PHASE.hold-PHASE.kick)/PHASE.reset; }
+
+    const kickType = loopCount % 3;
+    ctx.clearRect(0,0,W,H);
+
+    if(pitchImg.complete && pitchImg.naturalWidth>0) {
+      ctx.drawImage(pitchImg,0,0,W,H);
+      ctx.fillStyle='rgba(0,0,0,0.15)'; ctx.fillRect(0,0,W,H);
+    } else {
+      ctx.fillStyle='#2d5a27'; ctx.fillRect(0,0,W,H);
+      ctx.strokeStyle='rgba(255,255,255,0.4)'; ctx.lineWidth=1.5;
+      ctx.strokeRect(P.left,P.top,P.right-P.left,P.bottom-P.top);
+      ctx.beginPath(); ctx.moveTo(P.midX,P.top); ctx.lineTo(P.midX,P.bottom); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.arc(P.arcCentreX,P.arcCentreY,P.arcRadius,-Math.PI/2,Math.PI/2);
+    ctx.strokeStyle='rgba(255,100,100,0.3)'; ctx.lineWidth=1.5; ctx.setLineDash([6,4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(oppArcCX,H/2,oppArcR,Math.PI/2,-Math.PI/2);
+    ctx.strokeStyle='rgba(255,100,100,0.5)'; ctx.lineWidth=2; ctx.setLineDash([6,4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='rgba(255,100,100,0.05)'; ctx.fill();
+
+    const ga = phase==='reset' ? 1-easeInOut(pp)*0.3 : 1.0;
+
+    for(const op of oppPlayers) drawPlayer(ctx,op.x,op.y,OPP,op.n,9,ga*0.5);
+    ctx.globalAlpha=ga*0.6;
+    ctx.beginPath(); ctx.arc(oppGK.x,oppGK.y,13,0,Math.PI*2); ctx.fillStyle='#555'; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=2; ctx.stroke();
+    ctx.font='bold 11px -apple-system,sans-serif'; ctx.fillStyle='#fff';
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('GK',oppGK.x,oppGK.y+1);
+    ctx.textBaseline='alphabetic'; ctx.globalAlpha=1.0;
+
+    drawPlayer(ctx,GK.x,GK.y,DARK_GREEN,1,13,ga);
+    drawPlayer(ctx,def2.x,def2.y,GREEN,2,11,ga);
+    drawPlayer(ctx,def3.x,def3.y,GREEN,3,11,ga);
+    drawPlayer(ctx,def4.x,def4.y,GREEN,4,11,ga);
+    drawPlayer(ctx,p13.x,p13.y,GREEN,13,11,ga);
+    drawPlayer(ctx,p15.x,p15.y,GREEN,15,11,ga);
+    drawPlayer(ctx,p12.x,p12.y,GREEN,12,11,ga);
+    drawPlayer(ctx,p14.x,p14.y,GREEN,14,11,ga);
+    drawPlayer(ctx,p11.x,p11.y,GREEN,11,11,ga);
+    drawPlayer(ctx,p10.x,p10.y,GREEN,10,11,ga);
+    drawPlayer(ctx,p8.x,p8.y,GREEN,8,11,ga);
+    drawPlayer(ctx,p9.x,p9.y,GREEN,9,11,ga);
+
+    const isLongLeft=kickType===0, isLongMid=kickType===1, isLongRight=kickType===2;
+    const p6Drop = isLongLeft ? p6DropLeft : isLongRight ? p6DropRight : null;
+    const p5Drop = isLongMid ? p5DropMid : null;
+    const p7Drop = isLongMid ? p7DropMid : null;
+    const dropP = phase==='kick' ? easeInOut(Math.min(pp*2,1)) : 0;
+    const showDrop = phase==='kick';
+
+    if(p6Drop && showDrop) {
+      const pos6=lerpPos(p6,p6Drop,dropP); drawPlayer(ctx,pos6.x,pos6.y,CYAN,6,11,ga);
+      if(dropP>0.05) drawArrow(ctx,p6,p6Drop,dropP,'rgba(78,205,196,0.8)');
+    } else { drawPlayer(ctx,p6.x,p6.y,GREEN,6,11,ga); }
+
+    if(p5Drop && showDrop) {
+      const pos5=lerpPos(p5,p5Drop,dropP); drawPlayer(ctx,pos5.x,pos5.y,CYAN,5,11,ga);
+      if(dropP>0.05) drawArrow(ctx,p5,p5Drop,dropP,'rgba(78,205,196,0.8)');
+    } else { drawPlayer(ctx,p5.x,p5.y,GREEN,5,11,ga); }
+
+    if(p7Drop && showDrop) {
+      const pos7=lerpPos(p7,p7Drop,dropP); drawPlayer(ctx,pos7.x,pos7.y,CYAN,7,11,ga);
+      if(dropP>0.05) drawArrow(ctx,p7,p7Drop,dropP,'rgba(78,205,196,0.8)');
+    } else { drawPlayer(ctx,p7.x,p7.y,GREEN,7,11,ga); }
+
+    if(phase==='setup'||phase==='hold') {
+      ctx.font='bold 10px -apple-system,sans-serif'; ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.textAlign='left';
+      ctx.fillText('LINE 1', p13.x+16, p13.y-14);
+      ctx.fillText('LINE 2', p12.x+16, p12.y-14);
+      ctx.fillText('LINE 3', p5.x+16, p5.y-14);
+    }
+
+    const kickTargets = [
+      {x:P.midX+60, y:P.top+80},
+      {x:P.midX+40, y:H/2},
+      {x:P.midX+60, y:P.bottom-80},
+    ];
+    if(phase==='setup'||phase==='hold') {
+      drawBall(ctx,oppGK.x-15,oppGK.y-10);
+    } else if(phase==='kick') {
+      if(pp<0.25) drawBall(ctx,oppGK.x-15,oppGK.y-10);
+      else {
+        const bp=easeInOut((pp-0.25)/0.75);
+        const bPos=lerpPos(oppGK,kickTargets[kickType],bp);
+        drawBall(ctx,bPos.x,bPos.y-80*Math.sin(bp*Math.PI));
+      }
+    }
+
+    const label=document.getElementById('phase-label-6');
+    const kickNames=['LONG LEFT','LONG DOWN THE MIDDLE','LONG RIGHT'];
+    const dropDesc=isLongMid?'5 & 7 drop in behind to cut out the ball':`6 drops behind to cover the ${isLongLeft?'left':'right'} channel`;
+    if(phase==='setup') label.textContent='\u261e SETUP \u2014 13 & 15 up top | 12, 14, 11, 10 second line | 5, 8, 6, 9, 7 last line';
+    else if(phase==='hold') label.textContent=`\u261e HOLD \u2014 Opp GK about to kick ${kickNames[kickType]}`;
+    else if(phase==='kick') label.textContent=`\u261e ${kickNames[kickType]} \u2014 ${dropDesc}`;
     else label.textContent='';
 
     requestAnimationFrame(animate);
