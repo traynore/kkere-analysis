@@ -1,0 +1,101 @@
+Event,Time,Team Name,Name,Game Period,Outcome,Player,Location X,Location Y,PSR,Colormark,Positive,Score
+1,00:00:30,Denn,Shot from play,1,Point,Nathan Quigley,0.03821942,0.2231615,1,#ffffff,1,1
+2,00:00:41,Munterconnaught,Kickout,1,Won clean,Fintan Devin,0.413669,0.06048062,1,,1,0
+3,00:01:18,Munterconnaught,Shot from play,1,45,Eoin O Shea,0.8736511,0.7529937,0,#ed1c24,1,0
+4,00:01:44,Munterconnaught,Shot from play,1,45,Sean Hendrick,0.7234712,0.2336089,0,#ed1c24,1,0
+5,00:02:37,Munterconnaught,Scoreable free,1,Wide,Charles Baugh,0.6951439,0.498525,0,#ed1c24,1,0
+6,00:02:59,Denn,Kickout,1,Break lost,,0.5193346,0.4821076,1,,0,0
+7,00:03:36,Munterconnaught,Shot from play,1,45,Enda O Shea,0.9797662,0.6022527,0,#ed1c24,1,0
+8,00:04:03,Munterconnaught,Scoreable free,1,Wide,Charles Baugh,0.6910971,0.5530007,0,#ed1c24,1,0
+9,00:04:31,Denn,Kickout,1,Sideline ball,,0.597572,0.01645231,0,,0,0
+10,00:05:22,Munterconnaught,Shot from play,1,Point,Eoin O Shea,0.7756295,0.3709175,1,#ffffff,1,1
+11,00:05:30,Denn,Kickout,1,Short won,Thomas Edward Donohoe,0.7666367,0.7223977,1,,1,0
+12,00:06:25,Denn,Shot from play,1,Wide,,0.02113308,0.2694285,0,#ed1c24,1,0
+13,00:06:42,Munterconnaught,Kickout,1,Won clean,Eoin O Shea,0.5705935,0.1589846,1,,1,0
+14,00:06:59,Munterconnaught,Shot from play,1,Point,Eoin O Shea,0.7976618,0.2783835,1,#ffffff,1,1
+15,00:07:06,Denn,Kickout,1,Break lost,,0.5310252,0.218684,1,,0,0
+16,00:08:50,Denn,Shot from play,1,45,Oisin Smith,0.1470324,0.5186735,0,#ed1c24,1,0
+17,00:09:19,Denn,Scoreable free,1,Wide,Mark Fegan,0.3151978,0.4418106,0,#ed1c24,1,0
+18,00:09:49,Munterconnaught,Kickout,1,Break won,Danny Nolan,0.346223,0.123165,1,,1,0
+19,00:10:45,Munterconnaught,Shot from play,1,Short,Fintan Devin,0.9109712,0.6783695,-1,#ed1c24,1,0
+20,00:11:04,Munterconnaught,Scoreable free,1,2 Points,Enda O Shea,0.7670863,0.7440388,2,#f7941d,1,2
+21,00:11:29,Denn,Kickout,1,Break lost,Daniel Yore,0.5530576,0.7701573,1,,0,0
+22,00:12:31,Denn,Shot from play,1,Wide,Nathan Quigley,0.1749101,0.7313527,0,#ed1c24,1,0
+23,00:12:47,Munterconnaught,Kickout,1,Short won,Sean Hendrick,0.2414568,0.7194128,1,,1,0
+24,00:13:35,Munterconnaught,Shot from play,1,Wide,Daniel Yore,0.7841727,0.6052377,0,#ed1c24,1,0
+25,00:13:46,Denn,Kickout,1,Break lost,Cejay Reilly,0.5323741,0.6865781,1,,0,0
+26,00:14:37,Munterconnaught,Shot from play,1,Point,Fintan Devin,0.9172662,0.5992677,1,#ffffff,1,1
+27,00:14:48,Denn,Kickout,1,Break won,Oisin Kiernan,0.5278777,0.08958407,1,,1,0
+28,00:15:25,Denn,Shot from play,1,Point,Mark Reilly,0.1960432,0.3977822,1,#ffffff,1,1
+29,00:15:33,Munterconnaught,Kickout,1,Break lost,Oisin Kiernan,0.5049461,0.5298672,1,,0,0
+30,00:16:48,Denn,Shot from play,1,45,Sean Donohoe,0.1007194,0.504495,0,#ed1c24,1,0
+31,00:17:04,Denn,Scoreable free,1,Point,Mark Fegan,0.3098021,0.5238972,1,#ffffff,1,1
+32,00:17:37,Munterconnaught,Kickout,1,Break lost,Mark Reilly,0.3538669,0.2888308,1,,0,0
+33,00:18:56,Munterconnaught,Kickout,1,Won clean,,0.2603417,0.1530147,1,,1,0
+34,00:20:04,Denn,Scoreable free,1,Wide,Mark Fegan,0.2621403,0.2753985,0,#ed1c24,1,0
+35,00:20:43,Munterconnaught,Kickout,1,Break won,Danny Nolan,0.4181654,0.08510663,1,,1,0
+36,00:22:24,Denn,Shot from play,1,Point,Oisin Kiernan,0.2464029,0.4746452,1,#ffffff,1,1
+37,00:22:43,Munterconnaught,Kickout,1,Won clean,Sean Clarke,0.5049461,0.2336089,1,,1,0
+38,00:24:12,Munterconnaught,Scoreable free,1,Wide,Enda O Shea,0.6821043,0.6686683,0,#ed1c24,1,0
+39,00:24:35,Denn,Kickout,1,Break lost,,0.5094424,0.6403111,1,,0,0
+40,00:25:09,Munterconnaught,Shot from play,1,Point,Enda O Shea,0.8664568,0.7425463,1,#ffffff,1,1
+41,00:25:21,Denn,Kickout,1,Break lost,,0.4838129,0.2336089,1,,0,0
+42,00:25:46,Munterconnaught,Shot from play,1,Wide,Eoin O Shea,0.6686151,0.4865851,0,#ed1c24,1,0
+43,00:26:04,Denn,Kickout,1,Break won,,0.6200539,0.9052272,1,,1,0
+44,00:26:46,Munterconnaught,Shot from play,1,Blocked,Ryan Nwaneri,0.8246403,0.6641908,0,#ed1c24,1,0
+45,00:29:18,Denn,Shot from play,1,Point,Mark Reilly,0.1101619,0.2791297,1,#ffffff,1,1
+46,00:29:28,Munterconnaught,Kickout,1,Break won,,0.5602518,0.504495,1,,1,0
+47,00:30:38,Denn,Kickout,1,Won clean,,0.743705,0.197043,1,,1,0
+48,00:30:55,Denn,Shot from play,1,Blocked,Ben Conaty,0.09532373,0.3500227,0,#ed1c24,1,0
+49,00:31:21,Denn,Shot from play,1,Wide,Ben Conaty,0.158723,0.5089724,0,#ed1c24,1,0
+50,00:30:31,Denn,Scoreable free,2,Point,Nathan Quigley,0.7895683,0.5813579,1,#ffffff,1,1
+51,00:31:02,Munterconnaught,Kickout,2,Lost clean,Oisin Smith,0.6196043,0.5343446,1,#ed1c24,0,0
+52,00:32:09,Denn,Shot from play,2,2 Points,Nathan Quigley,0.7198741,0.6201625,2,#f7941d,1,2
+53,00:32:24,Munterconnaught,Kickout,2,Break lost,,0.5116906,0.2656973,1,,0,0
+54,00:32:47,Denn,Shot from play,2,Goal,Nathan Quigley,0.8965827,0.4268857,3,#70B12A,1,3
+55,00:33:00,Munterconnaught,Kickout,2,Lost clean,Oisin Kiernan,0.6276978,0.6403111,1,#ed1c24,0,0
+56,00:33:28,Denn,Shot from play,2,Point,Mark Reilly,0.9446942,0.597029,1,#ffffff,1,1
+57,00:33:36,Munterconnaught,Kickout,2,Break won,,0.6569245,0.5276284,1,,1,0
+58,00:34:17,Munterconnaught,Kickout,2,Break won,,0.6384892,0.4873314,1,,1,0
+59,00:34:49,Munterconnaught,Shot from play,2,Wide,Sean Hendrick,0.2693345,0.3127106,0,#ed1c24,1,0
+60,00:34:58,Denn,Kickout,2,Won clean,,0.3642086,0.7022492,1,,1,0
+61,00:36:09,Denn,Shot from play,2,Wide,,0.7868705,0.3642013,0,#ed1c24,1,0
+62,00:36:17,Munterconnaught,Kickout,2,Break won,Eoin O Shea,0.3947842,0.2030129,1,,1,0
+63,00:38:42,Munterconnaught,Scoreable free,2,Point,Enda O Shea,0.2482014,0.5104649,1,#ffffff,1,1
+64,00:39:19,Denn,Kickout,2,Won clean,Sean Donohoe,0.5256295,0.4544967,1,,1,0
+65,00:39:44,Denn,Shot from play,2,Point,Ben Conaty,0.841277,0.4239007,1,#ffffff,1,1
+66,00:39:53,Munterconnaught,Kickout,2,Break won,Ryan Gilsenan,0.5134892,0.2858459,1,,1,0
+67,00:40:35,Munterconnaught,Shot from play,2,Wide,Enda O Shea,0.2077338,0.3701713,0,#ed1c24,1,0
+68,00:40:43,Denn,Kickout,2,Lost clean,Sean Clarke,0.4231115,0.6940405,1,#ed1c24,0,0
+69,00:41:10,Munterconnaught,Shot from play,2,Wide,Ryan Nwaneri,0.181205,0.2716673,0,#ed1c24,1,0
+70,00:41:20,Denn,Kickout,2,Short won,,0.2904676,0.5798655,1,,1,0
+71,00:42:48,Munterconnaught,Shot from play,2,Wide,Ryan Gilsenan,0.08902878,0.2679361,0,#ed1c24,1,0
+72,00:43:04,Denn,Kickout,2,Short won,Finian Smith,0.1816547,0.09406153,1,,1,0
+73,00:44:53,Denn,Shot from play,2,Wide,Nathan Quigley,0.8803957,0.2030129,0,#ed1c24,1,0
+74,00:45:04,Munterconnaught,Kickout,2,Break lost,Ben Conaty,0.6214029,0.8604527,1,,0,0
+75,00:45:33,Denn,Shot from play,2,Point,Ben Conaty,0.8619604,0.7671723,1,#ffffff,1,1
+76,00:45:50,Munterconnaught,Kickout,2,Won clean,Cejay Reilly,0.6267986,0.04555577,1,,1,0
+77,00:46:52,Munterconnaught,Scoreable free,2,Point,Enda O Shea,0.2185252,0.4306169,1,#ffffff,1,1
+78,00:47:17,Denn,Kickout,2,Break lost,Fintan Devin,0.3992805,0.504495,1,,0,0
+79,00:47:48,Munterconnaught,Shot from play,2,Wide,Ryan Nwaneri,0.1897482,0.2306239,0,#ed1c24,1,0
+80,00:48:03,Denn,Kickout,2,Won clean,Ben Conaty,0.5503597,0.5000175,1,,1,0
+81,00:48:43,Denn,Scoreable free,2,Point,Nathan Quigley,0.8048561,0.6089689,1,#ffffff,1,1
+82,00:49:00,Munterconnaught,Kickout,2,Break won,Ryan Nwaneri,0.5593525,0.147791,1,,1,0
+83,00:50:41,Denn,Shot from play,2,45,Ben Conaty,0.9010791,0.5918053,0,#ed1c24,1,0
+84,00:51:15,Denn,Scoreable free,2,Point,Mark Fegan,0.7000899,0.3380828,1,#ffffff,1,1
+85,00:51:45,Munterconnaught,Kickout,2,Lost clean,Nathan Quigley,0.7356115,0.8686613,1,#ed1c24,0,0
+86,00:52:33,Denn,Shot from play,2,Point,Nathan Quigley,0.841277,0.326143,1,#ffffff,1,1
+87,00:52:44,Munterconnaught,Kickout,2,Lost clean,Mark Mcsherry,0.6191547,0.1157026,1,#ed1c24,0,0
+88,00:53:22,Denn,Shot from play,2,Wide,Mark Reilly,0.8480216,0.7097116,0,#ed1c24,1,0
+89,00:53:30,Munterconnaught,Kickout,2,Break lost,Oisin Kiernan,0.5939748,0.7283677,1,,0,0
+90,00:55:48,Munterconnaught,Shot from play,2,2 Points,Nathan DeKleer,0.2576439,0.1925655,2,#f7941d,1,2
+91,00:56:11,Denn,Kickout,2,Break won,Mark Mcsherry,0.4892086,0.7895596,1,,1,0
+92,00:57:11,Denn,Shot from play,2,Wide,Mark Reilly,0.8178957,0.3522615,0,#ed1c24,1,0
+93,00:57:24,Munterconnaught,Kickout,2,Sideline ball,,0.6785072,0.966419,0,,0,0
+94,00:58:00,Denn,Shot from play,2,Point,Mark Reilly,0.8543165,0.4910626,1,#ffffff,1,1
+95,00:58:07,Munterconnaught,Kickout,2,Break lost,Sean Donohoe,0.6488309,0.4059909,1,,0,0
+96,00:59:04,Denn,Shot from play,2,Point,Mark Reilly,0.8264388,0.4253932,1,#ffffff,1,1
+97,00:59:12,Munterconnaught,Kickout,2,Won clean,,0.6047662,0.8209018,1,,1,0
+98,01:00:20,Munterconnaught,Shot from play,2,Wide,Fintan Devin,0.193795,0.2515187,0,#ed1c24,1,0
+99,01:00:29,Denn,Kickout,2,Short won,Finian Smith,0.1946942,0.09480778,1,,1,0
+100,01:02:23,Denn,Shot from play,2,Point,Ben Conaty,0.919964,0.5186735,1,#ffffff,1,1

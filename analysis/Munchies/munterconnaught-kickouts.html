@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munterconnaught Opposition Analysis — Cavan IFC</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+  .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #16213e, #0f3460); border-radius: 16px; margin-bottom: 24px; }
+  .header h1 { font-size: 1.8rem; color: #fff; margin-bottom: 6px; }
+  .header .subtitle { color: #a0c4ff; font-size: 0.95rem; }
+  .header .match-info { color: #7b8794; font-size: 0.85rem; margin-top: 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .card { background: #16213e; border-radius: 14px; padding: 24px; border: 1px solid #1f4068; }
+  .card-full { grid-column: 1 / -1; }
+  .card h2 { font-size: 1.1rem; color: #a0c4ff; margin-bottom: 16px; border-bottom: 1px solid #1f4068; padding-bottom: 10px; }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1f406833; }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-size: 0.9rem; color: #ccc; }
+  .stat-value { font-size: 1.1rem; font-weight: 700; }
+  .stat-value.good { color: #4ade80; }
+  .stat-value.bad { color: #f87171; }
+  .stat-value.neutral { color: #fbbf24; }
+  .big-number { text-align: center; padding: 20px; }
+  .big-number .number { font-size: 3.5rem; font-weight: 800; }
+  .big-number .label { font-size: 0.85rem; color: #7b8794; margin-top: 4px; }
+  .bar-chart { margin-top: 10px; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 10px; }
+  .bar-label { width: 110px; font-size: 0.8rem; color: #ccc; text-align: right; padding-right: 10px; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 24px; background: #0f3460; border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 600; color: #fff; min-width: 28px; }
+  .half-comparison { display: flex; gap: 20px; justify-content: center; margin-top: 10px; }
+  .half-box { text-align: center; flex: 1; padding: 16px; background: #0f3460; border-radius: 10px; }
+  .half-box .half-title { font-size: 0.8rem; color: #7b8794; margin-bottom: 6px; }
+  .half-box .half-value { font-size: 2rem; font-weight: 800; }
+
+  /* PITCH */
+  .pitch-wrap { position: relative; width: 100%; padding-bottom: 52%; }
+  .pitch {
+    position: absolute; inset: 0;
+    background: url('../gaa-pitch-template.jpeg') center/100% 100% no-repeat;
+    border-radius: 10px; border: 2px solid #fff3; overflow: hidden;
+  }
+  .dot {
+    position: absolute; width: 14px; height: 14px; border-radius: 50%;
+    transform: translate(-50%, -50%); border: 2px solid #fff8; cursor: pointer;
+    transition: transform 0.15s; text-decoration: none; display: block;
+  }
+  .dot:hover { transform: translate(-50%, -50%) scale(1.7); z-index: 10; }
+  .dot.won-clean  { background: #4ade80; }
+  .dot.break-won  { background: #86efac; }
+  .dot.short-won  { background: #38bdf8; }
+  .dot.break-lost { background: #fbbf24; }
+  .dot.lost-clean { background: #f87171; }
+  .dot.sideline   { background: #c084fc; }
+  /* shot dots */
+  .dot.scored     { background: #4ade80; }
+  .dot.two-pts    { background: #f59e0b; }
+  .dot.wide       { background: #f87171; }
+  .dot.forty-five { background: #38bdf8; }
+  .dot.blocked    { background: #c084fc; }
+  .dot.short-shot { background: #94a3b8; }
+  /* free dots */
+  .dot.free-scored  { background: #4ade80; }
+  .dot.free-two     { background: #f59e0b; }
+  .dot.free-wide    { background: #f87171; }
+
+  .section-divider { grid-column: 1 / -1; border-top: 2px solid #1f4068; margin: 10px 0; padding-top: 10px; }
+  .section-divider h2 { font-size: 1.3rem; color: #a0c4ff; font-weight: 700; }
+
+  .dot[title]:hover::after {
+    content: attr(title);
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+    background: #000d; color: #fff; padding: 4px 8px; border-radius: 4px;
+    font-size: 0.7rem; white-space: nowrap; pointer-events: none;
+  }
+
+  .pitch-filters { display: flex; gap: 10px; margin-bottom: 12px; justify-content: center; flex-wrap: wrap; }
+  .pitch-filters button {
+    padding: 8px 18px; border-radius: 6px; border: 1px solid #1f4068;
+    background: #0f3460; color: #ccc; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .pitch-filters button.active { background: #a0c4ff; color: #1a1a2e; border-color: #a0c4ff; }
+  .pitch-filters button:hover { border-color: #a0c4ff; }
+
+  .direction-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding: 6px 12px; background: #0f3460; border-radius: 8px; font-size: 0.78rem; color: #a0c4ff; }
+  .direction-bar .arrow { display: flex; align-items: center; gap: 6px; }
+  .direction-bar .arrow span { font-weight: 600; }
+  .direction-bar .arrow-line { display: flex; align-items: center; gap: 0; }
+  .direction-bar .arrow-shaft { height: 2px; width: 60px; background: #a0c4ff; }
+  .direction-bar .arrow-head-r { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 9px solid #a0c4ff; }
+  .direction-bar .arrow-head-l { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 9px solid #a0c4ff; }
+  .legend { display: flex; gap: 14px; margin-top: 12px; justify-content: center; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #ccc; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #fff5; flex-shrink: 0; }
+
+  .target-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 8px; }
+  .target-table th { text-align: left; padding: 8px; color: #a0c4ff; border-bottom: 1px solid #1f4068; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .target-table td { padding: 8px; border-bottom: 1px solid #1f406833; color: #ccc; }
+  .target-table tr:hover td { background: #0f3460; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+  .badge-won  { background: #4ade8033; color: #4ade80; }
+  .badge-lost { background: #f8717133; color: #f87171; }
+  .badge-mix  { background: #fbbf2433; color: #fbbf24; }
+
+  /* PLAYERS TO WATCH */
+  .players-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto; }
+  .player-card { background: #16213e; border-radius: 14px; border: 1px solid #1f4068; overflow: hidden; }
+  .player-img-wrap { width: 100%; aspect-ratio: 3/4; background: #0f3460; overflow: hidden; }
+  .player-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .player-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #1f4068; font-size: 3rem; }
+  .player-info { padding: 14px; }
+  .player-name { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .player-role { font-size: 0.75rem; color: #a0c4ff; margin-bottom: 8px; }
+  .player-notes { font-size: 0.78rem; color: #ccc; line-height: 1.5; }
+  .threat-pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin-bottom: 8px; }
+  .threat-high   { background: #f8717133; color: #f87171; }
+  .threat-medium { background: #fbbf2433; color: #fbbf24; }
+  @media (max-width: 900px) { .players-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .players-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .half-comparison { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎯 Munterconnaught — Opposition Analysis</h1>
+  <div class="subtitle">Opposition prep · Cavan Intermediate Championship</div>
+  <div class="match-info">Source: Munterconnaught v Denn</div>
+</div>
+
+<div style="max-width:1200px;margin:0 auto 24px;">
+  <a href="https://www.youtube.com/watch?v=wt6R5Ik9ER0" target="_blank" style="display:block;position:relative;border-radius:14px;overflow:hidden;border:1px solid #1f4068;text-decoration:none;">
+    <img src="https://img.youtube.com/vi/wt6R5Ik9ER0/maxresdefault.jpg" style="width:100%;display:block;" alt="Munterconnaught v Denn">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0006;">
+      <div style="width:72px;height:72px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+        <div style="width:0;height:0;border-top:18px solid transparent;border-bottom:18px solid transparent;border-left:30px solid #fff;margin-left:6px;"></div>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,#000c);color:#fff;font-size:0.9rem;font-weight:600;">▶ Munterconnaught v Denn — Watch on YouTube</div>
+  </a>
+</div>
+
+<div class="grid">
+
+  <!-- Big numbers -->
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#fbbf24">58%</div>
+      <div class="label">Overall Kickout Retention (15/26)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#f87171">42%</div>
+      <div class="label">Kickouts Lost (11/26)</div>
+    </div>
+  </div>
+
+  <!-- Outcome breakdown -->
+  <div class="card">
+    <h2>📊 Kickout Outcomes (26 total)</h2>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Won clean</div>
+        <div class="bar-track"><div class="bar-fill" style="width:23%;background:#4ade80;">6</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Break won</div>
+        <div class="bar-track"><div class="bar-fill" style="width:31%;background:#86efac;">8</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Short won</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4%;background:#38bdf8;">1</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Break lost</div>
+        <div class="bar-track"><div class="bar-fill" style="width:23%;background:#fbbf24;">6</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Lost clean</div>
+        <div class="bar-track"><div class="bar-fill" style="width:15%;background:#f87171;">4</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Sideline</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4%;background:#c084fc;">1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Half by half -->
+  <div class="card">
+    <h2>⏱️ Half-by-Half Retention</h2>
+    <div class="half-comparison">
+      <div class="half-box">
+        <div class="half-title">1st Half</div>
+        <div class="half-value" style="color:#4ade80">70%</div>
+        <div style="font-size:0.8rem;color:#7b8794;margin-top:4px">7 / 10 retained</div>
+        <div style="font-size:0.75rem;color:#ccc;margin-top:4px">Won clean 3 · Break won 3 · Short won 1</div>
+        <div style="font-size:0.75rem;color:#f87171;margin-top:2px">Break lost 2 · Lost clean 0</div>
+      </div>
+      <div class="half-box">
+        <div class="half-title">2nd Half</div>
+        <div class="half-value" style="color:#f87171">50%</div>
+        <div style="font-size:0.8rem;color:#7b8794;margin-top:4px">8 / 16 retained</div>
+        <div style="font-size:0.75rem;color:#ccc;margin-top:4px">Won clean 3 · Break won 5</div>
+        <div style="font-size:0.75rem;color:#f87171;margin-top:2px">Break lost 4 · Lost clean 4 · Sideline 1</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:14px;font-size:0.82rem;color:#fbbf24;padding:10px;background:#0f3460;border-radius:8px;">
+      ⚠️ Retention drops from 70% → 50% in the 2nd half
+    </div>
+  </div>
+
+  <!-- Pitch map -->
+  <div class="card card-full">
+    <h2>🗺️ Kickout Landing Zones — Munterconnaught</h2>
+    <div class="pitch-filters">
+      <button class="active" data-filter="all">Full Game</button>
+      <button data-filter="1">1st Half</button>
+      <button data-filter="2">2nd Half</button>
+      <button data-filter="won">Won Only</button>
+      <button data-filter="lost">Lost Only</button>
+    </div>
+    <div class="pitch-wrap">
+      <div class="pitch" id="pitch">
+
+        <!-- ===== 1ST HALF ===== -->
+        <!-- Ev2 H1 00:00:41 Won clean Fintan Devin -->
+        <div class="dot won-clean" style="left:41.4%;top:6.0%" title="H1 00:00:41 · Won clean · Fintan Devin" data-half="1" data-result="won"></div>
+        <!-- Ev13 H1 00:06:42 Won clean Eoin O Shea -->
+        <div class="dot won-clean" style="left:57.1%;top:15.9%" title="H1 00:06:42 · Won clean · Eoin O Shea" data-half="1" data-result="won"></div>
+        <!-- Ev18 H1 00:09:49 Break won Danny Nolan -->
+        <div class="dot break-won" style="left:34.6%;top:12.3%" title="H1 00:09:49 · Break won · Danny Nolan" data-half="1" data-result="won"></div>
+        <!-- Ev23 H1 00:12:47 Short won Sean Hendrick -->
+        <div class="dot short-won" style="left:24.1%;top:71.9%" title="H1 00:12:47 · Short won · Sean Hendrick" data-half="1" data-result="won"></div>
+        <!-- Ev29 H1 00:15:33 Break lost Oisin Kiernan -->
+        <div class="dot break-lost" style="left:50.5%;top:53.0%" title="H1 00:15:33 · Break lost · Oisin Kiernan" data-half="1" data-result="lost"></div>
+        <!-- Ev32 H1 00:17:37 Break lost Mark Reilly -->
+        <div class="dot break-lost" style="left:35.4%;top:28.9%" title="H1 00:17:37 · Break lost · Mark Reilly" data-half="1" data-result="lost"></div>
+        <!-- Ev33 H1 00:18:56 Won clean -->
+        <div class="dot won-clean" style="left:26.0%;top:15.3%" title="H1 00:18:56 · Won clean" data-half="1" data-result="won"></div>
+        <!-- Ev35 H1 00:20:43 Break won Danny Nolan -->
+        <div class="dot break-won" style="left:41.8%;top:8.5%" title="H1 00:20:43 · Break won · Danny Nolan" data-half="1" data-result="won"></div>
+        <!-- Ev37 H1 00:22:43 Won clean Sean Clarke -->
+        <div class="dot won-clean" style="left:50.5%;top:23.4%" title="H1 00:22:43 · Won clean · Sean Clarke" data-half="1" data-result="won"></div>
+        <!-- Ev46 H1 00:29:28 Break won -->
+        <div class="dot break-won" style="left:56.0%;top:50.4%" title="H1 00:29:28 · Break won" data-half="1" data-result="won"></div>
+
+        <!-- ===== 2ND HALF ===== -->
+        <!-- Ev51 H2 00:31:02 Lost clean Oisin Smith -->
+        <div class="dot lost-clean" style="left:62.0%;top:53.4%" title="H2 00:31:02 · Lost clean · Oisin Smith" data-half="2" data-result="lost"></div>
+        <!-- Ev53 H2 00:32:24 Break lost -->
+        <div class="dot break-lost" style="left:51.2%;top:26.6%" title="H2 00:32:24 · Break lost" data-half="2" data-result="lost"></div>
+        <!-- Ev55 H2 00:33:00 Lost clean Oisin Kiernan -->
+        <div class="dot lost-clean" style="left:62.8%;top:64.0%" title="H2 00:33:00 · Lost clean · Oisin Kiernan" data-half="2" data-result="lost"></div>
+        <!-- Ev57 H2 00:33:36 Break won -->
+        <div class="dot break-won" style="left:65.7%;top:52.8%" title="H2 00:33:36 · Break won" data-half="2" data-result="won"></div>
+        <!-- Ev58 H2 00:34:17 Break won -->
+        <div class="dot break-won" style="left:63.8%;top:48.7%" title="H2 00:34:17 · Break won" data-half="2" data-result="won"></div>
+        <!-- Ev62 H2 00:36:17 Break won Eoin O Shea -->
+        <div class="dot break-won" style="left:39.5%;top:20.3%" title="H2 00:36:17 · Break won · Eoin O Shea" data-half="2" data-result="won"></div>
+        <!-- Ev66 H2 00:39:53 Break won Ryan Gilsenan -->
+        <div class="dot break-won" style="left:51.3%;top:28.6%" title="H2 00:39:53 · Break won · Ryan Gilsenan" data-half="2" data-result="won"></div>
+        <!-- Ev74 H2 00:45:04 Break lost Ben Conaty -->
+        <div class="dot break-lost" style="left:62.1%;top:86.0%" title="H2 00:45:04 · Break lost · Ben Conaty" data-half="2" data-result="lost"></div>
+        <!-- Ev76 H2 00:45:50 Won clean Cejay Reilly -->
+        <div class="dot won-clean" style="left:62.7%;top:4.6%" title="H2 00:45:50 · Won clean · Cejay Reilly" data-half="2" data-result="won"></div>
+        <!-- Ev82 H2 00:49:00 Break won Ryan Nwaneri -->
+        <div class="dot break-won" style="left:55.9%;top:14.8%" title="H2 00:49:00 · Break won · Ryan Nwaneri" data-half="2" data-result="won"></div>
+        <!-- Ev85 H2 00:51:45 Lost clean Nathan Quigley -->
+        <div class="dot lost-clean" style="left:73.6%;top:86.9%" title="H2 00:51:45 · Lost clean · Nathan Quigley" data-half="2" data-result="lost"></div>
+        <!-- Ev87 H2 00:52:44 Lost clean Mark Mcsherry -->
+        <div class="dot lost-clean" style="left:61.9%;top:11.6%" title="H2 00:52:44 · Lost clean · Mark Mcsherry" data-half="2" data-result="lost"></div>
+        <!-- Ev89 H2 00:53:30 Break lost Oisin Kiernan -->
+        <div class="dot break-lost" style="left:59.4%;top:72.8%" title="H2 00:53:30 · Break lost · Oisin Kiernan" data-half="2" data-result="lost"></div>
+        <!-- Ev93 H2 00:57:24 Sideline ball -->
+        <div class="dot sideline" style="left:67.9%;top:96.6%" title="H2 00:57:24 · Sideline ball" data-half="2" data-result="lost"></div>
+        <!-- Ev95 H2 00:58:07 Break lost Sean Donohoe -->
+        <div class="dot break-lost" style="left:64.9%;top:40.6%" title="H2 00:58:07 · Break lost · Sean Donohoe" data-half="2" data-result="lost"></div>
+        <!-- Ev97 H2 00:59:12 Won clean -->
+        <div class="dot won-clean" style="left:60.5%;top:82.1%" title="H2 00:59:12 · Won clean" data-half="2" data-result="won"></div>
+
+      </div>
+    </div>
+    <div class="direction-bar">
+      <div class="arrow"><span>H1 attack</span><div class="arrow-line"><div class="arrow-shaft"></div><div class="arrow-head-r"></div></div></div>
+      <div class="arrow"><div class="arrow-line"><div class="arrow-head-l"></div><div class="arrow-shaft"></div></div><span>H2 attack</span></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div> Won clean</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#86efac"></div> Break won</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div> Short won</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div> Break lost</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div> Lost clean</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c084fc"></div> Sideline</div>
+    </div>
+    <div style="text-align:center;margin-top:8px;font-size:0.75rem;color:#7b8794;">Hover over a dot to see time and outcome</div>
+  </div>
+
+  <!-- Key patterns -->
+  <div class="card">
+    <h2>🔍 Key Patterns</h2>
+    <div class="stat-row">
+      <span class="stat-label">1st half retention</span>
+      <span class="stat-value good">70% (7/10)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">2nd half retention</span>
+      <span class="stat-value bad">50% (8/16)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Short kickouts used</span>
+      <span class="stat-value neutral">1 only — rarely go short</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Lost clean (gifted away)</span>
+      <span class="stat-value bad">4 — all in 2nd half</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Kickouts to wide channels</span>
+      <span class="stat-value neutral">Frequent</span>
+    </div>
+
+  </div>
+
+  <!-- Kickout targets -->
+  <div class="card">
+    <h2>🎯 Named Kickout Targets</h2>
+    <table class="target-table">
+      <tr><th>Player</th><th>Times</th><th>Outcome</th></tr>
+      <tr><td>Danny Nolan</td><td>2</td><td><span class="badge badge-won">Break won · Break won</span></td></tr>
+      <tr><td>Eoin O Shea</td><td>2</td><td><span class="badge badge-won">Won clean · Break won</span></td></tr>
+      <tr><td>Sean Hendrick</td><td>1</td><td><span class="badge badge-won">Short won</span></td></tr>
+      <tr><td>Sean Clarke</td><td>1</td><td><span class="badge badge-won">Won clean</span></td></tr>
+      <tr><td>Fintan Devin</td><td>1</td><td><span class="badge badge-won">Won clean</span></td></tr>
+      <tr><td>Ryan Gilsenan</td><td>1</td><td><span class="badge badge-won">Break won</span></td></tr>
+      <tr><td>Ryan Nwaneri</td><td>1</td><td><span class="badge badge-won">Break won</span></td></tr>
+      <tr><td>Cejay Reilly</td><td>1</td><td><span class="badge badge-won">Won clean</span></td></tr>
+      <tr><td>Oisin Kiernan</td><td>2</td><td><span class="badge badge-lost">Break lost · Lost clean</span></td></tr>
+      <tr><td>Mark Reilly</td><td>1</td><td><span class="badge badge-lost">Break lost</span></td></tr>
+      <tr><td>Ben Conaty</td><td>1</td><td><span class="badge badge-lost">Break lost</span></td></tr>
+      <tr><td>Oisin Smith</td><td>1</td><td><span class="badge badge-lost">Lost clean</span></td></tr>
+      <tr><td>Nathan Quigley</td><td>1</td><td><span class="badge badge-lost">Lost clean</span></td></tr>
+      <tr><td>Mark Mcsherry</td><td>1</td><td><span class="badge badge-lost">Lost clean</span></td></tr>
+      <tr><td>Sean Donohoe</td><td>1</td><td><span class="badge badge-lost">Break lost</span></td></tr>
+    </table>
+    <div style="font-size:0.78rem;color:#7b8794;margin-top:10px;">Note: 10 of 26 kickouts had no named target recorded</div>
+  </div>
+
+</div>
+
+<!-- ===================== SHOTS FROM PLAY ===================== -->
+<div class="grid" style="margin-top:30px;">
+
+  <div class="section-divider">
+    <h2>🏹 Shots from Play</h2>
+  </div>
+
+  <!-- Big numbers -->
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#fbbf24">28%</div>
+      <div class="label">Accuracy from Play (5/18)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#f87171">8</div>
+      <div class="label">Wides from Play</div>
+    </div>
+  </div>
+
+  <!-- Outcome breakdown -->
+  <div class="card">
+    <h2>📊 Shot Outcomes (18 total)</h2>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Point</div>
+        <div class="bar-track"><div class="bar-fill" style="width:22%;background:#4ade80;">4</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2 Points</div>
+        <div class="bar-track"><div class="bar-fill" style="width:6%;background:#f59e0b;">1</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wide</div>
+        <div class="bar-track"><div class="bar-fill" style="width:44%;background:#f87171;">8</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">45</div>
+        <div class="bar-track"><div class="bar-fill" style="width:17%;background:#38bdf8;">3</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Blocked</div>
+        <div class="bar-track"><div class="bar-fill" style="width:6%;background:#c084fc;">1</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Short</div>
+        <div class="bar-track"><div class="bar-fill" style="width:6%;background:#94a3b8;">1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Half by half -->
+  <div class="card">
+    <h2>⏱️ Half-by-Half Shooting</h2>
+    <div class="half-comparison">
+      <div class="half-box">
+        <div class="half-title">1st Half</div>
+        <div class="half-value" style="color:#fbbf24">36%</div>
+        <div style="font-size:0.8rem;color:#7b8794;margin-top:4px">4 scored / 11 shots</div>
+        <div style="font-size:0.75rem;color:#ccc;margin-top:4px">4 pts · 3 wides · 3 × 45 · 1 blocked</div>
+      </div>
+      <div class="half-box">
+        <div class="half-title">2nd Half</div>
+        <div class="half-value" style="color:#f87171">14%</div>
+        <div style="font-size:0.8rem;color:#7b8794;margin-top:4px">1 scored / 7 shots</div>
+        <div style="font-size:0.75rem;color:#ccc;margin-top:4px">1 × 2pts · 5 wides · 1 short</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shots pitch map -->
+  <div class="card card-full">
+    <h2>🗺️ Shot Locations — Munterconnaught from Play</h2>
+    <div class="pitch-filters" id="shots-filters">
+      <button class="active" data-filter="all">Full Game</button>
+      <button data-filter="1">1st Half</button>
+      <button data-filter="2">2nd Half</button>
+      <button data-filter="scored">Scored</button>
+      <button data-filter="missed">Missed/Wide</button>
+    </div>
+    <div class="pitch-wrap">
+      <div class="pitch" id="shots-pitch">
+
+        <!-- 1st Half shots -->
+        <!-- Ev3 H1 00:01:18 45 Eoin O Shea -->
+        <div class="dot forty-five" style="left:87.4%;top:75.3%" title="H1 00:01:18 · 45 · Eoin O Shea" data-half="1" data-result="missed"></div>
+        <!-- Ev4 H1 00:01:44 45 Sean Hendrick -->
+        <div class="dot forty-five" style="left:72.3%;top:23.4%" title="H1 00:01:44 · 45 · Sean Hendrick" data-half="1" data-result="missed"></div>
+        <!-- Ev7 H1 00:03:36 45 Enda O Shea -->
+        <div class="dot forty-five" style="left:98.0%;top:60.2%" title="H1 00:03:36 · 45 · Enda O Shea" data-half="1" data-result="missed"></div>
+        <!-- Ev10 H1 00:05:22 Point Eoin O Shea -->
+        <div class="dot scored" style="left:77.6%;top:37.1%" title="H1 00:05:22 · Point · Eoin O Shea" data-half="1" data-result="scored"></div>
+        <!-- Ev14 H1 00:06:59 Point Eoin O Shea -->
+        <div class="dot scored" style="left:79.8%;top:27.8%" title="H1 00:06:59 · Point · Eoin O Shea" data-half="1" data-result="scored"></div>
+        <!-- Ev19 H1 00:10:45 Short Fintan Devin -->
+        <div class="dot short-shot" style="left:91.1%;top:67.8%" title="H1 00:10:45 · Short · Fintan Devin" data-half="1" data-result="missed"></div>
+        <!-- Ev24 H1 00:13:35 Wide Daniel Yore -->
+        <div class="dot wide" style="left:78.4%;top:60.5%" title="H1 00:13:35 · Wide · Daniel Yore" data-half="1" data-result="missed"></div>
+        <!-- Ev26 H1 00:14:37 Point Fintan Devin -->
+        <div class="dot scored" style="left:91.7%;top:59.9%" title="H1 00:14:37 · Point · Fintan Devin" data-half="1" data-result="scored"></div>
+        <!-- Ev40 H1 00:25:09 Point Enda O Shea -->
+        <div class="dot scored" style="left:86.6%;top:74.3%" title="H1 00:25:09 · Point · Enda O Shea" data-half="1" data-result="scored"></div>
+        <!-- Ev42 H1 00:25:46 Wide Eoin O Shea -->
+        <div class="dot wide" style="left:66.9%;top:48.7%" title="H1 00:25:46 · Wide · Eoin O Shea" data-half="1" data-result="missed"></div>
+        <!-- Ev44 H1 00:26:46 Blocked Ryan Nwaneri -->
+        <div class="dot blocked" style="left:82.5%;top:66.4%" title="H1 00:26:46 · Blocked · Ryan Nwaneri" data-half="1" data-result="missed"></div>
+
+        <!-- 2nd Half shots -->
+        <!-- Ev59 H2 00:34:49 Wide Sean Hendrick -->
+        <div class="dot wide" style="left:26.9%;top:31.3%" title="H2 00:34:49 · Wide · Sean Hendrick" data-half="2" data-result="missed"></div>
+        <!-- Ev67 H2 00:40:35 Wide Enda O Shea -->
+        <div class="dot wide" style="left:20.8%;top:37.0%" title="H2 00:40:35 · Wide · Enda O Shea" data-half="2" data-result="missed"></div>
+        <!-- Ev69 H2 00:41:10 Wide Ryan Nwaneri -->
+        <div class="dot wide" style="left:18.1%;top:27.2%" title="H2 00:41:10 · Wide · Ryan Nwaneri" data-half="2" data-result="missed"></div>
+        <!-- Ev71 H2 00:42:48 Wide Ryan Gilsenan -->
+        <div class="dot wide" style="left:8.9%;top:26.8%" title="H2 00:42:48 · Wide · Ryan Gilsenan" data-half="2" data-result="missed"></div>
+        <!-- Ev79 H2 00:47:48 Wide Ryan Nwaneri -->
+        <div class="dot wide" style="left:19.0%;top:23.1%" title="H2 00:47:48 · Wide · Ryan Nwaneri" data-half="2" data-result="missed"></div>
+        <!-- Ev90 H2 00:55:48 2 Points (unnamed) -->
+        <div class="dot two-pts" style="left:25.8%;top:19.3%" title="H2 00:55:48 · 2 Points · Nathan DeKleer" data-half="2" data-result="scored"></div>
+        <!-- Ev98 H2 01:00:20 Wide Fintan Devin -->
+        <div class="dot wide" style="left:19.4%;top:25.2%" title="H2 01:00:20 · Wide · Fintan Devin" data-half="2" data-result="missed"></div>
+
+      </div>
+    </div>
+    <div class="direction-bar">
+      <div class="arrow"><span>H1 attack</span><div class="arrow-line"><div class="arrow-shaft"></div><div class="arrow-head-r"></div></div></div>
+      <div class="arrow"><div class="arrow-line"><div class="arrow-head-l"></div><div class="arrow-shaft"></div></div><span>H2 attack</span></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div> Point</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> 2 Points</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div> Wide</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div> 45</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c084fc"></div> Blocked</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#94a3b8"></div> Short</div>
+    </div>
+    <div style="text-align:center;margin-top:8px;font-size:0.75rem;color:#7b8794;">Hover over a dot to see time, outcome and player</div>
+  </div>
+
+  <!-- Shooter breakdown -->
+  <div class="card">
+    <h2>👤 Shooter Breakdown</h2>
+    <table class="target-table">
+      <tr><th>Player</th><th>Shots</th><th>Scored</th><th>Accuracy</th></tr>
+      <tr><td>Eoin O Shea</td><td>4</td><td>2 pts</td><td><span class="badge badge-won">50%</span></td></tr>
+      <tr><td>Enda O Shea</td><td>3</td><td>1 pt</td><td><span class="badge badge-mix">33%</span></td></tr>
+      <tr><td>Fintan Devin</td><td>3</td><td>1 pt</td><td><span class="badge badge-mix">33%</span></td></tr>
+      <tr><td>Ryan Nwaneri</td><td>3</td><td>0</td><td><span class="badge badge-lost">0%</span></td></tr>
+      <tr><td>Sean Hendrick</td><td>2</td><td>0</td><td><span class="badge badge-lost">0%</span></td></tr>
+      <tr><td>Daniel Yore</td><td>1</td><td>0</td><td><span class="badge badge-lost">0%</span></td></tr>
+      <tr><td>Ryan Gilsenan</td><td>1</td><td>0</td><td><span class="badge badge-lost">0%</span></td></tr>
+      <tr><td>Nathan DeKleer</td><td>1</td><td>1 × 2pts</td><td><span class="badge badge-won">100%</span></td></tr>
+    </table>
+  </div>
+
+  <!-- Shot patterns -->
+  <div class="card">
+    <h2>🔍 Shot Patterns</h2>
+    <div class="stat-row">
+      <span class="stat-label">1st half accuracy</span>
+      <span class="stat-value neutral">36% (4/11)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">2nd half accuracy</span>
+      <span class="stat-value bad">14% (1/7)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">45s conceded</span>
+      <span class="stat-value neutral">3 — all 1st half</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Primary scorer from play</span>
+      <span class="stat-value good">Eoin O Shea (2 pts, 50%)</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== SCOREABLE FREES ===================== -->
+<div class="grid" style="margin-top:30px;">
+
+  <div class="section-divider">
+    <h2>🎯 Scoreable Frees</h2>
+  </div>
+
+  <!-- Big numbers -->
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#fbbf24">50%</div>
+      <div class="label">Free Conversion (3/6)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="big-number">
+      <div class="number" style="color:#4ade80">5</div>
+      <div class="label">Points from Frees (3pts + 1×2pt)</div>
+    </div>
+  </div>
+
+  <!-- Free outcomes -->
+  <div class="card">
+    <h2>📊 Free Outcomes (6 total)</h2>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Point</div>
+        <div class="bar-track"><div class="bar-fill" style="width:33%;background:#4ade80;">2</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2 Points</div>
+        <div class="bar-track"><div class="bar-fill" style="width:17%;background:#f59e0b;">1</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wide</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#f87171;">3</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Free taker breakdown -->
+  <div class="card">
+    <h2>👤 Free Takers</h2>
+    <table class="target-table">
+      <tr><th>Player</th><th>Frees</th><th>Scored</th><th>Notes</th></tr>
+      <tr><td><strong>Enda O Shea</strong></td><td>4</td><td>1pt + 1×2pt</td><td><span class="badge badge-mix">Primary taker · 2 wides</span></td></tr>
+      <tr><td>Charles Baugh</td><td>2</td><td>0</td><td><span class="badge badge-lost">Both wide — H1 only</span></td></tr>
+    </table>
+    <div style="font-size:0.82rem;color:#fbbf24;margin-top:12px;padding:10px;background:#0f3460;border-radius:8px;">
+      ⚠️ Charles Baugh took 2 early 45s and missed both — Enda O Shea then took over and was also unsuccessful from his one 45 attempt
+    </div>
+  </div>
+
+  <!-- Frees pitch map -->
+  <div class="card card-full">
+    <h2>🗺️ Free Kick Locations — Munterconnaught</h2>
+    <div class="pitch-filters" id="frees-filters">
+      <button class="active" data-filter="all">All Frees</button>
+      <button data-filter="scored">Scored</button>
+      <button data-filter="missed">Missed</button>
+    </div>
+    <div class="pitch-wrap">
+      <div class="pitch" id="frees-pitch">
+
+        <!-- Ev5 H1 00:02:37 Wide Charles Baugh -->
+        <div class="dot free-wide" style="left:69.5%;top:49.9%" title="H1 00:02:37 · Wide · Charles Baugh" data-result="missed"></div>
+        <!-- Ev8 H1 00:04:03 Wide Charles Baugh -->
+        <div class="dot free-wide" style="left:69.1%;top:55.3%" title="H1 00:04:03 · Wide · Charles Baugh" data-result="missed"></div>
+        <!-- Ev20 H1 00:11:04 2 Points Enda O Shea -->
+        <div class="dot free-two" style="left:76.7%;top:74.4%" title="H1 00:11:04 · 2 Points · Enda O Shea" data-result="scored"></div>
+        <!-- Ev38 H1 00:24:12 Wide Enda O Shea -->
+        <div class="dot free-wide" style="left:68.2%;top:66.9%" title="H1 00:24:12 · Wide · Enda O Shea" data-result="missed"></div>
+        <!-- Ev63 H2 00:38:42 Point Enda O Shea -->
+        <div class="dot free-scored" style="left:24.8%;top:51.0%" title="H2 00:38:42 · Point · Enda O Shea" data-result="scored"></div>
+        <!-- Ev77 H2 00:46:52 Point Enda O Shea -->
+        <div class="dot free-scored" style="left:21.9%;top:43.1%" title="H2 00:46:52 · Point · Enda O Shea" data-result="scored"></div>
+
+      </div>
+    </div>
+    <div class="direction-bar">
+      <div class="arrow"><span>H1 attack</span><div class="arrow-line"><div class="arrow-shaft"></div><div class="arrow-head-r"></div></div></div>
+      <div class="arrow"><div class="arrow-line"><div class="arrow-head-l"></div><div class="arrow-shaft"></div></div><span>H2 attack</span></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div> Point</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> 2 Points</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div> Wide</div>
+    </div>
+    <div style="text-align:center;margin-top:8px;font-size:0.75rem;color:#7b8794;">Hover over a dot to see time, outcome and player</div>
+  </div>
+
+</div>
+
+<!-- ===================== PLAYERS TO WATCH ===================== -->
+<div style="max-width:1200px;margin:30px auto 0;">
+  <div style="border-top:2px solid #1f4068;padding-top:10px;margin-bottom:20px;">
+    <h2 style="font-size:1.3rem;color:#a0c4ff;font-weight:700;">👀 Players to Watch</h2>
+  </div>
+  <div class="players-grid">
+
+    <!-- Eoin O Shea -->
+    <div class="player-card">
+      <div class="player-img-wrap">
+        <img src="Eoin O Shea.png" alt="Eoin O Shea">
+      </div>
+      <div class="player-info">
+        <div class="threat-pill threat-high">High Threat</div>
+        <div class="player-name">Eoin O Shea</div>
+        <div class="player-role">Forward · Kickout target</div>
+        <div class="player-notes">Top scorer from play (2 pts, 50% accuracy). Named kickout target twice — won both. Active across both halves.</div>
+      </div>
+    </div>
+
+    <!-- Enda O Shea -->
+    <div class="player-card">
+      <div class="player-img-wrap">
+        <img src="Enda O Shea.png" alt="Enda O Shea">
+      </div>
+      <div class="player-info">
+        <div class="threat-pill threat-high">High Threat</div>
+        <div class="player-name">Enda O Shea</div>
+        <div class="player-role">Forward · Primary free taker</div>
+        <div class="player-notes">Primary dead ball taker from Ev20 onwards. Scored 1pt + 1×2pt from frees. 1 pt from play. 2 wides from frees.</div>
+      </div>
+    </div>
+
+    <!-- Fintan Devin -->
+    <div class="player-card">
+      <div class="player-img-wrap">
+        <img src="Fintan Devin.png" alt="Fintan Devin">
+      </div>
+      <div class="player-info">
+        <div class="threat-pill threat-medium">Watch</div>
+        <div class="player-name">Fintan Devin</div>
+        <div class="player-role">Forward · Kickout target</div>
+        <div class="player-notes">Named kickout target — won clean. Scored 1pt from play. 3 shots total, 33% accuracy.</div>
+      </div>
+    </div>
+
+    <!-- Danny Nolan -->
+    <div class="player-card">
+      <div class="player-img-wrap">
+        <img src="Danny Nolan.png" alt="Danny Nolan">
+      </div>
+      <div class="player-info">
+        <div class="threat-pill threat-medium">Watch</div>
+        <div class="player-name">Danny Nolan</div>
+        <div class="player-role">Midfield · Kickout target</div>
+        <div class="player-notes">Named kickout target twice — won both breaks. Key aerial presence around midfield.</div>
+      </div>
+    </div>
+
+    <!-- Ryan Nwaneri -->
+    <div class="player-card">
+      <div class="player-img-wrap">
+        <img src="Ryan Nwaneri.png" alt="Ryan Nwaneri">
+      </div>
+      <div class="player-info">
+        <div class="threat-pill threat-medium">Watch</div>
+        <div class="player-name">Ryan Nwaneri</div>
+        <div class="player-role">Forward · Kickout target</div>
+        <div class="player-notes">Tends to go to midfield for the throw-in then retreats back inside. High shot volume (3 attempts, 0 scored). Named kickout target — break won.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="text-align:center;padding:30px;color:#7b8794;font-size:0.75rem;margin-top:10px;">
+  Munterconnaught Opposition Analysis · Cavan Intermediate Championship · Source: Munterconnaught v Denn
+</div>
+
+<script>
+// Kickout filters
+document.getElementById('pitch').closest('.card').querySelectorAll('.pitch-filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.getElementById('pitch').querySelectorAll('.dot').forEach(dot => {
+      let show = false;
+      if (filter === 'all') show = true;
+      else if (filter === '1' || filter === '2') show = dot.dataset.half === filter;
+      else if (filter === 'won') show = dot.dataset.result === 'won';
+      else if (filter === 'lost') show = dot.dataset.result === 'lost';
+      dot.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+// Shots from play filters
+document.getElementById('shots-filters').querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.getElementById('shots-pitch').querySelectorAll('.dot').forEach(dot => {
+      let show = false;
+      if (filter === 'all') show = true;
+      else if (filter === '1' || filter === '2') show = dot.dataset.half === filter;
+      else if (filter === 'scored') show = dot.dataset.result === 'scored';
+      else if (filter === 'missed') show = dot.dataset.result === 'missed';
+      dot.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+// Frees filters
+document.getElementById('frees-filters').querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.getElementById('frees-pitch').querySelectorAll('.dot').forEach(dot => {
+      let show = false;
+      if (filter === 'all') show = true;
+      else if (filter === 'scored') show = dot.dataset.result === 'scored';
+      else if (filter === 'missed') show = dot.dataset.result === 'missed';
+      dot.style.display = show ? '' : 'none';
+    });
+  });
+});
+</script>
+
+<script src="../../nav.js"></script><script src="../../auth.js"></script><script src="../../analytics.js"></script>
+</body>
+</html>

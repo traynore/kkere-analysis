@@ -73,14 +73,16 @@
       {label:'Ballinagh Kickouts — v Crosserlough', file:'ballinagh-v-crosserlough-kickouts.html'},
       {label:'Ballinagh Kickouts — v Gowna', file:'ballinagh-v-gowna-kickouts.html'},
       {label:'Ballinagh Kickouts — v Cuchulainns', file:'ballinagh-v-cuchulainns-kickouts.html'},
-      {label:'Ballinagh Kickouts — v Kingscourt', file:'ballinagh-v-kingscourt-kickouts.html'}
+      {label:'Ballinagh Kickouts — v Kingscourt', file:'ballinagh-v-kingscourt-kickouts.html'},
+      {label:'Munterconnaught — Opposition Analysis', file:'Munchies/munterconnaught-kickouts.html'}
     ]}
   ];
 
   var isGamesDir = location.pathname.indexOf('/games/') !== -1;
-  var isAnalysisDir = location.pathname.indexOf('/analysis/') !== -1;
-  var prefix = isGamesDir ? '' : (isAnalysisDir ? '../games/' : 'games/');
-  var homeHref = isGamesDir || isAnalysisDir ? '../index.html' : 'index.html';
+  var isMunchiesDir = location.pathname.indexOf('/analysis/Munchies/') !== -1;
+  var isAnalysisDir = !isMunchiesDir && location.pathname.indexOf('/analysis/') !== -1;
+  var prefix = isGamesDir ? '' : (isAnalysisDir ? '../games/' : (isMunchiesDir ? '../../games/' : 'games/'));
+  var homeHref = isGamesDir || isAnalysisDir ? '../index.html' : (isMunchiesDir ? '../../index.html' : 'index.html');
   var currentFile = location.pathname.split('/').pop();
 
   var nav = document.createElement('div');
@@ -110,7 +112,7 @@
     section.games.forEach(function(g) {
       var isCurrent = currentFile === g.file;
       var a = document.createElement('a');
-      var linkPrefix = section.isAnalysis ? (isAnalysisDir ? '' : (isGamesDir ? '../analysis/' : 'analysis/')) : prefix;
+      var linkPrefix = section.isAnalysis ? (isMunchiesDir ? '../../analysis/' : (isAnalysisDir ? '' : (isGamesDir ? '../analysis/' : 'analysis/'))) : prefix;
       a.href = linkPrefix + g.file;
       a.textContent = g.label;
       a.style.cssText = 'display:block;padding:8px 16px;text-decoration:none;color:' + (isCurrent ? '#27ae60' : '#2c3e50') + ';font-size:.88em;font-weight:' + (isCurrent ? 'bold' : 'normal') + ';border-left:3px solid ' + (isCurrent ? '#27ae60' : 'transparent');
