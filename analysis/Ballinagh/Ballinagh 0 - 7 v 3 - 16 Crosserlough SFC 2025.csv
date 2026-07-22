@@ -1,0 +1,84 @@
+Event,Time,Team Name,Name,Game Period,Outcome,Player,Location X,Location Y,PSR,Colormark,Positive,Score
+1,00:00:15,Ballinagh,Shot from play,1,Point,Eamon McEvoy,0.1821043,0.7485163,1,#ffffff,1,1
+2,00:00:24,Crosserlough,Kickout,1,Won clean,,0.4253597,0.1582384,1,,1,0
+3,00:01:13,Crosserlough,Shot from play,1,Wide,,0.8075539,0.2380863,0,#ed1c24,1,0
+4,00:01:22,Ballinagh,Kickout,1,Break lost,,0.4204137,0.3119644,1,,0,0
+5,00:01:56,Crosserlough,Shot from play,1,Wide,Player 14,0.7841727,0.6515047,0,#ed1c24,1,0
+6,00:02:08,Ballinagh,Kickout,1,Break won,Tristan Graham,0.4991007,0.467929,1,,1,0
+7,00:03:27,Ballinagh,Scoreable free,1,Point,Eamon McEvoy,0.1785072,0.2015205,1,#ffffff,1,1
+8,00:03:58,Crosserlough,Kickout,1,Lost clean,Thomas Smith,0.5022482,0.1306274,1,#ed1c24,0,0
+9,00:05:37,Crosserlough,Shot from play,1,2 Points,,0.7063849,0.520166,2,#f7941d,1,2
+10,00:06:37,Ballinagh,Kickout,1,Lost clean,,0.4590827,0.4656903,1,#ed1c24,0,0
+11,00:09:46,Crosserlough,Shot from play,1,Short,Player 6,0.8259892,0.7186666,-1,#ed1c24,1,0
+12,00:10:25,Crosserlough,Shot from play,1,Wide,,0.6780576,0.5119573,0,#ed1c24,1,0
+13,00:10:33,Ballinagh,Kickout,1,Won clean,,0.6214029,0.7306064,1,,1,0
+14,00:12:32,Ballinagh,Scoreable free,1,Point,Kevin Smith,0.7864208,0.5179273,1,#ffffff,1,1
+15,00:13:05,Crosserlough,Kickout,1,Break won,,0.6254497,0.5403146,1,,1,0
+16,00:13:40,Crosserlough,Shot from play,1,Point,,0.9536871,0.7425463,1,#ffffff,1,1
+17,00:13:47,Ballinagh,Kickout,1,Break lost,,0.5836331,0.09406153,1,,0,0
+18,00:15:49,Ballinagh,Shot from play,1,Blocked,Cormac Timoney,0.3111511,0.6776232,0,#ed1c24,1,0
+19,00:16:11,Ballinagh,Shot from play,1,Point,Damien Reilly,0.2248201,0.2992782,1,#ffffff,1,1
+20,00:16:23,Crosserlough,Kickout,1,Lost clean,Thomas Smith,0.4276079,0.4477805,1,#ed1c24,0,0
+21,00:17:26,Crosserlough,Kickout,1,Break lost,,0.6627698,0.2343551,1,,0,0
+22,00:21:04,Ballinagh,Shot from play,1,Point,Kevin Smith,0.256295,0.520166,1,#ffffff,1,1
+23,00:21:17,Crosserlough,Kickout,1,Break lost,Cormac Timoney,0.3875899,0.8231405,1,,0,0
+24,00:21:44,Ballinagh,Shot from play,1,Wide,Shane Finnegan,0.2495504,0.5821041,0,#ed1c24,1,0
+25,00:21:54,Crosserlough,Kickout,1,Lost clean,Thomas Smith,0.5485612,0.3007707,1,#ed1c24,0,0
+26,00:23:13,Crosserlough,Scoreable free,1,Point,Player 9,0.7558453,0.5059874,1,#ffffff,1,1
+27,00:23:26,Ballinagh,Kickout,1,Won clean,Killian Fay,0.5858813,0.4798689,1,,1,0
+28,00:24:42,Crosserlough,Shot from play,1,Short,Player 6,0.8129497,0.6992642,-1,#ed1c24,1,0
+29,00:26:21,Crosserlough,Shot from play,1,Point,,0.8138489,0.2821147,1,#ffffff,1,1
+30,00:26:35,Ballinagh,Kickout,1,Break won,,0.4716727,0.0813754,1,,1,0
+31,00:27:20,Ballinagh,Shot from play,1,Wide,Kevin Smith,0.2616906,0.4925551,0,#ed1c24,1,0
+32,00:27:35,Crosserlough,Kickout,1,Break won,,0.5395683,0.4970325,1,,1,0
+33,00:28:27,Crosserlough,Shot from play,1,2 Points,Player 14,0.7311151,0.6850856,2,#f7941d,1,2
+34,00:28:52,Ballinagh,Kickout,1,Break lost,,0.3363309,0.4858389,1,,0,0
+35,00:29:20,Crosserlough,Shot from play,1,Short,Player 9,0.7868705,0.9134359,-1,#ed1c24,1,0
+36,00:29:59,Crosserlough,Shot from play,1,2 Points,Player 14,0.7221223,0.2731597,2,#f7941d,1,2
+37,00:30:30,Ballinagh,Kickout,1,Break won,Cormac Timoney,0.4590827,0.2552499,1,,1,0
+38,00:30:50,Ballinagh,Shot from play,1,Point,Ronan Connolly,0.2248201,0.4843464,1,#ffffff,1,1
+39,00:31:03,Crosserlough,Kickout,1,Break won,,0.5377698,0.3485302,1,,1,0
+40,00:32:01,Crosserlough,Shot from play,1,Point,Player 14,0.7594424,0.5238972,1,#ffffff,1,1
+41,00:32:36,Ballinagh,Kickout,1,Break lost,,0.4721223,0.4701678,1,,0,0
+42,00:33:12,Crosserlough,Scoreable free,1,Point,Player 9,0.7693346,0.5194198,1,#ffffff,1,1
+43,00:33:30,Ballinagh,Kickout,1,Won clean,Thomas Smith,0.5953237,0.05973437,1,,1,0
+44,00:34:54,Ballinagh,Shot from play,1,45,Shane Finnegan,0.3196942,0.7097116,0,#ed1c24,1,0
+45,00:35:42,Ballinagh,Scoreable free,1,Wide,Tristan Graham,0.3165467,0.692548,0,#ed1c24,1,0
+46,00:32:09,Crosserlough,Shot from play,2,Short,Player 12,0.1515288,0.7858284,-1,#ed1c24,1,0
+47,00:33:32,Crosserlough,Shot from play,2,Point,Player 7,0.2180755,0.6559822,1,#ffffff,1,1
+48,00:33:42,Ballinagh,Kickout,2,Won clean,Cormac Timoney,0.647482,0.3089794,1,,1,0
+49,00:34:34,Ballinagh,Scoreable free,2,Wide,Cormac Timoney,0.6241007,0.3433065,0,#ed1c24,1,0
+50,00:34:49,Crosserlough,Kickout,2,Won clean,,0.5876799,0.5059874,1,,1,0
+51,00:35:32,Crosserlough,Shot from play,2,Point,Player 9,0.2108813,0.2656973,1,#ffffff,1,1
+52,00:35:40,Ballinagh,Kickout,2,Lost clean,,0.6169065,0.4612129,1,#ed1c24,0,0
+53,00:36:41,Crosserlough,Shot from play,2,Wide,Player 14,0.2180755,0.3298742,0,#ed1c24,1,0
+54,00:36:53,Ballinagh,Kickout,2,Break lost,,0.6713129,0.2022667,1,,1,0
+55,00:38:18,Crosserlough,Scoreable free,2,Point,Player 6,0.1906475,0.7112041,1,#ffffff,1,1
+56,00:38:55,Ballinagh,Kickout,2,Break lost,,0.6479316,0.2261465,1,,0,0
+57,00:42:28,Crosserlough,Shot from play,2,Goal,Player 15,0.1488309,0.4619591,3,#70B12A,1,3
+58,00:42:40,Ballinagh,Kickout,2,Lost clean,Player 3,0.6438849,0.6723995,1,#ed1c24,0,0
+59,00:44:17,Crosserlough,Shot from play,2,Goal,Player 9,0.2180755,0.3074869,3,#70B12A,1,3
+60,00:44:42,Ballinagh,Kickout,2,Break won,,0.6258993,0.400021,1,,1,0
+61,00:45:38,Crosserlough,Shot from play,2,Point,,0.102518,0.7000105,1,#ffffff,1,1
+62,00:45:50,Ballinagh,Kickout,2,Break won,Cormac Timoney,0.6232014,0.6656833,1,,1,0
+63,00:46:55,Ballinagh,Scoreable free,2,Wide,Cormac Timoney,0.6038669,0.6544897,0,#ed1c24,1,0
+64,00:47:32,Crosserlough,Kickout,2,Break lost,,0.4689748,0.7917984,1,,0,0
+65,00:47:50,Ballinagh,Shot from play,2,Wide,Cormac Timoney,0.7446043,0.726129,0,#ed1c24,1,0
+66,00:48:19,Crosserlough,Kickout,2,Break lost,,0.6434352,0.7731422,1,,0,0
+67,00:50:24,Ballinagh,Scoreable free,2,Point,Kevin Smith,0.7823741,0.3947973,1,#ffffff,1,1
+68,00:50:35,Crosserlough,Kickout,2,Lost clean,,0.709982,0.8358266,1,#ed1c24,0,0
+69,00:51:12,Ballinagh,Scoreable free,2,Wide,Kevin Smith,0.7315648,0.7582174,0,#ed1c24,1,0
+70,00:51:31,Crosserlough,Kickout,2,Break lost,Ronan Connolly,0.7513489,0.772396,1,,0,0
+71,00:51:59,Ballinagh,Shot from play,2,Wide,,0.9028777,0.8417966,0,#ed1c24,1,0
+72,00:52:08,Crosserlough,Kickout,2,Break lost,,0.6115108,0.1157026,1,,0,0
+73,00:53:09,Crosserlough,Shot from play,2,Goal,Player 8,0.08902878,0.5418071,3,#70B12A,1,3
+74,00:53:35,Ballinagh,Kickout,2,Break lost,,0.6551259,0.2343551,1,,0,0
+75,00:54:22,Crosserlough,Shot from play,2,Point,,0.136241,0.5238972,1,#ffffff,1,1
+76,00:54:37,Ballinagh,Kickout,2,Break lost,,0.4370503,0.5224047,1,,0,0
+77,00:57:26,Ballinagh,Scoreable free,2,Point,Kevin Smith,0.7607914,0.4127071,1,#ffffff,1,1
+78,00:57:41,Crosserlough,Kickout,2,Break won,Player 3,0.6092626,0.3709175,1,,1,0
+79,00:59:11,Crosserlough,Scoreable free,2,Wide,Player 6,0.266187,0.5007637,0,#ed1c24,1,0
+80,00:59:26,Ballinagh,Kickout,2,Lost clean,,0.636241,0.2418175,1,#ed1c24,0,0
+81,01:00:21,Crosserlough,Scoreable free,2,Point,Player 9,0.193795,0.4022597,1,#ffffff,1,1
+82,01:00:38,Ballinagh,Kickout,2,Won clean,Cormac Timoney,0.6321942,0.4940476,1,,1,0
+83,01:02:34,Ballinagh,Shot from play,2,Point,Thomas Smith,0.8089029,0.6015065,1,#ffffff,1,1

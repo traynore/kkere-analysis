@@ -15,6 +15,9 @@
       {label:'v Drung (W) 2-13 to 3-7', file:'Killinkere 2 - 13 v 3 - 7 Drung_FULL_infographic.html'},
       {label:'v Laragh (W) 5-17 to 1-11', file:'Killinkere 5 - 17 v 1 - 11 Laragh_FULL_infographic.html'}
     ]},
+    {heading:'🏆 IFC 2026', games:[
+      {label:'v Ballinagh (L) 0-18 to 1-18', file:'Killinkere 0 - 18 v 1 - 18 Ballinagh_FULL_infographic.html'}
+    ]},
     {heading:'🏆 Breffni Cup', games:[
       {label:'v Ballyhaise (W) 7-20 to 2-10', file:'Killinkere 7 - 20 v 2 - 10 Ballyhaise_FULL_infographic.html'},
       {label:'v Shercock (L) 0-5 to 2-11', file:'Killinkere 0 - 5 v 2 - 11 Shercock_FULL_infographic.html'}
@@ -62,7 +65,8 @@
       {label:'v Cornafean — GPS (13 Jun)', file:'v_Cornafean__ACFL_Div3_GPS_report.html'},
       {label:'v Cuchulainns Final — GPS (21 Jun)', file:'v_Cuchulainns__ACFL_Div7_Final_GPS_report.html'},
       {label:'v Ballyhaise — GPS (28 Jun)', file:'v_Ballyhaise_Breffni_Cup_GPS_report.html'},
-      {label:'v Shercock — GPS (10 Jul)', file:'v_Shercock__Breffni_Cup_GPS_report.html'}
+      {label:'v Shercock — GPS (10 Jul)', file:'v_Shercock__Breffni_Cup_GPS_report.html'},
+      {label:'v Ballinagh — GPS (18 Jul)', file:'v_Ballinagh_IFC_GPS_report.html'}
     ]},
     {heading:'📊 Analysis', isAnalysis:true, games:[
       {label:'Season Trends & Patterns', file:'season_trends.html'},
