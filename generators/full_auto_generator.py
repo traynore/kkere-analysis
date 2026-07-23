@@ -391,6 +391,8 @@ def generate_html(csv_file):
                 game_competitions.append('ACFL Div 7')
             elif 'breffni' in comp:
                 game_competitions.append('Breffni Cup')
+            elif 'ifc' in comp:
+                game_competitions.append('IFC')
             else:
                 game_competitions.append('Other')
             
