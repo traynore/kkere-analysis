@@ -86,8 +86,9 @@
   var isGamesDir = location.pathname.indexOf('/games/') !== -1;
   var isMunchiesDir = location.pathname.indexOf('/analysis/Munchies/') !== -1;
   var isAnalysisDir = !isMunchiesDir && location.pathname.indexOf('/analysis/') !== -1;
-  var prefix = isGamesDir ? '' : (isAnalysisDir ? '../games/' : (isMunchiesDir ? '../../games/' : 'games/'));
-  var homeHref = isGamesDir || isAnalysisDir ? '../index.html' : (isMunchiesDir ? '../../index.html' : 'index.html');
+  var isTemplatesDir = location.pathname.indexOf('/templates/') !== -1;
+  var prefix = isGamesDir ? '' : (isAnalysisDir ? '../games/' : (isMunchiesDir ? '../../games/' : (isTemplatesDir ? '../games/' : 'games/')));
+  var homeHref = isGamesDir || isAnalysisDir || isTemplatesDir ? '../index.html' : (isMunchiesDir ? '../../index.html' : 'index.html');
   var currentFile = location.pathname.split('/').pop();
 
   var nav = document.createElement('div');
@@ -117,7 +118,7 @@
     section.games.forEach(function(g) {
       var isCurrent = currentFile === g.file;
       var a = document.createElement('a');
-      var linkPrefix = section.isAnalysis ? (isMunchiesDir ? '../../analysis/' : (isAnalysisDir ? '' : (isGamesDir ? '../analysis/' : 'analysis/'))) : prefix;
+      var linkPrefix = section.isAnalysis ? (isMunchiesDir ? '../../analysis/' : (isAnalysisDir ? '' : (isGamesDir ? '../analysis/' : (isTemplatesDir ? '../analysis/' : 'analysis/')))) : prefix;
       a.href = linkPrefix + g.file;
       a.textContent = g.label;
       a.style.cssText = 'display:block;padding:8px 16px;text-decoration:none;color:' + (isCurrent ? '#27ae60' : '#2c3e50') + ';font-size:.88em;font-weight:' + (isCurrent ? 'bold' : 'normal') + ';border-left:3px solid ' + (isCurrent ? '#27ae60' : 'transparent');
