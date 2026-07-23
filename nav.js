@@ -16,7 +16,8 @@
       {label:'v Laragh (W) 5-17 to 1-11', file:'Killinkere 5 - 17 v 1 - 11 Laragh_FULL_infographic.html'}
     ]},
     {heading:'🏆 IFC 2026', games:[
-      {label:'v Ballinagh (L) 0-18 to 1-18', file:'Killinkere 0 - 18 v 1 - 18 Ballinagh_FULL_infographic.html'}
+      {label:'v Ballinagh (L) 0-18 to 1-18', file:'Killinkere 0 - 18 v 1 - 18 Ballinagh_FULL_infographic.html'},
+      {label:'v Munterconnaught (L) 1-15 to 1-16', file:'Killinkere 1 - 15 v 1 - 16 Munterconnaught_FULL_infographic.html'}
     ]},
     {heading:'🏆 Breffni Cup', games:[
       {label:'v Ballyhaise (W) 7-20 to 2-10', file:'Killinkere 7 - 20 v 2 - 10 Ballyhaise_FULL_infographic.html'},
