@@ -34,6 +34,9 @@ table.def-table{width:100%;border-collapse:collapse;font-size:.85em}
 .def-table th:hover{background:#2c3e50}.def-table td{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}
 .def-table tr:hover{background:#f0f4ff}.def-table tr:nth-child(even){background:#f8f9fa}
 .footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+.comp-filter{padding:7px 14px;border:2px solid #c0392b;border-radius:20px;background:#fff;color:#c0392b;font-weight:bold;font-size:.85em;cursor:pointer;margin:3px;transition:.2s}
+.comp-filter:hover{background:#fdecea}
+.comp-filter.active{background:#c0392b;color:#fff}
 </style></head><body>
 <div class="container">
 <div class="header">
@@ -96,6 +99,16 @@ table.def-table{width:100%;border-collapse:collapse;font-size:.85em}
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📋 Defensive Game-by-Game</h2>
+<div style="text-align:center;margin-bottom:20px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterDefTable('All')">All</button>
+<button class="comp-filter" onclick="filterDefTable('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterDefTable('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterDefTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterDefTable('ACFL Div 7')">ACFL Div 7</button>
+<button class="comp-filter" onclick="filterDefTable('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterDefTable('IFC')">IFC</button>
+</div>
 <div style="overflow-x:auto">
 <table class="def-table" id="defTable">
 <thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Conc</th><th>Goals</th><th>Opp Acc (play)</th><th>Wides</th><th>Frees Scored</th><th>Pts from Frees</th><th>Frees Conc</th><th>D/M/A</th><th>1H</th><th>2H</th><th>Opp KO Ret</th></tr></thead>
@@ -145,6 +158,14 @@ new Chart(document.getElementById('accChart'),{type:'bar',data:{labels:L,dataset
 new Chart(document.getElementById('halvesChart'),{type:'bar',data:{labels:L,datasets:[{label:'1st Half',data:[10, 14, 7, 7, 5, 4, 11, 4, 6, 15, 2, 9, 3, 10, 7, 11, 10, 9, 4, 9, 7, 9, 8, 13, 8, 10, 6, 11, 11],backgroundColor:orange,borderColor:orangeB,borderWidth:2},{label:'2nd Half',data:[5, 2, 6, 5, 7, 10, 5, 12, 7, 14, 6, 8, 6, 2, 8, 12, 17, 7, 10, 5, 3, 11, 14, 15, 5, 4, 10, 6, 10],backgroundColor:blue,borderColor:blueB,borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true}},plugins:{legend:{display:true,position:'top'}}}});
 new Chart(document.getElementById('freesChart'),{type:'bar',data:{labels:L,datasets:[{label:'Frees Conceded',data:[7, 19, 10, 11, 12, 8, 11, 12, 13, 14, 6, 13, 18, 16, 13, 6, 9, 9, 6, 7, 15, 5, 12, 12, 5, 8, 5, 7, 16],backgroundColor:orange,borderColor:orangeB,borderWidth:2},{label:'Pts from Frees',data:[3, 3, 2, 3, 2, 3, 1, 10, 3, 10, 0, 0, 5, 3, 4, 3, 3, 5, 3, 3, 3, 0, 3, 6, 1, 1, 2, 1, 8],backgroundColor:red,borderColor:redB,borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true}},plugins:{legend:{display:true,position:'top'}}}});
 document.querySelectorAll('.def-table th').forEach((th,i)=>{let asc=true;th.addEventListener('click',()=>{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{let av=a.children[i].textContent.replace(/[m%]/g,'').trim();let bv=b.children[i].textContent.replace(/[m%]/g,'').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)});rows.forEach(r=>tbody.appendChild(r));asc=!asc});});
+const defCompCats=["Spring League", "Spring League", "Spring League", "Challenge", "Challenge", "Spring League", "Challenge", "ACFL Div 7", "Spring League", "ACFL Div 3", "ACFL Div 7", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "Challenge", "Breffni Cup", "Breffni Cup", "IFC"];
+function filterDefTable(comp){
+  document.querySelectorAll('#table .comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#defTable tbody tr').forEach((row,i)=>{
+    row.style.display=(comp==='All'||defCompCats[i]===comp)?'':'none';
+  });
+}
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body></html>

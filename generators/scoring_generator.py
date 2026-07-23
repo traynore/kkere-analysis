@@ -47,6 +47,8 @@ def categorise(comp):
         return 'ACFL Div 7'
     elif 'breffni' in c:
         return 'Breffni Cup'
+    elif 'ifc' in c:
+        return 'IFC'
     else:
         return 'Other'
 
@@ -166,6 +168,7 @@ def generate():
             <div class="tab" data-cat="ACFL Div 3">📋 ACFL Div 3</div>
             <div class="tab" data-cat="ACFL Div 7">📋 ACFL Div 7</div>
             <div class="tab" data-cat="Breffni Cup">🏆 Breffni Cup</div>
+            <div class="tab" data-cat="IFC">🏆 IFC</div>
         </div>
 
         <div class="summary" id="summary"></div>

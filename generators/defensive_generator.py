@@ -32,6 +32,16 @@ def generate():
         w=sum(1 for g in gs if g['result']=='W'); d=sum(1 for g in gs if g['result']=='D'); l=sum(1 for g in gs if g['result']=='L')
         return f'{w}W-{d}D-{l}L'
 
+    def comp_cat(comp):
+        c = comp.lower()
+        if 'spring' in c or 'ulster' in c: return 'Spring League'
+        elif 'challenge' in c: return 'Challenge'
+        elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
+        elif 'div' in c: return 'ACFL Div 7'
+        elif 'breffni' in c: return 'Breffni Cup'
+        elif 'ifc' in c: return 'IFC'
+        else: return 'Other'
+
     games=[]
     foul_players=defaultdict(lambda:{'total':0,'def':0,'mid':0,'att':0})
 
@@ -82,6 +92,7 @@ def generate():
         except: date_obj=datetime.max
 
         games.append({'opp':opp,'date':meta.get('date',''),'date_obj':date_obj,'result':result,
+            'comp_cat':comp_cat(meta.get('competition','')),
             'o_total':o_total,'o_goals':o_goals,'o_acc':o_acc,'o_wides':o_wides,
             'o_scored_play':o_scored_play,'o_scored_free':o_scored_free,'o_shots':len(o_sp),
             'o_h1':o_h1,'o_h2':o_h2,
@@ -130,6 +141,8 @@ def generate():
     for name,d in foul_sorted[:15]:
         foul_rows+=f'<tr><td><strong>{name}</strong></td><td>{d["total"]}</td><td>{d["def"]}</td><td>{d["mid"]}</td><td>{d["att"]}</td></tr>\n'
 
+    comp_cats=json.dumps([g['comp_cat'] for g in games])
+
     html=f'''<!DOCTYPE html>
 <html lang="en">
 <head><meta name="robots" content="noindex, nofollow">
@@ -166,6 +179,9 @@ table.def-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 .def-table th:hover{{background:#2c3e50}}.def-table td{{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}}
 .def-table tr:hover{{background:#f0f4ff}}.def-table tr:nth-child(even){{background:#f8f9fa}}
 .footer{{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}}
+.comp-filter{{padding:7px 14px;border:2px solid #c0392b;border-radius:20px;background:#fff;color:#c0392b;font-weight:bold;font-size:.85em;cursor:pointer;margin:3px;transition:.2s}}
+.comp-filter:hover{{background:#fdecea}}
+.comp-filter.active{{background:#c0392b;color:#fff}}
 </style></head><body>
 <div class="container">
 <div class="header">
@@ -213,6 +229,16 @@ table.def-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">📋 Defensive Game-by-Game</h2>
+<div style="text-align:center;margin-bottom:20px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterDefTable('All')">All</button>
+<button class="comp-filter" onclick="filterDefTable('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterDefTable('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterDefTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterDefTable('ACFL Div 7')">ACFL Div 7</button>
+<button class="comp-filter" onclick="filterDefTable('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterDefTable('IFC')">IFC</button>
+</div>
 <div style="overflow-x:auto">
 <table class="def-table" id="defTable">
 <thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Conc</th><th>Goals</th><th>Opp Acc (play)</th><th>Wides</th><th>Frees Scored</th><th>Pts from Frees</th><th>Frees Conc</th><th>D/M/A</th><th>1H</th><th>2H</th><th>Opp KO Ret</th></tr></thead>
@@ -233,6 +259,14 @@ new Chart(document.getElementById('accChart'),{{type:'bar',data:{{labels:L,datas
 new Chart(document.getElementById('halvesChart'),{{type:'bar',data:{{labels:L,datasets:[{{label:'1st Half',data:{h1_data},backgroundColor:orange,borderColor:orangeB,borderWidth:2}},{{label:'2nd Half',data:{h2_data},backgroundColor:blue,borderColor:blueB,borderWidth:2}}]}},options:{{responsive:true,scales:{{y:{{beginAtZero:true}}}},plugins:{{legend:{{display:true,position:'top'}}}}}}}});
 new Chart(document.getElementById('freesChart'),{{type:'bar',data:{{labels:L,datasets:[{{label:'Frees Conceded',data:{fc_data},backgroundColor:orange,borderColor:orangeB,borderWidth:2}},{{label:'Pts from Frees',data:{pff_data},backgroundColor:red,borderColor:redB,borderWidth:2}}]}},options:{{responsive:true,scales:{{y:{{beginAtZero:true}}}},plugins:{{legend:{{display:true,position:'top'}}}}}}}});
 document.querySelectorAll('.def-table th').forEach((th,i)=>{{let asc=true;th.addEventListener('click',()=>{{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{{let av=a.children[i].textContent.replace(/[m%]/g,'').trim();let bv=b.children[i].textContent.replace(/[m%]/g,'').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)}});rows.forEach(r=>tbody.appendChild(r));asc=!asc}});}});
+const defCompCats={comp_cats};
+function filterDefTable(comp){{
+  document.querySelectorAll('#table .comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#defTable tbody tr').forEach((row,i)=>{{
+    row.style.display=(comp==='All'||defCompCats[i]===comp)?'':'none';
+  }});
+}}
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body></html>'''

@@ -261,6 +261,7 @@ def analyze_scoring(data_dir):
         elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
         elif 'div' in c: return 'ACFL Div 7'
         elif 'breffni' in c: return 'Breffni Cup'
+        elif 'ifc' in c: return 'IFC'
         else: return 'Other'
 
     all_summary = summarize(game_records)
@@ -470,6 +471,7 @@ def generate():
         elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
         elif 'div' in c: return 'ACFL Div 7'
         elif 'breffni' in c: return 'Breffni Cup'
+        elif 'ifc' in c: return 'IFC'
         else: return 'Other'
     chart_comps = json.dumps([comp_category(g['competition']) for g in games])
     chart_att_comps = json.dumps([comp_category(g['competition']) for g in games_with_attacks])
@@ -577,6 +579,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 <button class="comp-filter" onclick="filterCharts('ACFL Div 3')">ACFL Div 3</button>
 <button class="comp-filter" onclick="filterCharts('ACFL Div 7')">ACFL Div 7</button>
 <button class="comp-filter" onclick="filterCharts('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterCharts('IFC')">IFC</button>
 </div>
 
 <div class="chart-box">
@@ -606,6 +609,7 @@ table.trends-table{{width:100%;border-collapse:collapse;font-size:.88em}}
 <button class="comp-filter" onclick="filterAll('ACFL Div 3')">ACFL Div 3</button>
 <button class="comp-filter" onclick="filterAll('ACFL Div 7')">ACFL Div 7</button>
 <button class="comp-filter" onclick="filterAll('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterAll('IFC')">IFC</button>
 </div>
 
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.7em">🏆 Season Scoring Breakdown</h2>
@@ -678,6 +682,7 @@ From frees: {scoring['total_from_frees']} scores ({free_pct}%)<br>
 <button class="comp-filter" onclick="filterTable('ACFL Div 3')">ACFL Div 3</button>
 <button class="comp-filter" onclick="filterTable('ACFL Div 7')">ACFL Div 7</button>
 <button class="comp-filter" onclick="filterTable('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterTable('IFC')">IFC</button>
 </div>
 <div style="overflow-x:auto">
 <table class="trends-table" id="trendsTable">

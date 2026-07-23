@@ -36,6 +36,9 @@ table.ko-table{width:100%;border-collapse:collapse;font-size:.85em}
 .ko-table th:hover{background:#2c3e50}.ko-table td{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}
 .ko-table tr:hover{background:#f0f4ff}
 .footer{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}
+.comp-filter{padding:7px 14px;border:2px solid #2a5298;border-radius:20px;background:#fff;color:#2a5298;font-weight:bold;font-size:.85em;cursor:pointer;margin:3px;transition:.2s}
+.comp-filter:hover{background:#eef2ff}
+.comp-filter.active{background:#2a5298;color:#fff}
 </style></head><body>
 <div class="container">
 <div class="header">
@@ -149,6 +152,16 @@ table.ko-table{width:100%;border-collapse:collapse;font-size:.85em}
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">📋 Game-by-Game Kickouts</h2>
+<div style="text-align:center;margin-bottom:20px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterKoTable('All')">All</button>
+<button class="comp-filter" onclick="filterKoTable('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterKoTable('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterKoTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterKoTable('ACFL Div 7')">ACFL Div 7</button>
+<button class="comp-filter" onclick="filterKoTable('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterKoTable('IFC')">IFC</button>
+</div>
 <div style="overflow-x:auto">
 <table class="ko-table" id="koTable">
 <thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Own Won</th><th>Own %</th><th>Opp Won</th><th>Opp %</th></tr></thead>
@@ -196,6 +209,14 @@ const green='rgba(46,204,113,0.8)',greenB='rgba(39,174,96,1)',purple='rgba(155,8
 new Chart(document.getElementById('ownChart'),{type:'bar',data:{labels:L,datasets:[{label:'Own KO Retention %',data:[63, 74, 82, 85, 55, 67, 61, 82, 78, 70, 67, 72, 67, 47, 53, 75, 35, 74, 71, 89, 77, 67, 95, 61, 50, 79, 85, 65, 72],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)"],borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},plugins:[{id:'t70',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(70);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(46,204,113,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(46,204,113,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('70% target',right,yp-4);ctx.restore()}}]});
 new Chart(document.getElementById('oppChart'),{type:'bar',data:{labels:L,datasets:[{label:'Opp KO Win %',data:[29, 50, 50, 47, 46, 59, 29, 29, 45, 50, 57, 33, 58, 59, 27, 57, 27, 40, 50, 35, 41, 50, 56, 42, 41, 56, 41, 33, 60],backgroundColor:["rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(243,156,18,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(46,204,113,0.8)", "rgba(231,76,60,0.8)", "rgba(231,76,60,0.8)"],borderColor:["rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(230,126,34,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(39,174,96,1)", "rgba(192,57,43,1)", "rgba(192,57,43,1)"],borderWidth:2}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}},plugins:{legend:{display:false}}},plugins:[{id:'t40',afterDatasetsDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(40);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(155,89,182,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(155,89,182,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('40% target',right,yp-4);ctx.restore()}}]});
 document.querySelectorAll('.ko-table th').forEach((th,i)=>{let asc=true;th.addEventListener('click',()=>{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{let av=a.children[i].textContent.replace('%','').trim();let bv=b.children[i].textContent.replace('%','').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)});rows.forEach(r=>tbody.appendChild(r));asc=!asc});});
+const koCompCats=["Spring League", "Spring League", "Spring League", "Challenge", "Challenge", "Spring League", "Challenge", "ACFL Div 7", "Spring League", "ACFL Div 3", "ACFL Div 7", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 3", "ACFL Div 7", "ACFL Div 3", "ACFL Div 7", "Challenge", "Breffni Cup", "Breffni Cup", "IFC"];
+function filterKoTable(comp){
+  document.querySelectorAll('#table .comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#koTable tbody tr').forEach((row,i)=>{
+    row.style.display=(comp==='All'||koCompCats[i]===comp)?'':'none';
+  });
+}
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body></html>

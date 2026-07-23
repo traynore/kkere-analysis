@@ -39,6 +39,16 @@ def generate():
     player_own = defaultdict(lambda: {'won_clean': 0, 'short_won': 0, 'break_won': 0, 'total_won': 0})
     player_opp = defaultdict(lambda: {'lost_clean': 0, 'break_lost': 0, 'short_lost': 0, 'break_won': 0, 'won_clean': 0, 'total_won': 0})
 
+    def comp_cat(comp):
+        c = comp.lower()
+        if 'spring' in c or 'ulster' in c: return 'Spring League'
+        elif 'challenge' in c: return 'Challenge'
+        elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
+        elif 'div' in c: return 'ACFL Div 7'
+        elif 'breffni' in c: return 'Breffni Cup'
+        elif 'ifc' in c: return 'IFC'
+        else: return 'Other'
+
     for f in sorted(data_dir.glob('Killinkere*.csv')):
         meta = read_meta(str(f))
         events = read_csv(str(f))
@@ -86,6 +96,7 @@ def generate():
 
         games.append({
             'opp': opp, 'date': meta.get('date', ''), 'date_obj': date_obj, 'result': result,
+            'comp_cat': comp_cat(meta.get('competition', '')),
             'own_won': own_won, 'own_lost': own_lost, 'own_total': own_total,
             'own_pct': round(own_won / own_total * 100) if own_total else 0,
             'opp_won_by_us': opp_won_by_us, 'opp_total': opp_total,
@@ -143,6 +154,7 @@ def generate():
 
     # Chart data
     labels = json.dumps([f"v {g['opp']}" for g in games])
+    comp_cats = json.dumps([g['comp_cat'] for g in games])
     own_pct_data = json.dumps([g['own_pct'] for g in games])
     opp_pct_data = json.dumps([g['opp_pct'] for g in games])
     bar_colors = json.dumps(['rgba(46,204,113,0.8)' if g['result'] == 'W' else ('rgba(231,76,60,0.8)' if g['result'] == 'L' else 'rgba(243,156,18,0.8)') for g in games])
@@ -186,6 +198,9 @@ table.ko-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 .ko-table th:hover{{background:#2c3e50}}.ko-table td{{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}}
 .ko-table tr:hover{{background:#f0f4ff}}
 .footer{{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}}
+.comp-filter{{padding:7px 14px;border:2px solid #2a5298;border-radius:20px;background:#fff;color:#2a5298;font-weight:bold;font-size:.85em;cursor:pointer;margin:3px;transition:.2s}}
+.comp-filter:hover{{background:#eef2ff}}
+.comp-filter.active{{background:#2a5298;color:#fff}}
 </style></head><body>
 <div class="container">
 <div class="header">
@@ -231,6 +246,16 @@ table.ko-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">📋 Game-by-Game Kickouts</h2>
+<div style="text-align:center;margin-bottom:20px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterKoTable('All')">All</button>
+<button class="comp-filter" onclick="filterKoTable('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterKoTable('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterKoTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterKoTable('ACFL Div 7')">ACFL Div 7</button>
+<button class="comp-filter" onclick="filterKoTable('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterKoTable('IFC')">IFC</button>
+</div>
 <div style="overflow-x:auto">
 <table class="ko-table" id="koTable">
 <thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Own Won</th><th>Own %</th><th>Opp Won</th><th>Opp %</th></tr></thead>
@@ -249,6 +274,14 @@ const green='rgba(46,204,113,0.8)',greenB='rgba(39,174,96,1)',purple='rgba(155,8
 new Chart(document.getElementById('ownChart'),{{type:'bar',data:{{labels:L,datasets:[{{label:'Own KO Retention %',data:{own_pct_data},backgroundColor:{bar_colors},borderColor:{bar_borders},borderWidth:2}}]}},options:{{responsive:true,scales:{{y:{{beginAtZero:true,max:100,ticks:{{callback:v=>v+'%'}}}}}},plugins:{{legend:{{display:false}}}}}},plugins:[{{id:'t70',afterDatasetsDraw(c){{const{{ctx,chartArea:{{left,right}},scales:{{y}}}}=c;const yp=y.getPixelForValue(70);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(46,204,113,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(46,204,113,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('70% target',right,yp-4);ctx.restore()}}}}]}});
 new Chart(document.getElementById('oppChart'),{{type:'bar',data:{{labels:L,datasets:[{{label:'Opp KO Win %',data:{opp_pct_data},backgroundColor:{bar_colors},borderColor:{bar_borders},borderWidth:2}}]}},options:{{responsive:true,scales:{{y:{{beginAtZero:true,max:100,ticks:{{callback:v=>v+'%'}}}}}},plugins:{{legend:{{display:false}}}}}},plugins:[{{id:'t40',afterDatasetsDraw(c){{const{{ctx,chartArea:{{left,right}},scales:{{y}}}}=c;const yp=y.getPixelForValue(40);ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(155,89,182,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(155,89,182,0.8)';ctx.font='bold 10px Arial';ctx.textAlign='right';ctx.fillText('40% target',right,yp-4);ctx.restore()}}}}]}});
 document.querySelectorAll('.ko-table th').forEach((th,i)=>{{let asc=true;th.addEventListener('click',()=>{{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{{let av=a.children[i].textContent.replace('%','').trim();let bv=b.children[i].textContent.replace('%','').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)}});rows.forEach(r=>tbody.appendChild(r));asc=!asc}});}});
+const koCompCats={comp_cats};
+function filterKoTable(comp){{
+  document.querySelectorAll('#table .comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#koTable tbody tr').forEach((row,i)=>{{
+    row.style.display=(comp==='All'||koCompCats[i]===comp)?'':'none';
+  }});
+}}
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body></html>'''

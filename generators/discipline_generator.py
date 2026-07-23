@@ -39,6 +39,16 @@ def generate():
     games = []
     player_cards = defaultdict(lambda: {'yellow': 0, 'black': 0, 'red': 0, 'frees': 0, 'games_with_cards': []})
 
+    def comp_cat(comp):
+        c = comp.lower()
+        if 'spring' in c or 'ulster' in c: return 'Spring League'
+        elif 'challenge' in c: return 'Challenge'
+        elif 'div 3' in c or 'div3' in c: return 'ACFL Div 3'
+        elif 'div' in c: return 'ACFL Div 7'
+        elif 'breffni' in c: return 'Breffni Cup'
+        elif 'ifc' in c: return 'IFC'
+        else: return 'Other'
+
     for f in sorted(data_dir.glob('Killinkere*.csv')):
         meta = read_meta(str(f))
         events = read_csv(str(f))
@@ -96,6 +106,7 @@ def generate():
 
         games.append({
             'opp': opp, 'date': meta.get('date', ''), 'date_obj': date_obj, 'result': result,
+            'comp_cat': comp_cat(meta.get('competition', '')),
             'k_yellows': k_yellows, 'k_blacks': k_blacks, 'k_reds': k_reds,
             'o_yellows': o_yellows, 'o_blacks': o_blacks, 'o_reds': o_reds,
             'k_frees': k_frees, 'k_total': k_total, 'o_total': o_total,
@@ -142,6 +153,7 @@ def generate():
 
     # Chart data
     labels = json.dumps([f"v {g['opp']}" for g in games])
+    comp_cats = json.dumps([g['comp_cat'] for g in games])
     k_cards_data = json.dumps([g['k_yellows'] + g['k_blacks'] + g['k_reds'] for g in games])
     o_cards_data = json.dumps([g['o_yellows'] + g['o_blacks'] + g['o_reds'] for g in games])
     k_frees_data = json.dumps([g['k_frees'] for g in games])
@@ -190,6 +202,9 @@ table.disc-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 .disc-table th:hover{{background:#2c3e50}}.disc-table td{{padding:8px;border-bottom:1px solid #ecf0f1;text-align:center}}
 .disc-table tr:hover{{background:#f0f4ff}}
 .footer{{text-align:center;color:rgba(255,255,255,.7);margin-top:20px;font-size:.9em}}
+.comp-filter{{padding:7px 14px;border:2px solid #c0392b;border-radius:20px;background:#fff;color:#c0392b;font-weight:bold;font-size:.85em;cursor:pointer;margin:3px;transition:.2s}}
+.comp-filter:hover{{background:#fdecea}}
+.comp-filter.active{{background:#c0392b;color:#fff}}
 </style></head><body>
 <div class="container">
 <div class="header">
@@ -234,6 +249,16 @@ table.disc-table{{width:100%;border-collapse:collapse;font-size:.85em}}
 
 <div id="table" class="tab-content">
 <h2 style="color:#2c3e50;text-align:center;margin-bottom:18px;font-size:1.5em">📋 Game-by-Game Discipline</h2>
+<div style="text-align:center;margin-bottom:20px">
+<span style="font-weight:bold;color:#2c3e50;margin-right:12px">Filter:</span>
+<button class="comp-filter active" onclick="filterDiscTable('All')">All</button>
+<button class="comp-filter" onclick="filterDiscTable('Spring League')">Spring League</button>
+<button class="comp-filter" onclick="filterDiscTable('Challenge')">Challenge</button>
+<button class="comp-filter" onclick="filterDiscTable('ACFL Div 3')">ACFL Div 3</button>
+<button class="comp-filter" onclick="filterDiscTable('ACFL Div 7')">ACFL Div 7</button>
+<button class="comp-filter" onclick="filterDiscTable('Breffni Cup')">Breffni Cup</button>
+<button class="comp-filter" onclick="filterDiscTable('IFC')">IFC</button>
+</div>
 <div style="overflow-x:auto">
 <table class="disc-table" id="discTable">
 <thead><tr><th>Date</th><th>Opp</th><th>Res</th><th>Our Cards</th><th>Opp Cards</th><th>Details</th></tr></thead>
@@ -251,6 +276,14 @@ const L={labels};
 const orange='rgba(243,156,18,0.8)',orangeB='rgba(230,126,34,1)',red='rgba(231,76,60,0.8)',redB='rgba(192,57,43,1)',blue='rgba(52,152,219,0.8)',blueB='rgba(41,128,185,1)';
 new Chart(document.getElementById('cardsChart'),{{type:'bar',data:{{labels:L,datasets:[{{label:'Killinkere Cards',data:{k_cards_data},backgroundColor:orange,borderColor:orangeB,borderWidth:2}},{{label:'Opposition Cards',data:{o_cards_data},backgroundColor:red,borderColor:redB,borderWidth:2}}]}},options:{{responsive:true,scales:{{y:{{beginAtZero:true,ticks:{{stepSize:1}}}}}},plugins:{{legend:{{display:true,position:'top'}}}}}}}});
 document.querySelectorAll('.disc-table th').forEach((th,i)=>{{let asc=true;th.addEventListener('click',()=>{{const tbody=th.closest('table').querySelector('tbody');const rows=Array.from(tbody.querySelectorAll('tr'));rows.sort((a,b)=>{{let av=a.children[i].textContent.replace(/[🟨⬛🟥—]/g,'').trim();let bv=b.children[i].textContent.replace(/[🟨⬛🟥—]/g,'').trim();if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv)))return asc?av-bv:bv-av;return asc?av.localeCompare(bv):bv.localeCompare(av)}});rows.forEach(r=>tbody.appendChild(r));asc=!asc}});}});
+const discCompCats={comp_cats};
+function filterDiscTable(comp){{
+  document.querySelectorAll('#table .comp-filter').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#discTable tbody tr').forEach((row,i)=>{{
+    row.style.display=(comp==='All'||discCompCats[i]===comp)?'':'none';
+  }});
+}}
 </script>
 <script src="../nav.js"></script><script src="../auth.js"></script><script src="../analytics.js"></script>
 </body></html>'''
